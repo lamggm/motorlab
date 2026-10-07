@@ -2,6 +2,8 @@
 
 Aplicativo nativo Linux, com interface C++/Qt 6 e compilador .NET executado no Linux, para **SBLG2360T e SBLMG2360T**. Independente e não oficial da Roboteq. A organização segue as referências do RoboRun+ fornecidas pelo usuário, mantendo as cores do MotorLab. Dois canais; variantes TS não recebem autorização de escrita.
 
+Meta experimental de baixa velocidade: **20 RPM no eixo do motor**. [Objetivo, condições e resultados de bancada](docs/BAIXA-VELOCIDADE.md).
+
 ## Checkout Git
 
 Este repositório contém os fontes, testes, documentação e os insumos de compatibilidade descritos em [THIRD_PARTY.md](THIRD_PARTY.md). Os executáveis gerados, o runtime .NET autocontido, caches, logs e registros particulares da bancada permanecem locais. A seção **Abrir** abaixo descreve o pacote binário; para uma cópia recém-clonada, compile primeiro:
