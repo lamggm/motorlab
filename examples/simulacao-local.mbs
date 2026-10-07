@@ -1,0 +1,18 @@
+' Exemplo para o simulador local do MotorLab. Nao movimenta hardware.
+Option Explicit
+Dim i As Integer
+Dim amps As Integer
+Dim samples[4] As Integer
+SetTimerCount(0, 1000)
+For i = 0 To 3
+  amps = GetValue(_A, 1)
+  samples[i] = amps
+  Print("A1 bruto=", amps, " timer=", GetTimerCount(0), "\n")
+  Wait(100)
+Next
+If GetTimerState(0) = 0 Then
+  Print("Timer ainda em execucao\n")
+Else
+  Print("Timer encerrado\n")
+End If
+Terminate

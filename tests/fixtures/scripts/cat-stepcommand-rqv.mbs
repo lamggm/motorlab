@@ -1,0 +1,136 @@
+Option Explicit
+
+'These values will be supplied from the wizard.
+#define CHANNEL 			1
+#define POSITIVE_CMD 		20
+#define NEGATIVE_CMD		-20
+#define TIME_PERIOD			10000
+#define REPEAT_COUNT		1
+
+
+DIM i AS INTEGER
+DIM wave AS INTEGER
+DIM fault AS INTEGER
+DIM halfPeriod AS INTEGER
+DIM commandValue AS INTEGER
+DIM brakestatus	AS INTEGER
+
+DIM exitCode AS INTEGER
+DIM printState AS INTEGER
+DIM dataState AS INTEGER
+
+exitCode = 0xFF
+dataState = 0
+printState = 0
+
+halfPeriod = TIME_PERIOD / 2
+brakestatus = GetValue(_BRK, CHANNEL)
+SetCommand(_BRK, CHANNEL, 1)	'Release Motor Brake
+
+Wait(1000)
+
+'Notify collection start.
+Print("$Start=1\r")
+dataState = 1
+GOSUB ReportState
+
+FOR wave = 1 TO REPEAT_COUNT
+
+	SetCommand(_GIQ, CHANNEL, 0)
+	SetCommand(_GID, CHANNEL, 0)
+	
+	Print("@I:Wave ", wave, " started...\r")
+	printState = 1
+	GOSUB ReportState
+	
+	FOR i = 1 TO TIME_PERIOD
+	
+		GOSUB ExitIfFault
+	
+		IF i <= halfPeriod THEN
+			commandValue = POSITIVE_CMD
+		ELSE
+			commandValue = NEGATIVE_CMD
+		END IF
+			
+		SetCommand(_GIQ, CHANNEL, commandValue)
+		Wait(1)
+	NEXT 'i
+	
+	Wait(1)
+NEXT 'wave
+
+FOR i = 1 TO halfPeriod
+
+	GOSUB ExitIfFault
+		
+	SetCommand(_GIQ, CHANNEL, 0)
+	Wait(1)
+NEXT 'i
+
+SetCommand(_GIQ, CHANNEL, 0)
+SetCommand(_BRK, CHANNEL, brakestatus)	'Return motor brake override status to previous state
+
+Print("$ExitCode=0\r")
+exitCode = 0
+GOSUB ReportState
+
+TERMINATE
+
+ReportState:
+	SetCommand(_RQV, 1, exitCode OR (dataState << 8) OR (printState << 16) OR (wave << 24))
+	RETURN
+
+ExitIfFault:
+	fault = GetValue(_FF, 1)
+	IF fault <> 0 AND fault <> 128 THEN 'DefConfig
+		SetCommand(_EX, CHANNEL + 1)
+
+		Print("@E:Fault flag encountered:")
+		
+		IF (fault AND 0x001) <> 0 THEN
+			Print(" OverHeat")
+		END IF
+		
+		IF (fault AND 0x002) <> 0 THEN
+			Print(" OverVolt")
+		END IF
+		
+		IF (fault AND 0x004) <> 0 THEN
+			Print(" UnderVolt")
+		END IF
+		
+		IF (fault AND 0x008) <> 0 THEN
+			Print(" Short")
+		END IF
+		
+		IF (fault AND 0x010) <> 0 THEN
+			Print(" EStop")
+		END IF
+		
+		IF (fault AND 0x020) <> 0 THEN
+			Print(" Motor/Sensor")
+		END IF
+		
+		IF (fault AND 0x040) <> 0 THEN
+			Print(" MOSFail")
+		END IF
+		
+		IF (fault AND 0x080) <> 0 THEN
+			Print(" DefConfig")
+		END IF
+		
+		IF (fault AND 0x100) <> 0 THEN
+			Print(" STOFault")
+		END IF
+		
+		Print("\r")
+
+		Print("$ExitCode=1\r")
+		exitCode = 1
+		GOSUB ReportState
+		
+		Wait(1)
+		TERMINATE
+	END IF
+	RETURN 'ExitIfFault

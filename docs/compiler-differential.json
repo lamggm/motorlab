@@ -1,0 +1,86 @@
+[
+  {
+    "name": "arithmetic",
+    "equivalent": true,
+    "ok": true,
+    "size": 14
+  },
+  {
+    "name": "array_for",
+    "equivalent": true,
+    "ok": true,
+    "size": 79
+  },
+  {
+    "name": "if",
+    "equivalent": true,
+    "ok": true,
+    "size": 27
+  },
+  {
+    "name": "gosub",
+    "equivalent": true,
+    "ok": true,
+    "size": 14
+  },
+  {
+    "name": "constants",
+    "equivalent": true,
+    "ok": true,
+    "size": 22
+  },
+  {
+    "name": "boolean",
+    "equivalent": true,
+    "ok": true,
+    "size": 11
+  },
+  {
+    "name": "invalid",
+    "equivalent": true,
+    "ok": false,
+    "size": null
+  },
+  {
+    "name": "crlf",
+    "equivalent": true,
+    "ok": true,
+    "size": 8
+  },
+  {
+    "name": "sat-stepcommand-rqv.mbs",
+    "equivalent": true,
+    "ok": true,
+    "size": 911
+  },
+  {
+    "name": "sat-rampedcommand.mbs",
+    "equivalent": true,
+    "ok": true,
+    "size": 915
+  },
+  {
+    "name": "sat-rampedcommand-rqv.mbs",
+    "equivalent": true,
+    "ok": true,
+    "size": 993
+  },
+  {
+    "name": "cat-stepcommand-rqv.mbs",
+    "equivalent": true,
+    "ok": true,
+    "size": 705
+  },
+  {
+    "name": "cat-stepcommand.mbs",
+    "equivalent": true,
+    "ok": true,
+    "size": 627
+  },
+  {
+    "name": "sat-stepcommand.mbs",
+    "equivalent": true,
+    "ok": true,
+    "size": 833
+  }
+]

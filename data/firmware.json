@@ -1,0 +1,16 @@
+[
+  {
+    "model": "SBLG2360T",
+    "file": "SBLG2XXX-Firmware-Update-v30f-071526.dfu",
+    "version": "v3.0f",
+    "sha256": "6de09cc6d6854302d7f6e216bd279e0158744c61914532bf6f36c0ee13ea965b",
+    "source_url": "https://www.roboteq.com/docman-list/motor-controllers-documents-and-files/nxtgen-downloads-1/firmware/bldc-drives/robog4-1/1140-sblg2xxx-firmware-v3-0/file"
+  },
+  {
+    "model": "SBLMG2360T",
+    "file": "SBLMG2XXX-Firmware-Update-v30f-071526.dfu",
+    "version": "v3.0f",
+    "sha256": "7e2d2d37ef481b5ee3c9ac06736325c93bab3d3b0d0a306626b71958099fd061",
+    "source_url": "https://www.roboteq.com/docman-list/motor-controllers-documents-and-files/nxtgen-downloads-1/firmware/bldc-drives/robog4-1/1143-sblmg2xxx-firmware-v3-0/file"
+  }
+]

@@ -1,0 +1,163 @@
+Option Explicit
+
+'These values will be supplied from the wizard.
+#define CHANNEL 			1
+#define POSITIVE_CMD 		20
+#define NEGATIVE_CMD		-20
+#define TIME_PERIOD			10000
+#define REPEAT_COUNT		1
+
+
+DIM i AS INTEGER
+DIM wave AS INTEGER
+DIM fault AS INTEGER
+DIM halfPeriod AS INTEGER
+DIM commandValue AS INTEGER
+DIM acceleration AS INTEGER
+DIM deceleration AS INTEGER
+DIM msDecelerate AS INTEGER
+DIM msAccelerate AS INTEGER
+DIM positiveEnd AS INTEGER
+DIM negativeEnd AS INTEGER
+DIM brakestatus	AS INTEGER
+DIM brakestatus1 AS INTEGER
+DIM brakestatus2 AS INTEGER
+
+acceleration = GetConfig(_MAC, CHANNEL)
+deceleration = GetConfig(_MDEC, CHANNEL)
+
+msDecelerate = 10000 * POSITIVE_CMD / deceleration
+msAccelerate = 10000 * (-NEGATIVE_CMD) / acceleration
+
+halfPeriod = TIME_PERIOD / 2
+positiveEnd = halfPeriod - msDecelerate
+negativeEnd = TIME_PERIOD - msAccelerate
+
+IF CHANNEL = 1 OR CHANNEL = 2 THEN
+	brakestatus = GetValue(_BRK, CHANNEL)
+	SetCommand(_BRK, CHANNEL, 1)	'Release Motor Brake
+ELSE
+	brakestatus1 = GetValue(_BRK, 1)
+	brakestatus2 = GetValue(_BRK, 2)
+	SetCommand(_BRK, 1, 1)	'Release Motor Brake
+	SetCommand(_BRK, 2, 1)	'Release Motor Brake
+END IF
+
+Wait(1000)
+
+'Notify collection start.
+Print("$Start=1\r")
+
+FOR wave = 1 TO REPEAT_COUNT
+
+	IF CHANNEL = 1 OR CHANNEL = 2 THEN
+		SetCommand(_S, CHANNEL, 0)
+	ELSE
+		SetCommand(_S, 1, 0)
+		SetCommand(_S, 2, 0)
+	END IF
+	
+	Print("@I:Wave ", wave, " started...\r")
+	FOR i = 1 TO TIME_PERIOD
+		GOSUB ExitIfFault
+	
+		IF i <= positiveEnd THEN
+			commandValue = POSITIVE_CMD
+		ELSEIF i <= negativeEnd
+			commandValue = NEGATIVE_CMD
+		ELSE
+			commandValue = 0
+		END IF
+			
+		IF CHANNEL = 1 OR CHANNEL = 2 THEN
+			SetCommand(_S, CHANNEL, commandValue)
+		ELSE
+			SetCommand(_S, 1, commandValue)
+			SetCommand(_S, 2, commandValue)
+		END IF
+		Wait(1)
+	NEXT 'i
+	
+	Wait(1)
+NEXT 'wave
+
+FOR i = 1 TO halfPeriod
+	GOSUB ExitIfFault
+
+	IF CHANNEL = 1 OR CHANNEL = 2 THEN
+		SetCommand(_S, CHANNEL, 0)
+	ELSE
+		SetCommand(_S, 1, 0)
+		SetCommand(_S, 2, 0)
+	END IF
+	Wait(1)
+NEXT 'i
+
+IF CHANNEL = 1 OR CHANNEL = 2 THEN
+	SetCommand(_S, CHANNEL, 0)
+ELSE
+	SetCommand(_S, 1, 0)
+	SetCommand(_S, 2, 0)
+END IF
+
+IF CHANNEL = 1 OR CHANNEL = 2 THEN
+	SetCommand(_BRK, CHANNEL, brakestatus)	'Return motor brake override status to previous state
+ELSE
+	SetCommand(_BRK, 1, brakestatus1)	'Return motor brake override status to previous state
+	SetCommand(_BRK, 2, brakestatus2)	'Return motor brake override status to previous state
+END IF
+
+Print("$ExitCode=0\r")
+
+TERMINATE
+
+ExitIfFault:
+	fault = GetValue(_FF, 1)
+	IF fault <> 0 AND fault <> 128 THEN 'DefConfig
+		SetCommand(_EX, CHANNEL + 1)
+
+		Print("@E:Fault flag encountered:")
+		
+		IF (fault AND 0x001) <> 0 THEN
+			Print(" OverHeat")
+		END IF
+		
+		IF (fault AND 0x002) <> 0 THEN
+			Print(" OverVolt")
+		END IF
+		
+		IF (fault AND 0x004) <> 0 THEN
+			Print(" UnderVolt")
+		END IF
+		
+		IF (fault AND 0x008) <> 0 THEN
+			Print(" Short")
+		END IF
+		
+		IF (fault AND 0x010) <> 0 THEN
+			Print(" EStop")
+		END IF
+		
+		IF (fault AND 0x020) <> 0 THEN
+			Print(" Motor/Sensor")
+		END IF
+		
+		IF (fault AND 0x040) <> 0 THEN
+			Print(" MOSFail")
+		END IF
+		
+		IF (fault AND 0x080) <> 0 THEN
+			Print(" DefConfig")
+		END IF
+		
+		IF (fault AND 0x100) <> 0 THEN
+			Print(" STOFault")
+		END IF
+		
+		Print("\r")
+
+		Print("$ExitCode=1\r")
+		Wait(1)
+		TERMINATE
+	END IF
+	RETURN 'ExitIfFault

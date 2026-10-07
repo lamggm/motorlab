@@ -1,0 +1,39 @@
+{
+  "input_zip": "RoborunPlus v3.3 20260202.zip",
+  "input_sha256": "bcaeabb70d9d1ff346e0996571d930389fd37038f669e8c9b55de613c0e0b58d",
+  "date": "2026-10-07",
+  "source_files": {
+    "MicroBasic.dll": {
+      "sha256": "57a1796dc052d2de0f9bd180022dcbde90734af86a7246336d29dc799b9334ec",
+      "size": 196608
+    },
+    "Controller.dll": {
+      "sha256": "ed038937a65bea1381c409c4665ab632377128b249e5337edc9055c3d1dfcd59",
+      "size": 533504
+    },
+    "TreeDesigner.dll": {
+      "sha256": "538851d874b3d33c9dd0ca1f6bd2bb8d66ba16e12082cf7d227bab062731337f",
+      "size": 1605632
+    },
+    "Irony.dll": {
+      "sha256": "dd45c46830b94c78e6e145fae559647e1a54a066ece555047d2dd11fadb9fc44",
+      "size": 235520
+    },
+    "Trees/v3.0/SBLG2360T.ctree": {
+      "sha256": "e2236a3b20114c81978a0f9b5ef93d8db93f423fbe3ba763aada5a6e2882b03c",
+      "size": 76246
+    },
+    "Trees/v3.0/SBLMG2360T.ctree": {
+      "sha256": "5bf03cdceea3a05e85338d46f4dd764a0851da036a0eae5f66613cab6d21c42d",
+      "size": 78308
+    },
+    "Trees/v3.0/RCBSBLG2XXXT.ctree": {
+      "sha256": "364aa4c98af9a461fa9317eca527edb196ddc02f6e1472b86877eb80c4df2649",
+      "size": 162438
+    },
+    "Trees/v3.0/RCBSBLMG2XXXT.ctree": {
+      "sha256": "b8cdac4754cdb120df1763f6442c92d36f420c7c2d281e539bf29e4ab3d66d5a",
+      "size": 194022
+    }
+  }
+}

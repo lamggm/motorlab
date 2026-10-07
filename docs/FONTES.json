@@ -1,0 +1,10 @@
+{
+  "consulted": "2026-10-06",
+  "manual": {
+    "file": "RoboRun-Plus-User-Manual-v3.2.pdf",
+    "version": "v3.2",
+    "sha256": "9726a30b624769b0f160fa9803f9f43f41665ddfc758b5bc7803783366b7e82c",
+    "url": "https://www.roboteq.com/docman-list/motor-controllers-documents-and-files/documentation/user-manual/1191-roborun-utility-user-manual-v3-2/file"
+  },
+  "firmware_manifest": "../data/firmware.json"
+}

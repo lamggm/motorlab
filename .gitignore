@@ -1,0 +1,35 @@
+# Local build outputs and installed application (kept on the workstation)
+/bin/
+/libexec/
+/build/
+/build-*/
+/CMakeFiles/
+/CMakeCache.txt
+/Testing/
+/cmake_install.cmake
+/Makefile
+/compiler/bin/
+/compiler/obj/
+
+# Generated package checksums, logs and archives
+/SHA256SUMS
+*.log
+*.tar.gz
+*.zip
+
+# Python caches, environments and local credentials
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Editor and operating-system files
+.vscode/
+.idea/
+*~
+.DS_Store

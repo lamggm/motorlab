@@ -1,0 +1,101 @@
+{
+  "COMMAND_PRIORITY": [
+    "RS232",
+    "Pulse",
+    "Analog",
+    "None"
+  ],
+  "ENABLE_DISABLE": [
+    "Disabled",
+    "Enabled"
+  ],
+  "ENCODER_USE": [
+    "Feedback",
+    "Unused"
+  ],
+  "DIN_ACTION": [
+    "No Action",
+    "Quick Stop",
+    "Emergency Stop",
+    "Dead Man Switch",
+    "Forward Limit Switch",
+    "Reverse Limit Switch",
+    "Invert Direction",
+    "Run Script",
+    "Load Home Counter"
+  ],
+  "ACTION_v2_1": [
+    "No Action",
+    "Quick Stop",
+    "Emergency Stop",
+    "Dead Man Switch",
+    "Forward Limit Switch",
+    "Reverse Limit Switch",
+    "~Invert Direction",
+    "Run Script",
+    "Load Home Counter"
+  ],
+  "DIN_LEVEL": [
+    "High",
+    "Low"
+  ],
+  "DOUT_TRIGGER": [
+    "Never",
+    "Motor is On",
+    "Motor is Reverse",
+    "Overvoltage",
+    "Overtemperature",
+    "Status LED",
+    "No MOSFET Fail"
+  ],
+  "APIN_LIN": [
+    "Linear",
+    "Exp Weak",
+    "Exp Med",
+    "Exp Strong",
+    "Log Weak",
+    "Log Med",
+    "Log Strong"
+  ],
+  "AIN_MODE": [
+    "Disabled",
+    "Absolute",
+    "Relative"
+  ],
+  "APIN_USE": [
+    "No Action",
+    "Motor Command",
+    "Feedback"
+  ],
+  "PIN_MODE": [
+    "Disabled",
+    "Pulse Width",
+    "Frequency",
+    "Duty Cycle",
+    "MagSensor",
+    "BMS",
+    "Pulse Count",
+    "Flow Sensor"
+  ],
+  "PWB_SCSENSITIVITY": [
+    "Quick",
+    "Medium",
+    "Slow",
+    "Disabled"
+  ],
+  "OPERATING_MODE": [
+    "Open Loop Speed",
+    "Closed Loop Speed",
+    "Closed Loop Position"
+  ],
+  "MOT_ACCELRATION_MODE": [
+    "Mode1",
+    "Mode2",
+    "Mode3"
+  ],
+  "PID_MODE": [
+    "Mode1",
+    "Mode2",
+    "Mode3"
+  ]
+}
