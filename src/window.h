@@ -34,6 +34,9 @@ public:
   bool saveCpr(const QString &path);
   void showCpr(bool compare = false, const QString &inputPath = QString());
   bool loadProfile(const QString &path, QString *error = nullptr);
+  void showMotorProfiles();
+  bool stageMotorProfile(const QJsonObject &profile, int channel, bool calibration, QString *error);
+  QJsonObject captureMotorProfile(int channel, const QString &name, QString *error) const;
   int sampleCount() const { return recorded.size(); }
 
 protected:

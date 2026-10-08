@@ -1,0 +1,1415 @@
+[
+  {
+    "application": "MotorLab Linux",
+    "scope": "motor_channel_profile",
+    "schema": 1,
+    "id": "ktc-86bls125-j-speed",
+    "builtin": true,
+    "name": "Atual · Kalatec KTC-86BLS125-J · 660 W · velocidade",
+    "model": "SBLG2360T",
+    "firmware": "Roboteq v3.0f SBLG2XXX 07/15/2026",
+    "source": "serial",
+    "captured_channel": 1,
+    "timestamp_utc": "2026-10-08T14:37:13.296Z",
+    "calibration_available": false,
+    "description": "Perfil salvo dos dois canais: 3000 RPM, 19 A, quatro pares de polos, AS5047P de 1000 PPR, comutação trapezoidal Hall. PI inicial 0,03/0,01. Ensaios documentados a 100 e 500 RPM sem carga. Calibração Hall/SinCos do motor antigo não é validada para este modelo e não pode ser carregada por este perfil.",
+    "provenance": {
+      "file": "docs/perfis/ktc-86bls125-j/2026-10-08/dois-motores-eeprom/perfil-final-eeprom.json",
+      "sha256": "b075c96c784ae37cd7cb39aafb5384c00a359f0c571621b1ba39706cbfe2b284"
+    },
+    "parameters": [
+      {
+        "query": "~ALIM 1",
+        "raw": 190,
+        "scale": 10
+      },
+      {
+        "query": "~ATGA 1",
+        "raw": 0,
+        "scale": 1
+      },
+      {
+        "query": "~ATGD 1",
+        "raw": 500,
+        "scale": 1
+      },
+      {
+        "query": "~ATRIG 1",
+        "raw": 200,
+        "scale": 10
+      },
+      {
+        "query": "~B25 1",
+        "raw": 0,
+        "scale": 1
+      },
+      {
+        "query": "~BPR 1",
+        "raw": 0,
+        "scale": 1
+      },
+      {
+        "query": "~BLFB 1",
+        "raw": 0,
+        "scale": 1
+      },
+      {
+        "query": "~BLSTD 1",
+        "raw": 2,
+        "scale": 1
+      },
+      {
+        "query": "~BR 1",
+        "raw": 0,
+        "scale": 10000
+      },
+      {
+        "query": "~CLERD 1",
+        "raw": 4,
+        "scale": 1
+      },
+      {
+        "query": "~EDEC 1",
+        "raw": 20000,
+        "scale": 10
+      },
+      {
+        "query": "~EHL 1",
+        "raw": 20000,
+        "scale": 1
+      },
+      {
+        "query": "~EHLA 1",
+        "raw": 0,
+        "scale": 1
+      },
+      {
+        "query": "~EHOME 1",
+        "raw": 0,
+        "scale": 1
+      },
+      {
+        "query": "~ELL 1",
+        "raw": -20000,
+        "scale": 1
+      },
+      {
+        "query": "~ELLA 1",
+        "raw": 0,
+        "scale": 1
+      },
+      {
+        "query": "~EMOD 1",
+        "raw": 18,
+        "scale": 1
+      },
+      {
+        "query": "~EPPR 1",
+        "raw": 1000,
+        "scale": 1
+      },
+      {
+        "query": "~FET 1",
+        "raw": 500,
+        "scale": 1
+      },
+      {
+        "query": "~FEW 1",
+        "raw": 500,
+        "scale": 1
+      },
+      {
+        "query": "~ICAP 1",
+        "raw": 100,
+        "scale": 1
+      },
+      {
+        "query": "~JR 1",
+        "raw": 0,
+        "scale": 1000
+      },
+      {
+        "query": "~KDG 1",
+        "raw": 0,
+        "scale": 1000000
+      },
+      {
+        "query": "~KDG 3",
+        "raw": 0,
+        "scale": 1000000
+      },
+      {
+        "query": "~KIG 1",
+        "raw": 10000,
+        "scale": 1000000
+      },
+      {
+        "query": "~KIG 3",
+        "raw": 0,
+        "scale": 1000000
+      },
+      {
+        "query": "~KPG 1",
+        "raw": 30000,
+        "scale": 1000000
+      },
+      {
+        "query": "~KPG 3",
+        "raw": 200000,
+        "scale": 1000000
+      },
+      {
+        "query": "~LEAC 1",
+        "raw": 0,
+        "scale": 1
+      },
+      {
+        "query": "~LPFB 1",
+        "raw": 80,
+        "scale": 1
+      },
+      {
+        "query": "~MAC 1",
+        "raw": 30000,
+        "scale": 10
+      },
+      {
+        "query": "~MDEC 1",
+        "raw": 20000,
+        "scale": 10
+      },
+      {
+        "query": "~MDIR 1",
+        "raw": 0,
+        "scale": 1
+      },
+      {
+        "query": "~MMOD 1",
+        "raw": 1,
+        "scale": 1
+      },
+      {
+        "query": "~MNRPM 1",
+        "raw": 0,
+        "scale": 1
+      },
+      {
+        "query": "~MVEL 1",
+        "raw": 30,
+        "scale": 1
+      },
+      {
+        "query": "~MXPF 1",
+        "raw": 100,
+        "scale": 1
+      },
+      {
+        "query": "~MXPR 1",
+        "raw": 100,
+        "scale": 1
+      },
+      {
+        "query": "~MXRPM 1",
+        "raw": 3000,
+        "scale": 1
+      },
+      {
+        "query": "~MXTRN 1",
+        "raw": 1000,
+        "scale": 100
+      },
+      {
+        "query": "~NOMA 1",
+        "raw": 190,
+        "scale": 10
+      },
+      {
+        "query": "~R25 1",
+        "raw": 0,
+        "scale": 1
+      },
+      {
+        "query": "~SED 1",
+        "raw": 2,
+        "scale": 1
+      },
+      {
+        "query": "~SFTS 1",
+        "raw": 0,
+        "scale": 1
+      },
+      {
+        "query": "~TNM 1",
+        "raw": 124,
+        "scale": 1000
+      },
+      {
+        "query": "~TPAL 1",
+        "raw": 0,
+        "scale": 1
+      },
+      {
+        "query": "~TRPU 1",
+        "raw": 10000,
+        "scale": 1
+      },
+      {
+        "query": "~VELFF 1",
+        "raw": 0,
+        "scale": 1000
+      },
+      {
+        "query": "~BADJ 1",
+        "raw": 0,
+        "scale": 1
+      },
+      {
+        "query": "~BFBK 1",
+        "raw": 1,
+        "scale": 1
+      },
+      {
+        "query": "~BHL 1",
+        "raw": 20000,
+        "scale": 1
+      },
+      {
+        "query": "~BHLA 1",
+        "raw": 0,
+        "scale": 1
+      },
+      {
+        "query": "~BHOME 1",
+        "raw": 0,
+        "scale": 1
+      },
+      {
+        "query": "~BLL 1",
+        "raw": -20000,
+        "scale": 1
+      },
+      {
+        "query": "~BLLA 1",
+        "raw": 0,
+        "scale": 1
+      },
+      {
+        "query": "~BMOD 1",
+        "raw": 0,
+        "scale": 1
+      },
+      {
+        "query": "~BPOL 1",
+        "raw": 4,
+        "scale": 1
+      },
+      {
+        "query": "~BZPW 1",
+        "raw": 190,
+        "scale": 10
+      },
+      {
+        "query": "~FWVR 1",
+        "raw": 1000,
+        "scale": 10
+      },
+      {
+        "query": "~HPO 1",
+        "raw": 0,
+        "scale": 1
+      },
+      {
+        "query": "~HSAT 1",
+        "raw": 209,
+        "scale": 1
+      },
+      {
+        "query": "~HSAT 2",
+        "raw": 378,
+        "scale": 1
+      },
+      {
+        "query": "~HSAT 3",
+        "raw": 291,
+        "scale": 1
+      },
+      {
+        "query": "~HSAT 4",
+        "raw": 35,
+        "scale": 1
+      },
+      {
+        "query": "~HSAT 5",
+        "raw": 121,
+        "scale": 1
+      },
+      {
+        "query": "~HSAT 6",
+        "raw": 464,
+        "scale": 1
+      },
+      {
+        "query": "~HSAT 7",
+        "raw": 137,
+        "scale": 1
+      },
+      {
+        "query": "~HSAT 8",
+        "raw": 304,
+        "scale": 1
+      },
+      {
+        "query": "~HSAT 9",
+        "raw": 233,
+        "scale": 1
+      },
+      {
+        "query": "~HSAT 10",
+        "raw": 489,
+        "scale": 1
+      },
+      {
+        "query": "~HSAT 11",
+        "raw": 48,
+        "scale": 1
+      },
+      {
+        "query": "~HSAT 12",
+        "raw": 399,
+        "scale": 1
+      },
+      {
+        "query": "~HSM 1",
+        "raw": 0,
+        "scale": 1
+      },
+      {
+        "query": "~KIF 1",
+        "raw": 502656,
+        "scale": 10000
+      },
+      {
+        "query": "~KIF 3",
+        "raw": 502656,
+        "scale": 10000
+      },
+      {
+        "query": "~KPF 1",
+        "raw": 2000,
+        "scale": 10000
+      },
+      {
+        "query": "~KPF 3",
+        "raw": 2000,
+        "scale": 10000
+      },
+      {
+        "query": "~LD 1",
+        "raw": 0,
+        "scale": 1000
+      },
+      {
+        "query": "~LQ 1",
+        "raw": 0,
+        "scale": 1000
+      },
+      {
+        "query": "~MXPW 1",
+        "raw": 6600,
+        "scale": 10
+      },
+      {
+        "query": "~PSA 1",
+        "raw": 120,
+        "scale": 1
+      },
+      {
+        "query": "~RS 1",
+        "raw": 0,
+        "scale": 1000
+      },
+      {
+        "query": "~SPOL 1",
+        "raw": 1,
+        "scale": 1
+      },
+      {
+        "query": "~SWD 1",
+        "raw": 0,
+        "scale": 1
+      },
+      {
+        "query": "~VK 1",
+        "raw": 13000,
+        "scale": 1000
+      },
+      {
+        "query": "~ZSMA 1",
+        "raw": 0,
+        "scale": 1
+      },
+      {
+        "query": "~ZSMC 1",
+        "raw": 0,
+        "scale": 1
+      },
+      {
+        "query": "~ZSMC 2",
+        "raw": 0,
+        "scale": 1
+      },
+      {
+        "query": "~ZSMC 3",
+        "raw": 0,
+        "scale": 1
+      },
+      {
+        "query": "~OTL 2",
+        "raw": 100,
+        "scale": 1
+      }
+    ]
+  },
+  {
+    "application": "MotorLab Linux",
+    "scope": "motor_channel_profile",
+    "schema": 1,
+    "id": "ktc-86bls98-j-speed",
+    "builtin": true,
+    "name": "Antigo · Kalatec KTC-86BLS98-J · 400 W · velocidade",
+    "model": "SBLG2360T",
+    "firmware": "Roboteq v3.0f SBLG2XXX 07/15/2026",
+    "source": "serial",
+    "captured_channel": 1,
+    "timestamp_utc": "2026-10-07T20:26:44.006Z",
+    "calibration_available": true,
+    "description": "Configuração histórica de velocidade, ensaiada a 20–3000 RPM sem carga. AS5047P de 1000 PPR; comutação senoidal. A calibração pertence ao conjunto antigo de motor, Hall, encoder e fiação.",
+    "provenance": {
+      "file": "docs/perfis/ktc-86bls98-j/2026-10-08/perfil-velocidade-testado-2026-10-07.json",
+      "sha256": "a512a601c7dbc8777c6acf762b7e3a0b95c4af7cb2ac9483e70b2e898c9f30d7"
+    },
+    "parameters": [
+      {
+        "query": "~ALIM 1",
+        "raw": 115,
+        "scale": 10
+      },
+      {
+        "query": "~ATGA 1",
+        "raw": 0,
+        "scale": 1
+      },
+      {
+        "query": "~ATGD 1",
+        "raw": 500,
+        "scale": 1
+      },
+      {
+        "query": "~ATRIG 1",
+        "raw": 200,
+        "scale": 10
+      },
+      {
+        "query": "~B25 1",
+        "raw": 0,
+        "scale": 1
+      },
+      {
+        "query": "~BPR 1",
+        "raw": 0,
+        "scale": 1
+      },
+      {
+        "query": "~BLFB 1",
+        "raw": 0,
+        "scale": 1
+      },
+      {
+        "query": "~BLSTD 1",
+        "raw": 2,
+        "scale": 1
+      },
+      {
+        "query": "~BR 1",
+        "raw": 0,
+        "scale": 10000
+      },
+      {
+        "query": "~CLERD 1",
+        "raw": 4,
+        "scale": 1
+      },
+      {
+        "query": "~EDEC 1",
+        "raw": 20000,
+        "scale": 10
+      },
+      {
+        "query": "~EHL 1",
+        "raw": 20000,
+        "scale": 1
+      },
+      {
+        "query": "~EHLA 1",
+        "raw": 0,
+        "scale": 1
+      },
+      {
+        "query": "~EHOME 1",
+        "raw": 0,
+        "scale": 1
+      },
+      {
+        "query": "~ELL 1",
+        "raw": -20000,
+        "scale": 1
+      },
+      {
+        "query": "~ELLA 1",
+        "raw": 0,
+        "scale": 1
+      },
+      {
+        "query": "~EMOD 1",
+        "raw": 18,
+        "scale": 1
+      },
+      {
+        "query": "~EPPR 1",
+        "raw": 1000,
+        "scale": 1
+      },
+      {
+        "query": "~FET 1",
+        "raw": 500,
+        "scale": 1
+      },
+      {
+        "query": "~FEW 1",
+        "raw": 500,
+        "scale": 1
+      },
+      {
+        "query": "~ICAP 1",
+        "raw": 100,
+        "scale": 1
+      },
+      {
+        "query": "~JR 1",
+        "raw": 0,
+        "scale": 1000
+      },
+      {
+        "query": "~KDG 1",
+        "raw": 0,
+        "scale": 1000000
+      },
+      {
+        "query": "~KDG 3",
+        "raw": 0,
+        "scale": 1000000
+      },
+      {
+        "query": "~KIG 1",
+        "raw": 30000,
+        "scale": 1000000
+      },
+      {
+        "query": "~KIG 3",
+        "raw": 0,
+        "scale": 1000000
+      },
+      {
+        "query": "~KPG 1",
+        "raw": 120000,
+        "scale": 1000000
+      },
+      {
+        "query": "~KPG 3",
+        "raw": 100000,
+        "scale": 1000000
+      },
+      {
+        "query": "~LEAC 1",
+        "raw": 0,
+        "scale": 1
+      },
+      {
+        "query": "~LPFB 1",
+        "raw": 80,
+        "scale": 1
+      },
+      {
+        "query": "~MAC 1",
+        "raw": 30000,
+        "scale": 10
+      },
+      {
+        "query": "~MDEC 1",
+        "raw": 20000,
+        "scale": 10
+      },
+      {
+        "query": "~MDIR 1",
+        "raw": 0,
+        "scale": 1
+      },
+      {
+        "query": "~MMOD 1",
+        "raw": 1,
+        "scale": 1
+      },
+      {
+        "query": "~MNRPM 1",
+        "raw": 0,
+        "scale": 1
+      },
+      {
+        "query": "~MVEL 1",
+        "raw": 100,
+        "scale": 1
+      },
+      {
+        "query": "~MXPF 1",
+        "raw": 100,
+        "scale": 1
+      },
+      {
+        "query": "~MXPR 1",
+        "raw": 100,
+        "scale": 1
+      },
+      {
+        "query": "~MXRPM 1",
+        "raw": 3000,
+        "scale": 1
+      },
+      {
+        "query": "~MXTRN 1",
+        "raw": 1000,
+        "scale": 100
+      },
+      {
+        "query": "~NOMA 1",
+        "raw": 200,
+        "scale": 10
+      },
+      {
+        "query": "~R25 1",
+        "raw": 0,
+        "scale": 1
+      },
+      {
+        "query": "~SED 1",
+        "raw": 2,
+        "scale": 1
+      },
+      {
+        "query": "~SFTS 1",
+        "raw": 0,
+        "scale": 1
+      },
+      {
+        "query": "~TNM 1",
+        "raw": 1400,
+        "scale": 1000
+      },
+      {
+        "query": "~TPAL 1",
+        "raw": 0,
+        "scale": 1
+      },
+      {
+        "query": "~TRPU 1",
+        "raw": 10000,
+        "scale": 1
+      },
+      {
+        "query": "~VELFF 1",
+        "raw": 0,
+        "scale": 1000
+      },
+      {
+        "query": "~BADJ 1",
+        "raw": 0,
+        "scale": 1
+      },
+      {
+        "query": "~BFBK 1",
+        "raw": 2,
+        "scale": 1
+      },
+      {
+        "query": "~BHL 1",
+        "raw": 20000,
+        "scale": 1
+      },
+      {
+        "query": "~BHLA 1",
+        "raw": 0,
+        "scale": 1
+      },
+      {
+        "query": "~BHOME 1",
+        "raw": 0,
+        "scale": 1
+      },
+      {
+        "query": "~BLL 1",
+        "raw": -20000,
+        "scale": 1
+      },
+      {
+        "query": "~BLLA 1",
+        "raw": 0,
+        "scale": 1
+      },
+      {
+        "query": "~BMOD 1",
+        "raw": 1,
+        "scale": 1
+      },
+      {
+        "query": "~BPOL 1",
+        "raw": 4,
+        "scale": 1
+      },
+      {
+        "query": "~BZPW 1",
+        "raw": 180,
+        "scale": 10
+      },
+      {
+        "query": "~FWVR 1",
+        "raw": 1000,
+        "scale": 10
+      },
+      {
+        "query": "~HPO 1",
+        "raw": 0,
+        "scale": 1
+      },
+      {
+        "query": "~HSAT 1",
+        "raw": 209,
+        "scale": 1
+      },
+      {
+        "query": "~HSAT 2",
+        "raw": 378,
+        "scale": 1
+      },
+      {
+        "query": "~HSAT 3",
+        "raw": 291,
+        "scale": 1
+      },
+      {
+        "query": "~HSAT 4",
+        "raw": 35,
+        "scale": 1
+      },
+      {
+        "query": "~HSAT 5",
+        "raw": 121,
+        "scale": 1
+      },
+      {
+        "query": "~HSAT 6",
+        "raw": 464,
+        "scale": 1
+      },
+      {
+        "query": "~HSAT 7",
+        "raw": 137,
+        "scale": 1
+      },
+      {
+        "query": "~HSAT 8",
+        "raw": 304,
+        "scale": 1
+      },
+      {
+        "query": "~HSAT 9",
+        "raw": 233,
+        "scale": 1
+      },
+      {
+        "query": "~HSAT 10",
+        "raw": 489,
+        "scale": 1
+      },
+      {
+        "query": "~HSAT 11",
+        "raw": 48,
+        "scale": 1
+      },
+      {
+        "query": "~HSAT 12",
+        "raw": 399,
+        "scale": 1
+      },
+      {
+        "query": "~HSM 1",
+        "raw": 0,
+        "scale": 1
+      },
+      {
+        "query": "~KIF 1",
+        "raw": 502656,
+        "scale": 10000
+      },
+      {
+        "query": "~KIF 3",
+        "raw": 502656,
+        "scale": 10000
+      },
+      {
+        "query": "~KPF 1",
+        "raw": 2000,
+        "scale": 10000
+      },
+      {
+        "query": "~KPF 3",
+        "raw": 2000,
+        "scale": 10000
+      },
+      {
+        "query": "~LD 1",
+        "raw": 0,
+        "scale": 1000
+      },
+      {
+        "query": "~LQ 1",
+        "raw": 0,
+        "scale": 1000
+      },
+      {
+        "query": "~MXPW 1",
+        "raw": 4400,
+        "scale": 10
+      },
+      {
+        "query": "~PSA 1",
+        "raw": 120,
+        "scale": 1
+      },
+      {
+        "query": "~RS 1",
+        "raw": 0,
+        "scale": 1000
+      },
+      {
+        "query": "~SPOL 1",
+        "raw": 1,
+        "scale": 1
+      },
+      {
+        "query": "~SWD 1",
+        "raw": 0,
+        "scale": 1
+      },
+      {
+        "query": "~VK 1",
+        "raw": 13000,
+        "scale": 1000
+      },
+      {
+        "query": "~ZSMA 1",
+        "raw": 0,
+        "scale": 1
+      },
+      {
+        "query": "~ZSMC 1",
+        "raw": 0,
+        "scale": 1
+      },
+      {
+        "query": "~ZSMC 2",
+        "raw": 0,
+        "scale": 1
+      },
+      {
+        "query": "~ZSMC 3",
+        "raw": 0,
+        "scale": 1
+      },
+      {
+        "query": "~OTL 2",
+        "raw": 100,
+        "scale": 1
+      }
+    ]
+  },
+  {
+    "application": "MotorLab Linux",
+    "scope": "motor_channel_profile",
+    "schema": 1,
+    "id": "ktc-86bls98-j-position",
+    "builtin": true,
+    "name": "Antigo · Kalatec KTC-86BLS98-J · 400 W · posição",
+    "model": "SBLG2360T",
+    "firmware": "Roboteq v3.0f SBLG2XXX 07/15/2026",
+    "source": "serial",
+    "captured_channel": 1,
+    "timestamp_utc": "2026-10-08T13:08:46.772Z",
+    "calibration_available": true,
+    "description": "Última configuração arquivada do motor antigo, em posição por contagem: trajetória a 30 RPM, limite de 3000 RPM e corrente de 11,5 A. AS5047P de 1000 PPR. A/B não recupera a posição absoluta depois de desligar. A calibração pertence ao mesmo conjunto físico antigo.",
+    "provenance": {
+      "file": "docs/perfis/ktc-86bls98-j/2026-10-08/perfil-driver.json",
+      "sha256": "97a068e04bf3ba550dee22d1d7368bce1769474fec5b4f3ad04e624c26248ccd"
+    },
+    "parameters": [
+      {
+        "query": "~ALIM 1",
+        "raw": 115,
+        "scale": 10
+      },
+      {
+        "query": "~ATGA 1",
+        "raw": 0,
+        "scale": 1
+      },
+      {
+        "query": "~ATGD 1",
+        "raw": 500,
+        "scale": 1
+      },
+      {
+        "query": "~ATRIG 1",
+        "raw": 200,
+        "scale": 10
+      },
+      {
+        "query": "~B25 1",
+        "raw": 0,
+        "scale": 1
+      },
+      {
+        "query": "~BPR 1",
+        "raw": 0,
+        "scale": 1
+      },
+      {
+        "query": "~BLFB 1",
+        "raw": 0,
+        "scale": 1
+      },
+      {
+        "query": "~BLSTD 1",
+        "raw": 2,
+        "scale": 1
+      },
+      {
+        "query": "~BR 1",
+        "raw": 0,
+        "scale": 10000
+      },
+      {
+        "query": "~CLERD 1",
+        "raw": 4,
+        "scale": 1
+      },
+      {
+        "query": "~EDEC 1",
+        "raw": 20000,
+        "scale": 10
+      },
+      {
+        "query": "~EHL 1",
+        "raw": 20000,
+        "scale": 1
+      },
+      {
+        "query": "~EHLA 1",
+        "raw": 0,
+        "scale": 1
+      },
+      {
+        "query": "~EHOME 1",
+        "raw": 0,
+        "scale": 1
+      },
+      {
+        "query": "~ELL 1",
+        "raw": -20000,
+        "scale": 1
+      },
+      {
+        "query": "~ELLA 1",
+        "raw": 0,
+        "scale": 1
+      },
+      {
+        "query": "~EMOD 1",
+        "raw": 18,
+        "scale": 1
+      },
+      {
+        "query": "~EPPR 1",
+        "raw": 1000,
+        "scale": 1
+      },
+      {
+        "query": "~FET 1",
+        "raw": 500,
+        "scale": 1
+      },
+      {
+        "query": "~FEW 1",
+        "raw": 500,
+        "scale": 1
+      },
+      {
+        "query": "~ICAP 1",
+        "raw": 100,
+        "scale": 1
+      },
+      {
+        "query": "~JR 1",
+        "raw": 0,
+        "scale": 1000
+      },
+      {
+        "query": "~KDG 1",
+        "raw": 0,
+        "scale": 1000000
+      },
+      {
+        "query": "~KDG 3",
+        "raw": 0,
+        "scale": 1000000
+      },
+      {
+        "query": "~KIG 1",
+        "raw": 30000,
+        "scale": 1000000
+      },
+      {
+        "query": "~KIG 3",
+        "raw": 0,
+        "scale": 1000000
+      },
+      {
+        "query": "~KPG 1",
+        "raw": 120000,
+        "scale": 1000000
+      },
+      {
+        "query": "~KPG 3",
+        "raw": 200000,
+        "scale": 1000000
+      },
+      {
+        "query": "~LEAC 1",
+        "raw": 0,
+        "scale": 1
+      },
+      {
+        "query": "~LPFB 1",
+        "raw": 80,
+        "scale": 1
+      },
+      {
+        "query": "~MAC 1",
+        "raw": 30000,
+        "scale": 10
+      },
+      {
+        "query": "~MDEC 1",
+        "raw": 20000,
+        "scale": 10
+      },
+      {
+        "query": "~MDIR 1",
+        "raw": 0,
+        "scale": 1
+      },
+      {
+        "query": "~MMOD 1",
+        "raw": 3,
+        "scale": 1
+      },
+      {
+        "query": "~MNRPM 1",
+        "raw": 0,
+        "scale": 1
+      },
+      {
+        "query": "~MVEL 1",
+        "raw": 30,
+        "scale": 1
+      },
+      {
+        "query": "~MXPF 1",
+        "raw": 100,
+        "scale": 1
+      },
+      {
+        "query": "~MXPR 1",
+        "raw": 100,
+        "scale": 1
+      },
+      {
+        "query": "~MXRPM 1",
+        "raw": 3000,
+        "scale": 1
+      },
+      {
+        "query": "~MXTRN 1",
+        "raw": 1000,
+        "scale": 100
+      },
+      {
+        "query": "~NOMA 1",
+        "raw": 115,
+        "scale": 10
+      },
+      {
+        "query": "~R25 1",
+        "raw": 0,
+        "scale": 1
+      },
+      {
+        "query": "~SED 1",
+        "raw": 2,
+        "scale": 1
+      },
+      {
+        "query": "~SFTS 1",
+        "raw": 0,
+        "scale": 1
+      },
+      {
+        "query": "~TNM 1",
+        "raw": 1400,
+        "scale": 1000
+      },
+      {
+        "query": "~TPAL 1",
+        "raw": 0,
+        "scale": 1
+      },
+      {
+        "query": "~TRPU 1",
+        "raw": 10000,
+        "scale": 1
+      },
+      {
+        "query": "~VELFF 1",
+        "raw": 0,
+        "scale": 1000
+      },
+      {
+        "query": "~BADJ 1",
+        "raw": 0,
+        "scale": 1
+      },
+      {
+        "query": "~BFBK 1",
+        "raw": 2,
+        "scale": 1
+      },
+      {
+        "query": "~BHL 1",
+        "raw": 20000,
+        "scale": 1
+      },
+      {
+        "query": "~BHLA 1",
+        "raw": 0,
+        "scale": 1
+      },
+      {
+        "query": "~BHOME 1",
+        "raw": 0,
+        "scale": 1
+      },
+      {
+        "query": "~BLL 1",
+        "raw": -20000,
+        "scale": 1
+      },
+      {
+        "query": "~BLLA 1",
+        "raw": 0,
+        "scale": 1
+      },
+      {
+        "query": "~BMOD 1",
+        "raw": 1,
+        "scale": 1
+      },
+      {
+        "query": "~BPOL 1",
+        "raw": 4,
+        "scale": 1
+      },
+      {
+        "query": "~BZPW 1",
+        "raw": 180,
+        "scale": 10
+      },
+      {
+        "query": "~FWVR 1",
+        "raw": 1000,
+        "scale": 10
+      },
+      {
+        "query": "~HPO 1",
+        "raw": 0,
+        "scale": 1
+      },
+      {
+        "query": "~HSAT 1",
+        "raw": 209,
+        "scale": 1
+      },
+      {
+        "query": "~HSAT 2",
+        "raw": 378,
+        "scale": 1
+      },
+      {
+        "query": "~HSAT 3",
+        "raw": 291,
+        "scale": 1
+      },
+      {
+        "query": "~HSAT 4",
+        "raw": 35,
+        "scale": 1
+      },
+      {
+        "query": "~HSAT 5",
+        "raw": 121,
+        "scale": 1
+      },
+      {
+        "query": "~HSAT 6",
+        "raw": 464,
+        "scale": 1
+      },
+      {
+        "query": "~HSAT 7",
+        "raw": 137,
+        "scale": 1
+      },
+      {
+        "query": "~HSAT 8",
+        "raw": 304,
+        "scale": 1
+      },
+      {
+        "query": "~HSAT 9",
+        "raw": 233,
+        "scale": 1
+      },
+      {
+        "query": "~HSAT 10",
+        "raw": 489,
+        "scale": 1
+      },
+      {
+        "query": "~HSAT 11",
+        "raw": 48,
+        "scale": 1
+      },
+      {
+        "query": "~HSAT 12",
+        "raw": 399,
+        "scale": 1
+      },
+      {
+        "query": "~HSM 1",
+        "raw": 0,
+        "scale": 1
+      },
+      {
+        "query": "~KIF 1",
+        "raw": 502656,
+        "scale": 10000
+      },
+      {
+        "query": "~KIF 3",
+        "raw": 502656,
+        "scale": 10000
+      },
+      {
+        "query": "~KPF 1",
+        "raw": 2000,
+        "scale": 10000
+      },
+      {
+        "query": "~KPF 3",
+        "raw": 2000,
+        "scale": 10000
+      },
+      {
+        "query": "~LD 1",
+        "raw": 0,
+        "scale": 1000
+      },
+      {
+        "query": "~LQ 1",
+        "raw": 0,
+        "scale": 1000
+      },
+      {
+        "query": "~MXPW 1",
+        "raw": 4400,
+        "scale": 10
+      },
+      {
+        "query": "~PSA 1",
+        "raw": 120,
+        "scale": 1
+      },
+      {
+        "query": "~RS 1",
+        "raw": 0,
+        "scale": 1000
+      },
+      {
+        "query": "~SPOL 1",
+        "raw": 1,
+        "scale": 1
+      },
+      {
+        "query": "~SWD 1",
+        "raw": 0,
+        "scale": 1
+      },
+      {
+        "query": "~VK 1",
+        "raw": 13000,
+        "scale": 1000
+      },
+      {
+        "query": "~ZSMA 1",
+        "raw": 0,
+        "scale": 1
+      },
+      {
+        "query": "~ZSMC 1",
+        "raw": 0,
+        "scale": 1
+      },
+      {
+        "query": "~ZSMC 2",
+        "raw": 0,
+        "scale": 1
+      },
+      {
+        "query": "~ZSMC 3",
+        "raw": 0,
+        "scale": 1
+      },
+      {
+        "query": "~OTL 2",
+        "raw": 100,
+        "scale": 1
+      }
+    ]
+  }
+]

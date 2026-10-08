@@ -1,4 +1,5 @@
 #include "fake_controller.h"
+#include "motor_profiles.h"
 #include "remote_session.h"
 #include "window.h"
 #include <QJsonArray>
@@ -40,6 +41,30 @@ private slots:
     daemon.terminate();
     QVERIFY(daemon.waitForFinished(3000));
     QFile::remove(socket);
+  }
+  void motorProfilesStageThroughSharedDaemonWithoutWrites() {
+    FakeController fake;fake.overrides["?TRN"]="TRN=RoboG4:SBLG2360T";
+    fake.overrides["?FID"]="FID=Roboteq v3.0f SBLG2XXX 07/15/2026";
+    RemoteSession remote(socket);Window gui(nullptr,&remote);QVERIFY(remote.attach(false));
+    QVERIFY(remote.openSerial(fake.path,115200));QTRY_COMPARE(remote.model(),QString("RoboG4:SBLG2360T"));
+    QTemporaryDir empty;auto profile=MotorProfiles::library(empty.path())[0].toObject();QString error;
+    QVERIFY(!gui.stageMotorProfile(profile,2,false,&error));
+    QVERIFY(error.contains("Leia a configuração"));
+    QJsonArray queries;
+    for(auto e:MotorProfiles::plan(profile,2,false,"SBLG2360T",profile["firmware"].toString(),false,&error))queries.append(e.toObject()["query"]);
+    QVERIFY(call(remote,"read_parameters",{{"queries",queries}})["ok"].toBool());
+    QTRY_VERIFY_WITH_TIMEOUT(!call(remote,"status")["result"].toObject()["busy"].toBool(),10000);
+    QTRY_COMPARE(gui.findChild<QDoubleSpinBox *>("draft_ALIM_2")->value(),20.0);
+    QVERIFY2(gui.stageMotorProfile(profile,2,false,&error),qPrintable(error));
+    QCOMPARE(entry(remote,"ALIM 2")["draft_raw"].toInt(),190);
+    QCOMPARE(entry(remote,"EMOD 2")["draft_raw"].toInt(),34);
+    QVERIFY(!entry(remote,"ALIM 1")["dirty"].toBool());
+    QVERIFY(!entry(remote,"OTL 1")["dirty"].toBool());
+    QVERIFY(!entry(remote,"HSAT 13")["dirty"].toBool());
+    RemoteSession other(socket);Window observer(nullptr,&other);QVERIFY(other.attach(false));
+    QTRY_COMPARE(observer.findChild<QDoubleSpinBox *>("draft_ALIM_2")->value(),19.0);
+    for(const auto &cmd:fake.commands)
+      QVERIFY(!cmd.startsWith('!')&&!cmd.startsWith('^')&&!cmd.startsWith('%'));
   }
   void parametersAndTelemetryAreShared() {
     FakeController fake;

@@ -57,6 +57,7 @@ Veja [configuração, ferramentas e limites do MCP](docs/MCP.md). O adaptador re
 | USB / RS232 | Transporte ASCII POSIX, 8N1, seleção manual de porta/baud; identidade FID/TRN | Sem reconexão automática; bancada SBLG2360T v3.0f validada, demais unidades não qualificadas |
 | Configuração | **638 campos numéricos**, 155 definições, 153 definições editáveis; encoders, SSI, entradas, CAN/Modbus, motores, PID e FOC | Disponibilidade depende de cada resposta; TELS textual e parâmetros não documentados fora do catálogo |
 | Aplicação na RAM | Revisão, pausa do script, parada confirmada por FF, ACK e releitura de cada alteração | Não há transação/rollback automático; mudança de comunicação/segurança deve ser aplicada isoladamente |
+| Biblioteca de motores | Perfis persistentes por motor, escolha Motor 1 ou 2, prévia e importação como rascunho; atuais e históricos incluídos | [Uso e calibração física](docs/PERFIS-MOTOR.md); aplicar RAM e salvar EEPROM são etapas explícitas |
 | Perfis JSON | Salvar, validar e importar como rascunho; modelo, firmware, origem, unidades e valores brutos preservados | Cobrem o catálogo lido, não toda a memória; CPR disponível por ações separadas |
 | EEPROM e proteção | Salvar/carregar EEPROM, restaurar padrões, salvar calibrações, bloquear/desbloquear | Operações explícitas e revisadas; confirmação por ACK, não prova de retenção após desligar |
 | Motores | G, S, P e GIQ nos dois canais; slider mantido em G/S/GIQ, parada zero por canal e EX | Exigem habilitação e watchdog lido; adequação ao motor/modo precisa de teste em bancada |

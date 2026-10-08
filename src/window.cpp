@@ -661,11 +661,15 @@ QWidget *Window::parametersPage() {
                 "Rascunhos da tela não aplicados ficam fora desta gravação.");
   });
   actions.body->addSpacing(8);
-  actions.body->addWidget(label("Arquivos no computador", "muted"));
-  snapshot = button("Salvar perfil…", "saveSnapshot");
+  auto motorProfiles = button("Perfis de motor…", "motorProfiles");
+  motorProfiles->setToolTip("Biblioteca de motores: preparar os ajustes para Motor 1 ou Motor 2, ou salvar um novo perfil do canal.");
+  actions.body->addWidget(motorProfiles);
+  connect(motorProfiles, &QPushButton::clicked, this, &Window::showMotorProfiles);
+  actions.body->addWidget(label("Backup do controlador", "muted"));
+  snapshot = button("Salvar backup…", "saveSnapshot");
   snapshot->setToolTip("Exporta um arquivo JSON no computador; não grava a memória do driver.");
   actions.body->addWidget(snapshot);
-  auto load = button("Abrir perfil…", "loadProfile");
+  auto load = button("Abrir backup…", "loadProfile");
   load->setToolTip("Abre um JSON como rascunho para revisão; não aplica automaticamente ao driver.");
   actions.body->addWidget(load);
   connect(load, &QPushButton::clicked, this, [this] {

@@ -1,4 +1,6 @@
 #include "cpr.h"
+#include "motor_profiles.h"
+#include <QDialog>
 #include "fake_controller.h"
 #include "window.h"
 #include "config_browser.h"
@@ -27,6 +29,36 @@ static QTreeWidgetItem *parameter(QTreeWidget *tree, const QString &suffix) {
 class UiTests : public QObject {
   Q_OBJECT
 private slots:
+  void motorProfileDialogAndLocalStaging() {
+    Window window;window.show();QTemporaryDir dir;
+    auto profiles=MotorProfiles::library(dir.path());QString error;
+    QVERIFY(window.stageMotorProfile(profiles[2].toObject(),2,false,&error));
+    QCOMPARE(window.findChild<QDoubleSpinBox *>("draft_ALIM_2")->value(),11.5);
+    QCOMPARE(window.findChild<QDoubleSpinBox *>("draft_EMOD_2")->value(),34.0);
+    QCOMPARE(window.findChild<QComboBox *>("choice_MMOD_2")->currentData().toInt(),3);
+    auto before=window.findChild<QDoubleSpinBox *>("draft_ALIM_1")->value();
+    auto broken=profiles[0].toObject();broken["scope"]="catalog_configuration_profile";
+    QVERIFY(!window.stageMotorProfile(broken,1,false,&error));
+    QCOMPARE(window.findChild<QDoubleSpinBox *>("draft_ALIM_1")->value(),before);
+    window.showMotorProfiles();auto dialog=window.findChild<QDialog *>("motorProfilesDialog");QVERIFY(dialog);
+    auto select=dialog->findChild<QComboBox *>("motorProfileSelection");QVERIFY(select->count()>=3);
+    QVERIFY(select->itemText(0).contains("125-J"));QVERIFY(select->itemText(1).contains("98-J"));
+    auto calibration=dialog->findChild<QCheckBox *>("motorProfileCalibration");QVERIFY(!calibration->isEnabled());
+    auto table=dialog->findChild<QTableWidget *>("motorProfilePreview");QCOMPARE(table->rowCount(),72);
+    select->setCurrentIndex(2);QVERIFY(calibration->isEnabled());calibration->setChecked(true);QCOMPARE(table->rowCount(),90);
+    auto channel=dialog->findChild<QComboBox *>("motorProfileChannel");channel->setCurrentIndex(1);
+    select->setCurrentIndex(0);QVERIFY(!calibration->isChecked());QCOMPARE(table->rowCount(),72);
+    dialog->findChild<QPushButton *>("motorProfilePrepare")->click();
+    QCOMPARE(window.findChild<QDoubleSpinBox *>("draft_ALIM_2")->value(),19.0);
+    QCOMPARE(window.findChild<QComboBox *>("choice_MMOD_2")->currentData().toInt(),1);
+    QCOMPARE(window.findChild<QDoubleSpinBox *>("draft_ALIM_1")->value(),before);
+    if(qEnvironmentVariableIsSet("MOTORLAB_PROFILE_SCREENSHOT")) {
+      window.showMotorProfiles();QTest::qWait(150);
+      QVERIFY(window.findChild<QDialog *>("motorProfilesDialog"));
+      QVERIFY(window.findChild<QDialog *>("motorProfilesDialog")->grab().save(qEnvironmentVariable("MOTORLAB_PROFILE_SCREENSHOT")));
+    }
+  }
+
   void motorLoopErrorIsVisibleWithNoGeneralFault() {
     FakeController endpoint;
     endpoint.overrides["?FM 1"] = "FM=4";

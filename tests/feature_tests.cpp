@@ -1,4 +1,8 @@
 #include "basicvm.h"
+#include "motor_profiles.h"
+#include <QCryptographicHash>
+#include <QJsonDocument>
+#include <QTemporaryDir>
 #include "cansdo.h"
 #include "catalog.h"
 #include "cpr.h"
@@ -13,6 +17,62 @@
 class FeatureTests : public QObject {
   Q_OBJECT
 private slots:
+  void motorProfilesSeedProvenanceAndChannelIsolation() {
+    QTemporaryDir dir; auto profiles=MotorProfiles::library(dir.path());
+    QCOMPARE(profiles.size(),3); QCOMPARE(MotorProfiles::bindings().size(),90);
+    QString error;
+    for(auto value:profiles) {
+      auto p=value.toObject(); QFile source(QString(TEST_SOURCE_DIR)+"/"+p["provenance"].toObject()["file"].toString());
+      QVERIFY(source.open(QIODevice::ReadOnly)); auto bytes=source.readAll();
+      QCOMPARE(QString(QCryptographicHash::hash(bytes,QCryptographicHash::Sha256).toHex()),p["provenance"].toObject()["sha256"].toString());
+      QMap<QString,double> archived;
+      for(auto e:QJsonDocument::fromJson(bytes).object()["parameters"].toArray())
+        archived[e.toObject()["query"].toString()]=e.toObject()["raw"].toDouble();
+      for(auto e:p["parameters"].toArray())
+        QCOMPARE(e.toObject()["raw"].toDouble(),archived.value(e.toObject()["query"].toString()));
+      auto plan=MotorProfiles::plan(p,2,false,p["model"].toString(),p["firmware"].toString(),true,&error);
+      QVERIFY2(!plan.isEmpty(),qPrintable(error)); QCOMPARE(plan.size(),72);
+      QMap<QString,int> mapped; for(auto e:plan) mapped[e.toObject()["query"].toString()]=e.toObject()["raw"].toInt();
+      QCOMPARE(mapped["~EMOD 2"],34);
+      QVERIFY(mapped.contains("~KPG 4")); QVERIFY(mapped.contains("~KIF 4")); QVERIFY(mapped.contains("~OTL 3"));
+      QVERIFY(!mapped.contains("~OTL 1")); QVERIFY(!mapped.contains("~OTL 2"));
+      QVERIFY(!mapped.contains("~KPG 1")); QVERIFY(!mapped.contains("~KIF 1"));
+      QVERIFY(!mapped.contains("~RWD")); QVERIFY(!mapped.contains("~STO"));
+      QVERIFY(!mapped.contains("~HSAT 13")); QVERIFY(!mapped.contains("~BADJ 2"));
+    }
+    auto current=profiles[0].toObject();
+    QVERIFY(MotorProfiles::plan(current,1,true,"SBLG2360T",current["firmware"].toString(),true,&error).isEmpty());
+    auto old=profiles[2].toObject(); auto full=MotorProfiles::plan(old,2,true,"SBLG2360T",old["firmware"].toString(),true,&error);
+    QCOMPARE(full.size(),90); QSet<QString> queries;for(auto e:full)queries.insert(e.toObject()["query"].toString());
+    QVERIFY(queries.contains("~HSAT 24")); QVERIFY(queries.contains("~ZSMC 6")); QVERIFY(queries.contains("~ZSMA 2"));
+  }
+  void motorProfileValidationPersistenceAndCapture() {
+    QTemporaryDir dir; auto p=MotorProfiles::library(dir.path())[1].toObject();QString error;
+    auto valid=[&](QJsonObject profile){return MotorProfiles::plan(profile,1,false,"SBLG2360T",p["firmware"].toString(),true,&error);};
+    auto broken=p;broken["model"]="SBLMG2360T";QVERIFY(valid(broken).isEmpty());
+    broken=p;broken["source"]="demo";QVERIFY(valid(broken).isEmpty());
+    broken=p;broken["firmware"]="different";QVERIFY(valid(broken).isEmpty());
+    broken=p; auto array=p["parameters"].toArray();auto entry=array[0].toObject();entry["raw"]=1e100;array[0]=entry;broken["parameters"]=array;QVERIFY(valid(broken).isEmpty());
+    entry["raw"]=115;entry["scale"]=1;array[0]=entry;broken["parameters"]=array;QVERIFY(valid(broken).isEmpty());
+    entry["scale"]=10;entry["query"]="~RWD";array[0]=entry;broken["parameters"]=array;QVERIFY(valid(broken).isEmpty());
+    array=p["parameters"].toArray();array[0]=array[1];broken["parameters"]=array;QVERIFY(valid(broken).isEmpty());
+    array.removeLast();broken["parameters"]=array;QVERIFY(valid(broken).isEmpty());
+    auto target=MotorProfiles::plan(p,2,true,"SBLG2360T",p["firmware"].toString(),true,&error);
+    QJsonArray read;for(auto e:target){auto v=e.toObject();v["readable"]=true;v["draft"]=false;read.append(v);}
+    auto saved=MotorProfiles::capture(read,2,"Meu motor","SBLG2360T",p["firmware"].toString(),"serial",&error);
+    QVERIFY2(!saved.isEmpty(),qPrintable(error));
+    QCOMPARE(MotorProfiles::plan(saved,1,true,"SBLG2360T",p["firmware"].toString(),true,&error).size(),90);
+    auto unread=read;auto v=unread[0].toObject();v["readable"]=false;unread[0]=v;
+    QVERIFY(MotorProfiles::capture(unread,2,"Motor","SBLG2360T","f","serial",&error).isEmpty());
+    v["readable"]=true;v["draft"]=true;unread[0]=v;
+    QVERIFY(MotorProfiles::capture(unread,2,"Motor","SBLG2360T","f","serial",&error).isEmpty());
+    QVERIFY(MotorProfiles::save(saved,&error,dir.path()));auto library=MotorProfiles::library(dir.path());QCOMPARE(library.size(),4);
+    QCOMPARE(library.last().toObject()["name"].toString(),QString("Meu motor"));
+    QVERIFY(!MotorProfiles::remove(p["id"].toString(),&error,dir.path()));
+    QVERIFY(!MotorProfiles::remove("../outside",&error,dir.path()));
+    QVERIFY(MotorProfiles::remove(library.last().toObject()["id"].toString(),&error,dir.path()));
+    QCOMPARE(MotorProfiles::library(dir.path()).size(),3);
+  }
   void roboCanOfflineMatchesOriginalSequence() {
     auto image = HexFile::parse(
         ":100000000202020309010601052500FFFFFFFFFFB1\n:00000001FF\n");
