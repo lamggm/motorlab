@@ -1,0 +1,1001 @@
+{
+  "pairs": [
+    {
+      "source": "~ALIM 1",
+      "query": "~ALIM 2",
+      "raw": 190,
+      "before": 200,
+      "path": [
+        "Motor 1",
+        "Motor Output",
+        "Amps Limits",
+        "Amps Limit (A)"
+      ]
+    },
+    {
+      "source": "~MXRPM 1",
+      "query": "~MXRPM 2",
+      "raw": 3000,
+      "before": 1000,
+      "path": [
+        "Motor 1",
+        "Motor Output",
+        "Speed &amp; Acceleration",
+        "Max Speed (RPM)"
+      ]
+    },
+    {
+      "source": "~ATGA 1",
+      "query": "~ATGA 2",
+      "raw": 0,
+      "before": 0,
+      "path": [
+        "Motor 1",
+        "Motor Output",
+        "Amps Limits",
+        "Amps Trigger Action"
+      ]
+    },
+    {
+      "source": "~ATGD 1",
+      "query": "~ATGD 2",
+      "raw": 500,
+      "before": 500,
+      "path": [
+        "Motor 1",
+        "Motor Output",
+        "Amps Limits",
+        "Amps Trigger Delay (ms)"
+      ]
+    },
+    {
+      "source": "~ATRIG 1",
+      "query": "~ATRIG 2",
+      "raw": 200,
+      "before": 200,
+      "path": [
+        "Motor 1",
+        "Motor Output",
+        "Amps Limits",
+        "Amps Trigger (A)"
+      ]
+    },
+    {
+      "source": "~B25 1",
+      "query": "~B25 2",
+      "raw": 0,
+      "before": 0,
+      "path": [
+        "Motor 1",
+        "Motor Configuration",
+        "Motor Thermistor",
+        "B25"
+      ]
+    },
+    {
+      "source": "~BPR 1",
+      "query": "~BPR 2",
+      "raw": 0,
+      "before": 0,
+      "path": [
+        "Motor 1",
+        "Motor Output",
+        "Speed &amp; Acceleration",
+        "Bypass Trajectory/Ramp"
+      ]
+    },
+    {
+      "source": "~BLFB 1",
+      "query": "~BLFB 2",
+      "raw": 0,
+      "before": 0,
+      "path": [
+        "Motor 1",
+        "Motor Configuration",
+        "Closed Loop Feedback Sensor"
+      ]
+    },
+    {
+      "source": "~BLSTD 1",
+      "query": "~BLSTD 2",
+      "raw": 2,
+      "before": 2,
+      "path": [
+        "Motor 1",
+        "Motor Configuration",
+        "Stall Detection"
+      ]
+    },
+    {
+      "source": "~BR 1",
+      "query": "~BR 2",
+      "raw": 0,
+      "before": 0,
+      "path": [
+        "Motor 1",
+        "Motor Configuration",
+        "Sinusoidal Settings",
+        "Mechanical System Characteristics",
+        "Rotating friction coef. (mNm/(rad/s))"
+      ]
+    },
+    {
+      "source": "~CLERD 1",
+      "query": "~CLERD 2",
+      "raw": 4,
+      "before": 4,
+      "path": [
+        "Motor 1",
+        "Motor Output",
+        "Closed Loop Parameters",
+        "Loop Error Detection"
+      ]
+    },
+    {
+      "source": "~EDEC 1",
+      "query": "~EDEC 2",
+      "raw": 20000,
+      "before": 20000,
+      "path": [
+        "Motor 1",
+        "Motor Output",
+        "Speed &amp; Acceleration",
+        "Fault Deceleration (RPM/s)"
+      ]
+    },
+    {
+      "source": "~FET 1",
+      "query": "~FET 2",
+      "raw": 500,
+      "before": 500,
+      "path": [
+        "Motor 1",
+        "Motor Output",
+        "Closed Loop Parameters",
+        "Loop Error Time"
+      ]
+    },
+    {
+      "source": "~FEW 1",
+      "query": "~FEW 2",
+      "raw": 500,
+      "before": 250,
+      "path": [
+        "Motor 1",
+        "Motor Output",
+        "Closed Loop Parameters",
+        "Loop Error Limit"
+      ]
+    },
+    {
+      "source": "~ICAP 1",
+      "query": "~ICAP 2",
+      "raw": 100,
+      "before": 100,
+      "path": [
+        "Motor 1",
+        "Motor Output",
+        "Closed Loop Parameters",
+        "Integrator Limit (%)"
+      ]
+    },
+    {
+      "source": "~JR 1",
+      "query": "~JR 2",
+      "raw": 0,
+      "before": 0,
+      "path": [
+        "Motor 1",
+        "Motor Configuration",
+        "Sinusoidal Settings",
+        "Mechanical System Characteristics",
+        "Inertia (k.cm^2)"
+      ]
+    },
+    {
+      "source": "~KDG 1",
+      "query": "~KDG 2",
+      "raw": 0,
+      "before": 0,
+      "path": [
+        "Motor 1",
+        "Motor Output",
+        "Closed Loop Parameters",
+        "Closed Loop Speed",
+        "Speed Differential Gain"
+      ]
+    },
+    {
+      "source": "~KDG 3",
+      "query": "~KDG 4",
+      "raw": 0,
+      "before": 0,
+      "path": [
+        "Motor 1",
+        "Motor Output",
+        "Closed Loop Parameters",
+        "Closed Loop Position",
+        "Position Differential Gain"
+      ]
+    },
+    {
+      "source": "~KIG 1",
+      "query": "~KIG 2",
+      "raw": 10000,
+      "before": 0,
+      "path": [
+        "Motor 1",
+        "Motor Output",
+        "Closed Loop Parameters",
+        "Closed Loop Speed",
+        "Speed Integral Gain"
+      ]
+    },
+    {
+      "source": "~KIG 3",
+      "query": "~KIG 4",
+      "raw": 0,
+      "before": 0,
+      "path": [
+        "Motor 1",
+        "Motor Output",
+        "Closed Loop Parameters",
+        "Closed Loop Position",
+        "Position Integral Gain"
+      ]
+    },
+    {
+      "source": "~KPG 1",
+      "query": "~KPG 2",
+      "raw": 30000,
+      "before": 0,
+      "path": [
+        "Motor 1",
+        "Motor Output",
+        "Closed Loop Parameters",
+        "Closed Loop Speed",
+        "Speed Proportional Gain"
+      ]
+    },
+    {
+      "source": "~KPG 3",
+      "query": "~KPG 4",
+      "raw": 200000,
+      "before": 0,
+      "path": [
+        "Motor 1",
+        "Motor Output",
+        "Closed Loop Parameters",
+        "Closed Loop Position",
+        "Position Proportional Gain"
+      ]
+    },
+    {
+      "source": "~LEAC 1",
+      "query": "~LEAC 2",
+      "raw": 0,
+      "before": 0,
+      "path": [
+        "Motor 1",
+        "Motor Output",
+        "Closed Loop Parameters",
+        "Loop Error Action"
+      ]
+    },
+    {
+      "source": "~LPFB 1",
+      "query": "~LPFB 2",
+      "raw": 80,
+      "before": 45,
+      "path": [
+        "Motor 1",
+        "Motor Configuration",
+        "Speed feedback filter bandwidth (Hz)"
+      ]
+    },
+    {
+      "source": "~MAC 1",
+      "query": "~MAC 2",
+      "raw": 30000,
+      "before": 20000,
+      "path": [
+        "Motor 1",
+        "Motor Output",
+        "Speed &amp; Acceleration",
+        "Acceleration (RPM/s)"
+      ]
+    },
+    {
+      "source": "~MDEC 1",
+      "query": "~MDEC 2",
+      "raw": 20000,
+      "before": 20000,
+      "path": [
+        "Motor 1",
+        "Motor Output",
+        "Speed &amp; Acceleration",
+        "Deceleration (RPM/s)"
+      ]
+    },
+    {
+      "source": "~MDIR 1",
+      "query": "~MDIR 2",
+      "raw": 0,
+      "before": 0,
+      "path": [
+        "Motor 1",
+        "Motor Configuration",
+        "Motor Direction"
+      ]
+    },
+    {
+      "source": "~MMOD 1",
+      "query": "~MMOD 2",
+      "raw": 1,
+      "before": 0,
+      "path": [
+        "Motor 1",
+        "Motor Output",
+        "Operating Mode"
+      ]
+    },
+    {
+      "source": "~MNRPM 1",
+      "query": "~MNRPM 2",
+      "raw": 0,
+      "before": 0,
+      "path": [
+        "Motor 1",
+        "Motor Output",
+        "Speed &amp; Acceleration",
+        "Min Speed (RPM)"
+      ]
+    },
+    {
+      "source": "~MVEL 1",
+      "query": "~MVEL 2",
+      "raw": 30,
+      "before": 1000,
+      "path": [
+        "Motor 1",
+        "Motor Output",
+        "Closed Loop Parameters",
+        "Position Mode Velocity (RPM)"
+      ]
+    },
+    {
+      "source": "~MXPF 1",
+      "query": "~MXPF 2",
+      "raw": 100,
+      "before": 100,
+      "path": [
+        "Motor 1",
+        "Motor Output",
+        "Power Adjust",
+        "Max Power Fwd (%)"
+      ]
+    },
+    {
+      "source": "~MXPR 1",
+      "query": "~MXPR 2",
+      "raw": 100,
+      "before": 100,
+      "path": [
+        "Motor 1",
+        "Motor Output",
+        "Power Adjust",
+        "Max Power Rev (%)"
+      ]
+    },
+    {
+      "source": "~MXTRN 1",
+      "query": "~MXTRN 2",
+      "raw": 1000,
+      "before": 10000,
+      "path": [
+        "Motor 1",
+        "Motor Output",
+        "Closed Loop Parameters",
+        "Position Turns Min to Max"
+      ]
+    },
+    {
+      "source": "~NOMA 1",
+      "query": "~NOMA 2",
+      "raw": 190,
+      "before": 200,
+      "path": [
+        "Motor 1",
+        "Motor Output",
+        "Amps Limits",
+        "I2T Configuration",
+        "Nominal Current"
+      ]
+    },
+    {
+      "source": "~R25 1",
+      "query": "~R25 2",
+      "raw": 0,
+      "before": 0,
+      "path": [
+        "Motor 1",
+        "Motor Configuration",
+        "Motor Thermistor",
+        "R25"
+      ]
+    },
+    {
+      "source": "~SED 1",
+      "query": "~SED 2",
+      "raw": 2,
+      "before": 0,
+      "path": [
+        "Motor 1",
+        "Motor Configuration",
+        "Sensor Error Detection"
+      ]
+    },
+    {
+      "source": "~SFTS 1",
+      "query": "~SFTS 2",
+      "raw": 0,
+      "before": 0,
+      "path": [
+        "Motor 1",
+        "Motor Configuration",
+        "Safety Switch Connected"
+      ]
+    },
+    {
+      "source": "~TNM 1",
+      "query": "~TNM 2",
+      "raw": 124,
+      "before": 200,
+      "path": [
+        "Motor 1",
+        "Motor Configuration",
+        "Torque Constant (Nm/Arms)"
+      ]
+    },
+    {
+      "source": "~TPAL 1",
+      "query": "~TPAL 2",
+      "raw": 0,
+      "before": 0,
+      "path": [
+        "Motor 1",
+        "Motor Output",
+        "Amps Limits",
+        "I2T Configuration",
+        "Time (sec)"
+      ]
+    },
+    {
+      "source": "~TRPU 1",
+      "query": "~TRPU 2",
+      "raw": 10000,
+      "before": 10000,
+      "path": [
+        "Motor 1",
+        "Motor Configuration",
+        "Motor Thermistor",
+        "Pull-up Resistor (Ohms)"
+      ]
+    },
+    {
+      "source": "~VELFF 1",
+      "query": "~VELFF 2",
+      "raw": 0,
+      "before": 0,
+      "path": [
+        "Motor 1",
+        "Motor Output",
+        "Closed Loop Parameters",
+        "Closed Loop Position",
+        "Velocity Feedforward Gain"
+      ]
+    },
+    {
+      "source": "~BADJ 1",
+      "query": "~BADJ 2",
+      "raw": 0,
+      "before": 0,
+      "path": [
+        "Motor 1",
+        "Motor Configuration",
+        "Sinusoidal Settings",
+        "Angle Zero Adjust"
+      ]
+    },
+    {
+      "source": "~BFBK 1",
+      "query": "~BFBK 2",
+      "raw": 1,
+      "before": 1,
+      "path": [
+        "Motor 1",
+        "Motor Configuration",
+        "Sinusoidal Settings",
+        "Sinusoidal Angle Sensor"
+      ]
+    },
+    {
+      "source": "~BHL 1",
+      "query": "~BHL 2",
+      "raw": 20000,
+      "before": 20000,
+      "path": [
+        "Motor 1",
+        "Motor Configuration",
+        "Internal Sensor Counter",
+        "Max Limit"
+      ]
+    },
+    {
+      "source": "~BHLA 1",
+      "query": "~BHLA 2",
+      "raw": 0,
+      "before": 0,
+      "path": [
+        "Motor 1",
+        "Motor Configuration",
+        "Internal Sensor Counter",
+        "Action at Max"
+      ]
+    },
+    {
+      "source": "~BHOME 1",
+      "query": "~BHOME 2",
+      "raw": 0,
+      "before": 0,
+      "path": [
+        "Motor 1",
+        "Motor Configuration",
+        "Internal Sensor Counter",
+        "Home Count"
+      ]
+    },
+    {
+      "source": "~BLL 1",
+      "query": "~BLL 2",
+      "raw": -20000,
+      "before": -20000,
+      "path": [
+        "Motor 1",
+        "Motor Configuration",
+        "Internal Sensor Counter",
+        "Min Limit"
+      ]
+    },
+    {
+      "source": "~BLLA 1",
+      "query": "~BLLA 2",
+      "raw": 0,
+      "before": 0,
+      "path": [
+        "Motor 1",
+        "Motor Configuration",
+        "Internal Sensor Counter",
+        "Action at Min"
+      ]
+    },
+    {
+      "source": "~BMOD 1",
+      "query": "~BMOD 2",
+      "raw": 0,
+      "before": 0,
+      "path": [
+        "Motor 1",
+        "Motor Configuration",
+        "Switching Mode"
+      ]
+    },
+    {
+      "source": "~BPOL 1",
+      "query": "~BPOL 2",
+      "raw": 4,
+      "before": 2,
+      "path": [
+        "Motor 1",
+        "Motor Configuration",
+        "Number of Pole Pairs"
+      ]
+    },
+    {
+      "source": "~BZPW 1",
+      "query": "~BZPW 2",
+      "raw": 190,
+      "before": 100,
+      "path": [
+        "Motor 1",
+        "Motor Configuration",
+        "Reference Seek Power (A)"
+      ]
+    },
+    {
+      "source": "~FWVR 1",
+      "query": "~FWVR 2",
+      "raw": 1000,
+      "before": 1000,
+      "path": [
+        "Motor 1",
+        "Motor Configuration",
+        "Sinusoidal Settings",
+        "Motor Parameters",
+        "Field Weakening Voltage Ratio (%)"
+      ]
+    },
+    {
+      "source": "~HPO 1",
+      "query": "~HPO 2",
+      "raw": 0,
+      "before": 0,
+      "path": [
+        "Motor 1",
+        "Motor Configuration",
+        "Internal Sensor Counter",
+        "Hall Position"
+      ]
+    },
+    {
+      "source": "~HSM 1",
+      "query": "~HSM 2",
+      "raw": 0,
+      "before": 0,
+      "path": [
+        "Motor 1",
+        "Motor Configuration",
+        "Internal Sensor Counter",
+        "Hall Sensor Map"
+      ]
+    },
+    {
+      "source": "~KIF 1",
+      "query": "~KIF 2",
+      "raw": 502656,
+      "before": 3000,
+      "path": [
+        "Motor 1",
+        "Motor Configuration",
+        "Sinusoidal Settings",
+        "FOC Parameters",
+        "Flux Integral Gain"
+      ]
+    },
+    {
+      "source": "~KIF 3",
+      "query": "~KIF 4",
+      "raw": 502656,
+      "before": 0,
+      "path": [
+        "Motor 1",
+        "Motor Configuration",
+        "Sinusoidal Settings",
+        "FOC Parameters",
+        "Torque Integral Gain"
+      ]
+    },
+    {
+      "source": "~KPF 1",
+      "query": "~KPF 2",
+      "raw": 2000,
+      "before": 30,
+      "path": [
+        "Motor 1",
+        "Motor Configuration",
+        "Sinusoidal Settings",
+        "FOC Parameters",
+        "Flux Proportional Gain"
+      ]
+    },
+    {
+      "source": "~KPF 3",
+      "query": "~KPF 4",
+      "raw": 2000,
+      "before": 0,
+      "path": [
+        "Motor 1",
+        "Motor Configuration",
+        "Sinusoidal Settings",
+        "FOC Parameters",
+        "Torque Proportional Gain"
+      ]
+    },
+    {
+      "source": "~LD 1",
+      "query": "~LD 2",
+      "raw": 0,
+      "before": 0,
+      "path": [
+        "Motor 1",
+        "Motor Configuration",
+        "Sinusoidal Settings",
+        "Motor Parameters",
+        "D-axis Stator Inductance (Ld - mH)"
+      ]
+    },
+    {
+      "source": "~LQ 1",
+      "query": "~LQ 2",
+      "raw": 0,
+      "before": 0,
+      "path": [
+        "Motor 1",
+        "Motor Configuration",
+        "Sinusoidal Settings",
+        "Motor Parameters",
+        "Q-axis Stator Inductance (Lq - mH)"
+      ]
+    },
+    {
+      "source": "~MXPW 1",
+      "query": "~MXPW 2",
+      "raw": 6600,
+      "before": 28350,
+      "path": [
+        "Motor 1",
+        "Motor Configuration",
+        "Sinusoidal Settings",
+        "Motor Parameters",
+        "Maximum Motor Output Power (W)"
+      ]
+    },
+    {
+      "source": "~PSA 1",
+      "query": "~PSA 2",
+      "raw": 120,
+      "before": 128,
+      "path": [
+        "Motor 1",
+        "Motor Configuration",
+        "Sinusoidal Settings",
+        "Sensor Phase Shift Angle"
+      ]
+    },
+    {
+      "source": "~RS 1",
+      "query": "~RS 2",
+      "raw": 0,
+      "before": 0,
+      "path": [
+        "Motor 1",
+        "Motor Configuration",
+        "Sinusoidal Settings",
+        "Motor Parameters",
+        "Stator Resistance (Rs - Ohm)"
+      ]
+    },
+    {
+      "source": "~SPOL 1",
+      "query": "~SPOL 2",
+      "raw": 1,
+      "before": 1,
+      "path": [
+        "Motor 1",
+        "Motor Configuration",
+        "Sinusoidal Settings",
+        "SinCos/SSI Sensor Poles"
+      ]
+    },
+    {
+      "source": "~SWD 1",
+      "query": "~SWD 2",
+      "raw": 0,
+      "before": 0,
+      "path": [
+        "Motor 1",
+        "Motor Configuration",
+        "Swap Windings"
+      ]
+    },
+    {
+      "source": "~VK 1",
+      "query": "~VK 2",
+      "raw": 13000,
+      "before": 0,
+      "path": [
+        "Motor 1",
+        "Motor Configuration",
+        "Sinusoidal Settings",
+        "Motor Parameters",
+        "Voltage Constant (Vk -  V/kRPM)"
+      ]
+    },
+    {
+      "source": "~OTL 2",
+      "query": "~OTL 3",
+      "raw": 100,
+      "before": 100,
+      "path": [
+        "Motor 1",
+        "Motor Configuration",
+        "Motor Thermistor",
+        "Motor Over Temperature Limit"
+      ]
+    },
+    {
+      "source": "~EPPR 1",
+      "query": "~EPPR 2",
+      "raw": 1000,
+      "before": 1024,
+      "path": [
+        "Encoders"
+      ]
+    },
+    {
+      "source": "~ELL 1",
+      "query": "~ELL 2",
+      "raw": -20000,
+      "before": -20000,
+      "path": [
+        "Encoders"
+      ]
+    },
+    {
+      "source": "~EHL 1",
+      "query": "~EHL 2",
+      "raw": 20000,
+      "before": 20000,
+      "path": [
+        "Encoders"
+      ]
+    },
+    {
+      "source": "~EHOME 1",
+      "query": "~EHOME 2",
+      "raw": 0,
+      "before": 0,
+      "path": [
+        "Encoders"
+      ]
+    },
+    {
+      "source": "~EMOD 1",
+      "query": "~EMOD 2",
+      "raw": 34,
+      "before": 0,
+      "path": [
+        "Encoders",
+        "Feedback motor 2"
+      ]
+    },
+    {
+      "source": "~ELLA 1",
+      "query": "~ELLA 2",
+      "raw": 0,
+      "before": 0,
+      "path": [
+        "Encoders"
+      ]
+    },
+    {
+      "source": "~EHLA 1",
+      "query": "~EHLA 2",
+      "raw": 0,
+      "before": 0,
+      "path": [
+        "Encoders"
+      ]
+    }
+  ],
+  "changes": [
+    {
+      "query": "~ALIM 2",
+      "raw": 190
+    },
+    {
+      "query": "~MXRPM 2",
+      "raw": 3000
+    },
+    {
+      "query": "~FEW 2",
+      "raw": 500
+    },
+    {
+      "query": "~KIG 2",
+      "raw": 10000
+    },
+    {
+      "query": "~KPG 2",
+      "raw": 30000
+    },
+    {
+      "query": "~KPG 4",
+      "raw": 200000
+    },
+    {
+      "query": "~LPFB 2",
+      "raw": 80
+    },
+    {
+      "query": "~MAC 2",
+      "raw": 30000
+    },
+    {
+      "query": "~MMOD 2",
+      "raw": 1
+    },
+    {
+      "query": "~MVEL 2",
+      "raw": 30
+    },
+    {
+      "query": "~MXTRN 2",
+      "raw": 1000
+    },
+    {
+      "query": "~NOMA 2",
+      "raw": 190
+    },
+    {
+      "query": "~SED 2",
+      "raw": 2
+    },
+    {
+      "query": "~TNM 2",
+      "raw": 124
+    },
+    {
+      "query": "~BPOL 2",
+      "raw": 4
+    },
+    {
+      "query": "~BZPW 2",
+      "raw": 190
+    },
+    {
+      "query": "~KIF 2",
+      "raw": 502656
+    },
+    {
+      "query": "~KIF 4",
+      "raw": 502656
+    },
+    {
+      "query": "~KPF 2",
+      "raw": 2000
+    },
+    {
+      "query": "~KPF 4",
+      "raw": 2000
+    },
+    {
+      "query": "~MXPW 2",
+      "raw": 6600
+    },
+    {
+      "query": "~PSA 2",
+      "raw": 120
+    },
+    {
+      "query": "~VK 2",
+      "raw": 13000
+    },
+    {
+      "query": "~EPPR 2",
+      "raw": 1000
+    },
+    {
+      "query": "~EMOD 2",
+      "raw": 34
+    }
+  ],
+  "excluded_calibration": [
+    "~HSAT 1",
+    "~HSAT 2",
+    "~HSAT 3",
+    "~HSAT 4",
+    "~HSAT 5",
+    "~HSAT 6",
+    "~HSAT 7",
+    "~HSAT 8",
+    "~HSAT 9",
+    "~HSAT 10",
+    "~HSAT 11",
+    "~HSAT 12",
+    "~ZSMA 1",
+    "~ZSMC 1",
+    "~ZSMC 2",
+    "~ZSMC 3"
+  ]
+}

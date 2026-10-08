@@ -1,0 +1,28 @@
+{
+  "application": "MotorLab Linux",
+  "date_utc": "2026-10-08T14:39:25.861758+00:00",
+  "motor_model_both_channels": "KTC-86BLS125-J",
+  "known_parameters": 636,
+  "paired_fields": 74,
+  "ram_changed_fields": 25,
+  "eeprom_write_ack": true,
+  "post_write_full_read": true,
+  "power_cycle_verified": false,
+  "motor2_connected": false,
+  "motor2_motion_tested": false,
+  "motor1_test_evidence": "../velocidade-100rpm.json and ../velocidade-500rpm.json",
+  "faults_after_write": 48,
+  "hall1": 2,
+  "hall2": 7,
+  "files_sha256": {
+    "README.md": "df1e9c5c9f279cda025071374f2e8f083cd7c1175f3b0cb9d0634edf115e0359",
+    "aplicacao-ram.json": "05b83469a0b56e2c6d5d2bea5ca1b2eed8847ae3033007bbd66a81ad7974a83b",
+    "comparacao-final.json": "71191432b8b44b65de12099ae6df302c5e7b54c4b0fe5c16cd44e2b57ee3c03e",
+    "diagnostico-hall-pos-gravacao.json": "d4477383fa9619acd35ed4a54b1a0b7223b3c388985414ba8a3418d2c9c78f7a",
+    "estado-parado.json": "3f6228158464274787f4510e54f8c29349c93e7cb510ada48c12438130939c51",
+    "gravacao-eeprom.json": "272665c03e73b7e34cedbd6f24ef2a3a3bd637fbd979b2a83a3341bd32ad5f6b",
+    "perfil-final-eeprom.json": "b075c96c784ae37cd7cb39aafb5384c00a359f0c571621b1ba39706cbfe2b284",
+    "plano.json": "f3017018862fd9bba6206ed718d7f3cdb5dbb2cd8d59d19871b2dbcd8c1ffb66",
+    "releitura-pos-gravacao.json": "b09d49d29312da9a5ed3e65d7da8ad98f5407d5e7d2e214dd8a5d08153abbb5f"
+  }
+}

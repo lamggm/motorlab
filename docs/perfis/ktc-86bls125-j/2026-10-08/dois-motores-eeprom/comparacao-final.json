@@ -1,0 +1,135 @@
+{
+  "compared_fields": 636,
+  "differences": [
+    {
+      "query": "~ALIM 2",
+      "before": 200,
+      "after": 190
+    },
+    {
+      "query": "~MXRPM 2",
+      "before": 1000,
+      "after": 3000
+    },
+    {
+      "query": "~EMOD 2",
+      "before": 0,
+      "after": 34
+    },
+    {
+      "query": "~EPPR 2",
+      "before": 1024,
+      "after": 1000
+    },
+    {
+      "query": "~FEW 2",
+      "before": 250,
+      "after": 500
+    },
+    {
+      "query": "~KIG 2",
+      "before": 0,
+      "after": 10000
+    },
+    {
+      "query": "~KPG 2",
+      "before": 0,
+      "after": 30000
+    },
+    {
+      "query": "~KPG 4",
+      "before": 0,
+      "after": 200000
+    },
+    {
+      "query": "~LPFB 2",
+      "before": 45,
+      "after": 80
+    },
+    {
+      "query": "~MAC 2",
+      "before": 20000,
+      "after": 30000
+    },
+    {
+      "query": "~MMOD 2",
+      "before": 0,
+      "after": 1
+    },
+    {
+      "query": "~MVEL 2",
+      "before": 1000,
+      "after": 30
+    },
+    {
+      "query": "~MXTRN 2",
+      "before": 10000,
+      "after": 1000
+    },
+    {
+      "query": "~NOMA 2",
+      "before": 200,
+      "after": 190
+    },
+    {
+      "query": "~SED 2",
+      "before": 0,
+      "after": 2
+    },
+    {
+      "query": "~TNM 2",
+      "before": 200,
+      "after": 124
+    },
+    {
+      "query": "~BPOL 2",
+      "before": 2,
+      "after": 4
+    },
+    {
+      "query": "~BZPW 2",
+      "before": 100,
+      "after": 190
+    },
+    {
+      "query": "~KIF 2",
+      "before": 3000,
+      "after": 502656
+    },
+    {
+      "query": "~KIF 4",
+      "before": 0,
+      "after": 502656
+    },
+    {
+      "query": "~KPF 2",
+      "before": 30,
+      "after": 2000
+    },
+    {
+      "query": "~KPF 4",
+      "before": 0,
+      "after": 2000
+    },
+    {
+      "query": "~MXPW 2",
+      "before": 28350,
+      "after": 6600
+    },
+    {
+      "query": "~PSA 2",
+      "before": 128,
+      "after": 120
+    },
+    {
+      "query": "~VK 2",
+      "before": 0,
+      "after": 13000
+    }
+  ],
+  "verified_pairs": 74,
+  "encoder1_assignment": 18,
+  "encoder2_assignment": 34,
+  "source_eeprom_ack": true,
+  "power_cycle_verified": false
+}

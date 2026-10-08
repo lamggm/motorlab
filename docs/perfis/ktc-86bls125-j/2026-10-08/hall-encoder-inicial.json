@@ -1,0 +1,42 @@
+{
+  "motor": "KTC-86BLS125-J",
+  "mode": "open_loop",
+  "target": 50,
+  "target_unit": "raw_G",
+  "requested_seconds": 8.0,
+  "job_state": "succeeded",
+  "message": "Parada solicitada pelo operador. !EX confirmado.",
+  "stop_confirmed": true,
+  "sample_count": 369,
+  "steady_samples": 235,
+  "encoder": {
+    "mean": 155.47659574468085,
+    "min": 134.0,
+    "max": 173.0,
+    "stdev": 9.056001014161412
+  },
+  "hall": {
+    "mean": 157.35744680851064,
+    "min": 140.0,
+    "max": 184.0,
+    "stdev": 13.608191286021736
+  },
+  "rpm_from_counter": 155.3366539766557,
+  "max_abs_current_a": 2.2,
+  "fault_values": [
+    0
+  ],
+  "motor_flag_values": [
+    0
+  ],
+  "final": {
+    "?S": "0:-2",
+    "?BS 1": "0",
+    "?BS 2": "0",
+    "?FF": "16",
+    "?FM 1": "128",
+    "~ALIM 1": "190",
+    "~MXRPM 1": "3000"
+  },
+  "failure": null
+}

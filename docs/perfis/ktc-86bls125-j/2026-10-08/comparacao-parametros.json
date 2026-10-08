@@ -1,0 +1,51 @@
+{
+  "known_before": 636,
+  "known_after": 636,
+  "motor2_preserved": true,
+  "other_known_parameters_preserved": true,
+  "differences": {
+    "~ALIM 1": {
+      "before": 115,
+      "after": 190
+    },
+    "~KIG 1": {
+      "before": 30000,
+      "after": 10000
+    },
+    "~KPG 1": {
+      "before": 120000,
+      "after": 30000
+    },
+    "~MMOD 1": {
+      "before": 3,
+      "after": 1
+    },
+    "~NOMA 1": {
+      "before": 115,
+      "after": 190
+    },
+    "~TNM 1": {
+      "before": 1400,
+      "after": 124
+    },
+    "~BFBK 1": {
+      "before": 2,
+      "after": 1
+    },
+    "~BMOD 1": {
+      "before": 1,
+      "after": 0
+    },
+    "~BZPW 1": {
+      "before": 180,
+      "after": 190
+    },
+    "~MXPW 1": {
+      "before": 4400,
+      "after": 6600
+    }
+  },
+  "eeprom_written": false,
+  "calibration_executed": false,
+  "unused_old_hall_angle_calibration_preserved": true
+}

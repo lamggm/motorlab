@@ -1,0 +1,3207 @@
+{
+  "completed_steps": 638,
+  "created_utc": "2026-10-08T14:37:03.624Z",
+  "finished_utc": "2026-10-08T14:37:13.210Z",
+  "firmware": "Roboteq v3.0f SBLG2XXX 07/15/2026",
+  "job_id": "8390dc0a-5cca-4be2-a41a-302cc404954b",
+  "kind": "read",
+  "message": "Sequência concluída; consulte replies para resultados e rejeições individuais.",
+  "model": "SBLG2XXX:SBLG2360T",
+  "replies": [
+    {
+      "command": "~ALIM 1",
+      "ok": true,
+      "payload": "190"
+    },
+    {
+      "command": "~ALIM 2",
+      "ok": true,
+      "payload": "190"
+    },
+    {
+      "command": "~MXRPM 1",
+      "ok": true,
+      "payload": "3000"
+    },
+    {
+      "command": "~MXRPM 2",
+      "ok": true,
+      "payload": "3000"
+    },
+    {
+      "command": "~ACS",
+      "ok": true,
+      "payload": "1"
+    },
+    {
+      "command": "~AMS",
+      "ok": true,
+      "payload": "1"
+    },
+    {
+      "command": "~BRUN",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~CLIN 1",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~CLIN 2",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~CPRI 1",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~CPRI 2",
+      "ok": true,
+      "payload": "1"
+    },
+    {
+      "command": "~CPRI 3",
+      "ok": true,
+      "payload": "3"
+    },
+    {
+      "command": "~DFC 1",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~DFC 2",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~DMOD",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~ECHOF",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~EE 1",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~EE 2",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~EE 3",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~EE 4",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~EE 5",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~EE 6",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~EE 7",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~EE 8",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~EE 9",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~EE 10",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~EE 11",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~EE 12",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~EE 13",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~EE 14",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~EE 15",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~EE 16",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~EE 17",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~EE 18",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~EE 19",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~EE 20",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~EE 21",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~EE 22",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~EE 23",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~EE 24",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~EE 25",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~EE 26",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~EE 27",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~EE 28",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~EE 29",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~EE 30",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~EE 31",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~EE 32",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~FLCL",
+      "ok": true,
+      "payload": "1"
+    },
+    {
+      "command": "~ISM",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~MDAL",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~MNOD",
+      "ok": true,
+      "payload": "1"
+    },
+    {
+      "command": "~PMS",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~RSBR",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~RS485",
+      "ok": true,
+      "payload": "1"
+    },
+    {
+      "command": "~RWD",
+      "ok": true,
+      "payload": "1000"
+    },
+    {
+      "command": "~SCRO",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~STO",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~ACTR 1",
+      "ok": true,
+      "payload": "2500"
+    },
+    {
+      "command": "~ACTR 2",
+      "ok": true,
+      "payload": "2500"
+    },
+    {
+      "command": "~ACTR 3",
+      "ok": true,
+      "payload": "2500"
+    },
+    {
+      "command": "~ACTR 4",
+      "ok": true,
+      "payload": "2500"
+    },
+    {
+      "command": "~ACTR 5",
+      "ok": true,
+      "payload": "2500"
+    },
+    {
+      "command": "~ACTR 6",
+      "ok": true,
+      "payload": "2500"
+    },
+    {
+      "command": "~ACTR 7",
+      "ok": true,
+      "payload": "2500"
+    },
+    {
+      "command": "~ACTR 8",
+      "ok": true,
+      "payload": "2500"
+    },
+    {
+      "command": "~ADB 1",
+      "ok": true,
+      "payload": "5"
+    },
+    {
+      "command": "~ADB 2",
+      "ok": true,
+      "payload": "5"
+    },
+    {
+      "command": "~ADB 3",
+      "ok": true,
+      "payload": "5"
+    },
+    {
+      "command": "~ADB 4",
+      "ok": true,
+      "payload": "5"
+    },
+    {
+      "command": "~ADB 5",
+      "ok": true,
+      "payload": "5"
+    },
+    {
+      "command": "~ADB 6",
+      "ok": true,
+      "payload": "5"
+    },
+    {
+      "command": "~ADB 7",
+      "ok": true,
+      "payload": "5"
+    },
+    {
+      "command": "~ADB 8",
+      "ok": true,
+      "payload": "5"
+    },
+    {
+      "command": "~AINA 1",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~AINA 2",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~AINA 3",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~AINA 4",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~AINA 5",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~AINA 6",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~AINA 7",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~AINA 8",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~ALIN 1",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~ALIN 2",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~ALIN 3",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~ALIN 4",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~ALIN 5",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~ALIN 6",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~ALIN 7",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~ALIN 8",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~AMAX 1",
+      "ok": true,
+      "payload": "4750"
+    },
+    {
+      "command": "~AMAX 2",
+      "ok": true,
+      "payload": "4750"
+    },
+    {
+      "command": "~AMAX 3",
+      "ok": true,
+      "payload": "4750"
+    },
+    {
+      "command": "~AMAX 4",
+      "ok": true,
+      "payload": "4750"
+    },
+    {
+      "command": "~AMAX 5",
+      "ok": true,
+      "payload": "4750"
+    },
+    {
+      "command": "~AMAX 6",
+      "ok": true,
+      "payload": "4750"
+    },
+    {
+      "command": "~AMAX 7",
+      "ok": true,
+      "payload": "4750"
+    },
+    {
+      "command": "~AMAX 8",
+      "ok": true,
+      "payload": "4750"
+    },
+    {
+      "command": "~AMAXA 1",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~AMAXA 2",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~AMAXA 3",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~AMAXA 4",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~AMAXA 5",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~AMAXA 6",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~AMAXA 7",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~AMAXA 8",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~AMIN 1",
+      "ok": true,
+      "payload": "250"
+    },
+    {
+      "command": "~AMIN 2",
+      "ok": true,
+      "payload": "250"
+    },
+    {
+      "command": "~AMIN 3",
+      "ok": true,
+      "payload": "250"
+    },
+    {
+      "command": "~AMIN 4",
+      "ok": true,
+      "payload": "250"
+    },
+    {
+      "command": "~AMIN 5",
+      "ok": true,
+      "payload": "250"
+    },
+    {
+      "command": "~AMIN 6",
+      "ok": true,
+      "payload": "250"
+    },
+    {
+      "command": "~AMIN 7",
+      "ok": true,
+      "payload": "250"
+    },
+    {
+      "command": "~AMIN 8",
+      "ok": true,
+      "payload": "250"
+    },
+    {
+      "command": "~AMINA 1",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~AMINA 2",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~AMINA 3",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~AMINA 4",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~AMINA 5",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~AMINA 6",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~AMINA 7",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~AMINA 8",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~AMOD 1",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~AMOD 2",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~AMOD 3",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~AMOD 4",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~AMOD 5",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~AMOD 6",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~AMOD 7",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~AMOD 8",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~APOL 1",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~APOL 2",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~APOL 3",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~APOL 4",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~APOL 5",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~APOL 6",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~APOL 7",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~APOL 8",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~AUXV",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~DINA 1",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~DINA 2",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~DINA 3",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~DINA 4",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~DINA 5",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~DINA 6",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~DINA 7",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~DINA 8",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~DINA 9",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~DINA 10",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~DINL 1",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~DINL 2",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~DINL 3",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~DINL 4",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~DINL 5",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~DINL 6",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~DINL 7",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~DINL 8",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~DINL 9",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~DINL 10",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~DOA 1",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~DOA 2",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~DOA 3",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~DOA 4",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~DOL 1",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~DOL 2",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~DOL 3",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~DOL 4",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~DOT 1",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~DOT 2",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~DOT 3",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~DOT 4",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~ENCO",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~PCTR 1",
+      "ok": true,
+      "payload": "1500"
+    },
+    {
+      "command": "~PCTR 2",
+      "ok": true,
+      "payload": "1500"
+    },
+    {
+      "command": "~PCTR 3",
+      "ok": true,
+      "payload": "1500"
+    },
+    {
+      "command": "~PCTR 4",
+      "ok": true,
+      "payload": "1500"
+    },
+    {
+      "command": "~PCTR 5",
+      "ok": true,
+      "payload": "1500"
+    },
+    {
+      "command": "~PCTR 6",
+      "ok": true,
+      "payload": "1500"
+    },
+    {
+      "command": "~PCTR 7",
+      "ok": true,
+      "payload": "1500"
+    },
+    {
+      "command": "~PCTR 8",
+      "ok": true,
+      "payload": "1500"
+    },
+    {
+      "command": "~PDB 1",
+      "ok": true,
+      "payload": "5"
+    },
+    {
+      "command": "~PDB 2",
+      "ok": true,
+      "payload": "5"
+    },
+    {
+      "command": "~PDB 3",
+      "ok": true,
+      "payload": "5"
+    },
+    {
+      "command": "~PDB 4",
+      "ok": true,
+      "payload": "5"
+    },
+    {
+      "command": "~PDB 5",
+      "ok": true,
+      "payload": "5"
+    },
+    {
+      "command": "~PDB 6",
+      "ok": true,
+      "payload": "5"
+    },
+    {
+      "command": "~PDB 7",
+      "ok": true,
+      "payload": "5"
+    },
+    {
+      "command": "~PDB 8",
+      "ok": true,
+      "payload": "5"
+    },
+    {
+      "command": "~PINA 1",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~PINA 2",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~PINA 3",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~PINA 4",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~PINA 5",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~PINA 6",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~PINA 7",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~PINA 8",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~PLIN 1",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~PLIN 2",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~PLIN 3",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~PLIN 4",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~PLIN 5",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~PLIN 6",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~PLIN 7",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~PLIN 8",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~PMAX 1",
+      "ok": true,
+      "payload": "2000"
+    },
+    {
+      "command": "~PMAX 2",
+      "ok": true,
+      "payload": "2000"
+    },
+    {
+      "command": "~PMAX 3",
+      "ok": true,
+      "payload": "2000"
+    },
+    {
+      "command": "~PMAX 4",
+      "ok": true,
+      "payload": "2000"
+    },
+    {
+      "command": "~PMAX 5",
+      "ok": true,
+      "payload": "2000"
+    },
+    {
+      "command": "~PMAX 6",
+      "ok": true,
+      "payload": "2000"
+    },
+    {
+      "command": "~PMAX 7",
+      "ok": true,
+      "payload": "2000"
+    },
+    {
+      "command": "~PMAX 8",
+      "ok": true,
+      "payload": "2000"
+    },
+    {
+      "command": "~PMAXA 1",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~PMAXA 2",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~PMAXA 3",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~PMAXA 4",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~PMAXA 5",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~PMAXA 6",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~PMAXA 7",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~PMAXA 8",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~PMIN 1",
+      "ok": true,
+      "payload": "1000"
+    },
+    {
+      "command": "~PMIN 2",
+      "ok": true,
+      "payload": "1000"
+    },
+    {
+      "command": "~PMIN 3",
+      "ok": true,
+      "payload": "1000"
+    },
+    {
+      "command": "~PMIN 4",
+      "ok": true,
+      "payload": "1000"
+    },
+    {
+      "command": "~PMIN 5",
+      "ok": true,
+      "payload": "1000"
+    },
+    {
+      "command": "~PMIN 6",
+      "ok": true,
+      "payload": "1000"
+    },
+    {
+      "command": "~PMIN 7",
+      "ok": true,
+      "payload": "1000"
+    },
+    {
+      "command": "~PMIN 8",
+      "ok": true,
+      "payload": "1000"
+    },
+    {
+      "command": "~PMINA 1",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~PMINA 2",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~PMINA 3",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~PMINA 4",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~PMINA 5",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~PMINA 6",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~PMINA 7",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~PMINA 8",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~PMOD 1",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~PMOD 2",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~PMOD 3",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~PMOD 4",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~PMOD 5",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~PMOD 6",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~PMOD 7",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~PMOD 8",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~PPOL 1",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~PPOL 2",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~PPOL 3",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~PPOL 4",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~PPOL 5",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~PPOL 6",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~PPOL 7",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~PPOL 8",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~ATGA 1",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~ATGA 2",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~ATGD 1",
+      "ok": true,
+      "payload": "500"
+    },
+    {
+      "command": "~ATGD 2",
+      "ok": true,
+      "payload": "500"
+    },
+    {
+      "command": "~ATRIG 1",
+      "ok": true,
+      "payload": "200"
+    },
+    {
+      "command": "~ATRIG 2",
+      "ok": true,
+      "payload": "200"
+    },
+    {
+      "command": "~B25 1",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~B25 2",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~BKD",
+      "ok": true,
+      "payload": "250"
+    },
+    {
+      "command": "~BPR 1",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~BPR 2",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~BLFB 1",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~BLFB 2",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~BLSTD 1",
+      "ok": true,
+      "payload": "2"
+    },
+    {
+      "command": "~BLSTD 2",
+      "ok": true,
+      "payload": "2"
+    },
+    {
+      "command": "~BR 1",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~BR 2",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~CLERD 1",
+      "ok": true,
+      "payload": "4"
+    },
+    {
+      "command": "~CLERD 2",
+      "ok": true,
+      "payload": "4"
+    },
+    {
+      "command": "~EDEC 1",
+      "ok": true,
+      "payload": "20000"
+    },
+    {
+      "command": "~EDEC 2",
+      "ok": true,
+      "payload": "20000"
+    },
+    {
+      "command": "~EHL 1",
+      "ok": true,
+      "payload": "20000"
+    },
+    {
+      "command": "~EHL 2",
+      "ok": true,
+      "payload": "20000"
+    },
+    {
+      "command": "~EHLA 1",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~EHLA 2",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~EHOME 1",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~EHOME 2",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~ELL 1",
+      "ok": true,
+      "payload": "-20000"
+    },
+    {
+      "command": "~ELL 2",
+      "ok": true,
+      "payload": "-20000"
+    },
+    {
+      "command": "~ELLA 1",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~ELLA 2",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~EMOD 1",
+      "ok": true,
+      "payload": "18"
+    },
+    {
+      "command": "~EMOD 2",
+      "ok": true,
+      "payload": "34"
+    },
+    {
+      "command": "~EPPR 1",
+      "ok": true,
+      "payload": "1000"
+    },
+    {
+      "command": "~EPPR 2",
+      "ok": true,
+      "payload": "1000"
+    },
+    {
+      "command": "~FET 1",
+      "ok": true,
+      "payload": "500"
+    },
+    {
+      "command": "~FET 2",
+      "ok": true,
+      "payload": "500"
+    },
+    {
+      "command": "~FEW 1",
+      "ok": true,
+      "payload": "500"
+    },
+    {
+      "command": "~FEW 2",
+      "ok": true,
+      "payload": "500"
+    },
+    {
+      "command": "~ICAP 1",
+      "ok": true,
+      "payload": "100"
+    },
+    {
+      "command": "~ICAP 2",
+      "ok": true,
+      "payload": "100"
+    },
+    {
+      "command": "~JR 1",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~JR 2",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~KDG 1",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~KDG 2",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~KDG 3",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~KDG 4",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~KIG 1",
+      "ok": true,
+      "payload": "10000"
+    },
+    {
+      "command": "~KIG 2",
+      "ok": true,
+      "payload": "10000"
+    },
+    {
+      "command": "~KIG 3",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~KIG 4",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~KPG 1",
+      "ok": true,
+      "payload": "30000"
+    },
+    {
+      "command": "~KPG 2",
+      "ok": true,
+      "payload": "30000"
+    },
+    {
+      "command": "~KPG 3",
+      "ok": true,
+      "payload": "200000"
+    },
+    {
+      "command": "~KPG 4",
+      "ok": true,
+      "payload": "200000"
+    },
+    {
+      "command": "~LEAC 1",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~LEAC 2",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~LPFB 1",
+      "ok": true,
+      "payload": "80"
+    },
+    {
+      "command": "~LPFB 2",
+      "ok": true,
+      "payload": "80"
+    },
+    {
+      "command": "~MAC 1",
+      "ok": true,
+      "payload": "30000"
+    },
+    {
+      "command": "~MAC 2",
+      "ok": true,
+      "payload": "30000"
+    },
+    {
+      "command": "~MCLE 1",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~MCLE 2",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~MDEC 1",
+      "ok": true,
+      "payload": "20000"
+    },
+    {
+      "command": "~MDEC 2",
+      "ok": true,
+      "payload": "20000"
+    },
+    {
+      "command": "~MLX 1",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~MLX 2",
+      "ok": false,
+      "payload": "Controlador rejeitou a consulta/operação."
+    },
+    {
+      "command": "~MDIR 1",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~MDIR 2",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~MMOD 1",
+      "ok": true,
+      "payload": "1"
+    },
+    {
+      "command": "~MMOD 2",
+      "ok": true,
+      "payload": "1"
+    },
+    {
+      "command": "~MNRPM 1",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~MNRPM 2",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~MSTA 1",
+      "ok": true,
+      "payload": "1"
+    },
+    {
+      "command": "~MSTA 2",
+      "ok": true,
+      "payload": "1"
+    },
+    {
+      "command": "~MVEL 1",
+      "ok": true,
+      "payload": "30"
+    },
+    {
+      "command": "~MVEL 2",
+      "ok": true,
+      "payload": "30"
+    },
+    {
+      "command": "~MXMD",
+      "ok": true,
+      "payload": "0:0"
+    },
+    {
+      "command": "~MXPF 1",
+      "ok": true,
+      "payload": "100"
+    },
+    {
+      "command": "~MXPF 2",
+      "ok": true,
+      "payload": "100"
+    },
+    {
+      "command": "~MXPR 1",
+      "ok": true,
+      "payload": "100"
+    },
+    {
+      "command": "~MXPR 2",
+      "ok": true,
+      "payload": "100"
+    },
+    {
+      "command": "~MXTRN 1",
+      "ok": true,
+      "payload": "1000"
+    },
+    {
+      "command": "~MXTRN 2",
+      "ok": true,
+      "payload": "1000"
+    },
+    {
+      "command": "~NOMA 1",
+      "ok": true,
+      "payload": "190"
+    },
+    {
+      "command": "~NOMA 2",
+      "ok": true,
+      "payload": "190"
+    },
+    {
+      "command": "~OVH",
+      "ok": true,
+      "payload": "50"
+    },
+    {
+      "command": "~OVL",
+      "ok": true,
+      "payload": "600"
+    },
+    {
+      "command": "~R25 1",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~R25 2",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~SCLE 1",
+      "ok": true,
+      "payload": "12"
+    },
+    {
+      "command": "~SCLE 2",
+      "ok": true,
+      "payload": "12"
+    },
+    {
+      "command": "~SCLK",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~SED 1",
+      "ok": true,
+      "payload": "2"
+    },
+    {
+      "command": "~SED 2",
+      "ok": true,
+      "payload": "2"
+    },
+    {
+      "command": "~SFTS 1",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~SFTS 2",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~SHL 1",
+      "ok": true,
+      "payload": "20000"
+    },
+    {
+      "command": "~SHL 2",
+      "ok": true,
+      "payload": "20000"
+    },
+    {
+      "command": "~SHLA 1",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~SHLA 2",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~SHOME 1",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~SHOME 2",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~SLEN 1",
+      "ok": true,
+      "payload": "12"
+    },
+    {
+      "command": "~SLEN 2",
+      "ok": true,
+      "payload": "12"
+    },
+    {
+      "command": "~SLLA 1",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~SLLA 2",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~SMOD 1",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~SMOD 2",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~SSTA 1",
+      "ok": true,
+      "payload": "1"
+    },
+    {
+      "command": "~SSTA 2",
+      "ok": true,
+      "payload": "1"
+    },
+    {
+      "command": "~TNM 1",
+      "ok": true,
+      "payload": "124"
+    },
+    {
+      "command": "~TNM 2",
+      "ok": true,
+      "payload": "124"
+    },
+    {
+      "command": "~TPAL 1",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~TPAL 2",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~TRPU 1",
+      "ok": true,
+      "payload": "10000"
+    },
+    {
+      "command": "~TRPU 2",
+      "ok": true,
+      "payload": "10000"
+    },
+    {
+      "command": "~UVL",
+      "ok": true,
+      "payload": "100"
+    },
+    {
+      "command": "~VELFF 1",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~VELFF 2",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~BADJ 1",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~BADJ 2",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~BADV 1",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~BADV 2",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~BFBK 1",
+      "ok": true,
+      "payload": "1"
+    },
+    {
+      "command": "~BFBK 2",
+      "ok": true,
+      "payload": "1"
+    },
+    {
+      "command": "~BHL 1",
+      "ok": true,
+      "payload": "20000"
+    },
+    {
+      "command": "~BHL 2",
+      "ok": true,
+      "payload": "20000"
+    },
+    {
+      "command": "~BHLA 1",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~BHLA 2",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~BHOME 1",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~BHOME 2",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~BLL 1",
+      "ok": true,
+      "payload": "-20000"
+    },
+    {
+      "command": "~BLL 2",
+      "ok": true,
+      "payload": "-20000"
+    },
+    {
+      "command": "~BLLA 1",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~BLLA 2",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~BMOD 1",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~BMOD 2",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~BPOL 1",
+      "ok": true,
+      "payload": "4"
+    },
+    {
+      "command": "~BPOL 2",
+      "ok": true,
+      "payload": "4"
+    },
+    {
+      "command": "~BZPW 1",
+      "ok": true,
+      "payload": "190"
+    },
+    {
+      "command": "~BZPW 2",
+      "ok": true,
+      "payload": "190"
+    },
+    {
+      "command": "~FWVR 1",
+      "ok": true,
+      "payload": "1000"
+    },
+    {
+      "command": "~FWVR 2",
+      "ok": true,
+      "payload": "1000"
+    },
+    {
+      "command": "~HPO 1",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~HPO 2",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~HSAT 1",
+      "ok": true,
+      "payload": "209"
+    },
+    {
+      "command": "~HSAT 2",
+      "ok": true,
+      "payload": "378"
+    },
+    {
+      "command": "~HSAT 3",
+      "ok": true,
+      "payload": "291"
+    },
+    {
+      "command": "~HSAT 4",
+      "ok": true,
+      "payload": "35"
+    },
+    {
+      "command": "~HSAT 5",
+      "ok": true,
+      "payload": "121"
+    },
+    {
+      "command": "~HSAT 6",
+      "ok": true,
+      "payload": "464"
+    },
+    {
+      "command": "~HSAT 7",
+      "ok": true,
+      "payload": "137"
+    },
+    {
+      "command": "~HSAT 8",
+      "ok": true,
+      "payload": "304"
+    },
+    {
+      "command": "~HSAT 9",
+      "ok": true,
+      "payload": "233"
+    },
+    {
+      "command": "~HSAT 10",
+      "ok": true,
+      "payload": "489"
+    },
+    {
+      "command": "~HSAT 11",
+      "ok": true,
+      "payload": "48"
+    },
+    {
+      "command": "~HSAT 12",
+      "ok": true,
+      "payload": "399"
+    },
+    {
+      "command": "~HSAT 13",
+      "ok": true,
+      "payload": "469"
+    },
+    {
+      "command": "~HSAT 14",
+      "ok": true,
+      "payload": "128"
+    },
+    {
+      "command": "~HSAT 15",
+      "ok": true,
+      "payload": "42"
+    },
+    {
+      "command": "~HSAT 16",
+      "ok": true,
+      "payload": "298"
+    },
+    {
+      "command": "~HSAT 17",
+      "ok": true,
+      "payload": "384"
+    },
+    {
+      "command": "~HSAT 18",
+      "ok": true,
+      "payload": "213"
+    },
+    {
+      "command": "~HSAT 19",
+      "ok": true,
+      "payload": "384"
+    },
+    {
+      "command": "~HSAT 20",
+      "ok": true,
+      "payload": "42"
+    },
+    {
+      "command": "~HSAT 21",
+      "ok": true,
+      "payload": "469"
+    },
+    {
+      "command": "~HSAT 22",
+      "ok": true,
+      "payload": "213"
+    },
+    {
+      "command": "~HSAT 23",
+      "ok": true,
+      "payload": "298"
+    },
+    {
+      "command": "~HSAT 24",
+      "ok": true,
+      "payload": "128"
+    },
+    {
+      "command": "~HSM 1",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~HSM 2",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~KIF 1",
+      "ok": true,
+      "payload": "502656"
+    },
+    {
+      "command": "~KIF 2",
+      "ok": true,
+      "payload": "502656"
+    },
+    {
+      "command": "~KIF 3",
+      "ok": true,
+      "payload": "502656"
+    },
+    {
+      "command": "~KIF 4",
+      "ok": true,
+      "payload": "502656"
+    },
+    {
+      "command": "~KPF 1",
+      "ok": true,
+      "payload": "2000"
+    },
+    {
+      "command": "~KPF 2",
+      "ok": true,
+      "payload": "2000"
+    },
+    {
+      "command": "~KPF 3",
+      "ok": true,
+      "payload": "2000"
+    },
+    {
+      "command": "~KPF 4",
+      "ok": true,
+      "payload": "2000"
+    },
+    {
+      "command": "~LD 1",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~LD 2",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~LQ 1",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~LQ 2",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~MXPW 1",
+      "ok": true,
+      "payload": "6600"
+    },
+    {
+      "command": "~MXPW 2",
+      "ok": true,
+      "payload": "6600"
+    },
+    {
+      "command": "~PSA 1",
+      "ok": true,
+      "payload": "120"
+    },
+    {
+      "command": "~PSA 2",
+      "ok": true,
+      "payload": "120"
+    },
+    {
+      "command": "~RS 1",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~RS 2",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~SPOL 1",
+      "ok": true,
+      "payload": "1"
+    },
+    {
+      "command": "~SPOL 2",
+      "ok": true,
+      "payload": "1"
+    },
+    {
+      "command": "~SWD 1",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~SWD 2",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~TID 1",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~TID 2",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~VK 1",
+      "ok": true,
+      "payload": "13000"
+    },
+    {
+      "command": "~VK 2",
+      "ok": true,
+      "payload": "13000"
+    },
+    {
+      "command": "~ZSMA 1",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~ZSMA 2",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~ZSMC 1",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~ZSMC 2",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~ZSMC 3",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~ZSMC 4",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~ZSMC 5",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~ZSMC 6",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~CAS",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~CBR",
+      "ok": true,
+      "payload": "3"
+    },
+    {
+      "command": "~CEN",
+      "ok": true,
+      "payload": "1"
+    },
+    {
+      "command": "~CGT 1",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~CGT 2",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~CHB",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~CHBT 1",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~CHBT 2",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~CHBT 3",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~CHBT 4",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~CHLA",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~CLSN",
+      "ok": true,
+      "payload": "4"
+    },
+    {
+      "command": "~CNOD",
+      "ok": true,
+      "payload": "1"
+    },
+    {
+      "command": "~CSRT",
+      "ok": true,
+      "payload": "100"
+    },
+    {
+      "command": "~CTPS 1",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~CTPS 2",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~CTPS 3",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~CTPS 4",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~CTPS 5",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~CTPS 6",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~CTPS 7",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~CTPS 8",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~CTT 1",
+      "ok": true,
+      "payload": "255"
+    },
+    {
+      "command": "~CTT 2",
+      "ok": true,
+      "payload": "255"
+    },
+    {
+      "command": "~CTT 3",
+      "ok": true,
+      "payload": "255"
+    },
+    {
+      "command": "~CTT 4",
+      "ok": true,
+      "payload": "255"
+    },
+    {
+      "command": "~CTT 5",
+      "ok": true,
+      "payload": "255"
+    },
+    {
+      "command": "~CTT 6",
+      "ok": true,
+      "payload": "255"
+    },
+    {
+      "command": "~CTT 7",
+      "ok": true,
+      "payload": "255"
+    },
+    {
+      "command": "~CTT 8",
+      "ok": true,
+      "payload": "255"
+    },
+    {
+      "command": "~FSA",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~RPDM 1",
+      "ok": true,
+      "payload": "537200928"
+    },
+    {
+      "command": "~RPDM 2",
+      "ok": true,
+      "payload": "537201184"
+    },
+    {
+      "command": "~RPDM 3",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~RPDM 4",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~RPDM 5",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~RPDM 6",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~RPDM 7",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~RPDM 8",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~RPDM 9",
+      "ok": true,
+      "payload": "537201440"
+    },
+    {
+      "command": "~RPDM 10",
+      "ok": true,
+      "payload": "537201696"
+    },
+    {
+      "command": "~RPDM 11",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~RPDM 12",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~RPDM 13",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~RPDM 14",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~RPDM 15",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~RPDM 16",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~RPDM 17",
+      "ok": true,
+      "payload": "537201952"
+    },
+    {
+      "command": "~RPDM 18",
+      "ok": true,
+      "payload": "537202208"
+    },
+    {
+      "command": "~RPDM 19",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~RPDM 20",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~RPDM 21",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~RPDM 22",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~RPDM 23",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~RPDM 24",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~RPDM 25",
+      "ok": true,
+      "payload": "537202464"
+    },
+    {
+      "command": "~RPDM 26",
+      "ok": true,
+      "payload": "537202720"
+    },
+    {
+      "command": "~RPDM 27",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~RPDM 28",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~RPDM 29",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~RPDM 30",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~RPDM 31",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~RPDM 32",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~RPDM 33",
+      "ok": true,
+      "payload": "537202976"
+    },
+    {
+      "command": "~RPDM 34",
+      "ok": true,
+      "payload": "537203232"
+    },
+    {
+      "command": "~RPDM 35",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~RPDM 36",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~RPDM 37",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~RPDM 38",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~RPDM 39",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~RPDM 40",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~RPDM 41",
+      "ok": true,
+      "payload": "537203488"
+    },
+    {
+      "command": "~RPDM 42",
+      "ok": true,
+      "payload": "537203744"
+    },
+    {
+      "command": "~RPDM 43",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~RPDM 44",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~RPDM 45",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~RPDM 46",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~RPDM 47",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~RPDM 48",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~RPDM 49",
+      "ok": true,
+      "payload": "537204000"
+    },
+    {
+      "command": "~RPDM 50",
+      "ok": true,
+      "payload": "537204256"
+    },
+    {
+      "command": "~RPDM 51",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~RPDM 52",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~RPDM 53",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~RPDM 54",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~RPDM 55",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~RPDM 56",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~RPDM 57",
+      "ok": true,
+      "payload": "537204512"
+    },
+    {
+      "command": "~RPDM 58",
+      "ok": true,
+      "payload": "537204768"
+    },
+    {
+      "command": "~RPDM 59",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~RPDM 60",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~RPDM 61",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~RPDM 62",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~RPDM 63",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~RPDM 64",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~TPDM 1",
+      "ok": true,
+      "payload": "554041632"
+    },
+    {
+      "command": "~TPDM 2",
+      "ok": true,
+      "payload": "554041888"
+    },
+    {
+      "command": "~TPDM 3",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~TPDM 4",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~TPDM 5",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~TPDM 6",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~TPDM 7",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~TPDM 8",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~TPDM 9",
+      "ok": true,
+      "payload": "554042144"
+    },
+    {
+      "command": "~TPDM 10",
+      "ok": true,
+      "payload": "554042400"
+    },
+    {
+      "command": "~TPDM 11",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~TPDM 12",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~TPDM 13",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~TPDM 14",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~TPDM 15",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~TPDM 16",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~TPDM 17",
+      "ok": true,
+      "payload": "554042656"
+    },
+    {
+      "command": "~TPDM 18",
+      "ok": true,
+      "payload": "554042912"
+    },
+    {
+      "command": "~TPDM 19",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~TPDM 20",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~TPDM 21",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~TPDM 22",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~TPDM 23",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~TPDM 24",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~TPDM 25",
+      "ok": true,
+      "payload": "554043168"
+    },
+    {
+      "command": "~TPDM 26",
+      "ok": true,
+      "payload": "554043424"
+    },
+    {
+      "command": "~TPDM 27",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~TPDM 28",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~TPDM 29",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~TPDM 30",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~TPDM 31",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~TPDM 32",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~TPDM 33",
+      "ok": true,
+      "payload": "554047776"
+    },
+    {
+      "command": "~TPDM 34",
+      "ok": true,
+      "payload": "554048032"
+    },
+    {
+      "command": "~TPDM 35",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~TPDM 36",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~TPDM 37",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~TPDM 38",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~TPDM 39",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~TPDM 40",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~TPDM 41",
+      "ok": true,
+      "payload": "554048288"
+    },
+    {
+      "command": "~TPDM 42",
+      "ok": true,
+      "payload": "554048544"
+    },
+    {
+      "command": "~TPDM 43",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~TPDM 44",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~TPDM 45",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~TPDM 46",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~TPDM 47",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~TPDM 48",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~TPDM 49",
+      "ok": true,
+      "payload": "554048800"
+    },
+    {
+      "command": "~TPDM 50",
+      "ok": true,
+      "payload": "554049056"
+    },
+    {
+      "command": "~TPDM 51",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~TPDM 52",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~TPDM 53",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~TPDM 54",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~TPDM 55",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~TPDM 56",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~TPDM 57",
+      "ok": true,
+      "payload": "554049312"
+    },
+    {
+      "command": "~TPDM 58",
+      "ok": true,
+      "payload": "554049568"
+    },
+    {
+      "command": "~TPDM 59",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~TPDM 60",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~TPDM 61",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~TPDM 62",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~TPDM 63",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~TPDM 64",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~RPDC 1",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~RPDC 2",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~RPDC 3",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~RPDC 4",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~RPDC 5",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~RPDC 6",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~RPDC 7",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~RPDC 8",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~TPDC 1",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~TPDC 2",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~TPDC 3",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~TPDC 4",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~TPDC 5",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~TPDC 6",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~TPDC 7",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~TPDC 8",
+      "ok": true,
+      "payload": "0"
+    },
+    {
+      "command": "~OTL 1",
+      "ok": true,
+      "payload": "85"
+    },
+    {
+      "command": "~OTL 2",
+      "ok": true,
+      "payload": "100"
+    },
+    {
+      "command": "~OTL 3",
+      "ok": true,
+      "payload": "100"
+    },
+    {
+      "command": "~SLL 1",
+      "ok": true,
+      "payload": "-20000"
+    },
+    {
+      "command": "~SLL 2",
+      "ok": true,
+      "payload": "-20000"
+    }
+  ],
+  "result": {},
+  "source": "serial",
+  "state": "succeeded",
+  "success": true,
+  "total_steps": 638
+}

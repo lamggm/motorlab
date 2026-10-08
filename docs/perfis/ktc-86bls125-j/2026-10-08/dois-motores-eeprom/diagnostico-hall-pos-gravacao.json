@@ -1,0 +1,14 @@
+{
+  "?FID": "?FID\rFID=Roboteq v3.0f SBLG2XXX 07/15/2026",
+  "?HS 1": "?HS 1\rHS=2",
+  "?HS 2": "?HS 2\rHS=7",
+  "?FF": "?FF\rFF=48",
+  "?BS 1": "?BS 1\rBS=0",
+  "?BS 2": "?BS 2\rBS=0",
+  "~SED 1": "~SED 1\rSED=2",
+  "~SED 2": "~SED 2\rSED=2",
+  "~BFBK 1": "~BFBK 1\rBFBK=1",
+  "~BFBK 2": "~BFBK 2\rBFBK=1",
+  "~PSA 1": "~PSA 1\rPSA=120",
+  "~PSA 2": "~PSA 2\rPSA=120"
+}

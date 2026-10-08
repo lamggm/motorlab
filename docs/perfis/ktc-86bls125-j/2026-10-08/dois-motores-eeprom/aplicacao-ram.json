@@ -1,0 +1,287 @@
+{
+  "completed_steps": 54,
+  "created_utc": "2026-10-08T14:36:54.898Z",
+  "finished_utc": "2026-10-08T14:36:55.723Z",
+  "firmware": "Roboteq v3.0f SBLG2XXX 07/15/2026",
+  "job_id": "46a2851d-d16c-41de-ac18-76df59b82acb",
+  "kind": "apply",
+  "message": "Sequência concluída; consulte replies para resultados e rejeições individuais.",
+  "model": "SBLG2XXX:SBLG2360T",
+  "replies": [
+    {
+      "command": "!R 0",
+      "ok": false,
+      "payload": "Controlador rejeitou a consulta/operação."
+    },
+    {
+      "command": "!EX",
+      "ok": true,
+      "payload": "+"
+    },
+    {
+      "command": "?FF",
+      "ok": true,
+      "payload": "16"
+    },
+    {
+      "command": "?FS",
+      "ok": true,
+      "payload": "8"
+    },
+    {
+      "command": "^ALIM 2 190",
+      "ok": true,
+      "payload": "+"
+    },
+    {
+      "command": "~ALIM 2",
+      "ok": true,
+      "payload": "190"
+    },
+    {
+      "command": "^MXRPM 2 3000",
+      "ok": true,
+      "payload": "+"
+    },
+    {
+      "command": "~MXRPM 2",
+      "ok": true,
+      "payload": "3000"
+    },
+    {
+      "command": "^EMOD 2 34",
+      "ok": true,
+      "payload": "+"
+    },
+    {
+      "command": "~EMOD 2",
+      "ok": true,
+      "payload": "34"
+    },
+    {
+      "command": "^EPPR 2 1000",
+      "ok": true,
+      "payload": "+"
+    },
+    {
+      "command": "~EPPR 2",
+      "ok": true,
+      "payload": "1000"
+    },
+    {
+      "command": "^FEW 2 500",
+      "ok": true,
+      "payload": "+"
+    },
+    {
+      "command": "~FEW 2",
+      "ok": true,
+      "payload": "500"
+    },
+    {
+      "command": "^KIG 2 10000",
+      "ok": true,
+      "payload": "+"
+    },
+    {
+      "command": "~KIG 2",
+      "ok": true,
+      "payload": "10000"
+    },
+    {
+      "command": "^KPG 2 30000",
+      "ok": true,
+      "payload": "+"
+    },
+    {
+      "command": "~KPG 2",
+      "ok": true,
+      "payload": "30000"
+    },
+    {
+      "command": "^KPG 4 200000",
+      "ok": true,
+      "payload": "+"
+    },
+    {
+      "command": "~KPG 4",
+      "ok": true,
+      "payload": "200000"
+    },
+    {
+      "command": "^LPFB 2 80",
+      "ok": true,
+      "payload": "+"
+    },
+    {
+      "command": "~LPFB 2",
+      "ok": true,
+      "payload": "80"
+    },
+    {
+      "command": "^MAC 2 30000",
+      "ok": true,
+      "payload": "+"
+    },
+    {
+      "command": "~MAC 2",
+      "ok": true,
+      "payload": "30000"
+    },
+    {
+      "command": "^MMOD 2 1",
+      "ok": true,
+      "payload": "+"
+    },
+    {
+      "command": "~MMOD 2",
+      "ok": true,
+      "payload": "1"
+    },
+    {
+      "command": "^MVEL 2 30",
+      "ok": true,
+      "payload": "+"
+    },
+    {
+      "command": "~MVEL 2",
+      "ok": true,
+      "payload": "30"
+    },
+    {
+      "command": "^MXTRN 2 1000",
+      "ok": true,
+      "payload": "+"
+    },
+    {
+      "command": "~MXTRN 2",
+      "ok": true,
+      "payload": "1000"
+    },
+    {
+      "command": "^NOMA 2 190",
+      "ok": true,
+      "payload": "+"
+    },
+    {
+      "command": "~NOMA 2",
+      "ok": true,
+      "payload": "190"
+    },
+    {
+      "command": "^SED 2 2",
+      "ok": true,
+      "payload": "+"
+    },
+    {
+      "command": "~SED 2",
+      "ok": true,
+      "payload": "2"
+    },
+    {
+      "command": "^TNM 2 124",
+      "ok": true,
+      "payload": "+"
+    },
+    {
+      "command": "~TNM 2",
+      "ok": true,
+      "payload": "124"
+    },
+    {
+      "command": "^BPOL 2 4",
+      "ok": true,
+      "payload": "+"
+    },
+    {
+      "command": "~BPOL 2",
+      "ok": true,
+      "payload": "4"
+    },
+    {
+      "command": "^BZPW 2 190",
+      "ok": true,
+      "payload": "+"
+    },
+    {
+      "command": "~BZPW 2",
+      "ok": true,
+      "payload": "190"
+    },
+    {
+      "command": "^KIF 2 502656",
+      "ok": true,
+      "payload": "+"
+    },
+    {
+      "command": "~KIF 2",
+      "ok": true,
+      "payload": "502656"
+    },
+    {
+      "command": "^KIF 4 502656",
+      "ok": true,
+      "payload": "+"
+    },
+    {
+      "command": "~KIF 4",
+      "ok": true,
+      "payload": "502656"
+    },
+    {
+      "command": "^KPF 2 2000",
+      "ok": true,
+      "payload": "+"
+    },
+    {
+      "command": "~KPF 2",
+      "ok": true,
+      "payload": "2000"
+    },
+    {
+      "command": "^KPF 4 2000",
+      "ok": true,
+      "payload": "+"
+    },
+    {
+      "command": "~KPF 4",
+      "ok": true,
+      "payload": "2000"
+    },
+    {
+      "command": "^MXPW 2 6600",
+      "ok": true,
+      "payload": "+"
+    },
+    {
+      "command": "~MXPW 2",
+      "ok": true,
+      "payload": "6600"
+    },
+    {
+      "command": "^PSA 2 120",
+      "ok": true,
+      "payload": "+"
+    },
+    {
+      "command": "~PSA 2",
+      "ok": true,
+      "payload": "120"
+    },
+    {
+      "command": "^VK 2 13000",
+      "ok": true,
+      "payload": "+"
+    },
+    {
+      "command": "~VK 2",
+      "ok": true,
+      "payload": "13000"
+    }
+  ],
+  "result": {},
+  "source": "serial",
+  "state": "succeeded",
+  "success": true,
+  "total_steps": 54
+}

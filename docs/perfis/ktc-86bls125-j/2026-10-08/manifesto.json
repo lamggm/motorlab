@@ -1,0 +1,31 @@
+{
+  "motor": "Kalatec KTC-86BLS125-J",
+  "channel": 1,
+  "controller": "SBLG2360T",
+  "firmware": "Roboteq v3.0f SBLG2XXX 07/15/2026",
+  "timestamp_utc": "2026-10-08T14:25:04.563Z",
+  "ram_only": true,
+  "eeprom_written": false,
+  "commutation": "trapezoidal Hall",
+  "speed_feedback": "AS5047P encoder 1000 PPR/4000 CPR",
+  "operator_confirmed_mounted_free_shaft": true,
+  "operator_smoothness_confirmation": "pending",
+  "tests_rpm": [
+    100,
+    500
+  ],
+  "sensor_validation_raw_G": 50,
+  "sinusoidal_calibration_run": false,
+  "remaining": "Sinusoidal calibration and tuning, low-speed and rated-speed tests, load/thermal validation",
+  "files_sha256": {
+    "comparacao-parametros.json": "0ffd70dd2552278a061a5fe293cf078b3bdf5033b89f758dd6b9f6bb3f459da7",
+    "estado-inicial.json": "185e2a9fe7307a06360aa7e31c93ae3aa27b911da6e8b7cc3426d74c5da5a5e3",
+    "hall-encoder-inicial.csv": "3f5050b3a30a2180d8e23660827688d7ca58dcb60132ae145d4ee122b67bb399",
+    "hall-encoder-inicial.json": "6dfd7e5f39d0a2e5cbe7bba77e6199cebd393b68b013a9ffcc58e361d7d436bb",
+    "perfil-driver-ram.json": "c6cc528f404f3fc6fbec7ecc6d4787be7b7174be55359b9b109133ceb9ebef8a",
+    "velocidade-100rpm.csv": "19e5acc4f1181fb1380414a1d041c25f64a63c8435ae46e5cc6551baebd4729f",
+    "velocidade-100rpm.json": "7e8ef5a86b266498d1e1d5c76e14b1022e138b77475fe5108a4c8ce3beb5ed76",
+    "velocidade-500rpm.csv": "83c08d547307a9b05e6917727426c6ced7c88ed0bd3d203953fc7e5d6c03034b",
+    "velocidade-500rpm.json": "f99e4b677e45b080e34df8d199e10d930b26d2ed49871958c5d114c7eed5a331"
+  }
+}
