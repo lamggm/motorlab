@@ -20,12 +20,12 @@
   "files_sha256": {
     "comparacao-parametros.json": "0ffd70dd2552278a061a5fe293cf078b3bdf5033b89f758dd6b9f6bb3f459da7",
     "estado-inicial.json": "185e2a9fe7307a06360aa7e31c93ae3aa27b911da6e8b7cc3426d74c5da5a5e3",
-    "hall-encoder-inicial.csv": "3f5050b3a30a2180d8e23660827688d7ca58dcb60132ae145d4ee122b67bb399",
+    "hall-encoder-inicial.csv": "34eb3e52cdf5bcb47e075e5d5f93b44271d7bf864af13e94d879d99e02a964b9",
     "hall-encoder-inicial.json": "6dfd7e5f39d0a2e5cbe7bba77e6199cebd393b68b013a9ffcc58e361d7d436bb",
     "perfil-driver-ram.json": "c6cc528f404f3fc6fbec7ecc6d4787be7b7174be55359b9b109133ceb9ebef8a",
-    "velocidade-100rpm.csv": "19e5acc4f1181fb1380414a1d041c25f64a63c8435ae46e5cc6551baebd4729f",
+    "velocidade-100rpm.csv": "8a27ec5cd81c373f87650c1de751be347eb25991a134f5487673dc044e5e6a22",
     "velocidade-100rpm.json": "7e8ef5a86b266498d1e1d5c76e14b1022e138b77475fe5108a4c8ce3beb5ed76",
-    "velocidade-500rpm.csv": "83c08d547307a9b05e6917727426c6ced7c88ed0bd3d203953fc7e5d6c03034b",
+    "velocidade-500rpm.csv": "282848753b3f6edc317b5b06880fa518400ce78839f539375bd3d97460d91547",
     "velocidade-500rpm.json": "f99e4b677e45b080e34df8d199e10d930b26d2ed49871958c5d114c7eed5a331"
   }
 }
