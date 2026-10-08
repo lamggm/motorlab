@@ -1,0 +1,1176 @@
+{
+  "parameters": {
+    "ACS": {
+      "name": "Centralizar comando na partida",
+      "description": "Exige que a entrada analógica esteja no ponto de parada antes de aceitar comandos de movimento."
+    },
+    "AMS": {
+      "name": "Proteção da faixa analógica",
+      "description": "Rejeita comandos analógicos quando a tensão está fora da faixa permitida."
+    },
+    "BRUN": {
+      "name": "Iniciar script automaticamente",
+      "description": "Define se o script embarcado é executado ao ligar o controlador."
+    },
+    "CLIN": {
+      "name": "Curva do comando",
+      "description": "Aplica uma curva linear, exponencial ou logarítmica ao comando do canal."
+    },
+    "CPRI": {
+      "name": "Prioridade dos comandos",
+      "description": "Escolhe a ordem de prioridade das fontes de comando aceitas pelo controlador."
+    },
+    "DFC": {
+      "name": "Comando padrão",
+      "description": "Define o comando usado quando não há uma fonte de comando válida."
+    },
+    "DMOD": {
+      "name": "Modo Modbus",
+      "description": "Seleciona o modo de comunicação Modbus."
+    },
+    "ECHOF": {
+      "name": "Eco serial",
+      "description": "Habilita ou desabilita a repetição dos caracteres recebidos pela porta serial."
+    },
+    "EE": {
+      "name": "Valor definido pelo usuário",
+      "description": "Armazena um valor numérico da configuração disponível para a aplicação e os scripts."
+    },
+    "FLCL": {
+      "name": "Limpeza automática de falhas",
+      "description": "Define se as falhas podem ser limpas automaticamente; quando desabilitada, exigem limpeza explícita."
+    },
+    "ISM": {
+      "name": "Redirecionamento serial para script",
+      "description": "Disponibiliza ao script as mensagens recebidas na comunicação RS232/RS485."
+    },
+    "MDAL": {
+      "name": "Ordem dos dados Modbus",
+      "description": "Seleciona a ordem das palavras e dos bytes nos dados enviados e recebidos por Modbus."
+    },
+    "MNOD": {
+      "name": "Endereço Modbus",
+      "description": "Define o endereço do dispositivo escravo na rede Modbus."
+    },
+    "PMS": {
+      "name": "Proteção da faixa de pulsos",
+      "description": "Define se pulsos fora dos limites mínimo e máximo serão rejeitados."
+    },
+    "RSBR": {
+      "name": "Taxa de comunicação serial",
+      "description": "Seleciona a velocidade da comunicação RS232/RS485."
+    },
+    "RS485": {
+      "name": "Habilitar RS485",
+      "description": "Habilita ou desabilita a comunicação RS485 conforme o suporte do controlador."
+    },
+    "RWD": {
+      "name": "Tempo limite do comando serial",
+      "description": "Define o intervalo máximo entre comandos seriais. Zero desabilita o watchdog."
+    },
+    "SCRO": {
+      "name": "Porta de saída do script",
+      "description": "Seleciona a porta usada para a saída de texto dos scripts."
+    },
+    "STO": {
+      "name": "Habilitar STO",
+      "description": "Habilita a função de desligamento seguro de torque nas entradas STO do controlador."
+    },
+    "TELS": {
+      "name": "Sequência de telemetria",
+      "description": "Define a sequência de consultas e comandos de telemetria executada na partida."
+    },
+    "ACTR": {
+      "name": "Centro da entrada analógica",
+      "description": "Define a tensão de entrada que corresponde ao comando zero, ou parada."
+    },
+    "ADB": {
+      "name": "Zona morta analógica",
+      "description": "Define a faixa de variação da entrada analógica que não altera o comando."
+    },
+    "AINA": {
+      "name": "Uso da entrada analógica",
+      "description": "Seleciona a função da entrada analógica e os canais de motor aos quais ela se aplica."
+    },
+    "ALIN": {
+      "name": "Curva da entrada analógica",
+      "description": "Seleciona a curva de conversão entre a entrada analógica e seu valor interno."
+    },
+    "AMAX": {
+      "name": "Máximo da entrada analógica",
+      "description": "Define a tensão que corresponde ao comando máximo no sentido direto."
+    },
+    "AMAXA": {
+      "name": "Ação acima do máximo analógico",
+      "description": "Define a ação e o canal afetado quando a tensão ultrapassa o limite máximo."
+    },
+    "AMIN": {
+      "name": "Mínimo da entrada analógica",
+      "description": "Define a tensão que corresponde ao comando máximo no sentido reverso."
+    },
+    "AMINA": {
+      "name": "Ação abaixo do mínimo analógico",
+      "description": "Define a ação e o canal afetado quando a tensão fica abaixo do limite mínimo."
+    },
+    "AMOD": {
+      "name": "Tipo de conversão analógica",
+      "description": "Seleciona a medição de tensão absoluta ou relativa à saída de referência de 5 V."
+    },
+    "APOL": {
+      "name": "Polaridade da entrada analógica",
+      "description": "Define se o sentido da conversão da entrada analógica será invertido."
+    },
+    "AUXV": {
+      "name": "Tensão da saída auxiliar",
+      "description": "Configura o nível de tensão das saídas digitais de acionamento pelo lado positivo, quando suportado."
+    },
+    "DINA": {
+      "name": "Ação da entrada digital",
+      "description": "Define a ação executada e os canais afetados quando a entrada digital é ativada."
+    },
+    "DINL": {
+      "name": "Nível ativo da entrada digital",
+      "description": "Seleciona se a entrada digital é ativada por nível elétrico alto ou baixo."
+    },
+    "DOA": {
+      "name": "Ação da saída digital",
+      "description": "Seleciona o evento e o canal que ativam a saída digital. Este campo é exibido para leitura nesta versão."
+    },
+    "DOL": {
+      "name": "Nível ativo da saída digital",
+      "description": "Define o estado elétrico da saída digital quando a sua ação estiver ativa."
+    },
+    "DOT": {
+      "name": "Tipo de saída digital",
+      "description": "Seleciona o tipo de operação da saída digital conforme o hardware disponível."
+    },
+    "ENCO": {
+      "name": "Habilitar saída de encoder",
+      "description": "Configura a geração de sinais de encoder na saída do controlador, quando suportada."
+    },
+    "PCTR": {
+      "name": "Centro da entrada de pulsos",
+      "description": "Define o valor medido que será convertido em comando zero. A unidade depende do tipo de captura."
+    },
+    "PDB": {
+      "name": "Zona morta da entrada de pulsos",
+      "description": "Define a faixa de variação da entrada de pulsos que não altera o comando."
+    },
+    "PINA": {
+      "name": "Uso da entrada de pulsos",
+      "description": "Seleciona a função da entrada de pulsos e os canais de motor aos quais ela se aplica."
+    },
+    "PLIN": {
+      "name": "Curva da entrada de pulsos",
+      "description": "Seleciona a curva de conversão entre a entrada de pulsos e seu valor interno."
+    },
+    "PMAX": {
+      "name": "Máximo da entrada de pulsos",
+      "description": "Define o valor de captura que corresponde ao comando interno +1000."
+    },
+    "PMAXA": {
+      "name": "Ação acima do máximo de pulsos",
+      "description": "Define a ação e o canal afetado quando a captura excede o limite máximo."
+    },
+    "PMIN": {
+      "name": "Mínimo da entrada de pulsos",
+      "description": "Define o valor de captura que corresponde ao comando interno -1000."
+    },
+    "PMINA": {
+      "name": "Ação abaixo do mínimo de pulsos",
+      "description": "Define a ação e o canal afetado quando a captura fica abaixo do limite mínimo."
+    },
+    "PMOD": {
+      "name": "Tipo de captura de pulsos",
+      "description": "Habilita a entrada e seleciona a medição por largura, frequência, ciclo de trabalho ou contagem."
+    },
+    "PPOL": {
+      "name": "Polaridade da entrada de pulsos",
+      "description": "Define se o sentido da conversão da captura será invertido."
+    },
+    "ALIM": {
+      "name": "Limite de corrente",
+      "description": "Define a corrente máxima que o controlador pode fornecer ao motor, independentemente da carga."
+    },
+    "ATGA": {
+      "name": "Ação do limiar de corrente",
+      "description": "Seleciona a ação executada quando o limiar de corrente permanece excedido pelo tempo configurado."
+    },
+    "ATGD": {
+      "name": "Atraso do limiar de corrente",
+      "description": "Define por quanto tempo a corrente precisa exceder o limiar antes de executar a ação configurada."
+    },
+    "ATRIG": {
+      "name": "Limiar de corrente",
+      "description": "Define a corrente que dispara a ação configurada após o atraso correspondente."
+    },
+    "B25": {
+      "name": "Coeficiente beta do termistor",
+      "description": "Define o coeficiente beta usado para converter a resistência do termistor em temperatura."
+    },
+    "BKD": {
+      "name": "Atraso do freio",
+      "description": "Define o intervalo entre a parada dos motores e o acionamento do freio."
+    },
+    "BPR": {
+      "name": "Ignorar rampa e trajetória",
+      "description": "Seleciona o desvio da geração de rampa ou trajetória do controlador. Altera a forma de aplicação dos comandos."
+    },
+    "BLFB": {
+      "name": "Sensor de realimentação",
+      "description": "Seleciona o sensor usado para medir velocidade ou posição na malha fechada."
+    },
+    "BLSTD": {
+      "name": "Detecção de motor travado",
+      "description": "Define a combinação de tempo e potência permitida sem detectar movimento do motor."
+    },
+    "BR": {
+      "name": "Atrito rotacional",
+      "description": "Define o coeficiente de atrito do sistema mecânico usado pelo modelo do motor."
+    },
+    "CLERD": {
+      "name": "Detecção de erro da malha",
+      "description": "Seleciona o critério de erro entre a referência e a medição, incluindo tempo e limite de erro."
+    },
+    "EDEC": {
+      "name": "Desaceleração em falha",
+      "description": "Define a taxa de redução de velocidade aplicada pelo controlador em uma parada por falha."
+    },
+    "EHL": {
+      "name": "Limite máximo do encoder",
+      "description": "Define o limite superior de contagem do encoder para as ações de limite."
+    },
+    "EHLA": {
+      "name": "Ação no máximo do encoder",
+      "description": "Seleciona a ação e o canal afetado quando a contagem excede o limite superior."
+    },
+    "EHOME": {
+      "name": "Contagem de referência do encoder",
+      "description": "Define o valor carregado no contador ao receber o evento de referência."
+    },
+    "ELL": {
+      "name": "Limite mínimo do encoder",
+      "description": "Define o limite inferior de contagem do encoder para as ações de limite."
+    },
+    "ELLA": {
+      "name": "Ação no mínimo do encoder",
+      "description": "Seleciona a ação e o canal afetado quando a contagem fica abaixo do limite inferior."
+    },
+    "EMOD": {
+      "name": "Uso do encoder",
+      "description": "Seleciona a função do encoder e sua associação aos canais de motor."
+    },
+    "EPPR": {
+      "name": "Pulsos por volta do encoder",
+      "description": "Define os pulsos por volta, ou linhas A/B, antes da multiplicação por quadratura. O sinal do valor define o sentido de contagem."
+    },
+    "FET": {
+      "name": "Tempo de erro da malha",
+      "description": "Define o tempo pelo qual o erro pode permanecer acima do limite antes de disparar a ação de erro."
+    },
+    "FEW": {
+      "name": "Limite de erro da malha",
+      "description": "Define o desvio máximo permitido entre referência e realimentação. A unidade depende do modo de operação."
+    },
+    "ICAP": {
+      "name": "Limite do integrador",
+      "description": "Limita a contribuição do termo integral do controlador PID como porcentagem do seu nível máximo."
+    },
+    "JR": {
+      "name": "Inércia mecânica",
+      "description": "Define a inércia do sistema mecânico usado pelo modelo do motor."
+    },
+    "KDG": {
+      "name": "Ganho derivativo",
+      "description": "Ajusta a resposta do termo derivativo da malha PID de velocidade ou posição deste canal."
+    },
+    "KIG": {
+      "name": "Ganho integral",
+      "description": "Ajusta a correção acumulada do erro na malha PID de velocidade ou posição deste canal."
+    },
+    "KPG": {
+      "name": "Ganho proporcional",
+      "description": "Ajusta a resposta proporcional ao erro na malha PID de velocidade ou posição deste canal."
+    },
+    "LEAC": {
+      "name": "Ação por erro da malha",
+      "description": "Seleciona a resposta do controlador quando o erro da malha é detectado."
+    },
+    "LPFB": {
+      "name": "Filtro da velocidade medida",
+      "description": "Define a largura de banda do filtro passa-baixas aplicado à realimentação de velocidade."
+    },
+    "MAC": {
+      "name": "Aceleração",
+      "description": "Define a taxa de aumento da velocidade. No modo de torque, a unidade corresponde à rampa de corrente."
+    },
+    "MCLE": {
+      "name": "Bits do contador multivoltas",
+      "description": "Define o número de bits reservado à contagem de voltas no quadro SPI/SSI."
+    },
+    "MDEC": {
+      "name": "Desaceleração",
+      "description": "Define a taxa de redução da velocidade em uma parada normal. No modo de torque, corresponde à rampa de corrente."
+    },
+    "MLX": {
+      "name": "Função do conector Molex",
+      "description": "Seleciona o tipo de sensor conectado à entrada Molex do controlador."
+    },
+    "MDIR": {
+      "name": "Sentido do motor",
+      "description": "Seleciona o sentido direto ou invertido para os comandos deste motor."
+    },
+    "MMOD": {
+      "name": "Modo de operação",
+      "description": "Seleciona o controle em malha aberta, velocidade, posição ou torque para este canal."
+    },
+    "MNRPM": {
+      "name": "Velocidade mínima",
+      "description": "Define a velocidade mínima configurada para o motor."
+    },
+    "MSTA": {
+      "name": "Bit inicial de multivoltas",
+      "description": "Define a posição do primeiro bit da contagem de voltas no quadro SPI/SSI."
+    },
+    "MVEL": {
+      "name": "Velocidade no modo de posição",
+      "description": "Define a velocidade usada nas trajetórias para atingir o destino de posição."
+    },
+    "MXMD": {
+      "name": "Mistura dos canais",
+      "description": "Seleciona se os canais são independentes ou usam um dos modos de mistura de comandos."
+    },
+    "MXPF": {
+      "name": "Potência máxima no sentido direto",
+      "description": "Limita a escala do PWM aplicado ao motor no sentido direto, em porcentagem."
+    },
+    "MXPR": {
+      "name": "Potência máxima no sentido reverso",
+      "description": "Limita a escala do PWM aplicado ao motor no sentido reverso, em porcentagem."
+    },
+    "MXRPM": {
+      "name": "Velocidade máxima",
+      "description": "Define a rotação de referência que representa a velocidade máxima para o controlador."
+    },
+    "MXTRN": {
+      "name": "Voltas entre os limites de posição",
+      "description": "Define quantas voltas do motor correspondem à faixa entre os limites mínimo e máximo do sensor de posição."
+    },
+    "NOMA": {
+      "name": "Corrente nominal para I²t",
+      "description": "Define a corrente nominal usada na proteção térmica por corrente acumulada I²t."
+    },
+    "OVH": {
+      "name": "Histerese de sobretensão",
+      "description": "Define quanto a tensão deve cair abaixo do limite de sobretensão para limpar essa condição."
+    },
+    "OVL": {
+      "name": "Limite de sobretensão",
+      "description": "Define a tensão acima da qual o controlador sinaliza sobretensão e desliga o estágio de potência."
+    },
+    "R25": {
+      "name": "Resistência do termistor a 25 °C",
+      "description": "Define a resistência nominal do termistor a 25 °C para o cálculo de temperatura."
+    },
+    "SCLE": {
+      "name": "Bits do contador SSI",
+      "description": "Define o número de bits usado para extrair a contagem de posição do quadro SPI/SSI."
+    },
+    "SCLK": {
+      "name": "Frequência do relógio SSI",
+      "description": "Seleciona a frequência de relógio da comunicação com os sensores SSI."
+    },
+    "SED": {
+      "name": "Detecção de erro do sensor",
+      "description": "Seleciona o nível de tolerância à detecção de erros do sensor de realimentação."
+    },
+    "SFTS": {
+      "name": "Chave de segurança conectada",
+      "description": "Informa ao controlador se existe uma chave de segurança conectada ao sistema."
+    },
+    "SHL": {
+      "name": "Limite máximo do sensor SSI",
+      "description": "Define o limite superior da contagem do sensor SSI para as ações de limite."
+    },
+    "SHLA": {
+      "name": "Ação no máximo do SSI",
+      "description": "Seleciona a ação e o canal afetado quando a contagem SSI excede o limite superior."
+    },
+    "SHOME": {
+      "name": "Contagem de referência SSI",
+      "description": "Define o valor de referência carregado no contador do sensor SSI."
+    },
+    "SLEN": {
+      "name": "Bits totais do quadro SSI",
+      "description": "Define o comprimento total do quadro recebido do sensor SPI/SSI."
+    },
+    "SLLA": {
+      "name": "Ação no mínimo do SSI",
+      "description": "Seleciona a ação e o canal afetado quando a contagem SSI fica abaixo do limite inferior."
+    },
+    "SMOD": {
+      "name": "Uso do sensor SSI",
+      "description": "Seleciona a função do sensor SSI e sua associação aos canais de motor."
+    },
+    "SSTA": {
+      "name": "Bit inicial do contador SSI",
+      "description": "Define a posição do primeiro bit do contador de posição no quadro SPI/SSI."
+    },
+    "TNM": {
+      "name": "Constante de torque",
+      "description": "Define o torque por ampere RMS do motor para o modelo e o controle de torque."
+    },
+    "TPAL": {
+      "name": "Tempo da proteção I²t",
+      "description": "Define o tempo usado no cálculo da proteção térmica I²t."
+    },
+    "TRPU": {
+      "name": "Resistor de referência do termistor",
+      "description": "Define a resistência de pull-up usada na medição do termistor."
+    },
+    "UVL": {
+      "name": "Limite de subtensão",
+      "description": "Define a tensão abaixo da qual o controlador desliga o estágio de potência até a tensão se recuperar."
+    },
+    "VELFF": {
+      "name": "Antecipação de velocidade",
+      "description": "Ajusta a contribuição antecipada da velocidade na malha de posição. Zero desabilita essa contribuição."
+    },
+    "BADJ": {
+      "name": "Ajuste do zero elétrico",
+      "description": "Define o deslocamento acrescentado ao ângulo elétrico usado na comutação do motor."
+    },
+    "BADV": {
+      "name": "Avanço do ângulo de comutação",
+      "description": "Configura o avanço de ângulo da comutação do motor brushless."
+    },
+    "BFBK": {
+      "name": "Sensor de ângulo do rotor",
+      "description": "Seleciona o sensor de posição do rotor usado na comutação senoidal."
+    },
+    "BHL": {
+      "name": "Limite máximo do sensor interno",
+      "description": "Define o limite superior do contador do sensor interno do motor."
+    },
+    "BHLA": {
+      "name": "Ação no máximo do sensor interno",
+      "description": "Seleciona a ação quando o contador do sensor interno excede o limite superior."
+    },
+    "BHOME": {
+      "name": "Referência do sensor interno",
+      "description": "Define o valor carregado no contador interno ao detectar a referência."
+    },
+    "BLL": {
+      "name": "Limite mínimo do sensor interno",
+      "description": "Define o limite inferior do contador do sensor interno do motor."
+    },
+    "BLLA": {
+      "name": "Ação no mínimo do sensor interno",
+      "description": "Seleciona a ação quando o contador interno fica abaixo do limite inferior."
+    },
+    "BMOD": {
+      "name": "Tipo de comutação",
+      "description": "Seleciona a comutação trapezoidal ou senoidal do motor brushless."
+    },
+    "BPOL": {
+      "name": "Pares de polos do motor",
+      "description": "Define o número de pares de polos magnéticos do motor brushless."
+    },
+    "BZPW": {
+      "name": "Corrente de busca da referência",
+      "description": "Define o nível aplicado ao motor durante a busca da referência de zero."
+    },
+    "FWVR": {
+      "name": "Tensão de enfraquecimento de campo",
+      "description": "Define a relação de tensão utilizada na estratégia de enfraquecimento de campo."
+    },
+    "HPO": {
+      "name": "Posição dos sensores Hall",
+      "description": "Seleciona a disposição elétrica dos sensores Hall, de 60 ou 120 graus."
+    },
+    "HSAT": {
+      "name": "Ângulo da tabela Hall",
+      "description": "Define o ângulo correspondente a cada estado Hall e sentido de rotação na tabela de comutação."
+    },
+    "HSM": {
+      "name": "Mapeamento dos sensores Hall",
+      "description": "Configura a correspondência dos estados dos sensores Hall usados pelo motor."
+    },
+    "KIF": {
+      "name": "Ganho integral de corrente",
+      "description": "Ajusta o termo integral da malha de corrente de fluxo ou torque usada no controle FOC."
+    },
+    "KPF": {
+      "name": "Ganho proporcional de corrente",
+      "description": "Ajusta o termo proporcional da malha de corrente de fluxo ou torque usada no controle FOC."
+    },
+    "LD": {
+      "name": "Indutância do eixo d",
+      "description": "Define a indutância do estator no eixo direto usada pelo modelo FOC do motor."
+    },
+    "LQ": {
+      "name": "Indutância do eixo q",
+      "description": "Define a indutância do estator no eixo em quadratura usada pelo modelo FOC do motor."
+    },
+    "MXPW": {
+      "name": "Potência máxima do motor",
+      "description": "Define a potência máxima de saída do motor para a região de potência constante."
+    },
+    "PSA": {
+      "name": "Deslocamento de fase do sensor",
+      "description": "Define o deslocamento de fase entre o sensor de ângulo e o rotor na comutação senoidal."
+    },
+    "RS": {
+      "name": "Resistência do estator",
+      "description": "Define a resistência do estator usada pelo modelo elétrico do motor."
+    },
+    "SPOL": {
+      "name": "Polos do sensor de ângulo",
+      "description": "Define o número de polos do sensor de ângulo Sin/Cos ou SSI usado na comutação senoidal."
+    },
+    "SWD": {
+      "name": "Inversão dos sinais de comutação",
+      "description": "Seleciona a troca dos sinais conforme a sequência das fases e o sentido de contagem do sensor."
+    },
+    "TID": {
+      "name": "Corrente de fluxo alvo",
+      "description": "Exibe a referência de corrente do eixo d no controle FOC. Este campo é exibido para leitura nesta versão."
+    },
+    "VK": {
+      "name": "Constante de tensão do motor",
+      "description": "Define a constante de força contraeletromotriz do motor em relação à velocidade."
+    },
+    "ZSMA": {
+      "name": "Amplitude do cosseno",
+      "description": "Define a amplitude de referência do sinal de cosseno na calibração Sin/Cos."
+    },
+    "ZSMC": {
+      "name": "Calibração seno/cosseno",
+      "description": "Define os zeros de seno e cosseno e a relação entre os sinais de calibração Sin/Cos."
+    },
+    "CAS": {
+      "name": "Iniciar CANopen automaticamente",
+      "description": "Define se a operação CANopen é iniciada automaticamente após a reinicialização."
+    },
+    "CBR": {
+      "name": "Taxa da rede CAN",
+      "description": "Seleciona a taxa de transmissão de bits da rede CAN."
+    },
+    "CEN": {
+      "name": "Modo CAN",
+      "description": "Seleciona o protocolo e o modo de operação da interface CAN."
+    },
+    "CGT": {
+      "name": "Supervisão do nó CANopen",
+      "description": "Define o tempo de guarda e seu fator de vida para supervisionar a comunicação CANopen."
+    },
+    "CHB": {
+      "name": "Período do heartbeat CAN",
+      "description": "Define o intervalo entre mensagens periódicas de presença enviadas pelo controlador na rede CAN."
+    },
+    "CHBT": {
+      "name": "Supervisão de heartbeat recebido",
+      "description": "Configura o nó monitorado e o tempo limite de seu heartbeat CANopen."
+    },
+    "CHLA": {
+      "name": "Ação por perda de heartbeat",
+      "description": "Seleciona a ação executada quando o heartbeat monitorado deixa de ser recebido."
+    },
+    "CLSN": {
+      "name": "Nó CAN monitorado",
+      "description": "Define o identificador do nó cujas mensagens o controlador deve escutar."
+    },
+    "CNOD": {
+      "name": "Identificador do nó CAN",
+      "description": "Define o endereço do controlador na rede CAN."
+    },
+    "CSRT": {
+      "name": "Período de envio MiniCAN",
+      "description": "Define o intervalo de transmissão dos dados de processo em MiniCAN."
+    },
+    "CTPS": {
+      "name": "Período de envio TPDO",
+      "description": "Define o intervalo de transmissão do TPDO. Zero desabilita o envio periódico."
+    },
+    "CTT": {
+      "name": "Tipo de transmissão TPDO",
+      "description": "Configura o tipo de transmissão do TPDO em CANopen, incluindo comportamento síncrono ou assíncrono."
+    },
+    "FSA": {
+      "name": "Máquina de estados DS402",
+      "description": "Habilita ou desabilita a máquina de estados de acionamento definida pelo perfil DS402."
+    },
+    "RPDM": {
+      "name": "Mapeamento do RPDO",
+      "description": "Configura os objetos recebidos no RPDO por índice, subíndice e comprimento do objeto."
+    },
+    "TPDM": {
+      "name": "Mapeamento do TPDO",
+      "description": "Configura os objetos transmitidos no TPDO por índice, subíndice e comprimento do objeto."
+    },
+    "RPDC": {
+      "name": "Identificador COB-ID do RPDO",
+      "description": "Define o identificador CAN utilizado pelo PDO recebido."
+    },
+    "TPDC": {
+      "name": "Identificador COB-ID do TPDO",
+      "description": "Define o identificador CAN utilizado pelo PDO transmitido."
+    },
+    "OTL": {
+      "name": "Limite de temperatura",
+      "description": "Define a temperatura máxima do controlador ou do motor, conforme o índice do parâmetro."
+    },
+    "SLL": {
+      "name": "Limite mínimo do sensor SSI",
+      "description": "Define o limite inferior da contagem do sensor SSI para as ações de limite."
+    }
+  },
+  "categories": {
+    "General": {
+      "name": "Geral",
+      "description": "Proteções e opções compartilhadas pelos dois motores."
+    },
+    "Motor Configuration": {
+      "name": "Configuração do motor",
+      "description": "Características elétricas, sensores e comutação."
+    },
+    "Motor Output": {
+      "name": "Saída do motor",
+      "description": "Corrente, potência, rampas e malhas de controle."
+    },
+    "Voltage Limits": {
+      "name": "Limites de tensão",
+      "description": "Proteções de sobretensão, subtensão e recuperação."
+    },
+    "Motor Thermistor": {
+      "name": "Termistor do motor",
+      "description": "Medição e limite de temperatura do motor."
+    },
+    "Internal Sensor Counter": {
+      "name": "Contador do sensor interno",
+      "description": "Referência, limites e ações do sensor interno."
+    },
+    "Sinusoidal Settings": {
+      "name": "Comutação senoidal",
+      "description": "Sensor de ângulo, fase e ajustes da comutação."
+    },
+    "FOC Parameters": {
+      "name": "Controle de corrente FOC",
+      "description": "Ganhos das malhas de fluxo e torque."
+    },
+    "Hall Sensor Angle Table": {
+      "name": "Tabela de ângulos Hall",
+      "description": "Correspondência dos estados Hall em cada sentido."
+    },
+    "Negative Direction": {
+      "name": "Sentido negativo",
+      "description": "Ângulos para a rotação no sentido negativo."
+    },
+    "Positive Direction": {
+      "name": "Sentido positivo",
+      "description": "Ângulos para a rotação no sentido positivo."
+    },
+    "SinCos Calibration": {
+      "name": "Calibração seno/cosseno",
+      "description": "Zeros e relação dos sinais de seno e cosseno."
+    },
+    "Motor Parameters": {
+      "name": "Parâmetros elétricos",
+      "description": "Resistência, indutâncias e constantes do motor."
+    },
+    "Mechanical System Characteristics": {
+      "name": "Características mecânicas",
+      "description": "Inércia e atrito do conjunto mecânico."
+    },
+    "Amps Limits": {
+      "name": "Limites de corrente",
+      "description": "Corrente máxima, limiar e ação por excesso."
+    },
+    "I2T Configuration": {
+      "name": "Proteção térmica I²t",
+      "description": "Corrente nominal e tempo de integração térmica."
+    },
+    "Power Adjust": {
+      "name": "Limites de potência",
+      "description": "Escala máxima da saída nos dois sentidos."
+    },
+    "Speed &amp; Acceleration": {
+      "name": "Velocidade e rampas",
+      "description": "Velocidades, aceleração e desaceleração."
+    },
+    "Closed Loop Parameters": {
+      "name": "Controle em malha fechada",
+      "description": "Limites, detecção de erro e ganhos das malhas."
+    },
+    "Closed Loop Torque": {
+      "name": "Malha de torque",
+      "description": "Ajustes da malha de corrente e torque."
+    },
+    "Closed Loop Speed": {
+      "name": "Malha de velocidade",
+      "description": "Ganhos PID da velocidade medida."
+    },
+    "Closed Loop Position": {
+      "name": "Malha de posição",
+      "description": "Ganhos PID e antecipação da trajetória de posição."
+    },
+    "Start-up": {
+      "name": "Inicialização",
+      "description": "Script e condições de partida do controlador."
+    },
+    "Scripting": {
+      "name": "Scripts",
+      "description": "Opções de execução do script embarcado."
+    },
+    "Analog Start-up": {
+      "name": "Partida por entrada analógica",
+      "description": "Condição de comando zero antes da partida."
+    },
+    "Telemetry": {
+      "name": "Telemetria",
+      "description": "Opções de dados transmitidos pelo controlador."
+    },
+    "Commands": {
+      "name": "Comandos e segurança",
+      "description": "Fontes de comando, prioridades e proteções."
+    },
+    "Command Priorities": {
+      "name": "Prioridades dos comandos",
+      "description": "Ordem das fontes que comandam os motores."
+    },
+    "Default Command Value": {
+      "name": "Comando padrão",
+      "description": "Comandos usados sem uma fonte válida."
+    },
+    "Command Adjustments": {
+      "name": "Curvas dos comandos",
+      "description": "Conversão linear, exponencial ou logarítmica."
+    },
+    "Command Safety": {
+      "name": "Segurança dos comandos",
+      "description": "Tempo limite e validação das entradas."
+    },
+    "USB/RS232 Safety": {
+      "name": "Segurança USB/RS232",
+      "description": "Watchdog da comunicação de comandos."
+    },
+    "Pulse Safety": {
+      "name": "Segurança dos pulsos",
+      "description": "Validação da faixa de entrada de pulsos."
+    },
+    "Analog Safety": {
+      "name": "Segurança analógica",
+      "description": "Validação da faixa de tensão de entrada."
+    },
+    "RS232/485 Settings": {
+      "name": "Comunicação RS232/485",
+      "description": "Taxa de comunicação e opções seriais."
+    },
+    "CAN": {
+      "name": "Rede CAN",
+      "description": "Protocolo, nós, supervisão e dados de processo."
+    },
+    "CANOpen TPDO Send Rate": {
+      "name": "Períodos dos TPDOs",
+      "description": "Intervalos de transmissão dos dados de processo."
+    },
+    "CANOpen Transmission Type": {
+      "name": "Transmissão dos TPDOs",
+      "description": "Modo de transmissão de cada TPDO CANopen."
+    },
+    "CANOpen PDO Mapping": {
+      "name": "Mapeamento dos PDOs",
+      "description": "Objetos enviados e recebidos na rede CANopen."
+    },
+    "COB-ID configuration": {
+      "name": "Identificadores COB-ID",
+      "description": "Identificadores CAN dos dados de processo."
+    },
+    "CANOpen Consumer Heartbeat": {
+      "name": "Supervisão de heartbeat",
+      "description": "Nó monitorado e tempo limite de presença."
+    },
+    "CANOpen Node Guarding": {
+      "name": "Supervisão do nó",
+      "description": "Tempo de guarda e fator de vida do nó CANopen."
+    },
+    "ModBus": {
+      "name": "Modbus",
+      "description": "Modo, endereço e ordem dos dados."
+    },
+    "Encoders": {
+      "name": "Encoders",
+      "description": "Resolução, associação aos motores e limites."
+    },
+    "SSI Sensors": {
+      "name": "Sensores SSI",
+      "description": "Quadro, contagem e limites dos sensores seriais."
+    },
+    "SSI Multiturn Configuration": {
+      "name": "Contagem multivoltas SSI",
+      "description": "Extração da contagem de voltas do quadro."
+    },
+    "Digital Inputs": {
+      "name": "Entradas digitais",
+      "description": "Níveis elétricos e ações de cada entrada."
+    },
+    "Analog Inputs": {
+      "name": "Entradas analógicas",
+      "description": "Conversão, faixa e ações de cada entrada."
+    },
+    "Pulse Inputs": {
+      "name": "Entradas de pulsos",
+      "description": "Captura, faixa e ações de cada entrada."
+    },
+    "Digital Outputs": {
+      "name": "Saídas digitais",
+      "description": "Nível ativo e eventos de acionamento."
+    },
+    "User-Defined Values": {
+      "name": "Valores do usuário",
+      "description": "Valores numéricos disponíveis para scripts e aplicação."
+    },
+    "Range": {
+      "name": "Faixa de operação",
+      "description": "Valores de referência e limites de conversão."
+    },
+    "Motor 1": {
+      "name": "Motor 1",
+      "description": "Parâmetros do canal de motor."
+    },
+    "Motor 2": {
+      "name": "Motor 2",
+      "description": "Parâmetros do canal de motor."
+    },
+    "Encoder 1": {
+      "name": "Encoder 1",
+      "description": "Resolução, realimentação e limites do encoder."
+    },
+    "Encoder 2": {
+      "name": "Encoder 2",
+      "description": "Resolução, realimentação e limites do encoder."
+    },
+    "SSI Sensor 1": {
+      "name": "Sensor SSI 1",
+      "description": "Quadro de dados e contagem do sensor SSI."
+    },
+    "SSI Sensor 2": {
+      "name": "Sensor SSI 2",
+      "description": "Quadro de dados e contagem do sensor SSI."
+    },
+    "Digital In1": {
+      "name": "Entrada digital 1",
+      "description": "Nível ativo e ação desta entrada."
+    },
+    "Digital In2": {
+      "name": "Entrada digital 2",
+      "description": "Nível ativo e ação desta entrada."
+    },
+    "Digital In3": {
+      "name": "Entrada digital 3",
+      "description": "Nível ativo e ação desta entrada."
+    },
+    "Digital In4": {
+      "name": "Entrada digital 4",
+      "description": "Nível ativo e ação desta entrada."
+    },
+    "Digital In5": {
+      "name": "Entrada digital 5",
+      "description": "Nível ativo e ação desta entrada."
+    },
+    "Digital In6": {
+      "name": "Entrada digital 6",
+      "description": "Nível ativo e ação desta entrada."
+    },
+    "Digital In7": {
+      "name": "Entrada digital 7",
+      "description": "Nível ativo e ação desta entrada."
+    },
+    "Digital In8": {
+      "name": "Entrada digital 8",
+      "description": "Nível ativo e ação desta entrada."
+    },
+    "Digital In9": {
+      "name": "Entrada digital 9",
+      "description": "Nível ativo e ação desta entrada."
+    },
+    "Digital In10": {
+      "name": "Entrada digital 10",
+      "description": "Nível ativo e ação desta entrada."
+    },
+    "Digital Out1": {
+      "name": "Saída digital 1",
+      "description": "Nível e ação desta saída."
+    },
+    "Digital Out2": {
+      "name": "Saída digital 2",
+      "description": "Nível e ação desta saída."
+    },
+    "Digital Out3": {
+      "name": "Saída digital 3",
+      "description": "Nível e ação desta saída."
+    },
+    "Digital Out4": {
+      "name": "Saída digital 4",
+      "description": "Nível e ação desta saída."
+    },
+    "Ana In1": {
+      "name": "Entrada analógica 1",
+      "description": "Conversão e limites desta entrada analógica."
+    },
+    "Ana In2": {
+      "name": "Entrada analógica 2",
+      "description": "Conversão e limites desta entrada analógica."
+    },
+    "Ana In3": {
+      "name": "Entrada analógica 3",
+      "description": "Conversão e limites desta entrada analógica."
+    },
+    "Ana In4": {
+      "name": "Entrada analógica 4",
+      "description": "Conversão e limites desta entrada analógica."
+    },
+    "Ana In5": {
+      "name": "Entrada analógica 5",
+      "description": "Conversão e limites desta entrada analógica."
+    },
+    "Ana In6": {
+      "name": "Entrada analógica 6",
+      "description": "Conversão e limites desta entrada analógica."
+    },
+    "Ana In7": {
+      "name": "Entrada analógica 7",
+      "description": "Conversão e limites desta entrada analógica."
+    },
+    "Ana In8": {
+      "name": "Entrada analógica 8",
+      "description": "Conversão e limites desta entrada analógica."
+    },
+    "Pulse In1": {
+      "name": "Entrada de pulsos 1",
+      "description": "Captura e limites desta entrada de pulsos."
+    },
+    "Pulse In2": {
+      "name": "Entrada de pulsos 2",
+      "description": "Captura e limites desta entrada de pulsos."
+    },
+    "Pulse In3": {
+      "name": "Entrada de pulsos 3",
+      "description": "Captura e limites desta entrada de pulsos."
+    },
+    "Pulse In4": {
+      "name": "Entrada de pulsos 4",
+      "description": "Captura e limites desta entrada de pulsos."
+    },
+    "Pulse In5": {
+      "name": "Entrada de pulsos 5",
+      "description": "Captura e limites desta entrada de pulsos."
+    },
+    "Pulse In6": {
+      "name": "Entrada de pulsos 6",
+      "description": "Captura e limites desta entrada de pulsos."
+    },
+    "Pulse In7": {
+      "name": "Entrada de pulsos 7",
+      "description": "Captura e limites desta entrada de pulsos."
+    },
+    "Pulse In8": {
+      "name": "Entrada de pulsos 8",
+      "description": "Captura e limites desta entrada de pulsos."
+    },
+    "TPDO1": {
+      "name": "TPDO 1",
+      "description": "Mapeamento dos dados transmitidos."
+    },
+    "TPDO2": {
+      "name": "TPDO 2",
+      "description": "Mapeamento dos dados transmitidos."
+    },
+    "TPDO3": {
+      "name": "TPDO 3",
+      "description": "Mapeamento dos dados transmitidos."
+    },
+    "TPDO4": {
+      "name": "TPDO 4",
+      "description": "Mapeamento dos dados transmitidos."
+    },
+    "TPDO5": {
+      "name": "TPDO 5",
+      "description": "Mapeamento dos dados transmitidos."
+    },
+    "TPDO6": {
+      "name": "TPDO 6",
+      "description": "Mapeamento dos dados transmitidos."
+    },
+    "TPDO7": {
+      "name": "TPDO 7",
+      "description": "Mapeamento dos dados transmitidos."
+    },
+    "TPDO8": {
+      "name": "TPDO 8",
+      "description": "Mapeamento dos dados transmitidos."
+    },
+    "RPDO1": {
+      "name": "RPDO 1",
+      "description": "Mapeamento dos dados recebidos."
+    },
+    "RPDO2": {
+      "name": "RPDO 2",
+      "description": "Mapeamento dos dados recebidos."
+    },
+    "RPDO3": {
+      "name": "RPDO 3",
+      "description": "Mapeamento dos dados recebidos."
+    },
+    "RPDO4": {
+      "name": "RPDO 4",
+      "description": "Mapeamento dos dados recebidos."
+    },
+    "RPDO5": {
+      "name": "RPDO 5",
+      "description": "Mapeamento dos dados recebidos."
+    },
+    "RPDO6": {
+      "name": "RPDO 6",
+      "description": "Mapeamento dos dados recebidos."
+    },
+    "RPDO7": {
+      "name": "RPDO 7",
+      "description": "Mapeamento dos dados recebidos."
+    },
+    "RPDO8": {
+      "name": "RPDO 8",
+      "description": "Mapeamento dos dados recebidos."
+    },
+    "Brake 1": {
+      "name": "Freio 1",
+      "description": "Opções de acionamento do freio deste canal."
+    },
+    "Brake 2": {
+      "name": "Freio 2",
+      "description": "Opções de acionamento do freio deste canal."
+    }
+  },
+  "choices": {
+    "No Action": "Nenhuma ação",
+    "0:No Action": "0: Nenhuma ação",
+    "2:Feedback": "2: Realimentação",
+    "0:Hall-Sin/Cos Sensors": "0: Sensores Hall / seno-cosseno",
+    "2:SSI Sensors": "2: Sensores SSI",
+    "120 degrees": "120 graus",
+    "60 degrees": "60 graus",
+    "1s @ 50% Power": "1 s a 50% de potência",
+    "500ms @ 25% Power": "500 ms a 25% de potência",
+    "250ms @ 10% Power": "250 ms a 10% de potência",
+    "1s @ 500 Error Units": "1 s com erro de 500 unidades",
+    "500ms @ 250 Error Units": "500 ms com erro de 250 unidades",
+    "250ms @ 100 Error Units": "250 ms com erro de 100 unidades",
+    "Absolute": "Absoluto",
+    "Absolute Feedback": "Realimentação absoluta",
+    "Analog": "Analógico",
+    "Closed Loop Count Position": "Posição por contagem em malha fechada",
+    "Closed Loop Position Relative": "Posição relativa em malha fechada",
+    "Closed Loop Position Tracking": "Seguimento de posição em malha fechada",
+    "Closed Loop Speed": "Velocidade em malha fechada",
+    "Closed Loop Speed Position": "Velocidade e posição em malha fechada",
+    "Custom": "Personalizado",
+    "Dead Man Switch": "Chave de presença",
+    "Direct": "Direto",
+    "Disable": "Desabilitar",
+    "Disabled": "Desabilitado",
+    "Duty Cycle": "Ciclo de trabalho",
+    "Dynamic Braking (Three-phase short)": "Frenagem dinâmica (curto nas três fases)",
+    "Emergency Stop": "Parada de emergência",
+    "Enable": "Habilitar",
+    "Enabled": "Habilitado",
+    "Exp Med": "Exponencial média",
+    "Exp Strong": "Exponencial forte",
+    "Exp Weak": "Exponencial fraca",
+    "Extended RawCAN": "CAN bruto estendido",
+    "Feedback": "Realimentação",
+    "Flow Sensor": "Sensor de fluxo",
+    "Forward Limit Switch": "Fim de curso direto",
+    "Frequency": "Frequência",
+    "Hall + Encoder": "Hall + encoder",
+    "Hall only Swapped": "Somente Hall invertido",
+    "Hall+Encoder Swapped": "Hall + encoder invertidos",
+    "High": "Alto",
+    "High Word / High Byte": "Palavra alta / byte alto",
+    "High Word / Low Byte": "Palavra alta / byte baixo",
+    "Internal Sensor": "Sensor interno",
+    "Invert Direction": "Inverter sentido",
+    "Inverted": "Invertido",
+    "Linear": "Linear",
+    "Load Home Counter": "Carregar contagem de referência",
+    "Log Med": "Logarítmica média",
+    "Log Strong": "Logarítmica forte",
+    "Log Weak": "Logarítmica fraca",
+    "Low": "Baixo",
+    "Low Word / High Byte": "Palavra baixa / byte alto",
+    "Low Word / Low Byte": "Palavra baixa / byte baixo",
+    "MagSensor": "Sensor magnético",
+    "Mixed Mode 1": "Mistura de canais 1",
+    "Mixed Mode 2": "Mistura de canais 2",
+    "Mixed Mode 3": "Mistura de canais 3",
+    "Motor Command": "Comando do motor",
+    "Motor is On": "Motor ligado",
+    "Motor is Reverse": "Motor em reverso",
+    "Never": "Nunca",
+    "No": "Não",
+    "No MOSFET Fail": "Sem falha de MOSFET",
+    "None": "Nenhum",
+    "Off": "Desligado",
+    "Open Loop": "Malha aberta",
+    "Other": "Outro",
+    "Overtemperature": "Sobretemperatura",
+    "Overvoltage": "Sobretensão",
+    "Pulse": "Pulsos",
+    "Pulse Count": "Contagem de pulsos",
+    "Pulse Width": "Largura do pulso",
+    "Quick Stop": "Parada rápida",
+    "Relative": "Relativo",
+    "Reverse Limit Switch": "Fim de curso reverso",
+    "Run Script": "Executar script",
+    "SPI/SSI Sensor": "Sensor SPI/SSI",
+    "Separate": "Independentes",
+    "Sin/Cos Sensor": "Sensor seno/cosseno",
+    "Sinusoidal": "Senoidal",
+    "Status LED": "LED de estado",
+    "Strict": "Estrito",
+    "Swapped": "Invertidos",
+    "Tolerant": "Tolerante",
+    "Torque Mode": "Modo de torque",
+    "Trapezoidal": "Trapezoidal",
+    "Yes": "Sim",
+    "Encoder": "Encoder",
+    "Hall": "Hall",
+    "RS232": "RS232",
+    "115200": "115200",
+    "57600": "57600",
+    "38400": "38400",
+    "19200": "19200",
+    "9600": "9600",
+    "230600": "230600",
+    "RS485": "RS485",
+    "CANOpen": "CANOpen",
+    "MiniCAN": "MiniCAN",
+    "RawCAN": "RawCAN",
+    "RoboCAN": "RoboCAN",
+    "1000": "1000",
+    "800": "800",
+    "500": "500",
+    "250": "250",
+    "125": "125",
+    "RS232 ASCII": "RS232 ASCII",
+    "RS485 ASCII": "RS485 ASCII",
+    "RS232 RTU": "RS232 RTU",
+    "RS485 RTU": "RS485 RTU",
+    "680 KHz": "680 KHz",
+    "1360 KHz": "1360 KHz",
+    "2720 KHz": "2720 KHz",
+    "5440 KHz": "5440 KHz",
+    "10800 KHz": "10800 KHz",
+    "330 KHz": "330 KHz",
+    "BMS": "BMS"
+  }
+}

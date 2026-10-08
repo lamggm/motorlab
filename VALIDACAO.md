@@ -1,5 +1,14 @@
 # MotorLab Linux — validação
 
+## Cards de configuração e textos em português — 08/10/2026
+
+- Navegação ilustrada para Motor 1/2, Configuração do motor, Saída do motor e demais grupos. As listas contêm somente linhas de parâmetros; os caminhos originais permanecem separados dos comandos e índices do protocolo.
+- Todos os 638 campos das 155 definições do catálogo possuem nome e descrição em português. Tooltips preservam o nome original do RoboRun+, seguido da descrição; a explicação também aparece abaixo da lista. Opções enumeradas conservam seus valores numéricos.
+- Testes novos cobrem troca entre motores, índices planos de Hall/PID, busca global sem acentos e por nome original, cobertura das traduções e tooltips, restauração do grupo ao limpar a busca e largura dos editores. A proteção contra edição pelo scroll continua aprovada.
+- CTest final: **6/6 suítes aprovadas**; **2/2 integrações Python GUI/daemon** aprovadas. O recálculo de metadados dos tooltips foi retirado da atualização periódica depois de os testes detectarem atrasos de comunicação no backend gráfico simulado; as proteções e tempos do watchdog não foram modificados.
+- Capturas em demonstração verificadas em 1440×860 e 1100×680, incluindo níveis profundos da tabela Hall e textos de opções em português. Evidências locais: `../../work/config-cards/ctest-fixed.log`, `tests-final-render.log`, `tests-gateway.log` e `cards-*.png` nesse mesmo diretório.
+- Não foram alterados parâmetros, RAM, EEPROM ou firmware da unidade real nesta entrega. O daemon da bancada não foi reiniciado; a alteração é da apresentação da GUI.
+
 ## GUI, CLI e MCP no mesmo daemon — 0.8.0, 08/10/2026
 
 - A GUI de produção usa `RemoteSession`, cliente do socket de `motorlabd`; não abre uma segunda serial. O endpoint MCP da janela encaminha comandos ao daemon e atende visibilidade/captura localmente. Duas janelas e clientes CLI/MCP observam o mesmo PID, conexão, permissões, rascunhos, script e telemetria.

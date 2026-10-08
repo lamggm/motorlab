@@ -1,4 +1,6 @@
 #include "clickedit.h"
+#include "config_browser.h"
+#include "config_text.h"
 #include "window.h"
 #include "basicvm.h"
 #include <memory>
@@ -251,6 +253,7 @@ void Window::buildUi() {
         QLabel#status { color: #64e0c8; font-weight: 600; }
         QLabel#detectedModel { background: #0d1829; border: 1px solid #33455f; padding: 5px 8px; color: #b9d9ff; }
         QLabel#notice { color: #b9cde8; }
+        QToolTip { background:#14273e; color:#edf5ff; border:1px solid #52769c; padding:10px; font-size:13px; }
         QTabBar { background: #111d30; }
         QTabBar::tab { background: #142239; color: #94abc8; border: 1px solid #273d56; padding: 8px 27px; min-width: 85px; }
         QTabBar::tab:selected { background: #203b5d; color: #d9ebff; border-bottom: 2px solid #63a8ff; }
@@ -454,39 +457,15 @@ QWidget *Window::parametersPage() {
     tree->header()->setMinimumSectionSize(90);
     tree->header()->setSectionResizeMode(QHeaderView::Interactive);
     tree->header()->setSectionResizeMode(0, QHeaderView::Stretch);
-    tree->setColumnWidth(1, 112);
-    tree->setColumnWidth(2, 250);
-    tree->setColumnWidth(3, 145);
+    tree->setColumnWidth(1, 100);
+    tree->setColumnWidth(2, 330);
+    tree->setColumnWidth(3, 115);
     tree->header()->setToolTip("Arraste as divisórias das colunas para ajustar a largura.");
   }
-  auto general = new QTreeWidgetItem(parameterTree, {"Geral"});
-  general->setFirstColumnSpanned(true);
-  QVector<QTreeWidgetItem *> motors;
-  for (int i = 1; i <= 2; ++i) {
-    auto m = new QTreeWidgetItem(parameterTree, {QString("Motor %1").arg(i)});
-    m->setExpanded(true);
-    m->setFirstColumnSpanned(true);
-    motors.append(m);
-  }
-  QMap<QString, QTreeWidgetItem *> groups;
-  QMap<QString, QTreeWidgetItem *> originalGroups;
-  for (const auto &name : QStringList{
-           "Start-up", "Commands", "RS232/485 Settings", "CAN", "ModBus",
-           "Encoders", "SSI Sensors", "Digital Inputs", "Analog Inputs",
-           "Pulse Inputs", "Digital Outputs", "User-Defined Values"}) {
-    auto node = new QTreeWidgetItem(ioTree, {name});
-    node->setFirstColumnSpanned(true);
-    originalGroups["ControlTree|" + name] = node;
-  }
-  for (int i = 0; i < 2; ++i)
-    for (const auto &name :
-         QStringList{"Motor Configuration", "Motor Output"}) {
-      const auto root = QString("PowerTree|Motor %1").arg(i + 1);
-      originalGroups[root] = motors[i];
-      auto node = new QTreeWidgetItem(motors[i], {name});
-      node->setFirstColumnSpanned(true);
-      originalGroups[root + "|" + name] = node;
-    }
+  auto ioBrowser = new ConfigBrowser(ioTree, "ioConfig");
+  auto powerBrowser = new ConfigBrowser(parameterTree, "powerConfig");
+  connect(ioBrowser, &ConfigBrowser::clearFilterRequested, filter, &QLineEdit::clear);
+  connect(powerBrowser, &ConfigBrowser::clearFilterRequested, filter, &QLineEdit::clear);
 
   // Put familiar motor limits first; retain stable command identities in all
   // operations.
@@ -501,90 +480,54 @@ QWidget *Window::parametersPage() {
     for (int index = spec->indexMax ? 1 : 0; index <= spec->indexMax; ++index) {
       Parameter p;
       p.key = spec->key;
-      p.name = spec->name;
+      p.name = ConfigText::name(*spec, index);
       p.unit = spec->indexUnits.value(QString::number(index)).toString(spec->unit);
       p.channel = index;
       p.scale = spec->scale;
       p.editable = spec->editable;
       p.spec = spec;
       p.suffix = Catalog::suffix(*spec, index);
-      QTreeWidgetItem *parent = nullptr;
-      if (spec->group == "Geral")
-        parent = general;
-      else if (spec->group == "Motor / potência") {
-        // PID speed/position/FOC and Hall table use flat indices, not new motor
-        // channels.
-        const int motor = spec->key == "HSAT"   ? (index - 1) / 12
-                          : spec->key == "ZSMC" ? (index - 1) / 3
-                                                : (qMax(1, index) - 1) % 2;
-        parent = motors[qBound(0, motor, 1)];
-      } else {
-        QString group = spec->group;
-        const QMap<QString, QString> aliases{
-            {"Comandos / segurança", "Commands"},
-            {"Entradas analógicas", "Analog Inputs"},
-            {"Entradas de pulso", "Pulse Inputs"},
-            {"Sensores SSI", "SSI Sensors"}};
-        if (aliases.contains(group))
-          group = aliases[group];
-        if (group == "Entradas / saídas digitais")
-          group = p.key.startsWith("DO") ? "Digital Outputs" : "Digital Inputs";
-        if (originalGroups.contains("ControlTree|" + group))
-          parent = originalGroups["ControlTree|" + group];
-        else {
-          if (!groups.contains(group))
-            groups[group] = new QTreeWidgetItem(ioTree, {group});
-          parent = groups[group];
-        }
-        parent->setFirstColumnSpanned(true);
-      }
       const auto meta = Catalog::commonOriginal(p.key, index);
       const auto originalPath = meta["path"].toArray();
-      if (!originalPath.isEmpty()) {
-        auto tree =
-            meta["tree"].toString() == "PowerTree" ? parameterTree : ioTree;
-        QTreeWidgetItem *branch = nullptr;
-        QString prefix = meta["tree"].toString();
-        for (int n = 0; n < originalPath.size() - 1; ++n) {
-          const auto name = originalPath[n].toString();
-          prefix += "|" + name;
-          if (!originalGroups.contains(prefix)) {
-            QTreeWidgetItem *node = nullptr;
-            if (!branch && tree == parameterTree && name == "General")
-              node = general;
-            else if (!branch && tree == parameterTree && name == "Motor 1")
-              node = motors[0];
-            else if (!branch && tree == parameterTree && name == "Motor 2")
-              node = motors[1];
-            else
-              node = branch ? new QTreeWidgetItem(branch, {name})
-                            : new QTreeWidgetItem(tree, {name});
-            node->setFirstColumnSpanned(true);
-            originalGroups[prefix] = node;
-          }
-          branch = originalGroups[prefix];
+      QStringList categoryPath;
+      for (int n = 0; n < originalPath.size() - 1; ++n)
+        categoryPath.append(originalPath[n].toString());
+      bool powerParameter = meta["tree"].toString() == "PowerTree";
+      if (categoryPath.isEmpty()) {
+        if (spec->group == "Geral") {
+          powerParameter = true;
+          categoryPath = {"General"};
+        } else if (spec->group == "Motor / potência") {
+          powerParameter = true;
+          const int motor = spec->key == "HSAT" ? (index - 1) / 12
+                            : spec->key == "ZSMC" ? (index - 1) / 3
+                            : (qMax(1, index) - 1) % 2;
+          categoryPath = {QString("Motor %1").arg(qBound(0, motor, 1) + 1), "Motor Configuration"};
+        } else {
+          const QMap<QString, QString> aliases{
+              {"Comandos / segurança", "Commands"}, {"Entradas analógicas", "Analog Inputs"},
+              {"Entradas de pulso", "Pulse Inputs"}, {"Sensores SSI", "SSI Sensors"},
+              {"Variáveis do usuário", "User-Defined Values"}, {"CAN / CANopen", "CAN"},
+              {"Modbus", "ModBus"}};
+          QString group = aliases.value(spec->group, spec->group);
+          if (group == "Entradas / saídas digitais")
+            group = p.key.startsWith("DO") || p.key == "AUXV" ? "Digital Outputs" : "Digital Inputs";
+          categoryPath = {group};
         }
-        if (branch)
-          parent = branch;
       }
+      auto tree = powerParameter ? parameterTree : ioTree;
+      auto browser = powerParameter ? powerBrowser : ioBrowser;
       const QString indexText = index ? QString(" [%1]").arg(index) : QString();
       auto item = new QTreeWidgetItem(
-          parent, {p.name + indexText + " · " + p.key, "—", "Leitura", p.unit});
-      item->setToolTip(0, QString("%1; manual v3.0c, página %2. Índice e valor "
-                                  "na escala documentada.")
-                              .arg(p.suffix)
-                              .arg(spec->page));
-      if (!meta.isEmpty())
-        item->setToolTip(0, item->toolTip(0) +
-                                "\nRoboRun+ 3.3 · árvore v3.0: " +
-                                meta["description"].toString());
+          tree, {p.name + indexText + " · " + p.key, "—", "Leitura", p.unit});
+      item->setToolTip(0, ConfigText::tooltip(*spec, index));
+      item->setToolTip(1, item->toolTip(0));
+      item->setToolTip(2, item->toolTip(0));
       item->setData(0, Qt::UserRole, p.suffix);
       item->setTextAlignment(1, Qt::AlignRight | Qt::AlignVCenter);
       item->setToolTip(3, p.unit + (spec->unitNote.isEmpty()
                                       ? QString()
                                       : "\n" + spec->unitNote));
-      if (!spec->unitNote.isEmpty())
-        item->setToolTip(0, item->toolTip(0) + "\n" + spec->unitNote);
       const int row = parameters.size();
       parameterItems.append(item);
       if (p.editable) {
@@ -613,7 +556,10 @@ QWidget *Window::parametersPage() {
             auto o = option.toObject();
             if (!o["label"].toString().trimmed().isEmpty() &&
                 !o["label"].toString().trimmed().startsWith('~'))
-              p.choices->addItem(o["label"].toString(), o["value"].toInt());
+              {
+                p.choices->addItem(ConfigText::choice(o["label"].toString()), o["value"].toInt());
+                p.choices->setItemData(p.choices->count()-1, o["label"].toString(), Qt::ToolTipRole);
+              }
           }
           p.choices->setCurrentIndex(
               p.choices->findData(qRound(p.editor->value() * p.scale)));
@@ -624,8 +570,6 @@ QWidget *Window::parametersPage() {
                       parameters[row].editor->setValue(
                           parameters[row].choices->itemData(at).toDouble() /
                           parameters[row].scale);
-                    parameters[row].choices->setToolTip(
-                        parameters[row].choices->currentText());
                   });
         } else
           item->treeWidget()->setItemWidget(item, 2, p.editor);
@@ -642,12 +586,12 @@ QWidget *Window::parametersPage() {
         });
       }
       parameters.append(p);
+      browser->addParameter(item, categoryPath);
     }
-  for (auto group : groups)
-    if (group->childCount() == 0)
-      group->setHidden(true);
-  inputs.body->addWidget(ioTree, 1);
-  power.body->addWidget(parameterTree, 1);
+  ioBrowser->navigate({});
+  powerBrowser->navigate({});
+  inputs.body->addWidget(ioBrowser, 1);
+  power.body->addWidget(powerBrowser, 1);
   inputs.body->addWidget(
       label("Disponibilidade confirmada pelas respostas da unidade.", "muted"));
   power.body->addWidget(
@@ -832,24 +776,10 @@ QWidget *Window::parametersPage() {
                  ? "Perfil exportado: " + path
                  : "Não há dados conhecidos ou rascunhos válidos para salvar.");
   });
-  connect(filter, &QLineEdit::textChanged, this, [this, sections](const QString &text) {
-    int matches[2] = {0, 0};
-    for (int i = 0; i < parameters.size(); ++i) {
-      auto item = parameterItems[i];
-      const bool match = text.isEmpty() ||
-          QString(parameters[i].name + parameters[i].suffix + parameters[i].spec->group)
-              .contains(text, Qt::CaseInsensitive);
-      item->setHidden(!match);
-      if (match) {
-        ++matches[item->treeWidget() == ioTree ? 0 : 1];
-        if (!text.isEmpty())
-          for (auto parent = item->parent(); parent; parent = parent->parent())
-            parent->setExpanded(true);
-      }
-    }
-    if (!text.isEmpty() && !matches[sections->currentIndex()] &&
-        matches[1 - sections->currentIndex()])
-      sections->setCurrentIndex(1 - sections->currentIndex());
+  connect(filter, &QLineEdit::textChanged, this, [sections, ioBrowser, powerBrowser](const QString &text) {
+    const int matches[2] = {ioBrowser->setFilter(text), powerBrowser->setFilter(text)};
+    if (!text.trimmed().isEmpty() && !matches[sections->currentIndex()] && matches[1-sections->currentIndex()])
+      sections->setCurrentIndex(1-sections->currentIndex());
   });
   return page;
 }
@@ -2205,7 +2135,6 @@ void Window::updateParameterRow(int row) {
     QSignalBlocker block(p.choices);
     p.choices->setCurrentIndex(
         p.choices->findData(qRound(p.editor->value() * p.scale)));
-    p.choices->setToolTip(p.choices->currentText());
   }
   parameterItems[row]->setText(
       1, p.known ? QString::number(p.raw / p.scale, 'f',

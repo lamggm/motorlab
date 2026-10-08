@@ -53,7 +53,7 @@ Veja [configuração, ferramentas e limites do MCP](docs/MCP.md). O adaptador re
 
 | Área | Disponível nesta versão | Limite atual |
 |---|---|---|
-| Interface | Cabeçalho de conexão/script, seis abas, duas árvores de configuração em abas internas, ações, monitor, console, gráfico e editor | Interface independente; nomes técnicos e comandos do manual |
+| Interface | Cabeçalho de conexão/script, seis abas, cards ilustrados para motores e grupos, listas de parâmetros em português, ações, monitor, console, gráfico e editor | Nomes originais e descrições disponíveis ao passar o mouse |
 | USB / RS232 | Transporte ASCII POSIX, 8N1, seleção manual de porta/baud; identidade FID/TRN | Sem reconexão automática; bancada SBLG2360T v3.0f validada, demais unidades não qualificadas |
 | Configuração | **638 campos numéricos**, 155 definições, 153 definições editáveis; encoders, SSI, entradas, CAN/Modbus, motores, PID e FOC | Disponibilidade depende de cada resposta; TELS textual e parâmetros não documentados fora do catálogo |
 | Aplicação na RAM | Revisão, pausa do script, parada confirmada por FF, ACK e releitura de cada alteração | Não há transação/rollback automático; mudança de comunicação/segurança deve ser aplicada isoladamente |
@@ -71,6 +71,24 @@ Veja [configuração, ferramentas e limites do MCP](docs/MCP.md). O adaptador re
 **Novo na 0.4:** análise do instalador RoboRun+ 3.3 fornecido pelo usuário, compilação/exportação HEX, simulação do bytecode original, exportação de roteiro RoboCAN, árvores de parâmetros recuperadas, opções textuais, leitura/comparação/exportação CPR. Relatório técnico em `docs/ENGENHARIA-REVERSA.md`.
 
 DOA e TID permanecem somente para leitura; TELS textual é preservado na leitura/comparação CPR, mas não é aplicado ao controlador. As árvores v3.0 esclareceram ISM (0, 2, 4), B25, R25, FET, FEW, SED, MXPW e ZSMA. SLL foi recuperado apesar de um erro tipográfico no manual. Campos não suportados pela unidade ficam indisponíveis; os padrões das fotos/árvores não são aplicados automaticamente.
+
+### Navegação das configurações
+
+Em **Saída de potência**, escolha o card **Motor 1** ou **Motor 2**, depois
+**Configuração do motor** ou **Saída do motor**. Cada subgrupo também tem uma
+ilustração; somente os parâmetros aparecem em listas. **Início** retorna aos
+cards principais e **Voltar** retorna um nível. Entradas, encoders e redes seguem
+a mesma organização na aba **Entradas / saídas**.
+
+Os nomes e as opções estão em português. Ao passar o mouse sobre um card, nome
+ou editor, o tooltip mostra o nome original do RoboRun+ e uma explicação em
+português abaixo. Nos parâmetros, a explicação também aparece abaixo da lista.
+A busca abrange todos os grupos por nome em português, nome original ou comando,
+mesmo sem acentos; ao limpar a busca, retorna ao grupo anterior.
+
+As traduções estão em `data/config-pt.json`, separadas do catálogo do protocolo.
+Comandos, índices, valores das opções e escalas permanecem os mesmos. DOA e TID
+continuam somente para leitura; navegar pelos cards não aplica configurações.
 
 A polaridade DINL agora usa entrada 1–10 e nível 0/1; EE oferece 32 posições. Escalas de LD/LQ, VK, FWVR, JR, BR e MXTRN foram alinhadas às árvores originais. Perfis JSON antigos com DINL sem índice são recusados: releia a configuração ou importe o CPR, sem converter automaticamente o valor antigo.
 

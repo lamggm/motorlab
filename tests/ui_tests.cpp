@@ -1,6 +1,8 @@
 #include "cpr.h"
 #include "fake_controller.h"
 #include "window.h"
+#include "config_browser.h"
+#include "config_text.h"
 #include <QAbstractButton>
 #include <QFileDialog>
 #include <QJsonArray>
@@ -79,6 +81,7 @@ private slots:
     QTRY_VERIFY(numeric->isEnabled());
     QTRY_VERIFY(choice->isEnabled());
     tree->expandAll();
+    window.findChild<QLineEdit *>("parameterFilter")->setText("Motor");
     const auto wheel = [](QWidget *widget) {
       const QPoint center = widget->rect().center();
       QWheelEvent event(center, widget->mapToGlobal(center), QPoint(),
@@ -601,7 +604,9 @@ private slots:
     auto tree = window.findChild<QTreeWidget *>("parametersTree");
     auto alim = parameter(tree, "ALIM 1");
     QVERIFY(alim);
-    QCOMPARE(alim->parent()->text(0), QString("Amps Limits"));
+    QVERIFY(!alim->parent()); // Lists now contain parameters only.
+    QCOMPARE(alim->data(0, Qt::UserRole+1).toStringList(),
+             QStringList({"Motor 1", "Motor Output", "Amps Limits"}));
     auto choices = window.findChild<QComboBox *>("choice_ISM_0");
     QVERIFY(choices);
     QCOMPARE(choices->count(), 3);
@@ -610,6 +615,122 @@ private slots:
     QVERIFY(window.findChild<QPlainTextEdit *>("trafficConsole")
                 ->toPlainText()
                 .isEmpty());
+  }
+  void configurationCardsKeepMotorChannelsAndFlatIndicesSeparate() {
+    Window window;
+    window.show();
+    auto tree = window.findChild<QTreeWidget *>("parametersTree");
+    auto browser = window.findChild<ConfigBrowser *>("powerConfigBrowser");
+    QVERIFY(browser);
+    const auto clickCard = [&](const QString &path) {
+      auto card = window.findChild<QPushButton *>("powerConfigCard_"+path);
+      QVERIFY2(card, qPrintable(path));
+      QVERIFY(card->isVisible());
+      QVERIFY(!card->toolTip().isEmpty());
+      QTest::mouseClick(card, Qt::LeftButton);
+      QCoreApplication::processEvents();
+    };
+    QVERIFY(window.findChild<QPushButton *>("powerConfigCard_Motor 1")->isVisible());
+    QVERIFY(window.findChild<QPushButton *>("powerConfigCard_Motor 2")->isVisible());
+    QVERIFY(!tree->isVisible());
+    clickCard("Motor 1");
+    auto output = window.findChild<QPushButton *>("powerConfigCard_Motor 1|Motor Output");
+    QCOMPARE(output->text(), QString("Saída do motor"));
+    clickCard("Motor 1|Motor Output");
+    clickCard("Motor 1|Motor Output|Amps Limits");
+    QVERIFY(tree->isVisible());
+    QVERIFY(!parameter(tree,"ALIM 1")->isHidden());
+    QVERIFY(parameter(tree,"ALIM 2")->isHidden());
+    for (int i=0;i<tree->topLevelItemCount();++i) {
+      QCOMPARE(tree->topLevelItem(i)->childCount(),0);
+      QVERIFY(!tree->topLevelItem(i)->data(0,Qt::UserRole).toString().isEmpty());
+    }
+    window.findChild<QPushButton *>("powerConfigHome")->click();
+    clickCard("Motor 2");
+    clickCard("Motor 2|Motor Output");
+    clickCard("Motor 2|Motor Output|Amps Limits");
+    QVERIFY(parameter(tree,"ALIM 1")->isHidden());
+    QVERIFY(!parameter(tree,"ALIM 2")->isHidden());
+    QCOMPARE(parameter(tree,"HSAT 13")->data(0,Qt::UserRole+1).toStringList().first(),QString("Motor 2"));
+    QCOMPARE(parameter(tree,"KPG 3")->data(0,Qt::UserRole+1).toStringList(),
+             QStringList({"Motor 1","Motor Output","Closed Loop Parameters","Closed Loop Position"}));
+    auto filter=window.findChild<QLineEdit *>("parameterFilter");
+    filter->setText("aceleracao"); // Accent-independent global search.
+    QVERIFY(!parameter(tree,"MAC 1")->isHidden());
+    QVERIFY(!parameter(tree,"MAC 2")->isHidden());
+    filter->setText("Amps Limit"); // Original RoboRun names remain searchable.
+    QVERIFY(!parameter(tree,"ALIM 1")->isHidden());
+    QVERIFY(!parameter(tree,"ALIM 2")->isHidden());
+    filter->clear();
+    QVERIFY(parameter(tree,"ALIM 1")->isHidden());
+    QVERIFY(!parameter(tree,"ALIM 2")->isHidden());
+    QVERIFY(window.findChild<QPlainTextEdit *>("trafficConsole")->toPlainText().isEmpty());
+  }
+  void everyConfigurationHasPortugueseTextAndOriginalHoverHelp() {
+    Window window;
+    window.show();
+    const auto dict=ConfigText::dictionary();
+    for (const auto &spec:Catalog::all()) {
+      const auto translation=dict["parameters"].toObject()[spec.key].toObject();
+      QVERIFY2(!translation["name"].toString().isEmpty(),qPrintable(spec.key));
+      QVERIFY2(!translation["description"].toString().isEmpty(),qPrintable(spec.key));
+      for(int index=spec.indexMax?1:0;index<=spec.indexMax;++index) {
+        auto item=parameter(window.findChild<QTreeWidget *>("parametersTree"),Catalog::suffix(spec,index));
+        if(!item) item=parameter(window.findChild<QTreeWidget *>("ioCategories"),Catalog::suffix(spec,index));
+        QVERIFY(item);
+        QVERIFY(item->text(0).startsWith(ConfigText::name(spec,index)));
+        QVERIFY(item->toolTip(0).contains(ConfigText::description(spec,index).toHtmlEscaped()));
+        for(const auto &group:item->data(0,Qt::UserRole+1).toStringList())
+          QVERIFY2(dict["categories"].toObject().contains(group),qPrintable(group));
+        if(auto editor=item->treeWidget()->itemWidget(item,2))
+          QCOMPARE(editor->toolTip(),item->toolTip(0));
+      }
+    }
+    auto sto=window.findChild<QComboBox *>("choice_STO_0");
+    QCOMPARE(sto->itemText(sto->findData(1)),QString("Habilitado"));
+    auto filter=window.findChild<QLineEdit *>("parameterFilter");
+    filter->setText("ALIM 1");
+    auto item=parameter(window.findChild<QTreeWidget *>("parametersTree"),"ALIM 1");
+    window.findChild<QTreeWidget *>("parametersTree")->setCurrentItem(item);
+    auto help=window.findChild<QLabel *>("powerConfigParameterHelp");
+    QVERIFY(help->text().startsWith("<b>Amps Limit (A)</b>"));
+    QVERIFY(help->text().contains("corrente máxima"));
+  }
+  void configurationCardsRenderWithoutClipping() {
+    Window window;
+    window.resize(1440,860);
+    window.show();
+    window.startDemo();
+    auto session=window.findChild<Session *>();
+    for(const auto &suffix:QStringList{"ALIM 1","MXRPM 1","MAC 1","MDEC 1","EDEC 1","MNRPM 1","BPR 1"})
+      QVERIFY(session->enqueue("~"+suffix));
+    auto tree=window.findChild<QTreeWidget *>("parametersTree");
+    QTRY_COMPARE(parameter(tree,"MAC 1")->text(1),QString("0.0"));
+    window.findChild<QCheckBox *>("enableWrites")->setChecked(true);
+    auto browser=window.findChild<ConfigBrowser *>("powerConfigBrowser");
+    const auto capture=[&](const QString &name) {
+      QTest::qWait(60);
+      const auto dir=qEnvironmentVariable("MOTORLAB_UI_CAPTURE_DIR");
+      if(!dir.isEmpty()) QVERIFY(window.grab().save(dir+"/"+name+".png"));
+    };
+    capture("cards-home");
+    browser->navigate({"Motor 1"});capture("cards-motor-1");
+    browser->navigate({"Motor 1","Motor Output"});capture("cards-output");
+    browser->navigate({"Motor 1","Motor Output","Speed &amp; Acceleration"});
+    tree->setCurrentItem(parameter(tree,"MAC 1"));capture("cards-rampas");
+    auto editor=window.findChild<QDoubleSpinBox *>("draft_MAC_1");
+    QVERIFY(editor->isVisible());
+    QVERIFY(editor->width()>=220);
+    window.resize(1100,680);
+    QTest::qWait(60);
+    QCOMPARE(window.size(),QSize(1100,680));
+    QVERIFY(tree->viewport()->height()>=120);
+    capture("cards-rampas-1100");
+    browser->navigate({"Motor 1","Motor Configuration","Sinusoidal Settings","Hall Sensor Angle Table","Negative Direction"});
+    QTest::qWait(60);
+    QCOMPARE(window.size(),QSize(1100,680));
+    QVERIFY(!parameter(tree,"HSAT 1")->isHidden());
+    capture("cards-hall-1100");
   }
   void chartRetainsTimeWindowDuringFastCapture() {
     Chart chart;
