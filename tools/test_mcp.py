@@ -95,6 +95,11 @@ class McpTests(unittest.TestCase):
     def test_discovery_and_validation(self):
         tools=self.client.rpc('tools/list')['result']['tools']
         self.assertEqual(len(tools),25)
+        guards = next(t for t in tools if t["name"] == "motorlab_continuous")["inputSchema"]["properties"]
+        self.assertEqual(guards["max_current_a"]["type"], "number")
+        self.assertEqual(guards["max_current_a"]["default"], 11.5)
+        self.assertEqual(guards["max_speed_rpm"]["default"], 3000)
+        self.assertEqual(guards["max_temperature_c"]["default"], 85)
         self.assertFalse(self.tool('status')['connected'])
         self.assertIn('firmware_can',self.tool('status')['unavailable'])
         self.assertTrue(self.client.tool('connect',mode='serial',baud=12345)['isError'])

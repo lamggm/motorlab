@@ -373,7 +373,7 @@ private slots:
     FakeController endpoint;
     endpoint.params["MMOD 1"] = 3;
     endpoint.params["MVEL 1"] = 30;
-    endpoint.params["MXRPM 1"] = 100;
+    endpoint.params["MXRPM 1"] = 3000;
     Window window; window.show(); window.selectPage(1);
     window.findChild<QComboBox *>("sourceSelector")->setCurrentIndex(1);
     window.findChild<QComboBox *>("portSelector")->setEditText(endpoint.path);

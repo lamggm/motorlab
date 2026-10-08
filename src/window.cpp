@@ -1045,9 +1045,9 @@ QWidget *Window::monitorPage() {
           return -1;
         };
         const auto velocity = known("MVEL");
-        if (known("MMOD") != 3 || velocity < 1 || velocity > 100 ||
-            known("MXRPM") < 1 || known("MXRPM") > 100) {
-          commandState->setText("Posição: leia os parâmetros; requer MMOD3 e MVEL/MXRPM de 1 a 100 RPM.");
+        const auto maxRpm = known("MXRPM");
+        if (known("MMOD") != 3 || velocity < 1 || maxRpm < 1 || velocity > maxRpm) {
+          commandState->setText("Posição: leia os parâmetros; requer MMOD3 e MVEL positiva até o limite MXRPM do motor.");
           return;
         }
         *positionTarget = n;

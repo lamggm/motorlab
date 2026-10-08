@@ -725,7 +725,7 @@
   },
   {
     "name": "motorlab_continuous",
-    "description": "Ensaio contínuo supervisionado com lease e watchdog. mode=open_loop (padrão): G bruto -100..100. mode=encoder_speed: S em RPM -3000..3000, exige MMOD1, encoder feedback externo, ALIM dentro da guarda, MXPF/MXPR dentro de max_power_percent (padrão 25%, ampliação explícita até 100%) e MXRPM dentro da guarda. Monitora Hall e encoder, sentido/progresso do encoder, falhas, corrente e temperatura. Para por EX em falha, perda da lease ou motorlab_stop. Exige autorização humana para hardware. capture_fast=true reduz o intervalo entre consultas para 1 ms (a taxa real depende do transporte), captura até 2000 ciclos completos no job.samples, inclui erro, PWM e correntes FOC Id/Iq no modo encoder_speed e interrompe por LoopErr. As consultas de um ciclo não são simultâneas. mode=encoder_position: destino absoluto em contagens (zero permitido), MMOD3, deslocamento máximo 4000 contagens e janela entre origem/destino com margem100; exige MXRPM/MVEL dentro da guarda de até100 RPM e motores inicialmente parados. Repete o mesmo destino absoluto P (nunca PR) e mantém G0 (ativação serial sem setpoint no MMOD3) e S=MVEL para watchdog; captura obrigatória, para por LoopErr/corrente/velocidade/janela/lease e permite repouso dentro de20 contagens do alvo. Não zera referência nem grava EEPROM.",
+    "description": "Ensaio contínuo supervisionado com lease e watchdog. mode=open_loop (padrão): G bruto -1000..1000. mode=encoder_speed: S em RPM -3000..3000, exige MMOD1, encoder feedback externo, ALIM dentro da guarda, MXPF/MXPR dentro de max_power_percent (padrão 100%) e MXRPM dentro da guarda. Monitora Hall e encoder, sentido/progresso do encoder, falhas, corrente e temperatura. Para por EX em falha, perda da lease ou motorlab_stop. Exige autorização humana para hardware. capture_fast=true reduz o intervalo entre consultas para 1 ms (a taxa real depende do transporte), captura até 2000 ciclos completos no job.samples, inclui erro, PWM e correntes FOC Id/Iq no modo encoder_speed e interrompe por LoopErr. As consultas de um ciclo não são simultâneas. mode=encoder_position: destino absoluto em contagens (zero permitido), MMOD3, deslocamento máximo 4000 contagens e janela entre origem/destino com margem100; exige MXRPM dentro da guarda de velocidade e MVEL positiva até MXRPM (sem teto artificial de100 RPM) e motores inicialmente parados. Repete o mesmo destino absoluto P (nunca PR) e mantém G0 (ativação serial sem setpoint no MMOD3) e S=MVEL para watchdog; captura obrigatória, para por LoopErr/corrente/velocidade/janela/lease e permite repouso dentro de20 contagens do alvo. Não zera referência nem grava EEPROM. Guardas padrão da bancada: 3000 RPM, 11.5 A e 85 °C do controlador; não são temperatura do motor. Guardas explícitas menores não alteram os limites gravados no driver.",
     "inputSchema": {
       "type": "object",
       "properties": {
@@ -756,19 +756,24 @@
           "maxLength": 64
         },
         "max_current_a": {
-          "type": "integer",
+          "type": "number",
           "minimum": 1,
-          "maximum": 13
+          "maximum": 19,
+          "default": 11.5,
+          "description": "Guarda explícita em A; 11.5 A para KTC-86BLS98-J ou 19 A para KTC-86BLS125-J. Não altera ALIM/NOMA."
         },
         "max_speed_rpm": {
           "type": "integer",
           "minimum": 10,
-          "maximum": 3600
+          "maximum": 3600,
+          "default": 3000
         },
         "max_temperature_c": {
           "type": "integer",
           "minimum": 30,
-          "maximum": 70
+          "maximum": 85,
+          "description": "Guarda da temperatura medida do controlador; não representa temperatura do motor sem sensor próprio.",
+          "default": 85
         },
         "no_motion_ms": {
           "type": "integer",
@@ -800,7 +805,8 @@
         "max_power_percent": {
           "type": "integer",
           "minimum": 25,
-          "maximum": 100
+          "maximum": 100,
+          "default": 100
         },
         "capture_fast": {
           "type": "boolean"

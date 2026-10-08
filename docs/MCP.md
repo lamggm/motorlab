@@ -156,7 +156,7 @@ resultados atuais. A lease usa relógio monotônico, vence em 1–5 segundos (pa
 3 s) e não pode ser recuperada depois de expirar. `status.continuous` mostra
 atividade, tempo restante e medições; o token não aparece em status.
 
-O padrão `mode="open_loop"` usa **G em malha aberta, -100 a 100**, equivalente a até 10% de comando; não é referência em RPM. `mode="encoder_speed"` usa **S, -3000 a 3000 RPM**, exigindo MMOD=1, BLFB=0, encoder associado ao canal e EPPR positivo. Exige ainda ALIM até a guarda de corrente, potência máxima até `max_power_percent` (padrão 25%; ampliação explícita até 100%) e MXRPM entre a referência solicitada e a guarda de RPM. Consulta S/C, F e RMP, verificando velocidade, sentido e progresso do encoder além das guardas Hall existentes. O controlador precisa estar em canais separados, com
+O padrão `mode="open_loop"` usa **G em malha aberta, -1000 a 1000**, equivalente a até 100% de comando; não é referência em RPM. `mode="encoder_speed"` usa **S, -3000 a 3000 RPM**, exigindo MMOD=1, BLFB=0, encoder associado ao canal e EPPR positivo. Exige ainda ALIM até a guarda de corrente, potência máxima até `max_power_percent` (padrão 100%; guarda menor explícita permitida) e MXRPM entre a referência solicitada e a guarda de RPM. Consulta S/C, F e RMP, verificando velocidade, sentido e progresso do encoder além das guardas Hall existentes. O controlador precisa estar em canais separados, com
 serial como primeira prioridade, sem script em execução/autostart nem setup.
 O segundo canal precisa estar sem comando aplicado, potência ou velocidade.
 O watchdog real precisa estar entre 1000 e 2000 ms; o modo não altera RWD,
@@ -164,9 +164,9 @@ configuração nem EEPROM. A liberação de EStop só ocorre com `release=true` 
 após as verificações, sem liberar outros bits de falha.
 
 Cada ciclo alterna comando e consultas de falhas, RPM/sensor interno, contador,
-corrente, barramento, temperatura e status. Os limites padrão são 10 A, 600 RPM,
-60 °C e 2 s sem progresso do contador interno. Parâmetros permitem limites mais
-restritos; máximos aceitos: 11 A em open_loop ou 13 A em encoder_speed, 70 °C e 5 s sem progresso; guarda de velocidade até 1000 RPM em open_loop ou 3600 RPM em encoder_speed. A referência em encoder_speed deve ficar dentro da guarda. São limites
+corrente, barramento, temperatura e status. Os limites padrão da bancada são 11,5 A, 3000 RPM,
+85 °C do controlador e 2 s sem progresso do contador interno. Parâmetros permitem limites mais
+restritos; máximos aceitos: 19 A (aceita decimais, como 11,5 A), 85 °C do controlador e 5 s sem progresso; guarda de velocidade até 3600 RPM nos três modos. A referência em encoder_speed deve ficar dentro da guarda. São limites
 de supervisão por leitura, não garantias de que um pico físico nunca os ultrapasse.
 RPM correto depende da configuração de polos/sensor. Esta função não faz sintonia.
 
@@ -211,8 +211,14 @@ Os cartões **Encoder A/B** usam `?S`; **Hall / interno** usam `?BS 1` e `?BS 2`
 
 ## Posição por encoder
 
-`mode="encoder_position"` usa `value` como destino **absoluto em contagens**, na faixa de −3000 a 3000; aceita zero. É um ensaio limitado: exige MMOD3, feedback externo, MXRPM/MVEL dentro de `max_speed_rpm` de até 100 RPM, motores inicialmente parados e deslocamento de até 4000 contagens. O perfil deve estar preparado previamente; iniciar não modifica parâmetros nem zera o contador.
+`mode="encoder_position"` usa `value` como destino **absoluto em contagens**, na faixa de −3000 a 3000; aceita zero. É um ensaio limitado: exige MMOD3, feedback externo, MXRPM dentro de `max_speed_rpm` e MVEL positiva até MXRPM, motores inicialmente parados e deslocamento de até 4000 contagens. O perfil deve estar preparado previamente; iniciar não modifica parâmetros nem zera o contador.
 
 O mesmo alvo P é renovado com G0 e S=MVEL. Comandos relativos PR não são repetidos. Captura rápida é obrigatória e inclui C/F/TR/VDV/E/Id/Iq; erro de posição é rotulado em contagens. Repouso dentro de 20 contagens não dispara falta de progresso; a chegada deve ser avaliada pelo contador real, não pelo sucesso do job. Lease e guardas permanecem ativas durante a retenção. `motorlab_stop` envia EX e remove o torque, portanto não mantém posição.
 
 Para alterar referência C/CB por manutenção, ambos os motores precisam estar em MMOD0 e parados pelo encoder e Hall; EX/FF/FS e a releitura do contador são obrigatórios. [Ensaio e limitações de bancada](CONTROLE-POSICAO.md).
+
+### Limites nominais da bancada
+
+Para o Kalatec KTC-86BLS98-J, use guarda `max_speed_rpm=3000`, `max_current_a=11.5`, `max_power_percent=100` e `max_temperature_c=85` (temperatura do controlador). O driver conserva MXRPM=3000, ALIM/NOMA=115 bruto (11,5 A); a API não reduz esses parâmetros para ensaiar velocidades menores. Em posição, MVEL é a velocidade da trajetória e pode permanecer em 30 RPM com MXRPM=3000. O teto experimental de 100 RPM foi removido da GUI e do supervisor. A guarda precisa abranger o limite configurado do driver. Não há proteção de temperatura do motor verificada sem sensor; 50 °C publicados pelo fabricante são temperatura ambiente. [Ficha do motor](https://www.kalatec.com.br/motor-bldc-400w/).
+
+Para o KTC-86BLS125-J (660 W), o desenho oficial informa 19 A nominais, embora a página comercial diga 6,3 A. Use `max_current_a=19` explicitamente para este motor; a guarda padrão de 11,5 A pertence ao motor anterior. A troca exige parâmetros e verificação dos sensores do conjunto novo; não importar sua calibração do KTC-86BLS98-J.

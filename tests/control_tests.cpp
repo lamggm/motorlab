@@ -380,12 +380,14 @@ private slots:
     const auto st = call(c, "status")["result"].toObject();
     return {{"action", "start"}, {"channel", 1}, {"value", 100},
             {"lease_ms", 1000}, {"no_motion_ms", 5000},
+            {"max_speed_rpm", 600}, {"max_current_a", 10},
+            {"max_temperature_c", 60}, {"max_power_percent", 25},
             {"confirm", true}, {"expected_model", st["model"]},
             {"expected_firmware", st["firmware"]}};
   }
   void encoderSpeedSupervision_data() {
     QTest::addColumn<QString>("scenario");
-    for (const auto &s : {"normal", "rated-positive", "rated-negative", "rated-overcurrent", "rated-excess-power", "rated-overspeed", "wrong-mode", "wrong-feedback", "excess-current-limit", "excess-power", "encoder-reverse", "encoder-overspeed", "encoder-missing", "encoder-stuck"})
+    for (const auto &s : {"normal", "rated-positive", "rated-negative", "rated-overcurrent", "rated-excess-power", "rated-overspeed", "rated-19a", "wrong-mode", "wrong-feedback", "excess-current-limit", "excess-power", "encoder-reverse", "encoder-overspeed", "encoder-missing", "encoder-stuck"})
       QTest::newRow(s) << QString(s);
   }
   void encoderSpeedSupervision() {
@@ -419,6 +421,7 @@ private slots:
     args["mode"] = "encoder_speed";
     args["max_current_a"] = 3;
     if (rated) { fake.alim = 115; args["max_current_a"] = 13; }
+    if (scenario == "rated-19a") { fake.alim = 190; args["max_current_a"] = 19; }
     args["value"] = target;
     args["max_speed_rpm"] = rated ? 3400 : 250;
     if (rated && scenario != "rated-excess-power") args["max_power_percent"] = 100;
@@ -442,7 +445,7 @@ private slots:
         if (scenario != "encoder-stuck") fake.overrides["?C"] = "C=" + QString::number(count * 100) + ":0";
       });
       sensor.start(50);
-      if (scenario == "normal" || scenario == "rated-positive" || scenario == "rated-negative") {
+      if (scenario == "normal" || scenario == "rated-positive" || scenario == "rated-negative" || scenario == "rated-19a") {
         QTRY_VERIFY2(fake.commands.count(motorCommand) >= 3, qPrintable(result(c, id)["message"].toString()));
         QCOMPARE(call(c, "status")["result"].toObject()["continuous"].toObject()["unit"].toString(), QString("encoder_speed_rpm"));
         QVERIFY(call(c, "stop")["ok"].toBool());
@@ -505,15 +508,15 @@ private slots:
   }
   void positionSupervision_data() {
     QTest::addColumn<QString>("scenario");
-    for (const auto name : {"hold-zero", "hold-target", "travel-window", "lease", "loop-error", "moving", "far-origin", "velocity-zero", "speed-limit"})
+    for (const auto name : {"hold-zero", "hold-target", "travel-window", "lease", "loop-error", "moving", "far-origin", "velocity-zero", "speed-limit", "guard-below-nominal", "current-limit", "measured-current-limit", "hold-fast-trajectory"})
       QTest::newRow(name) << QString(name);
   }
   void positionSupervision() {
     QFETCH(QString, scenario);
     FakeController fake;
-    fake.alim = 30;
+    fake.alim = 115;
     fake.params["MMOD 1"] = 3; fake.params["EMOD 1"] = 18;
-    fake.params["EPPR 1"] = 1000; fake.params["MXRPM 1"] = 100;
+    fake.params["EPPR 1"] = 1000; fake.params["MXRPM 1"] = 3000;
     fake.params["MVEL 1"] = 30;
     fake.params["MXPF 1"] = fake.params["MXPR 1"] = 25;
     fake.overrides["?A"] = "A=1:0";
@@ -528,21 +531,27 @@ private slots:
     if (scenario == "moving") fake.overrides["?S"] = "S=1:0";
     if (scenario == "far-origin") fake.overrides["?C"] = "C=5000:0";
     if (scenario == "velocity-zero") fake.params["MVEL 1"] = 0;
+    if (scenario == "speed-limit") fake.params["MVEL 1"] = 3001;
+    if (scenario == "hold-fast-trajectory") fake.params["MVEL 1"] = 200;
+    if (scenario == "current-limit") fake.alim = 116;
     Window w; ControlServer c(w);
     call(c, "connect", {{"mode", "serial"}, {"port", fake.path}});
     QTRY_VERIFY(!call(c, "status")["result"].toObject()["model"].toString().isEmpty());
     auto args = continuousArgs(c);
     args["mode"] = "encoder_position"; args["value"] = scenario == "hold-target" ? 100 : 0;
-    args["max_current_a"] = 3; args["max_speed_rpm"] = 100;
+    args["max_current_a"] = 11.5; args["max_speed_rpm"] = 3000;
     args["lease_ms"] = 5000; args["no_motion_ms"] = 1000;
-    if (scenario == "lease") args["lease_ms"] = 1000;
-    if (scenario == "speed-limit") {
-      args["max_speed_rpm"] = 101;
-      QVERIFY(!call(c, "continuous", args)["ok"].toBool()); return;
+    if (scenario == "hold-target") {
+      for (const auto &key : {"max_speed_rpm", "max_current_a", "max_temperature_c", "max_power_percent"})
+        args.remove(key);
     }
+    if (scenario == "lease") args["lease_ms"] = 1000;
+    if (scenario == "speed-limit") args["max_speed_rpm"] = 3400;
+    if (scenario == "guard-below-nominal") args["max_speed_rpm"] = 2999;
     const auto id = start(c, "continuous", args);
     QVERIFY(!id.isEmpty());
-    if (scenario == "moving" || scenario == "far-origin" || scenario == "velocity-zero") {
+    if (scenario == "moving" || scenario == "far-origin" || scenario == "velocity-zero" || scenario == "speed-limit" ||
+        scenario == "guard-below-nominal" || scenario == "current-limit") {
       QTRY_COMPARE(result(c, id)["state"].toString(), QString("failed"));
       QVERIFY(!fake.commands.contains("!MG"));
       QVERIFY(!fake.commands.contains("!P 1 0"));
@@ -554,9 +563,9 @@ private slots:
       QVERIFY(result(c, id)["result"].toObject()["stop_confirmed"].toBool());
       return;
     }
-    QTRY_VERIFY(fake.commands.count("!S 1 30") >= 2);
+    QTRY_VERIFY(fake.commands.count(scenario == "hold-fast-trajectory" ? "!S 1 200" : "!S 1 30") >= 2);
     QVERIFY(fake.commands.count("!G 1 0") >= 2);
-    QVERIFY(fake.commands.indexOf("!G 1 0") < fake.commands.indexOf("!S 1 30"));
+    QVERIFY(fake.commands.indexOf("!G 1 0") < fake.commands.indexOf(scenario == "hold-fast-trajectory" ? "!S 1 200" : "!S 1 30"));
     QTRY_VERIFY(fake.commands.count(scenario == "hold-target" ? "!P 1 100" : "!P 1 0") >= 2);
     for (const auto &command : fake.commands) QVERIFY(!command.startsWith("!PR "));
     if (scenario == "hold-target") fake.overrides["?C"] = "C=100:0";
@@ -572,23 +581,24 @@ private slots:
     } else {
       if (scenario == "travel-window") fake.overrides["?C"] = "C=101:0";
       if (scenario == "loop-error") fake.overrides["?FM 1"] = "FM=4";
+      if (scenario == "measured-current-limit") fake.overrides["?A"] = "A=116:0";
       QTRY_COMPARE_WITH_TIMEOUT(result(c, id)["state"].toString(), QString("failed"), 3000);
     }
     QVERIFY(result(c, id)["result"].toObject()["stop_confirmed"].toBool());
     QVERIFY(!fake.commands.contains("%EESAV"));
   }
-  void continuousRangeDoesNotExpandOpenLoop() {
+  void continuousRejectsInvalidRanges() {
     FakeController fake; Window w; ControlServer c(w);
     call(c, "connect", {{"mode", "serial"}, {"port", fake.path}});
     QTRY_VERIFY(!call(c, "status")["result"].toObject()["model"].toString().isEmpty());
     auto args = continuousArgs(c);
-    args["value"] = 101;
+    args["value"] = 1001;
     QVERIFY(!call(c, "continuous", args)["ok"].toBool());
-    args["value"] = 100; args["max_speed_rpm"] = 3400;
+    args["value"] = 100; args["max_speed_rpm"] = 3601;
     QVERIFY(!call(c, "continuous", args)["ok"].toBool());
-    args["max_speed_rpm"] = 600; args["max_current_a"] = 13;
+    args["max_speed_rpm"] = 600; args["max_current_a"] = 19.1;
     QVERIFY(!call(c, "continuous", args)["ok"].toBool());
-    args["max_speed_rpm"] = 3400;
+    args["max_speed_rpm"] = 3400; args["max_current_a"] = 11.5;
     args["mode"] = "encoder_speed"; args["value"] = 3001;
     QVERIFY(!call(c, "continuous", args)["ok"].toBool());
     args["value"] = 3000; args["max_speed_rpm"] = 2000;
@@ -603,17 +613,19 @@ private slots:
     ControlServer c(w);
     call(c, "connect", {{"mode", "serial"}, {"port", fake.path}});
     QTRY_VERIFY(!call(c, "status")["result"].toObject()["model"].toString().isEmpty());
-    const auto started = call(c, "continuous", continuousArgs(c));
+    auto args = continuousArgs(c);
+    args["value"] = 1000; args["max_speed_rpm"] = 3000; args["max_current_a"] = 11.5;
+    const auto started = call(c, "continuous", args);
     QVERIFY(started["ok"].toBool());
     const auto id = started["result"].toObject()["job_id"].toString();
     QTRY_COMPARE_WITH_TIMEOUT(result(c, id)["state"].toString(), QString("failed"), 4000);
     QVERIFY(result(c, id)["result"].toObject()["stop_confirmed"].toBool());
     QVERIFY(result(c, id)["message"].toString().contains("expirou"));
-    QVERIFY(fake.commands.count("!G 1 100") > 1);
+    QVERIFY(fake.commands.count("!G 1 1000") > 1);
     QVERIFY(fake.faults & 16);
-    const auto count = fake.commands.count("!G 1 100");
+    const auto count = fake.commands.count("!G 1 1000");
     QTest::qWait(300);
-    QCOMPARE(fake.commands.count("!G 1 100"), count);
+    QCOMPARE(fake.commands.count("!G 1 1000"), count);
     QVERIFY(!call(c, "continuous", {{"action", "renew"},
         {"lease_token", started["result"].toObject()["lease_token"]}})["ok"].toBool());
   }

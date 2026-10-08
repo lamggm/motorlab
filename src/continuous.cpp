@@ -51,10 +51,14 @@ void ControlServer::continuousObserve(const QString &command, const QString &pay
     if (key == "EPPR" && n == 0) continuousStop("Resolução do encoder inválida.");
     if (key == "ALIM" && (n < 1 || n > continuous.maxAmps * 10)) continuousStop("Limite de corrente do driver excede o limite do ensaio.");
     if ((key == "MXPF" || key == "MXPR") && (n < 1 || n > continuous.maxPowerPercent)) continuousStop("Limite de potência do driver excede o limite explícito do ensaio.");
-    if (key == "MXRPM" && ((!continuous.position && n < std::abs(continuous.value)) || n < 1 || n > continuous.maxRpm)) continuousStop("Limite de velocidade do driver incompatível com o ensaio.");
+    if (key == "MXRPM") {
+      continuous.driverMaxRpm = int(n);
+      if ((!continuous.position && n < std::abs(continuous.value)) || n < 1 || n > continuous.maxRpm)
+        continuousStop("Limite de velocidade do driver incompatível com a guarda; não foi alterado.");
+    }
     if (key == "MVEL" && continuous.position) {
-      if (n < 1 || n > 100 || n > continuous.maxRpm)
-        continuousStop("Velocidade da trajetória fora de 1 a 100 RPM ou da guarda.");
+      if (n < 1 || n > continuous.driverMaxRpm || n > continuous.maxRpm)
+        continuousStop("Velocidade da trajetória excede MXRPM ou a guarda, ou não é positiva.");
       continuous.positionVelocity = int(n);
     }
     if (key == "F") continuous.sample[continuous.position ? "feedback_position_counts" : "feedback_rpm"] = double(n);
@@ -235,12 +239,10 @@ QJsonObject ControlServer::continuousStart(const QJsonObject &args) {
     throw std::runtime_error("Informe action=start, channel e value não zero.");
   const bool position = args["mode"].toString() == "encoder_position";
   const bool encoderSpeed = args["mode"].toString() == "encoder_speed";
-  if (!encoderSpeed && !position && (std::abs(args["value"].toInt()) > 100 || args["max_speed_rpm"].toInt(600) > 1000 || args["max_current_a"].toInt(10) > 11))
-    throw std::runtime_error("Malha aberta limitada a G +/-100, guarda de 1000 RPM e 11 A.");
-  if (encoderSpeed && std::abs(args["value"].toInt()) > args["max_speed_rpm"].toInt(600))
+  if (!encoderSpeed && !position && std::abs(args["value"].toInt()) > 1000)
+    throw std::runtime_error("Comando G em malha aberta deve ficar entre -1000 e 1000; não é RPM.");
+  if (encoderSpeed && std::abs(args["value"].toInt()) > args["max_speed_rpm"].toInt(3000))
     throw std::runtime_error("Referência RPM excede a guarda do ensaio.");
-  if (position && args["max_speed_rpm"].toInt(600) > 100)
-    throw std::runtime_error("Ensaio de posição limitado a 100 RPM.");
   authorize(args);
   continuous = Continuous{};
   continuous.enabled = true;
@@ -250,10 +252,10 @@ QJsonObject ControlServer::continuousStart(const QJsonObject &args) {
   continuous.channel = args["channel"].toInt();
   continuous.value = args["value"].toInt();
   continuous.leaseMs = args["lease_ms"].toInt(3000);
-  continuous.maxAmps = args["max_current_a"].toInt(10);
-  continuous.maxRpm = args["max_speed_rpm"].toInt(600);
-  continuous.maxTemperature = args["max_temperature_c"].toInt(60);
-  continuous.maxPowerPercent = args["max_power_percent"].toInt(25);
+  continuous.maxAmps = args["max_current_a"].toDouble(11.5);
+  continuous.maxRpm = args["max_speed_rpm"].toInt(3000);
+  continuous.maxTemperature = args["max_temperature_c"].toInt(85);
+  continuous.maxPowerPercent = args["max_power_percent"].toInt(100);
   continuous.noMotionMs = args["no_motion_ms"].toInt(2000);
   continuous.token = QUuid::createUuid().toString(QUuid::WithoutBraces);
   continuous.lease.start();

@@ -76,11 +76,11 @@ void validate(const QJsonValue &v, const QJsonObject &s,
          path + " texto inválido.");
   } else if (type == "boolean")
     need(v.isBool(), path + " deve ser booleano.");
-  else if (type == "integer") {
+  else if (type == "integer" || type == "number") {
     const double n = v.toDouble();
-    need(v.isDouble() && std::isfinite(n) && std::floor(n) == n &&
+    need(v.isDouble() && std::isfinite(n) && (type != "integer" || std::floor(n) == n) &&
              n >= s["minimum"].toDouble() && n <= s["maximum"].toDouble(),
-         path + " inteiro fora do limite.");
+         path + " número fora do limite.");
   }
   if (s.contains("enum"))
     need(s["enum"].toArray().contains(v), path + " opção desconhecida.");

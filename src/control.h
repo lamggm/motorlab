@@ -39,10 +39,11 @@ private:
     bool enabled = false, running = false, stopping = false, stoppingSequence = false;
     bool operatorStop = false, encoderSpeed = false, fastCapture = false;
     bool position = false, haveOrigin = false;
-    int positionVelocity = 0;
+    int positionVelocity = 0, driverMaxRpm = 0;
     qint64 positionOrigin = 0;
-    int channel = 1, value = 0, leaseMs = 3000, maxAmps = 10, maxRpm = 600;
-    int maxTemperature = 60, noMotionMs = 2000, maxPowerPercent = 25;
+    int channel = 1, value = 0, leaseMs = 3000, maxRpm = 3000;
+    double maxAmps = 11.5;
+    int maxTemperature = 85, noMotionMs = 2000, maxPowerPercent = 100;
     QString token, reason;
     QElapsedTimer lease, motorAck, progress, encoderProgress;
     bool haveCounter = false, haveEncoder = false;
