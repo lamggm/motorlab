@@ -31,6 +31,8 @@ A tabela Hall e todos os demais registros conhecidos estão no JSON. Resistênci
 
 Histórico de comportamento deste motor: [sintonia aceita a 20 RPM](../../../SINTONIA-20RPM.md), [ensaio de posição](../../../CONTROLE-POSICAO.md) e [meta experimental de baixa velocidade](../../../BAIXA-VELOCIDADE.md). O ensaio CLI de 500 RPM de 08/10/2026, em modo velocidade, mediu 500,0009 RPM pelo contador, média instantânea encoder de 499,53 RPM, Hall de 501,87 RPM e pico amostrado de 0,9 A, sem falhas nas capturas. Esse ensaio precede o perfil final em MMOD3; não significa que o modo posição e a velocidade foram testados simultaneamente. Não qualifica operação sob carga nem temperatura do motor.
 
+Também foi preservado o [perfil completo em velocidade, testado em 07/10/2026](perfil-velocidade-testado-2026-10-07.json): MMOD1=1, MXRPM1=3000 e os ganhos aprovados a 20–3000 RPM. É um registro histórico da RAM, anterior à seleção de posição e à gravação nominal de 08/10; não apresentá-lo como a última configuração EEPROM.
+
 ## Recuperação
 
 1. Voltar a conectar o **mesmo KTC-86BLS98-J com o mesmo conjunto Hall/encoder e fiação**, com o motor parado. Identificar modelo/firmware e exportar o estado atual antes de substituir parâmetros.
