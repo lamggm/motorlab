@@ -150,6 +150,10 @@ QJsonObject ControlServer::guiDispatch(const QJsonObject &a) {
       finish(false, "Interrompido pela GUI.");
     guiMotors.clear();
     guiMotorKeys.clear();
+    if (!guiOperation.isEmpty() && guiOperation != client) {
+      guiOperation.clear();
+      w.endOperation();
+    }
     const quint64 receipt = guiSerial;
     check(s.enqueue(a["command"].toString()), "Parada recusada pela sessão.");
     return {{"after_serial", double(receipt)}};

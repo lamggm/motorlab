@@ -282,6 +282,11 @@ void Window::maintenanceReply(const QString &cmd, const QString &payload,
   }
 }
 void Window::runtime(const QString &cmd, const QString &description) {
+  if(session.isRemote() && cmd=="!EX") {
+    const auto result=session.backendCall("motorlab_stop",{});
+    notify(result["ok"].toBool() ? "Parada de emergência solicitada ao daemon; confira a confirmação e o estado físico." : result["error"].toString());
+    return;
+  }
   const auto c = Protocol::command(cmd);
   if (!c.valid)
     return;

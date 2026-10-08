@@ -229,6 +229,28 @@ private slots:
     QVERIFY(
         !call(remote, "status")["result"].toObject()["gui_operation"].toBool());
   }
+  void graphicalEmergencyRevokesAnotherClientTransaction() {
+    FakeController fake;
+    fake.fragment = false;
+    RemoteSession owner(socket), observer(socket);
+    Window observerGui(nullptr, &observer);
+    QVERIFY(owner.attach(false));
+    QVERIFY(observer.attach(false));
+    QVERIFY(owner.openSerial(fake.path, 115200));
+    QTRY_COMPARE(owner.watchdogMs(), 1000);
+    QTRY_VERIFY(!owner.busy());
+    auto emergency = observerGui.findChild<QPushButton *>("emergencyStop");
+    QTRY_VERIFY(emergency->isEnabled());
+    QSignalSpy failures(&owner, &Session::failed);
+    QVERIFY(owner.setOperationActive(true));
+    emergency->click();
+    QTRY_VERIFY(
+        !call(owner, "status")["result"].toObject()["gui_operation"].toBool());
+    QTRY_VERIFY(!failures.isEmpty());
+    QVERIFY(failures.first()[0].toString().contains("Exclusividade revogada"));
+    QVERIFY(!owner.motionEnabled());
+    QVERIFY(!fake.commands.contains("%EESAV"));
+  }
   void earlierReplyIsNotAnAckForNewCommand() {
     RemoteSession remote(socket);
     QVERIFY(remote.attach(false));
@@ -239,7 +261,8 @@ private slots:
     const auto started = call(remote, "query", {{"command", "~MXRPM 1"}});
     QVERIFY(started["ok"].toBool());
     const auto id = started["result"].toObject()["job_id"].toString();
-    QTest::qSleep(1000); // drain any already queued demo scan without delivering this client's events
+    QTest::qSleep(1000); // drain any already queued demo scan without
+                         // delivering this client's events
     QCOMPARE(call(remote, "job", {{"job_id", id}})["result"]
                  .toObject()["state"]
                  .toString(),

@@ -1175,6 +1175,7 @@ QWidget *Window::monitorPage() {
   liveActions.append(release);
   estop->setStyleSheet("background:#8b2833;color:white;font-weight:700");
   connect(estop, &QPushButton::clicked, this, [this] {
+    if(session.isRemote()) { runtime("!EX",{}); return; }
     if (applying)
       completeApply(false,
                     "Operação cancelada pela parada; releia a configuração.");
