@@ -69,6 +69,11 @@ bool Window::saveProfile(const QString &path) {
          f.commit();
 }
 bool Window::loadProfile(const QString &path, QString *error) {
+  if(session.isRemote()) {
+    const auto reply=session.backendCall("motorlab_profile",{{"action","import_json"},{"path",path}});
+    if(!reply["ok"].toBool() && error) *error=reply["error"].toString();
+    return reply["ok"].toBool();
+  }
   auto bad = [&](const QString &message) {
     if (error)
       *error = message;
@@ -351,6 +356,7 @@ void Window::startStreamingWhenIdle(int remaining) {
 }
 
 void Window::onStream(const QString &payload) {
+  if (session.isRemote()) return;
   const auto r = Protocol::reply("ML=" + payload);
   if (!r.numeric || r.numbers.size() != 12) {
     session.stopStream();

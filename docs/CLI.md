@@ -1,9 +1,9 @@
-# MotorLab CLI 0.7.0
+# MotorLab CLI 0.8.0
 
 `motorlabd` é um backend nativo sem janela, Qt GUI/Widgets, X11, Wayland ou
 plugin offscreen. Usa Qt Core/Network. `motorlabctl` é o cliente Python 3 de
-terminal: retorna JSON e usa exatamente as 25 ferramentas do MCP. CLI e GUI
-compartilham o código de protocolo, catálogo, permissões e supervisão.
+terminal: retorna JSON e usa exatamente as 25 ferramentas do MCP. GUI, CLI e MCP são clientes do mesmo daemon: conexão, parâmetros pendentes,
+permissões, telemetria e jobs são compartilhados em tempo real.
 
 ## Começar
 
@@ -26,8 +26,9 @@ Para experimentar com dados simulados:
 ./motorlabctl disconnect
 ```
 
-Para uma unidade real, conecte explicitamente a porta correta, com a GUI e
-outros programas desconectados dela:
+Para uma unidade real, conecte explicitamente a porta correta. A GUI do MotorLab
+pode estar aberta; outros programas que abrem a serial diretamente devem estar
+desconectados dela:
 
 ```sh
 ./motorlabctl connect --port /dev/serial/by-id/PORTA-DA-UNIDADE --baud 115200
@@ -100,8 +101,11 @@ recusados no backend CLI. Para o aplicativo visual, use `--backend gui`.
 
 Diretório do socket: propriedade do usuário e modo 0700. O padrão CLI é
 `$XDG_RUNTIME_DIR/motorlab-cli/control.sock`; fallback em `~/.local/state`.
-A GUI usa outro socket. A porta serial permanece exclusiva: não conecte os
-dois backends ao mesmo driver. Não existe porta TCP aberta.
+A GUI usa esse daemon e pode observar uma conexão iniciada pela CLI. Seu socket
+`motorlab/control.sock` é somente uma ponte de compatibilidade para comandos
+e operações de janela; não abre outra serial. Não existe porta TCP aberta.
+Use `motorlab --backend-socket /DIRETORIO-PRIVADO/control.sock` para selecionar
+um daemon isolado. [Arquitetura e ciclo de vida](BACKEND-COMPARTILHADO.md).
 
 O daemon permanece ativo entre comandos; `disconnect` fecha a unidade.
 SIGINT/SIGTERM encerra o processo e fecha a Session. Uma operação DFU em
@@ -116,7 +120,7 @@ cmake -S . -B build-cli -DCMAKE_BUILD_TYPE=Release -DMOTORLAB_BUILD_GUI=OFF
 cmake --build build-cli -j4
 ctest --test-dir build-cli --output-on-failure
 cmake --install build-cli --prefix .
-./tools/package_cli.sh build-cli/motorlabd /DESTINO/motorlab-cli-0.7.0
+./tools/package_cli.sh build-cli/motorlabd /DESTINO/motorlab-cli-0.8.0
 ```
 
 Para produção sem Qt Test, adicione `-DBUILD_TESTING=OFF`. Qt Widgets não é
@@ -137,7 +141,7 @@ ajuste automático e linearidade permanecem pendentes. USB DFU não foi
 validado fisicamente nesta entrega. Nenhum ensaio deste desenvolvimento
 acessou ou modificou o motor da bancada.
 
-Suítes: `headless_tests` valida guardas e jobs por pseudoterminais;
+Suítes: `shared_backend_tests` verifica GUI/CLI, edição, releitura, sliders e perda de clientes no mesmo daemon; `headless_tests` valida guardas e jobs por pseudoterminais;
 `tools/test_mcp.py` verifica as 25 ferramentas e clientes concorrentes;
 `tools/test_cli.py` verifica terminal sem display, perfis, telemetria e saída
 de erro. Consulte `VALIDACAO.md` para os resultados desta versão.

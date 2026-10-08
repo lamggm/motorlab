@@ -188,12 +188,21 @@ private:
 };
 } // namespace
 
-Window::Window(QWidget *parent) : QMainWindow(parent), session(this) {
+Window::Window(QWidget *parent, Session *backend) : QMainWindow(parent), session(backend ? *backend : *new Session(this)) {
   buildUi();
+  elapsed.start();
+  connect(&session, &Session::backendSnapshot, this, &Window::syncBackend);
+  connect(script, &QPlainTextEdit::textChanged, this, [this] {
+    if (!syncingBackend) session.setSharedScript(script->toPlainText());
+  });
   connect(&session, &Session::changed, this, &Window::refreshState);
   connect(&session, &Session::received, this, &Window::onReply);
   connect(&session, &Session::traffic, this, &Window::writeLog);
   connect(&session, &Session::failed, this, [this](const QString &message) {
+    if (reviewingOperation) {
+      reviewingOperation=false;
+      if(auto box=qobject_cast<QMessageBox *>(QApplication::activeModalWidget())) box->reject();
+    }
     if (applying)
       completeApply(
           false,
@@ -224,7 +233,7 @@ Window::Window(QWidget *parent) : QMainWindow(parent), session(this) {
 }
 
 void Window::buildUi() {
-  setWindowTitle("MotorLab Linux 0.6.0 • SBLG2360T / SBLMG2360T");
+  setWindowTitle("MotorLab Linux 0.8.0 • SBLG2360T / SBLMG2360T");
   resize(1440, 860);
   setMinimumSize(1100, 680);
   setStyleSheet(R"(
@@ -294,7 +303,7 @@ void Window::buildUi() {
   auto brand = label("MOTORLAB", "brand");
   brand->setWordWrap(false);
   branding->addWidget(brand);
-  auto caption = label("MOTOR CONTROL UTILITY  ·  Linux 0.6.0", "muted");
+  auto caption = label("MOTOR CONTROL UTILITY  ·  Linux 0.8.0", "muted");
   caption->setWordWrap(false);
   branding->addWidget(caption);
   auto supported = label("SBLG2360T / SBLMG2360T  ·  dois canais", "muted");
@@ -621,6 +630,8 @@ QWidget *Window::parametersPage() {
         } else
           item->treeWidget()->setItemWidget(item, 2, p.editor);
         connect(p.editor, &QDoubleSpinBox::valueChanged, this, [this, row] {
+          if (syncingBackend) return;
+          if (!session.stageShared(parameters[row].suffix, qRound64(parameters[row].editor->value()*parameters[row].scale))) return;
           parameters[row].dirty = true;
           parameterItems[row]->setText(0, parameters[row].name + " · " +
                                               parameters[row].suffix + " *");
@@ -662,6 +673,10 @@ QWidget *Window::parametersPage() {
   advancedLayout->addWidget(offlineModel);
   connect(offlineModel, &QComboBox::currentTextChanged, this,
           [this](const QString &model) {
+            if (session.isRemote() && !syncingBackend && !session.connected()) {
+              const auto result=session.backendCall("motorlab_view",{{"model",model}});
+              if(!result["ok"].toBool()) { notify(result["error"].toString()); return; }
+            }
             if (session.connected() || profileModel.isEmpty() ||
                 model == profileModel)
               return;
@@ -1501,7 +1516,7 @@ QWidget *Window::aboutPage() {
   layout->setContentsMargins(0, 0, 0, 0);
   layout->setSpacing(6);
   auto identity = section("Identificação");
-  identity.body->addWidget(label("MotorLab Linux 0.6.0"));
+  identity.body->addWidget(label("MotorLab Linux 0.8.0"));
   identity.body->addWidget(
       label("Aplicativo independente, não oficial da Roboteq.", "muted"));
   device = label("Modelo detectado: —");
@@ -1558,6 +1573,9 @@ void Window::exportTelemetry() {
 }
 
 void Window::startDemo() {
+  if(session.isRemote() && session.connected()) {
+    notify(session.isDemo() ? "Demonstração já aberta no daemon." : "Daemon conectado a uma unidade real. Desconecte explicitamente antes de abrir demo."); return;
+  }
   source->setCurrentIndex(0);
   if (session.connected())
     session.close();
@@ -1620,6 +1638,10 @@ void Window::refreshPorts() {
 }
 
 void Window::refreshState() {
+  if (session.isRemote() && !session.setOperationActive(applying || readsPending > 0 || reviewingOperation)) {
+    applying=false; readsPending=0;
+    return;
+  }
   const bool live = session.connected(), demo = session.isDemo();
   source->setEnabled(!live);
   port->setEnabled(!live && source->currentIndex() == 1);
@@ -1740,6 +1762,15 @@ void Window::refreshState() {
     motorAlarmSummary.clear();
     statusFlags->setText("—");
   }
+  if (session.otherOperation()) {
+    connection->setEnabled(false); editEnabled->setEnabled(false); readParams->setEnabled(false); applyParams->setEnabled(false);
+    query->setEnabled(false); sendQuery->setEnabled(false); motionEnabled->setEnabled(false);
+    for(auto widget:motorSliders) widget->setEnabled(false);
+    for(auto widget:motorSend) widget->setEnabled(false);
+    for(auto action:liveActions) if(action->objectName()!="emergencyStop") action->setEnabled(false);
+    for(auto &p:parameters) { if(p.editor) p.editor->setEnabled(false); if(p.choices) p.choices->setEnabled(false); }
+    streamButton->setEnabled(false);
+  }
 }
 
 void Window::refreshManualControls() {
@@ -1829,6 +1860,7 @@ void Window::stopManualDrive(const QString &reason) {
 }
 
 void Window::poll() {
+  if (session.isRemote()) return;
   if (!session.connected() || session.streaming() || session.uploading() ||
       session.busy() || applying || readsPending || scanActive ||
       session.model().isEmpty())
@@ -1878,7 +1910,7 @@ void Window::onReply(const QString &cmd, const QString &payload, bool ok) {
       QSignalBlocker block(offlineModel);
       offlineModel->setCurrentText(profileModel);
     }
-    if (ok) {
+    if (ok && !session.isRemote()) {
       // Read only the manual-control prerequisites at connection time.
       // Never change the controller mode or activate a motor on startup.
       session.enqueue("~RWD");
@@ -2226,12 +2258,16 @@ void Window::applyParameters() {
                        : "Aplicar estes valores na RAM do controlador?\nA "
                          "alteração entra em vigor imediatamente. O script "
                          "será pausado e a parada !EX aplicada.\n\n";
-  if (QMessageBox::question(this, "Revisar alterações",
+  reviewingOperation=true;
+  if(!session.setOperationActive(true)) { reviewingOperation=false; refreshState(); return; }
+  const auto answer=QMessageBox::question(this, "Revisar alterações",
                             intro + review.join('\n') +
                                 "\n\nNão será feita gravação na EEPROM.",
                             QMessageBox::Yes | QMessageBox::Cancel,
-                            QMessageBox::Cancel) != QMessageBox::Yes)
-    return;
+                            QMessageBox::Cancel);
+  if(answer!=QMessageBox::Yes || !reviewingOperation) { reviewingOperation=false; refreshState(); return; }
+  applying=true;
+  reviewingOperation=false;
   session.stopStream();
   session.cancelMotion();
   applying = true;
@@ -2328,7 +2364,61 @@ void Window::closeEvent(QCloseEvent *event) {
     event->ignore();
     return;
   }
-  session.stopStream();
-  session.close();
+  if (session.isRemote()) {
+    for (auto timer : manualRepeats) timer->stop();
+    session.detach();
+  } else { session.stopStream(); session.close(); }
   event->accept();
+}
+
+void Window::syncBackend(const QJsonObject &snapshot) {
+  syncingBackend=true;
+  captureDemo=snapshot["demo"].toBool();
+  captureFirmware=profileFirmware=snapshot["firmware"].toString();
+  captureModel=snapshot["model"].toString();
+  profileModel=Protocol::supportedModel(captureModel);
+  profileSource=snapshot["telemetry"].toObject()["source"].toString("offline");
+  { QSignalBlocker b(source); source->setCurrentIndex(captureDemo ? 0 : 1); }
+  { QSignalBlocker b(offlineModel); offlineModel->setCurrentText(profileModel.isEmpty() ? snapshot["selected_model"].toString() : profileModel); }
+  for (const auto &value : snapshot["parameters"].toArray()) {
+    const auto entry=value.toObject();
+    for (int row=0;row<parameters.size();++row) {
+      auto &p=parameters[row]; if(p.suffix!=entry["suffix"].toString()) continue;
+      p.raw=qint64(entry["raw"].toDouble()); p.known=entry["known"].toBool(); p.dirty=entry["dirty"].toBool();
+      if(p.editor) { QSignalBlocker b(p.editor); p.editor->setValue(entry["draft_raw"].toDouble()/p.scale); }
+      updateParameterRow(row);
+      if(p.key=="MMOD" && p.known && !p.dirty && p.raw==3 && p.channel>=1 && p.channel<=manualRepeats.size() && !manualRepeats[p.channel-1]->isActive())
+        findChild<QComboBox *>(QString("motorMode%1").arg(p.channel))->setCurrentIndex(2);
+      break;
+    }
+  }
+  if(snapshot.contains("script") && script->toPlainText()!=snapshot["script"].toString()) {
+    const QSignalBlocker b(script); script->setPlainText(snapshot["script"].toString()); script->document()->setModified(false);
+  }
+  const auto samples=snapshot["telemetry"].toObject()["samples"].toArray();
+  if(!samples.isEmpty() && snapshot["connected"].toBool()) {
+    const auto sample=samples.last().toObject(); const auto stamp=sample["timestamp"].toString();
+    if(!stamp.isEmpty() && stamp!=sharedSampleTimestamp && QDateTime::fromString(stamp,Qt::ISODateWithMs).msecsTo(QDateTime::currentDateTimeUtc()) < 1000) {
+      sharedSampleTimestamp=stamp; readings.clear();
+      const auto fields=sample["readings"].toObject();
+      for(auto it=fields.begin();it!=fields.end();++it) readings[it.key()]=it.value().toString();
+      if(fields.isEmpty()) {
+        auto pair=[&](const QString &cmd,const QString &one,const QString &two,int scale) {
+          if(sample[one].isDouble() && sample[two].isDouble()) readings[cmd]=QString("%1:%2").arg(qRound64(sample[one].toDouble()*scale)).arg(qRound64(sample[two].toDouble()*scale));
+        };
+        auto scalar=[&](const QString &cmd,const QString &key,int scale) { if(sample[key].isDouble()) readings[cmd]=QString::number(qRound64(sample[key].toDouble()*scale)); };
+        pair("?A","amps1","amps2",10); pair("?S","rpm1","rpm2",1); pair("?C","encoder1","encoder2",1);
+        scalar("?V 2","voltage",10); scalar("?T 2","temperature",1); scalar("?FF","faults",1); scalar("?FS","flags",1);
+        scalar("?BS 1","rpm1_hall",1); scalar("?BS 2","rpm2_hall",1);
+      }
+      updateSamples();
+    }
+  }
+  const bool other=snapshot["other_operation"].toBool();
+  if(other) {
+    for(auto timer:manualRepeats) timer->stop();
+    readParams->setEnabled(false); applyParams->setEnabled(false); connection->setEnabled(false);
+    for(auto widget:motorSliders) widget->setEnabled(false);
+  }
+  syncingBackend=false;
 }

@@ -213,6 +213,12 @@ void Window::showCpr(bool compare, const QString &inputPath) {
                     "Perfil simulado não pode ser importado em unidade real.");
                 return;
               }
+              if(session.isRemote()) {
+                QJsonArray changes;
+                for(const auto &value:staged) changes.append(QJsonObject{{"query","~"+parameters[value.first].suffix},{"raw",double(value.second)}});
+                const auto reply=session.backendCall("motorlab_stage",{{"changes",changes}});
+                if(!reply["ok"].toBool()) { info->setText(reply["error"].toString()); return; }
+              }
               for (const auto &value : staged) {
                 auto &p = parameters[value.first];
                 QSignalBlocker block(p.editor);

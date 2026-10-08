@@ -3,6 +3,7 @@
 #include "protocol.h"
 #include <QElapsedTimer>
 #include <QMap>
+#include <QJsonObject>
 #include <QObject>
 #include <QQueue>
 #include <QSocketNotifier>
@@ -13,34 +14,42 @@ class Session : public QObject {
   Q_OBJECT
 public:
   explicit Session(QObject *parent = nullptr);
-  ~Session() override;
-  bool openSerial(const QString &path, int baud);
-  void openDemo();
-  void close();
-  bool enqueue(const QString &command);
-  bool connected() const { return live; }
-  bool isDemo() const { return demo; }
-  bool busy() const { return active || !pending.isEmpty(); }
-  bool setWritesEnabled(bool enabled);
-  bool writesEnabled() const { return writes; }
-  bool setMotionEnabled(bool enabled);
-  bool motionEnabled() const { return motion; }
-  int watchdogMs() const { return watchdog; }
-  void cancelMotion();
-  bool startStream(int intervalMs);
-  void stopStream();
-  bool streaming() const { return stream; }
-  bool uploadScript(const HexImage &image);
-  bool uploading() const { return upload; }
-  QString firmware() const { return fid; }
-  QString model() const { return trn; }
-  QString usbPath() const;
-  bool prepareFirmwareUpdate(const QString &expectedModel,
+  virtual ~Session() override;
+  virtual bool openSerial(const QString &path, int baud);
+  virtual void openDemo();
+  virtual void close();
+  virtual bool enqueue(const QString &command);
+  virtual bool connected() const { return live; }
+  virtual bool isDemo() const { return demo; }
+  virtual bool busy() const { return active || !pending.isEmpty(); }
+  virtual bool setWritesEnabled(bool enabled);
+  virtual bool writesEnabled() const { return writes; }
+  virtual bool setMotionEnabled(bool enabled);
+  virtual bool motionEnabled() const { return motion; }
+  virtual int watchdogMs() const { return watchdog; }
+  virtual void cancelMotion();
+  virtual bool startStream(int intervalMs);
+  virtual void stopStream();
+  virtual bool streaming() const { return stream; }
+  virtual bool uploadScript(const HexImage &image);
+  virtual bool uploading() const { return upload; }
+  virtual QString firmware() const { return fid; }
+  virtual QString model() const { return trn; }
+  virtual QString usbPath() const;
+  virtual bool prepareFirmwareUpdate(const QString &expectedModel,
                              const QString &expectedPath);
-  bool enterDfu(const QString &expectedModel = {},
+  virtual bool enterDfu(const QString &expectedModel = {},
                 const QString &expectedPath = {});
+  virtual bool otherOperation() const { return false; }
+  virtual bool isRemote() const { return false; }
+  virtual void detach() {}
+  virtual bool setOperationActive(bool) { return true; }
+  virtual bool stageShared(const QString &, qint64) { return true; }
+  virtual void setSharedScript(const QString &) {}
+  virtual QJsonObject backendCall(const QString &, const QJsonObject &) { return {}; }
   int timeoutMs = 900;
 signals:
+  void backendSnapshot(QJsonObject snapshot);
   void received(QString command, QString payload, bool success);
   void traffic(QString direction, QString text);
   void changed();

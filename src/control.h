@@ -58,6 +58,20 @@ private:
   void continuousObserve(const QString &command, const QString &payload, bool ok);
   void continuousStop(const QString &reason);
   std::function<void()> afterSteps;
+  struct GuiClient { QElapsedTimer heartbeat; QString parametersHash; QString script; bool operationWrites=false; };
+  QMap<QString, GuiClient> guiClients;
+  QString guiOperation;
+  QMap<int, QString> guiMotors;
+  QMap<int, QString> guiMotorKeys;
+  QJsonArray guiEvents;
+  QMap<QString, QJsonObject> guiReadings;
+  quint64 guiSerial = 0;
+  bool guiAutonomousReady=false;
+  QTimer guiWatchdog;
+  void guiEvent(const QString &kind, QJsonObject data = {});
+  QJsonObject guiDispatch(const QJsonObject &args);
+  QJsonObject guiSnapshot(const QString &client, quint64 since, bool initial = false);
+  void releaseGui(const QString &client, bool lost);
   QJsonObject state() const;
   QJsonObject newJob(const QString &kind);
   void finish(bool success, const QString &message,

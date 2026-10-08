@@ -1,13 +1,13 @@
-# MCP do MotorLab Linux 0.7.0
+# MCP do MotorLab Linux 0.8.0
 
 Servidor local para operar a instância nativa do MotorLab por ferramentas MCP.
 O adaptador usa apenas Python 3 padrão. Por padrão opera o backend `motorlabd`,
 feito com Qt Core/Network e sem interface gráfica. Catálogo, rascunhos, jobs e
-validações são compartilhados pelo código da CLI e da GUI. [Comandos CLI](CLI.md).
+validações pertencem ao mesmo daemon utilizado pela GUI e CLI. [Comandos CLI](CLI.md).
 
 ## Abrir e registrar
 
-O MCP inicia **desconectado**, sem procurar controladoras. O padrão é CLI.
+Um daemon novo inicia **desconectado**, sem procurar controladoras. Clientes reutilizam a conexão já existente. O padrão MCP é CLI.
 `--backend gui` seleciona o aplicativo com janela; `./iniciar.sh` abre essa GUI.
 `motorlab_view(visible=true)` e capturas PNG exigem o backend GUI. Na CLI,
 `view` aceita modelo offline/página como metadados e recusa pedidos de janela
@@ -101,7 +101,7 @@ v3.0f para escrita, porta exclusiva, watchdog para movimento, catálogo e comand
 validados. Ao fim das tarefas, a permissão de escrita é revogada. Não há disputa
 intencional com outros processos nem tomada forçada de uma porta ocupada.
 
-Clientes MCP/CLI no mesmo socket compartilham uma fila de operação; com backend GUI, compartilham também a sessão da janela. CLI e GUI em sockets distintos não compartilham conexão serial. A exclusividade da porta impede conectar ambas ao mesmo dispositivo. Edição/ações concorrentes ficam
+GUI, MCP e CLI compartilham o daemon e a conexão serial, inclusive quando o MCP usa o socket de compatibilidade da janela. Só o daemon abre a USB. Edição/ações concorrentes ficam
 bloqueadas durante uma tarefa; status, log, progresso e parada continuam acessíveis.
 Uma parada durante transação pode fechar a serial sem ACK para não confundir
 respostas. Isso é relatado como não confirmado, exigindo reconexão/consulta.

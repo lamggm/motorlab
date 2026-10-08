@@ -1,4 +1,4 @@
-# MotorLab Linux 0.7.0
+# MotorLab Linux 0.8.0
 
 Aplicativo nativo Linux, com interface C++/Qt 6, backend CLI sem interface gráfica e compilador .NET executado no Linux, para **SBLG2360T e SBLMG2360T**. Independente e não oficial da Roboteq. A organização segue as referências do RoboRun+ fornecidas pelo usuário, mantendo as cores do MotorLab. Dois canais; variantes TS não recebem autorização de escrita.
 
@@ -31,7 +31,7 @@ O pacote contém o executável Linux x86_64 e os fontes completos.
 ./iniciar.sh
 ```
 
-Inicia desconectado. Para experimentar sem hardware:
+Um daemon novo inicia desconectado. Ao abrir a GUI, ela reflete a conexão já existente no daemon e não envia movimento. Para experimentar sem hardware, use um daemon desconectado:
 
 ```sh
 ./iniciar.sh --demo
@@ -41,7 +41,7 @@ O binário desta estação exige **Qt 6.11, glibc 2.42 e suas dependências din�
 
 ## MCP e automação
 
-A versão 0.7.0 inclui **25 ferramentas MCP**. Por padrão, o MCP usa `motorlabd`, backend CLI sem Qt GUI/Widgets ou servidor gráfico. `motorlabctl` oferece comandos de terminal e acesso a todas as ferramentas por `call`. A GUI continua disponível por `./iniciar.sh` e por MCP com `--backend gui`, em socket separado. Ambas usam o mesmo motor de comandos e validações. A inicialização permanece desconectada. Veja [uso, compilação e pacote CLI](docs/CLI.md).
+A versão 0.8.0 mantém **25 ferramentas MCP** e usa **um daemon `motorlabd` como backend da GUI, CLI e MCP**. A conexão USB, permissões, rascunhos, scripts, telemetria e jobs pertencem ao daemon. A GUI é um cliente pelo socket local; seu socket de compatibilidade MCP encaminha as operações ao mesmo daemon e atende apenas janela/captura localmente. `motorlabctl` oferece comandos de terminal e acesso a todas as ferramentas por `call`. Veja [arquitetura e encerramento de clientes](docs/BACKEND-COMPARTILHADO.md) e [uso, compilação e pacote CLI](docs/CLI.md).
 
 O contínuo supervisionado aceita `mode="encoder_speed"` para S/RPM com validação de configuração e limites. Ensaios sem carga a 100 e 3000 RPM realizados em SBLG2360T; detalhes e limitações em `VALIDACAO.md`. Sintonia automática permanece pendente.
 A opção `capture_fast=true` registra até 2000 ciclos completos em `job.samples`, incluindo erro, referência da rampa, PWM e correntes FOC Id/Iq. O intervalo entre consultas é reduzido, mas a taxa depende da comunicação: cerca de 38–40 ciclos/s na bancada USB. As consultas não são simultâneas. Essa opção interrompe o ensaio por LoopErr ou corrente FOC acima da guarda. O painel Falhas também mostra erros específicos dos motores quando FF=0; AmpLim aparece como limitação de corrente.

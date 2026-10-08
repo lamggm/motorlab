@@ -25,7 +25,7 @@ class Window : public QMainWindow {
 signals:
   void firmwareUpdateFinished(bool success, QString message);
 public:
-  explicit Window(QWidget *parent = nullptr);
+  explicit Window(QWidget *parent = nullptr, Session *backend = nullptr);
   void startDemo();
   void selectPage(int index);
   bool saveCsv(const QString &path);
@@ -90,7 +90,10 @@ private:
   void updateSamples();
   void notify(const QString &message);
   void writeLog(const QString &direction, const QString &message);
-  Session session;
+  Session &session;
+  void syncBackend(const QJsonObject &snapshot);
+  bool syncingBackend = false, reviewingOperation = false;
+  QString sharedSampleTimestamp;
   QTimer pollTimer;
   QElapsedTimer elapsed;
   QComboBox *source = nullptr, *port = nullptr, *baud = nullptr;

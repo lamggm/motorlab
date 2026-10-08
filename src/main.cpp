@@ -1,8 +1,11 @@
 #include "window.h"
+#include "remote_session.h"
+#include <unistd.h>
 #include "control.h"
 #include <QApplication>
 #include <QCommandLineParser>
 #include <QDir>
+#include <QFileInfo>
 #include <QPainter>
 #include <QTabBar>
 #include <cstdio>
@@ -10,7 +13,7 @@
 int main(int argc, char **argv) {
   QApplication app(argc, argv);
   QCoreApplication::setApplicationName("MotorLab Linux");
-  QCoreApplication::setApplicationVersion("0.6.0");
+  QCoreApplication::setApplicationVersion("0.8.0");
   QCommandLineParser options;
   options.setApplicationDescription(
       "Interface nativa Linux para Roboteq SBLG2360T e SBLMG2360T. Inicia "
@@ -29,6 +32,7 @@ int main(int argc, char **argv) {
                      "diagnóstico, 4 scripts, 5 sobre.",
                      "numero", "0"});
   options.addOption({"control-socket", "API local para MCP, socket Unix privado.", "path"});
+  options.addOption({"backend-socket", "Socket do motorlabd compartilhado.", "path"});
   options.addOption({"hidden", "Iniciar janela oculta (MCP pode mostrá-la)."});
   options.process(app);
   QPixmap icon(128, 128);
@@ -43,7 +47,12 @@ int main(int argc, char **argv) {
   painter.drawLine(66, 75, 92, 45);
   painter.end();
   app.setWindowIcon(QIcon(icon));
-  Window window;
+  QString runtime=qEnvironmentVariable("XDG_RUNTIME_DIR",QString("/run/user/%1").arg(getuid()));
+  if(!QFileInfo(runtime).isDir()) runtime=QDir::homePath()+"/.local/state";
+  const QString backendPath=options.isSet("backend-socket") ? options.value("backend-socket") : runtime+"/motorlab-cli/control.sock";
+  RemoteSession backend(backendPath);
+  Window window(nullptr, &backend);
+  if (!backend.attach()) { std::fprintf(stderr,"Backend: %s\n",qPrintable(backend.error())); return 4; }
   if (options.isSet("screenshot-size")) {
     const auto parts = options.value("screenshot-size").split('x');
     bool widthOk = false, heightOk = false;

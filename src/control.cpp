@@ -88,6 +88,28 @@ void validate(const QJsonValue &v, const QJsonObject &s,
 } // namespace
 
 ControlServer::ControlServer(ControlHost &host) : QObject(&host), w(host) {
+  if (w.headless()) {
+    connect(&w.session, &Session::received, this, [this](QString command, QString payload, bool ok) {
+      QJsonObject event{{"command",command},{"payload",payload},{"ok",ok},{"timestamp",now()}};
+      if(command.startsWith('~') || command.startsWith('?')) guiReadings[command] = event;
+      guiEvent("received",event);
+      if(guiMotors.contains(0) && guiMotorKeys.value(0)==Protocol::command(command).key && ok) guiAutonomousReady=true;
+      if(command=="?FS" && ok && guiAutonomousReady && guiMotors.contains(0)) {
+        const auto flags=Protocol::reply("FS="+payload);
+        if(flags.numeric && flags.numbers.size()==1 && !(flags.numbers[0] & (128|256))) { guiMotors.remove(0); guiMotorKeys.remove(0); guiAutonomousReady=false; }
+      }
+    });
+    connect(&w.session, &Session::traffic, this, [this](QString direction, QString text) { guiEvent("traffic",{{"direction",direction},{"text",text}}); });
+    connect(&w.session, &Session::failed, this, [this](QString message) { guiEvent("failed",{{"message",message}}); });
+    connect(&w.session, &Session::streamFrame, this, [this](QString payload) { guiEvent("stream",{{"payload",payload}}); });
+    connect(&w.session, &Session::uploadProgress, this, [this](int done,int total) { guiEvent("upload_progress",{{"done",done},{"total",total}}); });
+    connect(&w.session, &Session::uploadFinished, this, [this](bool ok,QString message) { guiEvent("upload_finished",{{"ok",ok},{"message",message}}); });
+    guiWatchdog.setInterval(100);
+    connect(&guiWatchdog,&QTimer::timeout,this,[this] {
+      for (const auto &client : guiClients.keys()) if(guiClients[client].heartbeat.elapsed()>2000) releaseGui(client,true);
+    });
+    guiWatchdog.start();
+  }
   QFile f(":/mcp-tools.json");
   if (!f.open(QIODevice::ReadOnly))
     qFatal("MCP schema resource missing");
@@ -261,8 +283,11 @@ QJsonObject ControlServer::state() const {
           {"watchdog_ms", s.watchdogMs()},
           {"streaming", s.streaming()},
           {"busy",
-           !active.isEmpty() || s.busy() || w.isApplying() || w.readsPending() > 0},
+           !active.isEmpty() || !guiMotors.isEmpty() || s.busy() || w.isApplying() || w.readsPending() > 0},
           {"active_job", active},
+          {"gui_clients", guiClients.size()},
+          {"gui_operation", !guiOperation.isEmpty()},
+          {"gui_motion_channels", guiMotors.size()},
           {"continuous", continuousState()},
           {"notice", w.noticeText()},
           {"sample_count", w.sampleCount()},
@@ -274,6 +299,7 @@ QJsonObject ControlServer::state() const {
                       "CANopen_write_PDO_motion", "RoboCAN_transport"}}};
 }
 void ControlServer::requireIdle() const {
+  need(guiOperation.isEmpty() && guiMotors.isEmpty(), "Uma janela mantém uma operação ou movimento; pare os canais antes de usar outro cliente.");
   need(!w.manualDriveActive(), "Controle pelos sliders em andamento; zere/pare os canais antes desta operação.");
   need(active.isEmpty() && !w.isApplying() && !w.readsPending() &&
            !w.session.uploading(),
@@ -418,6 +444,8 @@ void ControlServer::next() {
 QJsonObject ControlServer::dispatch(const QString &method,
                                     const QJsonObject &a) {
   try {
+    if (w.session.isRemote() && method != "motorlab_view") return w.session.backendCall(method,a);
+    if (method == "gui_session") return {{"ok",true},{"result",guiDispatch(a)}};
     bool found = false;
     for (auto v : schemas)
       if (v.toObject()["name"] == method) {
@@ -465,6 +493,8 @@ QJsonObject ControlServer::dispatch(const QString &method,
         return {{"ports", ports}, {"opened", false}};
       }
       if (method == "motorlab_stop") {
+        guiMotors.clear(); guiMotorKeys.clear();
+        if(!guiOperation.isEmpty()) { guiOperation.clear(); w.endOperation(); }
         if (continuous.enabled) {
           if (!continuous.stopping) {
             continuous.operatorStop = true;
@@ -531,6 +561,10 @@ QJsonObject ControlServer::dispatch(const QString &method,
       }
       if (method == "motorlab_view") {
         if (a.contains("model")) {
+          if(s.isRemote()) {
+            const auto reply=s.backendCall("motorlab_view",{{"model",a["model"]}});
+            need(reply["ok"].toBool(),reply["error"].toString());
+          }
           requireIdle();
           need(!s.connected(), "Seleção de modelo somente desconectado.");
         }
@@ -548,6 +582,7 @@ QJsonObject ControlServer::dispatch(const QString &method,
         return sequence("pause", commands);
       }
       if (method == "motorlab_connect") {
+        guiReadings.clear();
         need(!s.connected(),
              "Desconecte explicitamente a fonte atual antes de trocar.");
         if (text(a, "mode") == "serial") need(!text(a, "port").isEmpty(), "Informe port.");
@@ -555,6 +590,7 @@ QJsonObject ControlServer::dispatch(const QString &method,
         return state();
       }
       if (method == "motorlab_disconnect") {
+        guiReadings.clear();
         s.close();
         return state();
       }

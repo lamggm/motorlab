@@ -150,7 +150,7 @@ def run_stdio(bridge):
             initialized = True
             result = {'protocolVersion': version if version in VERSIONS else VERSIONS[0],
                       'capabilities': {'tools': {'listChanged': False}},
-                      'serverInfo': {'name': 'motorlab', 'version': '0.7.0'},
+                      'serverInfo': {'name': 'motorlab', 'version': '0.8.0'},
                       'instructions': ('MotorLab nativo Linux, backend CLI ou GUI. Comece com status; hardware não conecta automaticamente. '
                        'Use job para aguardar resultados. Demo e histórico não provam hardware. '
                        'Conectar bancada, gravar, mover e calibrar exigem instrução explícita do usuário. '

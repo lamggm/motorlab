@@ -13,7 +13,7 @@
 namespace { int shutdownPipe[2] = {-1,-1}; void terminate(int) { const int savedErrno=errno; const char byte=1; if(shutdownPipe[1]>=0) { const auto unused=::write(shutdownPipe[1],&byte,1); (void)unused; } errno=savedErrno; } }
 int main(int argc,char **argv) {
   QCoreApplication app(argc,argv);
-  app.setApplicationName("MotorLab CLI"); app.setApplicationVersion("0.7.0");
+  app.setApplicationName("MotorLab CLI"); app.setApplicationVersion("0.8.0");
   QCommandLineParser options; options.setApplicationDescription("Backend CLI nativo do MotorLab. Sem interface gráfica; inicia desconectado.");
   options.addHelpOption(); options.addVersionOption();
   options.addOption({"control-socket","Socket Unix privado compatível com o MCP.","path"});

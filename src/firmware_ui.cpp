@@ -67,7 +67,7 @@ void Window::showFirmwareUpdate(const QString &inputPath, const QString &backupP
   const auto backup =
       !backupPath.isEmpty() ? backupPath : QFileDialog::getSaveFileName(this, "Salvar perfil antes da atualização",
                                    "antes-do-firmware.json", "Perfil (*.json)");
-  if (backup.isEmpty() || !saveProfile(backup)) {
+  if (backup.isEmpty() || (!session.isRemote() && !saveProfile(backup))) {
     notify("Leia a configuração e salve um perfil antes de atualizar.");
     return;
   }
@@ -85,6 +85,27 @@ void Window::showFirmwareUpdate(const QString &inputPath, const QString &backupP
                             QMessageBox::Yes | QMessageBox::Cancel,
                             QMessageBox::Cancel) != QMessageBox::Yes)
     return;
+  if(session.isRemote()) {
+    const auto reply=session.backendCall("motorlab_firmware",{{"action","update_usb"},{"path",file},{"backup_path",backup},
+        {"confirm",true},{"expected_model",session.model()},{"expected_firmware",session.firmware()}});
+    if(!reply["ok"].toBool()) { notify(reply["error"].toString()); return; }
+    const auto job=reply["result"].toObject()["job_id"].toString();
+    UpdateDialog dialog(this); dialog.setWindowTitle("Atualização USB pelo motorlabd"); dialog.resize(700,260); dialog.locked=true;
+    auto layout=new QVBoxLayout(&dialog); auto state=new QLabel("Daemon preparando/gravando firmware…"); state->setWordWrap(true); layout->addWidget(state);
+    auto close=new QPushButton("Fechar"); close->setEnabled(false); layout->addWidget(close); connect(close,&QPushButton::clicked,&dialog,&QDialog::accept);
+    QTimer timer(&dialog); timer.setInterval(500);
+    connect(&timer,&QTimer::timeout,&dialog,[&] {
+      const auto result=session.backendCall("motorlab_job",{{"job_id",job}});
+      if(!result["ok"].toBool()) {
+        timer.stop(); state->setText("Conexão com daemon perdida. Atualização não confirmada; consulte o job antes de operar."); dialog.locked=false; close->setEnabled(true); return;
+      }
+      const auto status=result["result"].toObject(); state->setText(status["message"].toString("Atualização em andamento no daemon…"));
+      if(status["state"].toString()!="running") {
+        timer.stop(); dialog.locked=false; close->setEnabled(true); notify(state->text()); emit firmwareUpdateFinished(status["success"].toBool(),state->text());
+        if(automated) QTimer::singleShot(0,&dialog,&QDialog::accept);
+      }
+    }); timer.start(); dialog.exec(); return;
+  }
   QTemporaryDir dir;
   if (!dir.isValid()) {
     notify("Não foi possível preparar a cópia imutável do firmware.");

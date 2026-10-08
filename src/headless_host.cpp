@@ -81,6 +81,10 @@ void HeadlessHost::onReply(const QString &command, const QString &payload, bool 
   if (command == "?FID" && ok) firmware = captureFirmware = payload;
   if (command == "?TRN" && ok) {
     profileModel = Protocol::supportedModel(payload); captureModel = payload;
+    if(ok) {
+      session.enqueue("~RWD");
+      for(int ch=1;ch<=2;++ch) for(const auto &key:{"MMOD","MVEL","MXRPM"}) session.enqueue(QString("~%1 %2").arg(key).arg(ch));
+    }
     if (!profileModel.isEmpty()) model = profileModel;
   }
   if (command.startsWith('~')) {
@@ -129,6 +133,8 @@ void HeadlessHost::recordFrame() {
   scalar("?BS 1","rpm1_hall",1); scalar("?BS 2","rpm2_hall",1);
   scalar("?FF","faults",1); scalar("?FS","flags",1);
   sample["rpm1_encoder"] = sample["rpm1"]; sample["rpm2_encoder"] = sample["rpm2"];
+  QJsonObject fields; for(auto it=readings.begin();it!=readings.end();++it) fields[it.key()]=it.value();
+  sample["readings"]=fields;
   samples.append(sample); if (samples.size() > 36000) samples.removeFirst();
 }
 QJsonObject HeadlessHost::telemetry(int limit) const {
