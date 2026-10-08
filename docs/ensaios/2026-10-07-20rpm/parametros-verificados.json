@@ -1,0 +1,207 @@
+{
+  "model": "SBLG2360T",
+  "firmware": "Roboteq v3.0f SBLG2XXX 07/15/2026",
+  "persistencia": "RAM; EEPROM não gravada nesta rodada",
+  "parameters": [
+    {
+      "draft": false,
+      "query": "~ALIM 1",
+      "raw": 115,
+      "readable": true,
+      "scale": 10,
+      "unit": "A RMS"
+    },
+    {
+      "draft": false,
+      "query": "~MXRPM 1",
+      "raw": 3000,
+      "readable": true,
+      "scale": 1,
+      "unit": "RPM"
+    },
+    {
+      "draft": false,
+      "query": "~RWD",
+      "raw": 1000,
+      "readable": true,
+      "scale": 1,
+      "unit": "ms"
+    },
+    {
+      "draft": false,
+      "query": "~BLFB 1",
+      "raw": 0,
+      "readable": true,
+      "scale": 1,
+      "unit": "opção"
+    },
+    {
+      "draft": false,
+      "query": "~CLERD 1",
+      "raw": 4,
+      "readable": true,
+      "scale": 1,
+      "unit": "opção"
+    },
+    {
+      "draft": false,
+      "query": "~EMOD 1",
+      "raw": 18,
+      "readable": true,
+      "scale": 1,
+      "unit": "máscara"
+    },
+    {
+      "draft": false,
+      "query": "~EPPR 1",
+      "raw": 1000,
+      "readable": true,
+      "scale": 1,
+      "unit": "pulsos/volta"
+    },
+    {
+      "draft": false,
+      "query": "~FET 1",
+      "raw": 500,
+      "readable": true,
+      "scale": 1,
+      "unit": "ms"
+    },
+    {
+      "draft": false,
+      "query": "~FEW 1",
+      "raw": 500,
+      "readable": true,
+      "scale": 1,
+      "unit": "RPM"
+    },
+    {
+      "draft": false,
+      "query": "~ICAP 1",
+      "raw": 100,
+      "readable": true,
+      "scale": 1,
+      "unit": "%"
+    },
+    {
+      "draft": false,
+      "query": "~KDG 1",
+      "raw": 0,
+      "readable": true,
+      "scale": 1000000,
+      "unit": "ganho"
+    },
+    {
+      "draft": false,
+      "query": "~KIG 1",
+      "raw": 30000,
+      "readable": true,
+      "scale": 1000000,
+      "unit": "ganho"
+    },
+    {
+      "draft": false,
+      "query": "~KPG 1",
+      "raw": 120000,
+      "readable": true,
+      "scale": 1000000,
+      "unit": "ganho"
+    },
+    {
+      "draft": false,
+      "query": "~LEAC 1",
+      "raw": 0,
+      "readable": true,
+      "scale": 1,
+      "unit": "opção"
+    },
+    {
+      "draft": false,
+      "query": "~LPFB 1",
+      "raw": 80,
+      "readable": true,
+      "scale": 1,
+      "unit": "Hz"
+    },
+    {
+      "draft": false,
+      "query": "~MAC 1",
+      "raw": 30000,
+      "readable": true,
+      "scale": 10,
+      "unit": "RPM/s"
+    },
+    {
+      "draft": false,
+      "query": "~MDEC 1",
+      "raw": 20000,
+      "readable": true,
+      "scale": 10,
+      "unit": "RPM/s"
+    },
+    {
+      "draft": false,
+      "query": "~MMOD 1",
+      "raw": 1,
+      "readable": true,
+      "scale": 1,
+      "unit": "opção"
+    },
+    {
+      "draft": false,
+      "query": "~BFBK 1",
+      "raw": 2,
+      "readable": true,
+      "scale": 1,
+      "unit": "opção"
+    },
+    {
+      "draft": false,
+      "query": "~BMOD 1",
+      "raw": 1,
+      "readable": true,
+      "scale": 1,
+      "unit": "opção"
+    },
+    {
+      "draft": false,
+      "query": "~BPOL 1",
+      "raw": 4,
+      "readable": true,
+      "scale": 1,
+      "unit": "pares de polos"
+    },
+    {
+      "draft": false,
+      "query": "~KIF 1",
+      "raw": 502656,
+      "readable": true,
+      "scale": 10000,
+      "unit": "ganho"
+    },
+    {
+      "draft": false,
+      "query": "~KIF 3",
+      "raw": 502656,
+      "readable": true,
+      "scale": 10000,
+      "unit": "ganho"
+    },
+    {
+      "draft": false,
+      "query": "~KPF 1",
+      "raw": 2000,
+      "readable": true,
+      "scale": 10000,
+      "unit": "ganho"
+    },
+    {
+      "draft": false,
+      "query": "~KPF 3",
+      "raw": 2000,
+      "readable": true,
+      "scale": 10000,
+      "unit": "ganho"
+    }
+  ]
+}

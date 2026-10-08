@@ -19,7 +19,7 @@ ROOT = Path(__file__).resolve().parents[1]
 SPEC = importlib.util.spec_from_file_location('motorlab_mcp', ROOT / 'mcp/server.py')
 server = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(server)
-EXE = ROOT / 'bin/motorlab'
+EXE = ROOT / 'bin/motorlabd'
 
 class Client:
     def __init__(self, path):
@@ -163,8 +163,12 @@ class McpTests(unittest.TestCase):
         self.assertTrue(parsed['entries'])
         self.assertTrue(self.client.tool('profile',action='export_cpr',path=p)['isError'])
         png=str(Path(self.temp.name)/'ui.png')
-        self.tool('view',page=0,screenshot_path=png)
-        self.assertEqual(Path(png).read_bytes()[:8],b'\x89PNG\r\n\x1a\n')
+        if self.tool('status').get('backend') == 'cli':
+            self.assertTrue(self.client.tool('view',page=0,screenshot_path=png)['isError'])
+            self.assertFalse(Path(png).exists())
+        else:
+            self.tool('view',page=0,screenshot_path=png)
+            self.assertEqual(Path(png).read_bytes()[:8],b'\x89PNG\r\n\x1a\n')
     def test_full_catalog_and_bulk_reads(self):
         self.demo();self.assertEqual(self.tool('catalog',limit=1)['total'],638)
         result=self.job(self.tool('read_parameters'))

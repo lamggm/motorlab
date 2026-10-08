@@ -21,6 +21,7 @@ class ControlServer;
 class Window : public QMainWindow {
   Q_OBJECT
   friend class ControlServer;
+  friend class GuiControlHost;
 signals:
   void firmwareUpdateFinished(bool success, QString message);
 public:

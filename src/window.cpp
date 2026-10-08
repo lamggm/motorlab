@@ -1007,7 +1007,7 @@ QWidget *Window::monitorPage() {
             [slider, value](int i) {
               const int bound = i == 0   ? 1000
                                 : i == 1 ? 65535
-                                : i == 2 ? 2147483647
+                                : i == 2 ? 4000
                                          : 450;
               slider->setRange(-bound, bound);
               value->setRange(-bound, bound);
@@ -1021,18 +1021,39 @@ QWidget *Window::monitorPage() {
     manualRepeats.append(repeat);
     auto ackAge = std::make_shared<QElapsedTimer>();
     auto pendingCommand = std::make_shared<bool>(false);
-    auto apply = [this, ch, mode, value, repeat, commandState, ackAge, pendingCommand] {
+    auto positionPhase = std::make_shared<int>(0);
+    auto positionTarget = std::make_shared<qint64>(0);
+    auto positionVelocity = std::make_shared<qint64>(0);
+    auto apply = [this, ch, mode, value, repeat, commandState, ackAge, pendingCommand, positionPhase, positionTarget, positionVelocity] {
       if (!session.motionEnabled() || applying || manualStopping || manualFaults != 0) {
         commandState->setText("Valor local: habilite o controle e libere a parada antes de aplicar.");
         return;
       }
       const auto key = QStringList{"G", "S", "P", "GIQ"}[mode->currentIndex()];
       const auto n = qRound64(value->value());
-      if (key == "P") {
-        session.enqueue(QString("!P %1 %2").arg(ch).arg(n));
-        return;
+      if (key == "G" && n != 0) {
+        for (const auto &p : parameters)
+          if (p.key == "MMOD" && p.channel == ch && p.known && p.raw == 3) {
+            commandState->setText("G não move em posição absoluta (MMOD3). Selecione P e mova a barra para definir o destino.");
+            return;
+          }
       }
-      if (n == 0) {
+      if (key == "P") {
+        const auto known = [this, ch](const QString &key) -> qint64 {
+          for (const auto &p : parameters)
+            if (p.key == key && p.channel == ch && p.known && !p.dirty) return p.raw;
+          return -1;
+        };
+        const auto velocity = known("MVEL");
+        if (known("MMOD") != 3 || velocity < 1 || velocity > 100 ||
+            known("MXRPM") < 1 || known("MXRPM") > 100) {
+          commandState->setText("Posição: leia os parâmetros; requer MMOD3 e MVEL/MXRPM de 1 a 100 RPM.");
+          return;
+        }
+        *positionTarget = n;
+        *positionVelocity = velocity;
+      }
+      if (n == 0 && key != "P") {
         repeat->stop();
         mode->setEnabled(true);
         session.enqueue(QString("!%1 %2 0").arg(key).arg(ch));
@@ -1043,17 +1064,20 @@ QWidget *Window::monitorPage() {
       if (!repeat->isActive()) {
         ackAge->start();
         *pendingCommand = false;
+        *positionPhase = 0;
         repeat->start(qBound(10, session.watchdogMs() / 3, 100));
       }
       mode->setEnabled(false);
-      commandState->setText(QString("Comando mantido: %1 %2. Soltar o mouse mantém; zero/Parar interrompe.").arg(key).arg(n));
+      commandState->setText(key == "P"
+          ? QString("Destino mantido: %1 contagens. Zero retorna à referência; Parar interrompe.").arg(n)
+          : QString("Comando mantido: %1 %2. Soltar o mouse mantém; zero/Parar interrompe.").arg(key).arg(n));
       refreshState();
     };
     connect(&session, &Session::received, this,
             [ch, repeat, ackAge, pendingCommand, this](QString cmd, QString, bool ok) {
       const auto c = Protocol::command(cmd);
       if (repeat->isActive() && c.motion && c.channel == ch &&
-          QStringList{"G", "S", "GIQ"}.contains(c.key)) {
+          QStringList{"G", "S", "P", "GIQ"}.contains(c.key)) {
         *pendingCommand = false;
         if (ok)
           ackAge->restart();
@@ -1061,7 +1085,7 @@ QWidget *Window::monitorPage() {
           stopManualDrive("Controlador rejeitou comando manual: " + cmd);
       }
     });
-    connect(repeat, &QTimer::timeout, this, [this, ch, mode, value, repeat, ackAge, pendingCommand] {
+    connect(repeat, &QTimer::timeout, this, [this, ch, mode, value, repeat, ackAge, pendingCommand, positionPhase, positionTarget, positionVelocity] {
       if (!session.motionEnabled() || !session.connected()) {
         repeat->stop();
         mode->setEnabled(true);
@@ -1082,7 +1106,15 @@ QWidget *Window::monitorPage() {
       if (!*pendingCommand) {
         const auto key = QStringList{"G", "S", "P", "GIQ"}[mode->currentIndex()];
         *pendingCommand = true;
-        if (!session.enqueue(QString("!%1 %2 %3").arg(key).arg(ch).arg(qRound64(value->value()))))
+        QString command = QString("!%1 %2 %3").arg(key).arg(ch).arg(qRound64(value->value()));
+        if (key == "P") {
+          // One outstanding command; renew a fixed absolute destination, never PR.
+          command = *positionPhase == 0 ? QString("!G %1 0").arg(ch)
+              : *positionPhase == 1 ? QString("!S %1 %2").arg(ch).arg(*positionVelocity)
+                                   : QString("!P %1 %2").arg(ch).arg(*positionTarget);
+          *positionPhase = (*positionPhase + 1) % 3;
+        }
+        if (!session.enqueue(command))
           stopManualDrive("Comando manual recusado pela sessão.");
       }
     });
@@ -1090,12 +1122,18 @@ QWidget *Window::monitorPage() {
     motorSend.append(send);
     row->addWidget(send);
     connect(send, &QPushButton::clicked, this, apply);
-    connect(slider, &QSlider::valueChanged, this, [apply, mode](int) {
-      if (mode->currentIndex() != 2)
+    connect(slider, &QSlider::valueChanged, this, [apply, mode, slider](int) {
+      // Position dragging previews the destination; release commits it once.
+      // Keyboard/accessibility changes are discrete and commit immediately.
+      if (mode->currentIndex() != 2 || !slider->isSliderDown())
+        apply();
+    });
+    connect(slider, &QSlider::sliderReleased, this, [apply, mode] {
+      if (mode->currentIndex() == 2)
         apply();
     });
     connect(value, &QDoubleSpinBox::editingFinished, this, apply);
-    slider->setToolTip("G/S/GIQ: mover a barra aplica e mantém o comando, mesmo após soltar. Zero ou Parar para parada normal. Posição absoluta exige Aplicar.");
+    slider->setToolTip("G/S/GIQ: mover a barra aplica e mantém o comando, mesmo após soltar. Zero ou Parar para parada normal. Posição: -4000 a 4000 contagens; soltar a barra confirma o destino, que fica mantido. Aplicar também confirma. Zero retorna à referência; Parar interrompe.");
     auto stop = button("Parar", QString("motorStop%1").arg(ch));
     motorStop.append(stop);
     row->addWidget(stop);
@@ -1103,9 +1141,10 @@ QWidget *Window::monitorPage() {
       repeat->stop();
       mode->setEnabled(true);
       value->setValue(0);
-      if (mode->currentIndex() == 2)
-        runtime(QString("!MS %1").arg(ch), "Parar o canal em posição");
-      else
+      if (mode->currentIndex() == 2) {
+        if (!session.enqueue(QString("!MS %1").arg(ch)))
+          notify("Parada de posição recusada pela sessão.");
+      } else
         apply();
     });
     command.body->addLayout(row);
@@ -1727,7 +1766,7 @@ void Window::refreshManualControls() {
       : (manualFaults & 16) ? "PARADA ATIVA: o valor do slider ainda não move o motor. Use Liberar parada / falhas e confirme; depois mova a barra. O comando permanece após soltar."
       : manualFaults != 0 ? "Controlador com falha: envio manual bloqueado. Confira o painel Falhas."
       : !motorAlarmSummary.isEmpty() ? motorAlarmSummary + " — confira o painel Falhas. Zere o comando antes de retomar o teste."
-      : "PRONTO: mover a barra aplica e mantém o comando. Zero/Parar = parada normal; botão vermelho = emergência. G é comando bruto; S exige controle de velocidade configurado.");
+      : "PRONTO: mover a barra aplica e mantém o comando. Em P, soltar confirma o destino absoluto; zero retorna à referência e Parar interrompe. G/S: zero ou Parar = parada normal. Botão vermelho = emergência.");
 }
 
 void Window::updateFaultSummary(int ff, int fm1, int fm2) {
@@ -1839,6 +1878,14 @@ void Window::onReply(const QString &cmd, const QString &payload, bool ok) {
       QSignalBlocker block(offlineModel);
       offlineModel->setCurrentText(profileModel);
     }
+    if (ok) {
+      // Read only the manual-control prerequisites at connection time.
+      // Never change the controller mode or activate a motor on startup.
+      session.enqueue("~RWD");
+      for (int ch = 1; ch <= 2; ++ch)
+        for (const auto &key : {"MMOD", "MVEL", "MXRPM"})
+          session.enqueue(QString("~%1 %2").arg(key).arg(ch));
+    }
   }
   if (cmd == "?TRN" && ok && !session.isDemo()) {
     notify(Protocol::compatible(session.firmware(), session.model())
@@ -1873,8 +1920,15 @@ void Window::onReply(const QString &cmd, const QString &payload, bool ok) {
         for (int i = 0; i < parameters.size(); ++i)
           if (parameters[i].channel == p.channel)
             updateParameterRow(i);
+      if (p.key == "MMOD" && p.known && !p.dirty && p.raw == 3 &&
+          p.channel >= 1 && p.channel <= manualRepeats.size() &&
+          !manualRepeats[p.channel - 1]->isActive()) {
+        auto mode = findChild<QComboBox *>(QString("motorMode%1").arg(p.channel));
+        mode->setCurrentIndex(2);
+      }
     }
-    if (readsPending > 0) {
+    if (readsPending > 0 && nextParameter > 0 &&
+        cmd == "~" + parameters[nextParameter - 1].suffix) {
       --readsPending;
       readNextParameter();
     }

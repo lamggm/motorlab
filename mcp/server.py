@@ -22,12 +22,12 @@ MAX_MESSAGE = 2 * 1024 * 1024
 VERSIONS = ('2025-11-25', '2025-06-18', '2025-03-26', '2024-11-05')
 
 
-def default_socket():
+def default_socket(backend="gui"):
     runtime = os.environ.get('XDG_RUNTIME_DIR', f'/run/user/{os.getuid()}')
     base = Path(runtime)
     if not base.is_dir():
         base = Path.home() / '.local/state'
-    return base / 'motorlab/control.sock'
+    return base / ('motorlab-cli/control.sock' if backend == 'cli' else 'motorlab/control.sock')
 
 
 def private_directory(path):
@@ -38,9 +38,10 @@ def private_directory(path):
 
 
 class Bridge:
-    def __init__(self, path=None, executable=None, launch=True, offscreen=False):
-        self.path = Path(path or default_socket()).absolute()
-        self.executable = Path(executable or ROOT / 'bin/motorlab').absolute()
+    def __init__(self, path=None, executable=None, launch=True, offscreen=False, backend=None):
+        self.backend = backend or ('gui' if executable and Path(executable).name == 'motorlab' else 'cli')
+        self.path = Path(path or default_socket(self.backend)).absolute()
+        self.executable = Path(executable or ROOT / ('bin/motorlabd' if self.backend == 'cli' else 'bin/motorlab')).absolute()
         self.launch = launch
         self.offscreen = offscreen
         self.spawned_process = None
@@ -83,7 +84,7 @@ class Bridge:
                     raise RuntimeError('O destino existente não é um socket próprio; não será removido.')
                 self.path.unlink()
             env = os.environ.copy()
-            if self.offscreen or not (env.get('DISPLAY') or env.get('WAYLAND_DISPLAY')):
+            if self.backend == 'gui' and (self.offscreen or not (env.get('DISPLAY') or env.get('WAYLAND_DISPLAY'))):
                 env['QT_QPA_PLATFORM'] = 'offscreen'
             logfd = os.open(self.path.parent / 'motorlab.log', os.O_CREAT | os.O_APPEND | os.O_WRONLY | os.O_NOFOLLOW, 0o600)
             with os.fdopen(logfd, 'ab') as log:
@@ -149,8 +150,8 @@ def run_stdio(bridge):
             initialized = True
             result = {'protocolVersion': version if version in VERSIONS else VERSIONS[0],
                       'capabilities': {'tools': {'listChanged': False}},
-                      'serverInfo': {'name': 'motorlab', 'version': '0.6.0'},
-                      'instructions': ('MotorLab nativo Linux. Comece com status; hardware não conecta automaticamente. '
+                      'serverInfo': {'name': 'motorlab', 'version': '0.7.0'},
+                      'instructions': ('MotorLab nativo Linux, backend CLI ou GUI. Comece com status; hardware não conecta automaticamente. '
                        'Use job para aguardar resultados. Demo e histórico não provam hardware. '
                        'Conectar bancada, gravar, mover e calibrar exigem instrução explícita do usuário. '
                        'confirm é reconhecimento dos argumentos, nunca evidência de autorização humana. '
@@ -181,6 +182,7 @@ def run_stdio(bridge):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--socket')
+    parser.add_argument('--backend', choices=['cli', 'gui'], help='CLI por padrão; --app usa GUI.')
     parser.add_argument('--executable')
     parser.add_argument('--no-launch', action='store_true')
     parser.add_argument('--offscreen', action='store_true')
@@ -188,7 +190,7 @@ def main():
     parser.add_argument('--call', help='Executar uma ferramenta diretamente (diagnóstico local).')
     parser.add_argument('--arguments', default='{}')
     opts = parser.parse_args()
-    bridge = Bridge(opts.socket, opts.executable, not opts.no_launch, opts.offscreen)
+    bridge = Bridge(opts.socket, opts.executable, not opts.no_launch, opts.offscreen, opts.backend or ('gui' if opts.app else None))
     if opts.app:
         result = bridge.call('motorlab_view', {'visible': True})
         if not result.get('ok'):

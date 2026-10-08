@@ -1,0 +1,50 @@
+{
+  "posicao-p02-1000": {
+    "target_counts": 1000,
+    "samples": 227,
+    "duration_s": 7.937,
+    "first_count": 190,
+    "last_count": 999,
+    "last_error_degrees": -0.09,
+    "last_second_range_counts": [
+      999,
+      999
+    ],
+    "peak_abs_encoder_rpm": 44,
+    "peak_abs_motor_current_a": 0.9,
+    "peak_abs_torque_current_a": 1.4,
+    "faults": [
+      0
+    ],
+    "motor_flags": [
+      0
+    ],
+    "stop_message": "Parada solicitada pelo operador. !EX confirmado.",
+    "settling_within_12_counts_s": 0.614,
+    "settling_within_5_counts_s": 0.649
+  },
+  "posicao-p02-retorno-0": {
+    "target_counts": 0,
+    "samples": 225,
+    "duration_s": 7.919,
+    "first_count": 999,
+    "last_count": 4,
+    "last_error_degrees": 0.36,
+    "last_second_range_counts": [
+      4,
+      5
+    ],
+    "peak_abs_encoder_rpm": 43,
+    "peak_abs_motor_current_a": 1,
+    "peak_abs_torque_current_a": 1.2,
+    "faults": [
+      0
+    ],
+    "motor_flags": [
+      0
+    ],
+    "stop_message": "Parada solicitada pelo operador. !EX confirmado.",
+    "settling_within_12_counts_s": 0.714,
+    "settling_within_5_counts_s": 6.339
+  }
+}

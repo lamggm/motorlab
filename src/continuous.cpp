@@ -1,5 +1,5 @@
 #include "control.h"
-#include "window.h"
+#include "control_host.h"
 #include <QDateTime>
 #include <QUuid>
 #include <cmath>
@@ -8,7 +8,7 @@
 QJsonObject ControlServer::continuousState() const {
   return {{"active", continuous.enabled}, {"running", continuous.running && !continuous.stopping},
           {"stopping", continuous.stopping}, {"channel", continuous.channel},
-          {"command_value", continuous.value}, {"unit", continuous.encoderSpeed ? "encoder_speed_rpm" : "open_loop_command_not_rpm"},
+          {"command_value", continuous.value}, {"unit", continuous.position ? "encoder_position_counts" : continuous.encoderSpeed ? "encoder_speed_rpm" : "open_loop_command_not_rpm"},
           {"lease_remaining_ms", continuous.enabled ? qMax<qint64>(0, continuous.leaseMs - continuous.lease.elapsed()) : 0},
           {"cycles", double(continuous.cycles)}, {"stop_reason", continuous.reason},
           {"sample", continuous.sample}};
@@ -28,7 +28,7 @@ void ControlServer::continuousObserve(const QString &command, const QString &pay
     continuousStop("Consulta/comando rejeitado: " + command);
     return;
   }
-  if (command.startsWith("!G ") || command.startsWith("!S ")) {
+  if (command.startsWith("!G ") || command.startsWith("!S ") || command.startsWith("!P ")) {
     continuous.motorAck.restart();
     return;
   }
@@ -43,18 +43,25 @@ void ControlServer::continuousObserve(const QString &command, const QString &pay
   const auto n = parsed.numbers[0];
   if (key == "RWD" && (n < 1000 || n > 2000))
     continuousStop("Modo contínuo requer watchdog entre 1000 e 2000 ms; não foi alterado.");
-  if (key == "MMOD" && n != (continuous.encoderSpeed ? 1 : 0))
+  if (key == "MMOD" && n != (continuous.position ? 3 : continuous.encoderSpeed ? 1 : 0))
     continuousStop("Modo do controlador diferente do modo solicitado.");
-  if (continuous.encoderSpeed) {
+  if (continuous.encoderSpeed || continuous.position) {
     if (key == "BLFB" && n != 0) continuousStop("Realimentação externa não selecionada.");
     if (key == "EMOD" && n != 2 + 16 * continuous.channel) continuousStop("Encoder não associado como feedback do canal.");
     if (key == "EPPR" && n == 0) continuousStop("Resolução do encoder inválida.");
     if (key == "ALIM" && (n < 1 || n > continuous.maxAmps * 10)) continuousStop("Limite de corrente do driver excede o limite do ensaio.");
     if ((key == "MXPF" || key == "MXPR") && (n < 1 || n > continuous.maxPowerPercent)) continuousStop("Limite de potência do driver excede o limite explícito do ensaio.");
-    if (key == "MXRPM" && (n < std::abs(continuous.value) || n > continuous.maxRpm)) continuousStop("Limite de velocidade do driver incompatível com o ensaio.");
-    if (key == "F") continuous.sample["feedback_rpm"] = double(n);
+    if (key == "MXRPM" && ((!continuous.position && n < std::abs(continuous.value)) || n < 1 || n > continuous.maxRpm)) continuousStop("Limite de velocidade do driver incompatível com o ensaio.");
+    if (key == "MVEL" && continuous.position) {
+      if (n < 1 || n > 100 || n > continuous.maxRpm)
+        continuousStop("Velocidade da trajetória fora de 1 a 100 RPM ou da guarda.");
+      continuous.positionVelocity = int(n);
+    }
+    if (key == "F") continuous.sample[continuous.position ? "feedback_position_counts" : "feedback_rpm"] = double(n);
+    if (key == "TR") continuous.sample["track_position_counts"] = double(n);
+    if (key == "VDV") continuous.sample["velocity_demand_rpm"] = double(n);
     if (key == "RMP") continuous.sample["ramped_command"] = double(n);
-    if (key == "E") continuous.sample["speed_error_rpm"] = double(n);
+    if (key == "E") continuous.sample[continuous.position ? "trajectory_error_counts" : "speed_error_rpm"] = double(n);
     if (key == "MA") {
       const int axis = command.section(' ', -1).toInt();
       continuous.sample[axis % 2 ? "flux_amps" : "torque_amps"] = double(n) / 10.0;
@@ -112,12 +119,28 @@ void ControlServer::continuousObserve(const QString &command, const QString &pay
     const auto prefix = key == "S" ? "encoder_rpm" : "encoder_counter";
     continuous.sample[QString(prefix) + "1"] = double(parsed.numbers[0]);
     continuous.sample[QString(prefix) + "2"] = double(parsed.numbers[1]);
-    if (continuous.encoderSpeed) {
+    if (continuous.encoderSpeed || continuous.position) {
       const auto measured = parsed.numbers[continuous.channel - 1];
       if (key == "S" && (std::abs(double(measured)) > continuous.maxRpm ||
-          (continuous.running && measured * continuous.value < -1000)))
+          (continuous.running && !continuous.position && measured * continuous.value < -1000)))
         continuousStop("Encoder excedeu limite de RPM ou indicou sentido contrário.");
+      if (key == "S" && continuous.position && !continuous.running &&
+          (parsed.numbers[0] != 0 || parsed.numbers[1] != 0))
+        continuousStop("Posicionamento requer ambos os motores inicialmente parados.");
       if (key == "C") {
+        if (continuous.position) {
+          if (!continuous.haveOrigin) {
+            continuous.positionOrigin = measured;
+            continuous.haveOrigin = true;
+            if (std::abs(measured - continuous.value) > 4000)
+              continuousStop("Deslocamento de posição excede 4000 contagens.");
+          }
+          const auto lo = qMin(continuous.positionOrigin, qint64(continuous.value)) - 100;
+          const auto hi = qMax(continuous.positionOrigin, qint64(continuous.value)) + 100;
+          continuous.sample["target_error_counts"] = double(continuous.value - measured);
+          if (continuous.running && (measured < lo || measured > hi))
+            continuousStop("Posição excedeu a janela do ensaio (margem de 100 contagens).");
+        }
         if (continuous.haveEncoder && measured != continuous.encoderCounter) continuous.encoderProgress.restart();
         continuous.encoderCounter = measured;
         continuous.haveEncoder = true;
@@ -166,37 +189,7 @@ void ControlServer::continuousCycle() {
   jobs[active]["phase"] = "continuous";
   jobs[active]["continuous"] = continuousState();
   const auto &sample = continuous.sample;
-  const QStringList metricKeys{"amps1", "amps2", "voltage", "encoder_rpm1", "encoder_rpm2", "temperature"};
-  for (int i = 0; i < metricKeys.size(); ++i)
-    w.metrics[i]->setText(sample.contains(metricKeys[i])
-        ? QString::number(sample[metricKeys[i]].toDouble(), 'f', i < 3 ? 1 : 0) : "—");
-  for (auto label : w.speedSources)
-    label->setText("Encoder A/B: ?S · Hall/interno: ?BS");
-  for (int i = 0; i < w.hallRpm.size(); ++i) {
-    const auto key = QString("rpm%1").arg(i + 1);
-    w.hallRpm[i]->setText(sample.contains(key) ? QString::number(sample[key].toDouble(), 'f', 0) : "—");
-  }
-  for (int i = 0; i < w.motorFlags.size(); ++i) {
-    const auto key = QString("motor_flags%1").arg(i + 1);
-    w.motorFlags[i]->setText(sample.contains(key)
-        ? Protocol::motorNames(sample[key].toInt()).join(" · ") : "Estado: aguardando leitura");
-  }
-  w.faults->setText(sample.contains("faults")
-      ? Protocol::faultNames(sample["faults"].toInt()).join(" · ") : "—");
-  w.updateFaultSummary(sample["faults"].toInt(-1),
-                       sample["motor_flags1"].toInt(-1), sample["motor_flags2"].toInt(-1));
-  w.statusFlags->setText(sample.contains("flags")
-      ? Protocol::statusNames(sample["flags"].toInt()).join(" · ") : "—");
-  w.encoders->setText(QString("Encoder C1: %1 · C2: %2\nHall CB%3: %4")
-      .arg(sample.contains("encoder_counter1") ? QString::number(sample["encoder_counter1"].toDouble(), 'f', 0) : "—")
-      .arg(sample.contains("encoder_counter2") ? QString::number(sample["encoder_counter2"].toDouble(), 'f', 0) : "—")
-      .arg(continuous.channel).arg(continuous.counter));
-  w.continuousHistoryNote->setVisible(true);
-  w.chart->setEnabled(false);
-  w.ioValues->setEnabled(false);
-  for (auto feed : {w.chartFeed, w.diagnosticFeed})
-    for (int row = 0; row < feed->rowCount(); ++row)
-      feed->item(row, 1)->setText("—");
+  w.continuousUpdate(sample, continuous.channel, continuous.counter);
   w.notify(QString("CONTÍNUO • M%1 • comando %2 • %3 RPM • %4 A — PARADA: !EX")
                .arg(continuous.channel).arg(continuous.value)
                .arg(continuous.sample["rpm"].toDouble()).arg(continuous.sample["amps"].toDouble()));
@@ -207,10 +200,22 @@ void ControlServer::continuousCycle() {
            {QString("?M %1").arg(3 - continuous.channel), {}},
            {QString("?BS %1").arg(3 - continuous.channel), {}},
            {"?FM 1", {}}, {"?FM 2", {}}, {"?S", {}}, {"?C", {}}};
+  if (continuous.position) {
+    // Refresh the same absolute P target; never repeat relative PR commands.
+    // G0 selects the serial source without a position setpoint in MMOD3.
+    // S sets trajectory velocity; neither command changes the absolute target.
+    steps[0] = Step{QString("!G %1 0").arg(ch), {}};
+    steps.insert(1, Step{QString("!S %1 %2").arg(ch).arg(continuous.positionVelocity), {}});
+    steps.insert(2, Step{QString("!P %1 %2").arg(ch).arg(continuous.value), {}});
+  }
   stepIndex = 0;
-  if (continuous.encoderSpeed) {
+  if (continuous.encoderSpeed || continuous.position) {
     steps.append(Step{"?F " + ch, {}});
     steps.append(Step{"?RMP " + ch, {}});
+    if (continuous.position) {
+      steps.append(Step{"?TR " + ch, {}});
+      steps.append(Step{"?VDV " + ch, {}});
+    }
     if (continuous.fastCapture) {
       steps.append(Step{"?E " + ch, {}});
       steps.append(Step{"?P " + ch, {}});
@@ -226,18 +231,22 @@ void ControlServer::continuousCycle() {
 
 QJsonObject ControlServer::continuousStart(const QJsonObject &args) {
   if (args["action"].toString() != "start" || !args.contains("channel") ||
-      !args.contains("value") || args["value"].toInt() == 0)
+      !args.contains("value") || (args["value"].toInt() == 0 && args["mode"].toString() != "encoder_position"))
     throw std::runtime_error("Informe action=start, channel e value não zero.");
+  const bool position = args["mode"].toString() == "encoder_position";
   const bool encoderSpeed = args["mode"].toString() == "encoder_speed";
-  if (!encoderSpeed && (std::abs(args["value"].toInt()) > 100 || args["max_speed_rpm"].toInt(600) > 1000 || args["max_current_a"].toInt(10) > 11))
+  if (!encoderSpeed && !position && (std::abs(args["value"].toInt()) > 100 || args["max_speed_rpm"].toInt(600) > 1000 || args["max_current_a"].toInt(10) > 11))
     throw std::runtime_error("Malha aberta limitada a G +/-100, guarda de 1000 RPM e 11 A.");
   if (encoderSpeed && std::abs(args["value"].toInt()) > args["max_speed_rpm"].toInt(600))
     throw std::runtime_error("Referência RPM excede a guarda do ensaio.");
+  if (position && args["max_speed_rpm"].toInt(600) > 100)
+    throw std::runtime_error("Ensaio de posição limitado a 100 RPM.");
   authorize(args);
   continuous = Continuous{};
   continuous.enabled = true;
+  continuous.position = position;
   continuous.encoderSpeed = args["mode"].toString() == "encoder_speed";
-  continuous.fastCapture = args["capture_fast"].toBool();
+  continuous.fastCapture = position || args["capture_fast"].toBool();
   continuous.channel = args["channel"].toInt();
   continuous.value = args["value"].toInt();
   continuous.leaseMs = args["lease_ms"].toInt(3000);
@@ -255,9 +264,10 @@ QJsonObject ControlServer::continuousStart(const QJsonObject &args) {
   const auto other = QString::number(3 - continuous.channel);
   const bool release = args["release"].toBool();
   QList<Step> preflight;
-  if (continuous.encoderSpeed)
+  if (continuous.encoderSpeed || continuous.position)
     for (const auto &key : {"BLFB", "EMOD", "EPPR", "ALIM", "MXPF", "MXPR", "MXRPM"})
       preflight.append(Step{"~" + QString(key) + " " + ch, {}});
+  if (position) preflight.append(Step{"~MVEL " + ch, {}});
   preflight.append({{"?S", {}}, {"?C", {}}});
   preflight.append({{"~RWD", {}}, {"~MMOD " + ch, {}},
       {"~MXMD", {}}, {"~SCRO", {}}, {"~CPRI 1", {}}, {"?FS", {}}, {"?FF", {}},

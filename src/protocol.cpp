@@ -76,7 +76,7 @@ Command command(const QString &text) {
             c.key))
       c.valid = !hasA;
     else if (QSet<QString>{"A", "S", "C", "P", "F", "FM", "CB", "BS", "SNA",
-                           "ANG", "E", "M", "RMP"}
+                           "ANG", "E", "M", "RMP", "TR", "VDV"}
                  .contains(c.key))
       c.valid = !hasA || (a >= 1 && a <= 2);
     else if (QSet<QString>{"MA", "MC", "K"}.contains(c.key))

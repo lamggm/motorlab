@@ -7,10 +7,12 @@
 #include <QTimer>
 #include <functional>
 class Window;
+class ControlHost;
 class ControlServer : public QObject {
   Q_OBJECT
 public:
   explicit ControlServer(Window &window);
+  explicit ControlServer(ControlHost &host);
   bool listen(const QString &path);
   QString error() const { return server.errorString(); }
   QJsonObject dispatch(const QString &method, const QJsonObject &args);
@@ -23,7 +25,7 @@ private:
     bool pauseAttempt = false;
     bool scriptIdle = false;
   };
-  Window &w;
+  ControlHost &w;
   QLocalServer server;
   QJsonArray schemas;
   QMap<QString, QJsonObject> jobs;
@@ -36,6 +38,9 @@ private:
   struct Continuous {
     bool enabled = false, running = false, stopping = false, stoppingSequence = false;
     bool operatorStop = false, encoderSpeed = false, fastCapture = false;
+    bool position = false, haveOrigin = false;
+    int positionVelocity = 0;
+    qint64 positionOrigin = 0;
     int channel = 1, value = 0, leaseMs = 3000, maxAmps = 10, maxRpm = 600;
     int maxTemperature = 60, noMotionMs = 2000, maxPowerPercent = 25;
     QString token, reason;

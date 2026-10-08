@@ -256,7 +256,7 @@ private slots:
     auto edit = window.findChild<QCheckBox *>("enableWrites");
     auto choice = window.findChild<QComboBox *>("choice_STO_0");
     auto draft = window.findChild<QDoubleSpinBox *>("draft_STO_0");
-    auto unknown = window.findChild<QComboBox *>("choice_MMOD_1");
+    auto unknown = window.findChild<QComboBox *>("choice_PMOD_1");
     QVERIFY(choice && draft && unknown);
     QVERIFY(!choice->isEnabled());
     QVERIFY(session->enqueue("~STO"));
@@ -369,6 +369,101 @@ private slots:
     QVERIFY(!session->motionEnabled());
   }
 
+  void positionManualKeepsAbsoluteTargetAndStopsWithoutReturningHome() {
+    FakeController endpoint;
+    endpoint.params["MMOD 1"] = 3;
+    endpoint.params["MVEL 1"] = 30;
+    endpoint.params["MXRPM 1"] = 100;
+    Window window; window.show(); window.selectPage(1);
+    window.findChild<QComboBox *>("sourceSelector")->setCurrentIndex(1);
+    window.findChild<QComboBox *>("portSelector")->setEditText(endpoint.path);
+    window.findChild<QPushButton *>("connectButton")->click();
+    auto session = window.findChild<Session *>();
+    QTRY_VERIFY(!session->model().isEmpty());
+    auto mode = window.findChild<QComboBox *>("motorMode1");
+    QTRY_COMPARE(mode->currentIndex(), 2); // Fresh connection detects MMOD3.
+    QTRY_VERIFY(endpoint.commands.contains("~MXRPM 1"));
+    QTest::qWait(100);
+    QTRY_COMPARE(session->watchdogMs(), 1000);
+    for (const auto &cmd : endpoint.commands)
+      QVERIFY2(!cmd.startsWith('!') && !cmd.startsWith('^') && !cmd.startsWith('%'), qPrintable(cmd));
+    QVERIFY(session->setWritesEnabled(true));
+    QVERIFY(session->setMotionEnabled(true));
+    auto slider = window.findChild<QSlider *>("motorCommand1");
+    auto send = window.findChild<QPushButton *>("motorSend1");
+    QTRY_VERIFY(send->isEnabled());
+    mode->setCurrentIndex(0);
+    slider->setValue(475); // ACK of G would conceal its ineffectiveness in MMOD3.
+    QTest::qWait(150);
+    QVERIFY(!endpoint.commands.contains("!G 1 475"));
+    QVERIFY(window.findChild<QLabel *>("motorCommandStatus1")->text().contains("G não move"));
+    mode->setCurrentIndex(2);
+    slider->setSliderDown(true);
+    slider->setValue(1000);
+    QTest::qWait(150);
+    QVERIFY(!endpoint.commands.contains("!G 1 0"));
+    slider->setSliderDown(false); // Release alone applies a fixed absolute target.
+    QTRY_VERIFY(endpoint.commands.count("!P 1 1000") >= 3);
+    QVERIFY(endpoint.commands.indexOf("!G 1 0") < endpoint.commands.indexOf("!S 1 30"));
+    QVERIFY(endpoint.commands.indexOf("!S 1 30") < endpoint.commands.indexOf("!P 1 1000"));
+    slider->setSliderDown(true);
+    slider->setValue(2000); // Dragging previews; the confirmed target stays 1000.
+    QTest::qWait(500);
+    QVERIFY(!endpoint.commands.contains("!P 1 2000"));
+    slider->setSliderDown(false);
+    QTRY_VERIFY(endpoint.commands.count("!P 1 2000") >= 2);
+    window.findChild<QPushButton *>("motorStop1")->click();
+    QTRY_VERIFY(endpoint.commands.contains("!MS 1"));
+    QTest::qWait(400);
+    QVERIFY(!endpoint.commands.contains("!P 1 0")); // Stop must not request the origin.
+    QVERIFY(!endpoint.commands.contains("!EX"));
+    const int stopped = endpoint.commands.lastIndexOf("!MS 1");
+    for (int i = stopped + 1; i < endpoint.commands.size(); ++i)
+      QVERIFY(!endpoint.commands[i].startsWith("!P "));
+    slider->setValue(0); send->click(); // Stop already reset the slider to zero.
+    QTRY_VERIFY(endpoint.commands.count("!P 1 0") >= 3);
+    endpoint.overrides["!P 1 0"] = "-";
+    QTRY_VERIFY(endpoint.commands.contains("!EX"));
+    QVERIFY(!session->motionEnabled());
+    for (const auto &cmd : endpoint.commands) {
+      QVERIFY(!cmd.startsWith("!PR "));
+      QVERIFY(!cmd.startsWith('^'));
+      QVERIFY(!cmd.startsWith('%'));
+    }
+  }
+
+  void positionManualRejectsUnreadPrerequisite() {
+    FakeController endpoint;
+    endpoint.params["MMOD 1"] = 3;
+    endpoint.params["MVEL 1"] = 30;
+    endpoint.params["MXRPM 1"] = 100;
+    endpoint.overrides["~MVEL 1"] = "-";
+    Window window; window.show(); window.selectPage(1);
+    window.findChild<QComboBox *>("sourceSelector")->setCurrentIndex(1);
+    window.findChild<QComboBox *>("portSelector")->setEditText(endpoint.path);
+    window.findChild<QPushButton *>("connectButton")->click();
+    auto session = window.findChild<Session *>();
+    QTRY_VERIFY(endpoint.commands.contains("~MXRPM 1"));
+    QTest::qWait(100);
+    QVERIFY(session->setWritesEnabled(true));
+    QVERIFY(session->setMotionEnabled(true));
+    auto slider = window.findChild<QSlider *>("motorCommand1");
+    auto send = window.findChild<QPushButton *>("motorSend1");
+    QTRY_VERIFY(send->isEnabled());
+    slider->setValue(1000);
+    QTest::qWait(200);
+    QVERIFY(!endpoint.commands.contains("!G 1 0"));
+    QVERIFY(!endpoint.commands.contains("!P 1 1000"));
+    endpoint.overrides.remove("~MVEL 1");
+    QVERIFY(session->enqueue("~MVEL 1"));
+    QTRY_COMPARE(parameter(window.findChild<QTreeWidget *>("parametersTree"), "MVEL 1")->text(1), QString("30"));
+    QTRY_VERIFY(send->isEnabled());
+    send->click();
+    QTRY_VERIFY(endpoint.commands.contains("!P 1 1000"));
+    window.findChild<QPushButton *>("motorStop1")->click();
+    QTRY_VERIFY(endpoint.commands.contains("!MS 1"));
+  }
+
   void manualControlsEnableFromMonitorWithoutMotion() {
     FakeController endpoint;
     Window window;
@@ -382,8 +477,7 @@ private slots:
     QTRY_VERIFY(arm->isEnabled());
     QVERIFY(!session->writesEnabled());
     QVERIFY(!slider->isEnabled());
-    // Unknown watchdog is read, never changed or implicitly armed.
-    arm->click();
+    // Connection reads the watchdog, never changes it or implicitly arms.
     QTRY_COMPARE(session->watchdogMs(), 1000);
     QVERIFY(!session->motionEnabled());
     QVERIFY(!session->writesEnabled());
@@ -625,7 +719,7 @@ private slots:
     QVERIFY(!real.loadProfile(path, &error));
     QVERIFY(error.contains("simulado"));
     for (auto cmd : endpoint.commands)
-      QVERIFY(cmd.startsWith('?'));
+      QVERIFY(cmd.startsWith('?') || cmd.startsWith('~'));
   }
   void eepromGuard_data() {
     QTest::addColumn<QString>("pauseReply");
@@ -787,7 +881,7 @@ private slots:
                   ->grab()
                   .save(capture + "/compiler.png"));
     for (auto cmd : endpoint.commands)
-      QVERIFY(cmd.startsWith('?'));
+      QVERIFY(cmd.startsWith('?') || cmd.startsWith('~'));
   }
 
   void demoShowsUnitsAndExportsHonestData() {

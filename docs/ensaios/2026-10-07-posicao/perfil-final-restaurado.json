@@ -1,0 +1,5104 @@
+{
+    "application": "MotorLab Linux",
+    "catalog_fields": 638,
+    "complete_catalog_read": false,
+    "firmware": "Roboteq v3.0f SBLG2XXX 07/15/2026",
+    "known_fields": 636,
+    "model": "SBLG2360T",
+    "parameters": [
+        {
+            "draft": false,
+            "query": "~ALIM 1",
+            "raw": 115,
+            "readable": true,
+            "scale": 10,
+            "unit": "A RMS"
+        },
+        {
+            "draft": false,
+            "query": "~ALIM 2",
+            "raw": 200,
+            "readable": true,
+            "scale": 10,
+            "unit": "A RMS"
+        },
+        {
+            "draft": false,
+            "query": "~MXRPM 1",
+            "raw": 3000,
+            "readable": true,
+            "scale": 1,
+            "unit": "RPM"
+        },
+        {
+            "draft": false,
+            "query": "~MXRPM 2",
+            "raw": 1000,
+            "readable": true,
+            "scale": 1,
+            "unit": "RPM"
+        },
+        {
+            "draft": false,
+            "query": "~ACS",
+            "raw": 1,
+            "readable": true,
+            "scale": 1,
+            "unit": "opção"
+        },
+        {
+            "draft": false,
+            "query": "~AMS",
+            "raw": 1,
+            "readable": true,
+            "scale": 1,
+            "unit": "opção"
+        },
+        {
+            "draft": false,
+            "query": "~BRUN",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "opção"
+        },
+        {
+            "draft": false,
+            "query": "~CLIN 1",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "opção"
+        },
+        {
+            "draft": false,
+            "query": "~CLIN 2",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "opção"
+        },
+        {
+            "draft": false,
+            "query": "~CPRI 1",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "opção"
+        },
+        {
+            "draft": false,
+            "query": "~CPRI 2",
+            "raw": 1,
+            "readable": true,
+            "scale": 1,
+            "unit": "opção"
+        },
+        {
+            "draft": false,
+            "query": "~CPRI 3",
+            "raw": 3,
+            "readable": true,
+            "scale": 1,
+            "unit": "opção"
+        },
+        {
+            "draft": false,
+            "query": "~DFC 1",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "comando"
+        },
+        {
+            "draft": false,
+            "query": "~DFC 2",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "comando"
+        },
+        {
+            "draft": false,
+            "query": "~DMOD",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "opção"
+        },
+        {
+            "draft": false,
+            "query": "~ECHOF",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "opção"
+        },
+        {
+            "draft": false,
+            "query": "~EE 1",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "inteiro"
+        },
+        {
+            "draft": false,
+            "query": "~EE 2",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "inteiro"
+        },
+        {
+            "draft": false,
+            "query": "~EE 3",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "inteiro"
+        },
+        {
+            "draft": false,
+            "query": "~EE 4",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "inteiro"
+        },
+        {
+            "draft": false,
+            "query": "~EE 5",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "inteiro"
+        },
+        {
+            "draft": false,
+            "query": "~EE 6",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "inteiro"
+        },
+        {
+            "draft": false,
+            "query": "~EE 7",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "inteiro"
+        },
+        {
+            "draft": false,
+            "query": "~EE 8",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "inteiro"
+        },
+        {
+            "draft": false,
+            "query": "~EE 9",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "inteiro"
+        },
+        {
+            "draft": false,
+            "query": "~EE 10",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "inteiro"
+        },
+        {
+            "draft": false,
+            "query": "~EE 11",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "inteiro"
+        },
+        {
+            "draft": false,
+            "query": "~EE 12",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "inteiro"
+        },
+        {
+            "draft": false,
+            "query": "~EE 13",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "inteiro"
+        },
+        {
+            "draft": false,
+            "query": "~EE 14",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "inteiro"
+        },
+        {
+            "draft": false,
+            "query": "~EE 15",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "inteiro"
+        },
+        {
+            "draft": false,
+            "query": "~EE 16",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "inteiro"
+        },
+        {
+            "draft": false,
+            "query": "~EE 17",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "inteiro"
+        },
+        {
+            "draft": false,
+            "query": "~EE 18",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "inteiro"
+        },
+        {
+            "draft": false,
+            "query": "~EE 19",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "inteiro"
+        },
+        {
+            "draft": false,
+            "query": "~EE 20",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "inteiro"
+        },
+        {
+            "draft": false,
+            "query": "~EE 21",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "inteiro"
+        },
+        {
+            "draft": false,
+            "query": "~EE 22",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "inteiro"
+        },
+        {
+            "draft": false,
+            "query": "~EE 23",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "inteiro"
+        },
+        {
+            "draft": false,
+            "query": "~EE 24",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "inteiro"
+        },
+        {
+            "draft": false,
+            "query": "~EE 25",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "inteiro"
+        },
+        {
+            "draft": false,
+            "query": "~EE 26",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "inteiro"
+        },
+        {
+            "draft": false,
+            "query": "~EE 27",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "inteiro"
+        },
+        {
+            "draft": false,
+            "query": "~EE 28",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "inteiro"
+        },
+        {
+            "draft": false,
+            "query": "~EE 29",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "inteiro"
+        },
+        {
+            "draft": false,
+            "query": "~EE 30",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "inteiro"
+        },
+        {
+            "draft": false,
+            "query": "~EE 31",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "inteiro"
+        },
+        {
+            "draft": false,
+            "query": "~EE 32",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "inteiro"
+        },
+        {
+            "draft": false,
+            "query": "~FLCL",
+            "raw": 1,
+            "readable": true,
+            "scale": 1,
+            "unit": "opção"
+        },
+        {
+            "draft": false,
+            "query": "~ISM",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "opção"
+        },
+        {
+            "draft": false,
+            "query": "~MDAL",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "opção"
+        },
+        {
+            "draft": false,
+            "query": "~MNOD",
+            "raw": 1,
+            "readable": true,
+            "scale": 1,
+            "unit": "ID"
+        },
+        {
+            "draft": false,
+            "query": "~PMS",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "opção"
+        },
+        {
+            "draft": false,
+            "query": "~RSBR",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "opção"
+        },
+        {
+            "draft": false,
+            "query": "~RS485",
+            "raw": 1,
+            "readable": true,
+            "scale": 1,
+            "unit": "opção"
+        },
+        {
+            "draft": false,
+            "query": "~RWD",
+            "raw": 1000,
+            "readable": true,
+            "scale": 1,
+            "unit": "ms"
+        },
+        {
+            "draft": false,
+            "query": "~SCRO",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "opção"
+        },
+        {
+            "draft": false,
+            "query": "~STO",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "opção"
+        },
+        {
+            "draft": false,
+            "query": "~ACTR 1",
+            "raw": 2500,
+            "readable": true,
+            "scale": 1,
+            "unit": "mV"
+        },
+        {
+            "draft": false,
+            "query": "~ACTR 2",
+            "raw": 2500,
+            "readable": true,
+            "scale": 1,
+            "unit": "mV"
+        },
+        {
+            "draft": false,
+            "query": "~ACTR 3",
+            "raw": 2500,
+            "readable": true,
+            "scale": 1,
+            "unit": "mV"
+        },
+        {
+            "draft": false,
+            "query": "~ACTR 4",
+            "raw": 2500,
+            "readable": true,
+            "scale": 1,
+            "unit": "mV"
+        },
+        {
+            "draft": false,
+            "query": "~ACTR 5",
+            "raw": 2500,
+            "readable": true,
+            "scale": 1,
+            "unit": "mV"
+        },
+        {
+            "draft": false,
+            "query": "~ACTR 6",
+            "raw": 2500,
+            "readable": true,
+            "scale": 1,
+            "unit": "mV"
+        },
+        {
+            "draft": false,
+            "query": "~ACTR 7",
+            "raw": 2500,
+            "readable": true,
+            "scale": 1,
+            "unit": "mV"
+        },
+        {
+            "draft": false,
+            "query": "~ACTR 8",
+            "raw": 2500,
+            "readable": true,
+            "scale": 1,
+            "unit": "mV"
+        },
+        {
+            "draft": false,
+            "query": "~ADB 1",
+            "raw": 5,
+            "readable": true,
+            "scale": 1,
+            "unit": "%"
+        },
+        {
+            "draft": false,
+            "query": "~ADB 2",
+            "raw": 5,
+            "readable": true,
+            "scale": 1,
+            "unit": "%"
+        },
+        {
+            "draft": false,
+            "query": "~ADB 3",
+            "raw": 5,
+            "readable": true,
+            "scale": 1,
+            "unit": "%"
+        },
+        {
+            "draft": false,
+            "query": "~ADB 4",
+            "raw": 5,
+            "readable": true,
+            "scale": 1,
+            "unit": "%"
+        },
+        {
+            "draft": false,
+            "query": "~ADB 5",
+            "raw": 5,
+            "readable": true,
+            "scale": 1,
+            "unit": "%"
+        },
+        {
+            "draft": false,
+            "query": "~ADB 6",
+            "raw": 5,
+            "readable": true,
+            "scale": 1,
+            "unit": "%"
+        },
+        {
+            "draft": false,
+            "query": "~ADB 7",
+            "raw": 5,
+            "readable": true,
+            "scale": 1,
+            "unit": "%"
+        },
+        {
+            "draft": false,
+            "query": "~ADB 8",
+            "raw": 5,
+            "readable": true,
+            "scale": 1,
+            "unit": "%"
+        },
+        {
+            "draft": false,
+            "query": "~AINA 1",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "máscara"
+        },
+        {
+            "draft": false,
+            "query": "~AINA 2",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "máscara"
+        },
+        {
+            "draft": false,
+            "query": "~AINA 3",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "máscara"
+        },
+        {
+            "draft": false,
+            "query": "~AINA 4",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "máscara"
+        },
+        {
+            "draft": false,
+            "query": "~AINA 5",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "máscara"
+        },
+        {
+            "draft": false,
+            "query": "~AINA 6",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "máscara"
+        },
+        {
+            "draft": false,
+            "query": "~AINA 7",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "máscara"
+        },
+        {
+            "draft": false,
+            "query": "~AINA 8",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "máscara"
+        },
+        {
+            "draft": false,
+            "query": "~ALIN 1",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "opção"
+        },
+        {
+            "draft": false,
+            "query": "~ALIN 2",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "opção"
+        },
+        {
+            "draft": false,
+            "query": "~ALIN 3",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "opção"
+        },
+        {
+            "draft": false,
+            "query": "~ALIN 4",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "opção"
+        },
+        {
+            "draft": false,
+            "query": "~ALIN 5",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "opção"
+        },
+        {
+            "draft": false,
+            "query": "~ALIN 6",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "opção"
+        },
+        {
+            "draft": false,
+            "query": "~ALIN 7",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "opção"
+        },
+        {
+            "draft": false,
+            "query": "~ALIN 8",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "opção"
+        },
+        {
+            "draft": false,
+            "query": "~AMAX 1",
+            "raw": 4750,
+            "readable": true,
+            "scale": 1,
+            "unit": "mV"
+        },
+        {
+            "draft": false,
+            "query": "~AMAX 2",
+            "raw": 4750,
+            "readable": true,
+            "scale": 1,
+            "unit": "mV"
+        },
+        {
+            "draft": false,
+            "query": "~AMAX 3",
+            "raw": 4750,
+            "readable": true,
+            "scale": 1,
+            "unit": "mV"
+        },
+        {
+            "draft": false,
+            "query": "~AMAX 4",
+            "raw": 4750,
+            "readable": true,
+            "scale": 1,
+            "unit": "mV"
+        },
+        {
+            "draft": false,
+            "query": "~AMAX 5",
+            "raw": 4750,
+            "readable": true,
+            "scale": 1,
+            "unit": "mV"
+        },
+        {
+            "draft": false,
+            "query": "~AMAX 6",
+            "raw": 4750,
+            "readable": true,
+            "scale": 1,
+            "unit": "mV"
+        },
+        {
+            "draft": false,
+            "query": "~AMAX 7",
+            "raw": 4750,
+            "readable": true,
+            "scale": 1,
+            "unit": "mV"
+        },
+        {
+            "draft": false,
+            "query": "~AMAX 8",
+            "raw": 4750,
+            "readable": true,
+            "scale": 1,
+            "unit": "mV"
+        },
+        {
+            "draft": false,
+            "query": "~AMAXA 1",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "máscara"
+        },
+        {
+            "draft": false,
+            "query": "~AMAXA 2",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "máscara"
+        },
+        {
+            "draft": false,
+            "query": "~AMAXA 3",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "máscara"
+        },
+        {
+            "draft": false,
+            "query": "~AMAXA 4",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "máscara"
+        },
+        {
+            "draft": false,
+            "query": "~AMAXA 5",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "máscara"
+        },
+        {
+            "draft": false,
+            "query": "~AMAXA 6",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "máscara"
+        },
+        {
+            "draft": false,
+            "query": "~AMAXA 7",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "máscara"
+        },
+        {
+            "draft": false,
+            "query": "~AMAXA 8",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "máscara"
+        },
+        {
+            "draft": false,
+            "query": "~AMIN 1",
+            "raw": 250,
+            "readable": true,
+            "scale": 1,
+            "unit": "mV"
+        },
+        {
+            "draft": false,
+            "query": "~AMIN 2",
+            "raw": 250,
+            "readable": true,
+            "scale": 1,
+            "unit": "mV"
+        },
+        {
+            "draft": false,
+            "query": "~AMIN 3",
+            "raw": 250,
+            "readable": true,
+            "scale": 1,
+            "unit": "mV"
+        },
+        {
+            "draft": false,
+            "query": "~AMIN 4",
+            "raw": 250,
+            "readable": true,
+            "scale": 1,
+            "unit": "mV"
+        },
+        {
+            "draft": false,
+            "query": "~AMIN 5",
+            "raw": 250,
+            "readable": true,
+            "scale": 1,
+            "unit": "mV"
+        },
+        {
+            "draft": false,
+            "query": "~AMIN 6",
+            "raw": 250,
+            "readable": true,
+            "scale": 1,
+            "unit": "mV"
+        },
+        {
+            "draft": false,
+            "query": "~AMIN 7",
+            "raw": 250,
+            "readable": true,
+            "scale": 1,
+            "unit": "mV"
+        },
+        {
+            "draft": false,
+            "query": "~AMIN 8",
+            "raw": 250,
+            "readable": true,
+            "scale": 1,
+            "unit": "mV"
+        },
+        {
+            "draft": false,
+            "query": "~AMINA 1",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "máscara"
+        },
+        {
+            "draft": false,
+            "query": "~AMINA 2",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "máscara"
+        },
+        {
+            "draft": false,
+            "query": "~AMINA 3",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "máscara"
+        },
+        {
+            "draft": false,
+            "query": "~AMINA 4",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "máscara"
+        },
+        {
+            "draft": false,
+            "query": "~AMINA 5",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "máscara"
+        },
+        {
+            "draft": false,
+            "query": "~AMINA 6",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "máscara"
+        },
+        {
+            "draft": false,
+            "query": "~AMINA 7",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "máscara"
+        },
+        {
+            "draft": false,
+            "query": "~AMINA 8",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "máscara"
+        },
+        {
+            "draft": false,
+            "query": "~AMOD 1",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "opção"
+        },
+        {
+            "draft": false,
+            "query": "~AMOD 2",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "opção"
+        },
+        {
+            "draft": false,
+            "query": "~AMOD 3",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "opção"
+        },
+        {
+            "draft": false,
+            "query": "~AMOD 4",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "opção"
+        },
+        {
+            "draft": false,
+            "query": "~AMOD 5",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "opção"
+        },
+        {
+            "draft": false,
+            "query": "~AMOD 6",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "opção"
+        },
+        {
+            "draft": false,
+            "query": "~AMOD 7",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "opção"
+        },
+        {
+            "draft": false,
+            "query": "~AMOD 8",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "opção"
+        },
+        {
+            "draft": false,
+            "query": "~APOL 1",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "opção"
+        },
+        {
+            "draft": false,
+            "query": "~APOL 2",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "opção"
+        },
+        {
+            "draft": false,
+            "query": "~APOL 3",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "opção"
+        },
+        {
+            "draft": false,
+            "query": "~APOL 4",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "opção"
+        },
+        {
+            "draft": false,
+            "query": "~APOL 5",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "opção"
+        },
+        {
+            "draft": false,
+            "query": "~APOL 6",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "opção"
+        },
+        {
+            "draft": false,
+            "query": "~APOL 7",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "opção"
+        },
+        {
+            "draft": false,
+            "query": "~APOL 8",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "opção"
+        },
+        {
+            "draft": false,
+            "query": "~AUXV",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "opção"
+        },
+        {
+            "draft": false,
+            "query": "~DINA 1",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "máscara"
+        },
+        {
+            "draft": false,
+            "query": "~DINA 2",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "máscara"
+        },
+        {
+            "draft": false,
+            "query": "~DINA 3",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "máscara"
+        },
+        {
+            "draft": false,
+            "query": "~DINA 4",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "máscara"
+        },
+        {
+            "draft": false,
+            "query": "~DINA 5",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "máscara"
+        },
+        {
+            "draft": false,
+            "query": "~DINA 6",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "máscara"
+        },
+        {
+            "draft": false,
+            "query": "~DINA 7",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "máscara"
+        },
+        {
+            "draft": false,
+            "query": "~DINA 8",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "máscara"
+        },
+        {
+            "draft": false,
+            "query": "~DINA 9",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "máscara"
+        },
+        {
+            "draft": false,
+            "query": "~DINA 10",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "máscara"
+        },
+        {
+            "draft": false,
+            "query": "~DINL 1",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "opção"
+        },
+        {
+            "draft": false,
+            "query": "~DINL 2",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "opção"
+        },
+        {
+            "draft": false,
+            "query": "~DINL 3",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "opção"
+        },
+        {
+            "draft": false,
+            "query": "~DINL 4",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "opção"
+        },
+        {
+            "draft": false,
+            "query": "~DINL 5",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "opção"
+        },
+        {
+            "draft": false,
+            "query": "~DINL 6",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "opção"
+        },
+        {
+            "draft": false,
+            "query": "~DINL 7",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "opção"
+        },
+        {
+            "draft": false,
+            "query": "~DINL 8",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "opção"
+        },
+        {
+            "draft": false,
+            "query": "~DINL 9",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "opção"
+        },
+        {
+            "draft": false,
+            "query": "~DINL 10",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "opção"
+        },
+        {
+            "draft": false,
+            "query": "~DOA 1",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "máscara"
+        },
+        {
+            "draft": false,
+            "query": "~DOA 2",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "máscara"
+        },
+        {
+            "draft": false,
+            "query": "~DOA 3",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "máscara"
+        },
+        {
+            "draft": false,
+            "query": "~DOA 4",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "máscara"
+        },
+        {
+            "draft": false,
+            "query": "~DOL 1",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "opção"
+        },
+        {
+            "draft": false,
+            "query": "~DOL 2",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "opção"
+        },
+        {
+            "draft": false,
+            "query": "~DOL 3",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "opção"
+        },
+        {
+            "draft": false,
+            "query": "~DOL 4",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "opção"
+        },
+        {
+            "draft": false,
+            "query": "~DOT 1",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "opção"
+        },
+        {
+            "draft": false,
+            "query": "~DOT 2",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "opção"
+        },
+        {
+            "draft": false,
+            "query": "~DOT 3",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "opção"
+        },
+        {
+            "draft": false,
+            "query": "~DOT 4",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "opção"
+        },
+        {
+            "draft": false,
+            "query": "~ENCO",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "opção"
+        },
+        {
+            "draft": false,
+            "query": "~PCTR 1",
+            "raw": 1500,
+            "readable": true,
+            "scale": 1,
+            "unit": "conforme PMOD"
+        },
+        {
+            "draft": false,
+            "query": "~PCTR 2",
+            "raw": 1500,
+            "readable": true,
+            "scale": 1,
+            "unit": "conforme PMOD"
+        },
+        {
+            "draft": false,
+            "query": "~PCTR 3",
+            "raw": 1500,
+            "readable": true,
+            "scale": 1,
+            "unit": "conforme PMOD"
+        },
+        {
+            "draft": false,
+            "query": "~PCTR 4",
+            "raw": 1500,
+            "readable": true,
+            "scale": 1,
+            "unit": "conforme PMOD"
+        },
+        {
+            "draft": false,
+            "query": "~PCTR 5",
+            "raw": 1500,
+            "readable": true,
+            "scale": 1,
+            "unit": "conforme PMOD"
+        },
+        {
+            "draft": false,
+            "query": "~PCTR 6",
+            "raw": 1500,
+            "readable": true,
+            "scale": 1,
+            "unit": "conforme PMOD"
+        },
+        {
+            "draft": false,
+            "query": "~PCTR 7",
+            "raw": 1500,
+            "readable": true,
+            "scale": 1,
+            "unit": "conforme PMOD"
+        },
+        {
+            "draft": false,
+            "query": "~PCTR 8",
+            "raw": 1500,
+            "readable": true,
+            "scale": 1,
+            "unit": "conforme PMOD"
+        },
+        {
+            "draft": false,
+            "query": "~PDB 1",
+            "raw": 5,
+            "readable": true,
+            "scale": 1,
+            "unit": "%"
+        },
+        {
+            "draft": false,
+            "query": "~PDB 2",
+            "raw": 5,
+            "readable": true,
+            "scale": 1,
+            "unit": "%"
+        },
+        {
+            "draft": false,
+            "query": "~PDB 3",
+            "raw": 5,
+            "readable": true,
+            "scale": 1,
+            "unit": "%"
+        },
+        {
+            "draft": false,
+            "query": "~PDB 4",
+            "raw": 5,
+            "readable": true,
+            "scale": 1,
+            "unit": "%"
+        },
+        {
+            "draft": false,
+            "query": "~PDB 5",
+            "raw": 5,
+            "readable": true,
+            "scale": 1,
+            "unit": "%"
+        },
+        {
+            "draft": false,
+            "query": "~PDB 6",
+            "raw": 5,
+            "readable": true,
+            "scale": 1,
+            "unit": "%"
+        },
+        {
+            "draft": false,
+            "query": "~PDB 7",
+            "raw": 5,
+            "readable": true,
+            "scale": 1,
+            "unit": "%"
+        },
+        {
+            "draft": false,
+            "query": "~PDB 8",
+            "raw": 5,
+            "readable": true,
+            "scale": 1,
+            "unit": "%"
+        },
+        {
+            "draft": false,
+            "query": "~PINA 1",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "máscara"
+        },
+        {
+            "draft": false,
+            "query": "~PINA 2",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "máscara"
+        },
+        {
+            "draft": false,
+            "query": "~PINA 3",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "máscara"
+        },
+        {
+            "draft": false,
+            "query": "~PINA 4",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "máscara"
+        },
+        {
+            "draft": false,
+            "query": "~PINA 5",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "máscara"
+        },
+        {
+            "draft": false,
+            "query": "~PINA 6",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "máscara"
+        },
+        {
+            "draft": false,
+            "query": "~PINA 7",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "máscara"
+        },
+        {
+            "draft": false,
+            "query": "~PINA 8",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "máscara"
+        },
+        {
+            "draft": false,
+            "query": "~PLIN 1",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "opção"
+        },
+        {
+            "draft": false,
+            "query": "~PLIN 2",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "opção"
+        },
+        {
+            "draft": false,
+            "query": "~PLIN 3",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "opção"
+        },
+        {
+            "draft": false,
+            "query": "~PLIN 4",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "opção"
+        },
+        {
+            "draft": false,
+            "query": "~PLIN 5",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "opção"
+        },
+        {
+            "draft": false,
+            "query": "~PLIN 6",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "opção"
+        },
+        {
+            "draft": false,
+            "query": "~PLIN 7",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "opção"
+        },
+        {
+            "draft": false,
+            "query": "~PLIN 8",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "opção"
+        },
+        {
+            "draft": false,
+            "query": "~PMAX 1",
+            "raw": 2000,
+            "readable": true,
+            "scale": 1,
+            "unit": "conforme PMOD"
+        },
+        {
+            "draft": false,
+            "query": "~PMAX 2",
+            "raw": 2000,
+            "readable": true,
+            "scale": 1,
+            "unit": "conforme PMOD"
+        },
+        {
+            "draft": false,
+            "query": "~PMAX 3",
+            "raw": 2000,
+            "readable": true,
+            "scale": 1,
+            "unit": "conforme PMOD"
+        },
+        {
+            "draft": false,
+            "query": "~PMAX 4",
+            "raw": 2000,
+            "readable": true,
+            "scale": 1,
+            "unit": "conforme PMOD"
+        },
+        {
+            "draft": false,
+            "query": "~PMAX 5",
+            "raw": 2000,
+            "readable": true,
+            "scale": 1,
+            "unit": "conforme PMOD"
+        },
+        {
+            "draft": false,
+            "query": "~PMAX 6",
+            "raw": 2000,
+            "readable": true,
+            "scale": 1,
+            "unit": "conforme PMOD"
+        },
+        {
+            "draft": false,
+            "query": "~PMAX 7",
+            "raw": 2000,
+            "readable": true,
+            "scale": 1,
+            "unit": "conforme PMOD"
+        },
+        {
+            "draft": false,
+            "query": "~PMAX 8",
+            "raw": 2000,
+            "readable": true,
+            "scale": 1,
+            "unit": "conforme PMOD"
+        },
+        {
+            "draft": false,
+            "query": "~PMAXA 1",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "máscara"
+        },
+        {
+            "draft": false,
+            "query": "~PMAXA 2",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "máscara"
+        },
+        {
+            "draft": false,
+            "query": "~PMAXA 3",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "máscara"
+        },
+        {
+            "draft": false,
+            "query": "~PMAXA 4",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "máscara"
+        },
+        {
+            "draft": false,
+            "query": "~PMAXA 5",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "máscara"
+        },
+        {
+            "draft": false,
+            "query": "~PMAXA 6",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "máscara"
+        },
+        {
+            "draft": false,
+            "query": "~PMAXA 7",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "máscara"
+        },
+        {
+            "draft": false,
+            "query": "~PMAXA 8",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "máscara"
+        },
+        {
+            "draft": false,
+            "query": "~PMIN 1",
+            "raw": 1000,
+            "readable": true,
+            "scale": 1,
+            "unit": "conforme PMOD"
+        },
+        {
+            "draft": false,
+            "query": "~PMIN 2",
+            "raw": 1000,
+            "readable": true,
+            "scale": 1,
+            "unit": "conforme PMOD"
+        },
+        {
+            "draft": false,
+            "query": "~PMIN 3",
+            "raw": 1000,
+            "readable": true,
+            "scale": 1,
+            "unit": "conforme PMOD"
+        },
+        {
+            "draft": false,
+            "query": "~PMIN 4",
+            "raw": 1000,
+            "readable": true,
+            "scale": 1,
+            "unit": "conforme PMOD"
+        },
+        {
+            "draft": false,
+            "query": "~PMIN 5",
+            "raw": 1000,
+            "readable": true,
+            "scale": 1,
+            "unit": "conforme PMOD"
+        },
+        {
+            "draft": false,
+            "query": "~PMIN 6",
+            "raw": 1000,
+            "readable": true,
+            "scale": 1,
+            "unit": "conforme PMOD"
+        },
+        {
+            "draft": false,
+            "query": "~PMIN 7",
+            "raw": 1000,
+            "readable": true,
+            "scale": 1,
+            "unit": "conforme PMOD"
+        },
+        {
+            "draft": false,
+            "query": "~PMIN 8",
+            "raw": 1000,
+            "readable": true,
+            "scale": 1,
+            "unit": "conforme PMOD"
+        },
+        {
+            "draft": false,
+            "query": "~PMINA 1",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "máscara"
+        },
+        {
+            "draft": false,
+            "query": "~PMINA 2",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "máscara"
+        },
+        {
+            "draft": false,
+            "query": "~PMINA 3",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "máscara"
+        },
+        {
+            "draft": false,
+            "query": "~PMINA 4",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "máscara"
+        },
+        {
+            "draft": false,
+            "query": "~PMINA 5",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "máscara"
+        },
+        {
+            "draft": false,
+            "query": "~PMINA 6",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "máscara"
+        },
+        {
+            "draft": false,
+            "query": "~PMINA 7",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "máscara"
+        },
+        {
+            "draft": false,
+            "query": "~PMINA 8",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "máscara"
+        },
+        {
+            "draft": false,
+            "query": "~PMOD 1",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "opção"
+        },
+        {
+            "draft": false,
+            "query": "~PMOD 2",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "opção"
+        },
+        {
+            "draft": false,
+            "query": "~PMOD 3",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "opção"
+        },
+        {
+            "draft": false,
+            "query": "~PMOD 4",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "opção"
+        },
+        {
+            "draft": false,
+            "query": "~PMOD 5",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "opção"
+        },
+        {
+            "draft": false,
+            "query": "~PMOD 6",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "opção"
+        },
+        {
+            "draft": false,
+            "query": "~PMOD 7",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "opção"
+        },
+        {
+            "draft": false,
+            "query": "~PMOD 8",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "opção"
+        },
+        {
+            "draft": false,
+            "query": "~PPOL 1",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "opção"
+        },
+        {
+            "draft": false,
+            "query": "~PPOL 2",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "opção"
+        },
+        {
+            "draft": false,
+            "query": "~PPOL 3",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "opção"
+        },
+        {
+            "draft": false,
+            "query": "~PPOL 4",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "opção"
+        },
+        {
+            "draft": false,
+            "query": "~PPOL 5",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "opção"
+        },
+        {
+            "draft": false,
+            "query": "~PPOL 6",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "opção"
+        },
+        {
+            "draft": false,
+            "query": "~PPOL 7",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "opção"
+        },
+        {
+            "draft": false,
+            "query": "~PPOL 8",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "opção"
+        },
+        {
+            "draft": false,
+            "query": "~ATGA 1",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "máscara"
+        },
+        {
+            "draft": false,
+            "query": "~ATGA 2",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "máscara"
+        },
+        {
+            "draft": false,
+            "query": "~ATGD 1",
+            "raw": 500,
+            "readable": true,
+            "scale": 1,
+            "unit": "ms"
+        },
+        {
+            "draft": false,
+            "query": "~ATGD 2",
+            "raw": 500,
+            "readable": true,
+            "scale": 1,
+            "unit": "ms"
+        },
+        {
+            "draft": false,
+            "query": "~ATRIG 1",
+            "raw": 200,
+            "readable": true,
+            "scale": 10,
+            "unit": "A"
+        },
+        {
+            "draft": false,
+            "query": "~ATRIG 2",
+            "raw": 200,
+            "readable": true,
+            "scale": 10,
+            "unit": "A"
+        },
+        {
+            "draft": false,
+            "query": "~B25 1",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "K"
+        },
+        {
+            "draft": false,
+            "query": "~B25 2",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "K"
+        },
+        {
+            "draft": false,
+            "query": "~BKD",
+            "raw": 250,
+            "readable": true,
+            "scale": 1,
+            "unit": "ms"
+        },
+        {
+            "draft": false,
+            "query": "~BPR 1",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "opção"
+        },
+        {
+            "draft": false,
+            "query": "~BPR 2",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "opção"
+        },
+        {
+            "draft": false,
+            "query": "~BLFB 1",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "opção"
+        },
+        {
+            "draft": false,
+            "query": "~BLFB 2",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "opção"
+        },
+        {
+            "draft": false,
+            "query": "~BLSTD 1",
+            "raw": 2,
+            "readable": true,
+            "scale": 1,
+            "unit": "opção"
+        },
+        {
+            "draft": false,
+            "query": "~BLSTD 2",
+            "raw": 2,
+            "readable": true,
+            "scale": 1,
+            "unit": "opção"
+        },
+        {
+            "draft": false,
+            "query": "~BR 1",
+            "raw": 0,
+            "readable": true,
+            "scale": 10000,
+            "unit": "mNm/(rad/s)"
+        },
+        {
+            "draft": false,
+            "query": "~BR 2",
+            "raw": 0,
+            "readable": true,
+            "scale": 10000,
+            "unit": "mNm/(rad/s)"
+        },
+        {
+            "draft": false,
+            "query": "~CLERD 1",
+            "raw": 4,
+            "readable": true,
+            "scale": 1,
+            "unit": "opção"
+        },
+        {
+            "draft": false,
+            "query": "~CLERD 2",
+            "raw": 4,
+            "readable": true,
+            "scale": 1,
+            "unit": "opção"
+        },
+        {
+            "draft": false,
+            "query": "~EDEC 1",
+            "raw": 20000,
+            "readable": true,
+            "scale": 10,
+            "unit": "RPM/s"
+        },
+        {
+            "draft": false,
+            "query": "~EDEC 2",
+            "raw": 20000,
+            "readable": true,
+            "scale": 10,
+            "unit": "RPM/s"
+        },
+        {
+            "draft": false,
+            "query": "~EHL 1",
+            "raw": 20000,
+            "readable": true,
+            "scale": 1,
+            "unit": "contagens"
+        },
+        {
+            "draft": false,
+            "query": "~EHL 2",
+            "raw": 20000,
+            "readable": true,
+            "scale": 1,
+            "unit": "contagens"
+        },
+        {
+            "draft": false,
+            "query": "~EHLA 1",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "máscara"
+        },
+        {
+            "draft": false,
+            "query": "~EHLA 2",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "máscara"
+        },
+        {
+            "draft": false,
+            "query": "~EHOME 1",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "contagens"
+        },
+        {
+            "draft": false,
+            "query": "~EHOME 2",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "contagens"
+        },
+        {
+            "draft": false,
+            "query": "~ELL 1",
+            "raw": -20000,
+            "readable": true,
+            "scale": 1,
+            "unit": "contagens"
+        },
+        {
+            "draft": false,
+            "query": "~ELL 2",
+            "raw": -20000,
+            "readable": true,
+            "scale": 1,
+            "unit": "contagens"
+        },
+        {
+            "draft": false,
+            "query": "~ELLA 1",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "máscara"
+        },
+        {
+            "draft": false,
+            "query": "~ELLA 2",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "máscara"
+        },
+        {
+            "draft": false,
+            "query": "~EMOD 1",
+            "raw": 18,
+            "readable": true,
+            "scale": 1,
+            "unit": "máscara"
+        },
+        {
+            "draft": false,
+            "query": "~EMOD 2",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "máscara"
+        },
+        {
+            "draft": false,
+            "query": "~EPPR 1",
+            "raw": 1000,
+            "readable": true,
+            "scale": 1,
+            "unit": "pulsos/volta"
+        },
+        {
+            "draft": false,
+            "query": "~EPPR 2",
+            "raw": 1024,
+            "readable": true,
+            "scale": 1,
+            "unit": "pulsos/volta"
+        },
+        {
+            "draft": false,
+            "query": "~FET 1",
+            "raw": 500,
+            "readable": true,
+            "scale": 1,
+            "unit": "ms"
+        },
+        {
+            "draft": false,
+            "query": "~FET 2",
+            "raw": 500,
+            "readable": true,
+            "scale": 1,
+            "unit": "ms"
+        },
+        {
+            "draft": false,
+            "query": "~FEW 1",
+            "raw": 500,
+            "readable": true,
+            "scale": 1,
+            "unit": "RPM"
+        },
+        {
+            "draft": false,
+            "query": "~FEW 2",
+            "raw": 250,
+            "readable": true,
+            "scale": 1,
+            "unit": "conforme MMOD"
+        },
+        {
+            "draft": false,
+            "query": "~ICAP 1",
+            "raw": 100,
+            "readable": true,
+            "scale": 1,
+            "unit": "%"
+        },
+        {
+            "draft": false,
+            "query": "~ICAP 2",
+            "raw": 100,
+            "readable": true,
+            "scale": 1,
+            "unit": "%"
+        },
+        {
+            "draft": false,
+            "query": "~JR 1",
+            "raw": 0,
+            "readable": true,
+            "scale": 1000,
+            "unit": "kg.cm²"
+        },
+        {
+            "draft": false,
+            "query": "~JR 2",
+            "raw": 0,
+            "readable": true,
+            "scale": 1000,
+            "unit": "kg.cm²"
+        },
+        {
+            "draft": false,
+            "query": "~KDG 1",
+            "raw": 0,
+            "readable": true,
+            "scale": 1000000,
+            "unit": "ganho"
+        },
+        {
+            "draft": false,
+            "query": "~KDG 2",
+            "raw": 0,
+            "readable": true,
+            "scale": 1000000,
+            "unit": "ganho"
+        },
+        {
+            "draft": false,
+            "query": "~KDG 3",
+            "raw": 0,
+            "readable": true,
+            "scale": 1000000,
+            "unit": "ganho"
+        },
+        {
+            "draft": false,
+            "query": "~KDG 4",
+            "raw": 0,
+            "readable": true,
+            "scale": 1000000,
+            "unit": "ganho"
+        },
+        {
+            "draft": false,
+            "query": "~KIG 1",
+            "raw": 30000,
+            "readable": true,
+            "scale": 1000000,
+            "unit": "ganho"
+        },
+        {
+            "draft": false,
+            "query": "~KIG 2",
+            "raw": 0,
+            "readable": true,
+            "scale": 1000000,
+            "unit": "ganho"
+        },
+        {
+            "draft": false,
+            "query": "~KIG 3",
+            "raw": 0,
+            "readable": true,
+            "scale": 1000000,
+            "unit": "ganho"
+        },
+        {
+            "draft": false,
+            "query": "~KIG 4",
+            "raw": 0,
+            "readable": true,
+            "scale": 1000000,
+            "unit": "ganho"
+        },
+        {
+            "draft": false,
+            "query": "~KPG 1",
+            "raw": 120000,
+            "readable": true,
+            "scale": 1000000,
+            "unit": "ganho"
+        },
+        {
+            "draft": false,
+            "query": "~KPG 2",
+            "raw": 0,
+            "readable": true,
+            "scale": 1000000,
+            "unit": "ganho"
+        },
+        {
+            "draft": false,
+            "query": "~KPG 3",
+            "raw": 100000,
+            "readable": true,
+            "scale": 1000000,
+            "unit": "ganho"
+        },
+        {
+            "draft": false,
+            "query": "~KPG 4",
+            "raw": 0,
+            "readable": true,
+            "scale": 1000000,
+            "unit": "ganho"
+        },
+        {
+            "draft": false,
+            "query": "~LEAC 1",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "opção"
+        },
+        {
+            "draft": false,
+            "query": "~LEAC 2",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "opção"
+        },
+        {
+            "draft": false,
+            "query": "~LPFB 1",
+            "raw": 80,
+            "readable": true,
+            "scale": 1,
+            "unit": "Hz"
+        },
+        {
+            "draft": false,
+            "query": "~LPFB 2",
+            "raw": 45,
+            "readable": true,
+            "scale": 1,
+            "unit": "Hz"
+        },
+        {
+            "draft": false,
+            "query": "~MAC 1",
+            "raw": 30000,
+            "readable": true,
+            "scale": 10,
+            "unit": "RPM/s"
+        },
+        {
+            "draft": false,
+            "query": "~MAC 2",
+            "raw": 20000,
+            "readable": true,
+            "scale": 10,
+            "unit": "RPM/s"
+        },
+        {
+            "draft": false,
+            "query": "~MCLE 1",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "bits"
+        },
+        {
+            "draft": false,
+            "query": "~MCLE 2",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "bits"
+        },
+        {
+            "draft": false,
+            "query": "~MDEC 1",
+            "raw": 20000,
+            "readable": true,
+            "scale": 10,
+            "unit": "RPM/s"
+        },
+        {
+            "draft": false,
+            "query": "~MDEC 2",
+            "raw": 20000,
+            "readable": true,
+            "scale": 10,
+            "unit": "RPM/s"
+        },
+        {
+            "draft": false,
+            "query": "~MLX 1",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "opção"
+        },
+        {
+            "draft": false,
+            "query": "~MDIR 1",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "opção"
+        },
+        {
+            "draft": false,
+            "query": "~MDIR 2",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "opção"
+        },
+        {
+            "draft": false,
+            "query": "~MMOD 1",
+            "raw": 1,
+            "readable": true,
+            "scale": 1,
+            "unit": "opção"
+        },
+        {
+            "draft": false,
+            "query": "~MMOD 2",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "opção"
+        },
+        {
+            "draft": false,
+            "query": "~MNRPM 1",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "RPM"
+        },
+        {
+            "draft": false,
+            "query": "~MNRPM 2",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "RPM"
+        },
+        {
+            "draft": false,
+            "query": "~MSTA 1",
+            "raw": 1,
+            "readable": true,
+            "scale": 1,
+            "unit": "bit inicial"
+        },
+        {
+            "draft": false,
+            "query": "~MSTA 2",
+            "raw": 1,
+            "readable": true,
+            "scale": 1,
+            "unit": "bit inicial"
+        },
+        {
+            "draft": false,
+            "query": "~MVEL 1",
+            "raw": 100,
+            "readable": true,
+            "scale": 1,
+            "unit": "RPM"
+        },
+        {
+            "draft": false,
+            "query": "~MVEL 2",
+            "raw": 1000,
+            "readable": true,
+            "scale": 1,
+            "unit": "RPM"
+        },
+        {
+            "draft": false,
+            "query": "~MXPF 1",
+            "raw": 100,
+            "readable": true,
+            "scale": 1,
+            "unit": "%"
+        },
+        {
+            "draft": false,
+            "query": "~MXPF 2",
+            "raw": 100,
+            "readable": true,
+            "scale": 1,
+            "unit": "%"
+        },
+        {
+            "draft": false,
+            "query": "~MXPR 1",
+            "raw": 100,
+            "readable": true,
+            "scale": 1,
+            "unit": "%"
+        },
+        {
+            "draft": false,
+            "query": "~MXPR 2",
+            "raw": 100,
+            "readable": true,
+            "scale": 1,
+            "unit": "%"
+        },
+        {
+            "draft": false,
+            "query": "~MXTRN 1",
+            "raw": 1000,
+            "readable": true,
+            "scale": 100,
+            "unit": "voltas"
+        },
+        {
+            "draft": false,
+            "query": "~MXTRN 2",
+            "raw": 10000,
+            "readable": true,
+            "scale": 100,
+            "unit": "voltas"
+        },
+        {
+            "draft": false,
+            "query": "~NOMA 1",
+            "raw": 200,
+            "readable": true,
+            "scale": 10,
+            "unit": "A RMS"
+        },
+        {
+            "draft": false,
+            "query": "~NOMA 2",
+            "raw": 200,
+            "readable": true,
+            "scale": 10,
+            "unit": "A RMS"
+        },
+        {
+            "draft": false,
+            "query": "~OVH",
+            "raw": 50,
+            "readable": true,
+            "scale": 10,
+            "unit": "V"
+        },
+        {
+            "draft": false,
+            "query": "~OVL",
+            "raw": 600,
+            "readable": true,
+            "scale": 10,
+            "unit": "V"
+        },
+        {
+            "draft": false,
+            "query": "~R25 1",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "Ω"
+        },
+        {
+            "draft": false,
+            "query": "~R25 2",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "Ω"
+        },
+        {
+            "draft": false,
+            "query": "~SCLE 1",
+            "raw": 12,
+            "readable": true,
+            "scale": 1,
+            "unit": "bits"
+        },
+        {
+            "draft": false,
+            "query": "~SCLE 2",
+            "raw": 12,
+            "readable": true,
+            "scale": 1,
+            "unit": "bits"
+        },
+        {
+            "draft": false,
+            "query": "~SCLK",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "opção"
+        },
+        {
+            "draft": false,
+            "query": "~SED 1",
+            "raw": 2,
+            "readable": true,
+            "scale": 1,
+            "unit": "opção"
+        },
+        {
+            "draft": false,
+            "query": "~SED 2",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "opção"
+        },
+        {
+            "draft": false,
+            "query": "~SFTS 1",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "opção"
+        },
+        {
+            "draft": false,
+            "query": "~SFTS 2",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "opção"
+        },
+        {
+            "draft": false,
+            "query": "~SHL 1",
+            "raw": 20000,
+            "readable": true,
+            "scale": 1,
+            "unit": "contagens"
+        },
+        {
+            "draft": false,
+            "query": "~SHL 2",
+            "raw": 20000,
+            "readable": true,
+            "scale": 1,
+            "unit": "contagens"
+        },
+        {
+            "draft": false,
+            "query": "~SHLA 1",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "máscara"
+        },
+        {
+            "draft": false,
+            "query": "~SHLA 2",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "máscara"
+        },
+        {
+            "draft": false,
+            "query": "~SHOME 1",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "contagens"
+        },
+        {
+            "draft": false,
+            "query": "~SHOME 2",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "contagens"
+        },
+        {
+            "draft": false,
+            "query": "~SLEN 1",
+            "raw": 12,
+            "readable": true,
+            "scale": 1,
+            "unit": "bits"
+        },
+        {
+            "draft": false,
+            "query": "~SLEN 2",
+            "raw": 12,
+            "readable": true,
+            "scale": 1,
+            "unit": "bits"
+        },
+        {
+            "draft": false,
+            "query": "~SLLA 1",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "máscara"
+        },
+        {
+            "draft": false,
+            "query": "~SLLA 2",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "máscara"
+        },
+        {
+            "draft": false,
+            "query": "~SMOD 1",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "máscara"
+        },
+        {
+            "draft": false,
+            "query": "~SMOD 2",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "máscara"
+        },
+        {
+            "draft": false,
+            "query": "~SSTA 1",
+            "raw": 1,
+            "readable": true,
+            "scale": 1,
+            "unit": "bit inicial"
+        },
+        {
+            "draft": false,
+            "query": "~SSTA 2",
+            "raw": 1,
+            "readable": true,
+            "scale": 1,
+            "unit": "bit inicial"
+        },
+        {
+            "draft": false,
+            "query": "~TNM 1",
+            "raw": 1400,
+            "readable": true,
+            "scale": 1000,
+            "unit": "Nm/A"
+        },
+        {
+            "draft": false,
+            "query": "~TNM 2",
+            "raw": 200,
+            "readable": true,
+            "scale": 1000,
+            "unit": "Nm/A"
+        },
+        {
+            "draft": false,
+            "query": "~TPAL 1",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "s"
+        },
+        {
+            "draft": false,
+            "query": "~TPAL 2",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "s"
+        },
+        {
+            "draft": false,
+            "query": "~TRPU 1",
+            "raw": 10000,
+            "readable": true,
+            "scale": 1,
+            "unit": "Ω"
+        },
+        {
+            "draft": false,
+            "query": "~TRPU 2",
+            "raw": 10000,
+            "readable": true,
+            "scale": 1,
+            "unit": "Ω"
+        },
+        {
+            "draft": false,
+            "query": "~UVL",
+            "raw": 100,
+            "readable": true,
+            "scale": 10,
+            "unit": "V"
+        },
+        {
+            "draft": false,
+            "query": "~VELFF 1",
+            "raw": 0,
+            "readable": true,
+            "scale": 1000,
+            "unit": "ganho"
+        },
+        {
+            "draft": false,
+            "query": "~VELFF 2",
+            "raw": 0,
+            "readable": true,
+            "scale": 1000,
+            "unit": "ganho"
+        },
+        {
+            "draft": false,
+            "query": "~BADJ 1",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "1/512 volta"
+        },
+        {
+            "draft": false,
+            "query": "~BADJ 2",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "1/512 volta"
+        },
+        {
+            "draft": false,
+            "query": "~BADV 1",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "1/512 volta"
+        },
+        {
+            "draft": false,
+            "query": "~BADV 2",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "1/512 volta"
+        },
+        {
+            "draft": false,
+            "query": "~BFBK 1",
+            "raw": 2,
+            "readable": true,
+            "scale": 1,
+            "unit": "opção"
+        },
+        {
+            "draft": false,
+            "query": "~BFBK 2",
+            "raw": 1,
+            "readable": true,
+            "scale": 1,
+            "unit": "opção"
+        },
+        {
+            "draft": false,
+            "query": "~BHL 1",
+            "raw": 20000,
+            "readable": true,
+            "scale": 1,
+            "unit": "contagens"
+        },
+        {
+            "draft": false,
+            "query": "~BHL 2",
+            "raw": 20000,
+            "readable": true,
+            "scale": 1,
+            "unit": "contagens"
+        },
+        {
+            "draft": false,
+            "query": "~BHLA 1",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "máscara"
+        },
+        {
+            "draft": false,
+            "query": "~BHLA 2",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "máscara"
+        },
+        {
+            "draft": false,
+            "query": "~BHOME 1",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "contagens"
+        },
+        {
+            "draft": false,
+            "query": "~BHOME 2",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "contagens"
+        },
+        {
+            "draft": false,
+            "query": "~BLL 1",
+            "raw": -20000,
+            "readable": true,
+            "scale": 1,
+            "unit": "contagens"
+        },
+        {
+            "draft": false,
+            "query": "~BLL 2",
+            "raw": -20000,
+            "readable": true,
+            "scale": 1,
+            "unit": "contagens"
+        },
+        {
+            "draft": false,
+            "query": "~BLLA 1",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "máscara"
+        },
+        {
+            "draft": false,
+            "query": "~BLLA 2",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "máscara"
+        },
+        {
+            "draft": false,
+            "query": "~BMOD 1",
+            "raw": 1,
+            "readable": true,
+            "scale": 1,
+            "unit": "opção"
+        },
+        {
+            "draft": false,
+            "query": "~BMOD 2",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "opção"
+        },
+        {
+            "draft": false,
+            "query": "~BPOL 1",
+            "raw": 4,
+            "readable": true,
+            "scale": 1,
+            "unit": "pares de polos"
+        },
+        {
+            "draft": false,
+            "query": "~BPOL 2",
+            "raw": 2,
+            "readable": true,
+            "scale": 1,
+            "unit": "pares de polos"
+        },
+        {
+            "draft": false,
+            "query": "~BZPW 1",
+            "raw": 180,
+            "readable": true,
+            "scale": 10,
+            "unit": "A"
+        },
+        {
+            "draft": false,
+            "query": "~BZPW 2",
+            "raw": 100,
+            "readable": true,
+            "scale": 10,
+            "unit": "A"
+        },
+        {
+            "draft": false,
+            "query": "~FWVR 1",
+            "raw": 1000,
+            "readable": true,
+            "scale": 10,
+            "unit": "%"
+        },
+        {
+            "draft": false,
+            "query": "~FWVR 2",
+            "raw": 1000,
+            "readable": true,
+            "scale": 10,
+            "unit": "%"
+        },
+        {
+            "draft": false,
+            "query": "~HPO 1",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "opção"
+        },
+        {
+            "draft": false,
+            "query": "~HPO 2",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "opção"
+        },
+        {
+            "draft": false,
+            "query": "~HSAT 1",
+            "raw": 209,
+            "readable": true,
+            "scale": 1,
+            "unit": "1/512 volta"
+        },
+        {
+            "draft": false,
+            "query": "~HSAT 2",
+            "raw": 378,
+            "readable": true,
+            "scale": 1,
+            "unit": "1/512 volta"
+        },
+        {
+            "draft": false,
+            "query": "~HSAT 3",
+            "raw": 291,
+            "readable": true,
+            "scale": 1,
+            "unit": "1/512 volta"
+        },
+        {
+            "draft": false,
+            "query": "~HSAT 4",
+            "raw": 35,
+            "readable": true,
+            "scale": 1,
+            "unit": "1/512 volta"
+        },
+        {
+            "draft": false,
+            "query": "~HSAT 5",
+            "raw": 121,
+            "readable": true,
+            "scale": 1,
+            "unit": "1/512 volta"
+        },
+        {
+            "draft": false,
+            "query": "~HSAT 6",
+            "raw": 464,
+            "readable": true,
+            "scale": 1,
+            "unit": "1/512 volta"
+        },
+        {
+            "draft": false,
+            "query": "~HSAT 7",
+            "raw": 137,
+            "readable": true,
+            "scale": 1,
+            "unit": "1/512 volta"
+        },
+        {
+            "draft": false,
+            "query": "~HSAT 8",
+            "raw": 304,
+            "readable": true,
+            "scale": 1,
+            "unit": "1/512 volta"
+        },
+        {
+            "draft": false,
+            "query": "~HSAT 9",
+            "raw": 233,
+            "readable": true,
+            "scale": 1,
+            "unit": "1/512 volta"
+        },
+        {
+            "draft": false,
+            "query": "~HSAT 10",
+            "raw": 489,
+            "readable": true,
+            "scale": 1,
+            "unit": "1/512 volta"
+        },
+        {
+            "draft": false,
+            "query": "~HSAT 11",
+            "raw": 48,
+            "readable": true,
+            "scale": 1,
+            "unit": "1/512 volta"
+        },
+        {
+            "draft": false,
+            "query": "~HSAT 12",
+            "raw": 399,
+            "readable": true,
+            "scale": 1,
+            "unit": "1/512 volta"
+        },
+        {
+            "draft": false,
+            "query": "~HSAT 13",
+            "raw": 469,
+            "readable": true,
+            "scale": 1,
+            "unit": "1/512 volta"
+        },
+        {
+            "draft": false,
+            "query": "~HSAT 14",
+            "raw": 128,
+            "readable": true,
+            "scale": 1,
+            "unit": "1/512 volta"
+        },
+        {
+            "draft": false,
+            "query": "~HSAT 15",
+            "raw": 42,
+            "readable": true,
+            "scale": 1,
+            "unit": "1/512 volta"
+        },
+        {
+            "draft": false,
+            "query": "~HSAT 16",
+            "raw": 298,
+            "readable": true,
+            "scale": 1,
+            "unit": "1/512 volta"
+        },
+        {
+            "draft": false,
+            "query": "~HSAT 17",
+            "raw": 384,
+            "readable": true,
+            "scale": 1,
+            "unit": "1/512 volta"
+        },
+        {
+            "draft": false,
+            "query": "~HSAT 18",
+            "raw": 213,
+            "readable": true,
+            "scale": 1,
+            "unit": "1/512 volta"
+        },
+        {
+            "draft": false,
+            "query": "~HSAT 19",
+            "raw": 384,
+            "readable": true,
+            "scale": 1,
+            "unit": "1/512 volta"
+        },
+        {
+            "draft": false,
+            "query": "~HSAT 20",
+            "raw": 42,
+            "readable": true,
+            "scale": 1,
+            "unit": "1/512 volta"
+        },
+        {
+            "draft": false,
+            "query": "~HSAT 21",
+            "raw": 469,
+            "readable": true,
+            "scale": 1,
+            "unit": "1/512 volta"
+        },
+        {
+            "draft": false,
+            "query": "~HSAT 22",
+            "raw": 213,
+            "readable": true,
+            "scale": 1,
+            "unit": "1/512 volta"
+        },
+        {
+            "draft": false,
+            "query": "~HSAT 23",
+            "raw": 298,
+            "readable": true,
+            "scale": 1,
+            "unit": "1/512 volta"
+        },
+        {
+            "draft": false,
+            "query": "~HSAT 24",
+            "raw": 128,
+            "readable": true,
+            "scale": 1,
+            "unit": "1/512 volta"
+        },
+        {
+            "draft": false,
+            "query": "~HSM 1",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa"
+        },
+        {
+            "draft": false,
+            "query": "~HSM 2",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa"
+        },
+        {
+            "draft": false,
+            "query": "~KIF 1",
+            "raw": 502656,
+            "readable": true,
+            "scale": 10000,
+            "unit": "ganho"
+        },
+        {
+            "draft": false,
+            "query": "~KIF 2",
+            "raw": 3000,
+            "readable": true,
+            "scale": 10000,
+            "unit": "ganho"
+        },
+        {
+            "draft": false,
+            "query": "~KIF 3",
+            "raw": 502656,
+            "readable": true,
+            "scale": 10000,
+            "unit": "ganho"
+        },
+        {
+            "draft": false,
+            "query": "~KIF 4",
+            "raw": 0,
+            "readable": true,
+            "scale": 10000,
+            "unit": "ganho"
+        },
+        {
+            "draft": false,
+            "query": "~KPF 1",
+            "raw": 2000,
+            "readable": true,
+            "scale": 10000,
+            "unit": "ganho"
+        },
+        {
+            "draft": false,
+            "query": "~KPF 2",
+            "raw": 30,
+            "readable": true,
+            "scale": 10000,
+            "unit": "ganho"
+        },
+        {
+            "draft": false,
+            "query": "~KPF 3",
+            "raw": 2000,
+            "readable": true,
+            "scale": 10000,
+            "unit": "ganho"
+        },
+        {
+            "draft": false,
+            "query": "~KPF 4",
+            "raw": 0,
+            "readable": true,
+            "scale": 10000,
+            "unit": "ganho"
+        },
+        {
+            "draft": false,
+            "query": "~LD 1",
+            "raw": 0,
+            "readable": true,
+            "scale": 1000,
+            "unit": "mH"
+        },
+        {
+            "draft": false,
+            "query": "~LD 2",
+            "raw": 0,
+            "readable": true,
+            "scale": 1000,
+            "unit": "mH"
+        },
+        {
+            "draft": false,
+            "query": "~LQ 1",
+            "raw": 0,
+            "readable": true,
+            "scale": 1000,
+            "unit": "mH"
+        },
+        {
+            "draft": false,
+            "query": "~LQ 2",
+            "raw": 0,
+            "readable": true,
+            "scale": 1000,
+            "unit": "mH"
+        },
+        {
+            "draft": false,
+            "query": "~MXPW 1",
+            "raw": 4400,
+            "readable": true,
+            "scale": 10,
+            "unit": "W"
+        },
+        {
+            "draft": false,
+            "query": "~MXPW 2",
+            "raw": 28350,
+            "readable": true,
+            "scale": 10,
+            "unit": "W"
+        },
+        {
+            "draft": false,
+            "query": "~PSA 1",
+            "raw": 120,
+            "readable": true,
+            "scale": 1,
+            "unit": "1/512 volta"
+        },
+        {
+            "draft": false,
+            "query": "~PSA 2",
+            "raw": 128,
+            "readable": true,
+            "scale": 1,
+            "unit": "1/512 volta"
+        },
+        {
+            "draft": false,
+            "query": "~RS 1",
+            "raw": 0,
+            "readable": true,
+            "scale": 1000,
+            "unit": "Ω"
+        },
+        {
+            "draft": false,
+            "query": "~RS 2",
+            "raw": 0,
+            "readable": true,
+            "scale": 1000,
+            "unit": "Ω"
+        },
+        {
+            "draft": false,
+            "query": "~SPOL 1",
+            "raw": 1,
+            "readable": true,
+            "scale": 1,
+            "unit": "pares de polos"
+        },
+        {
+            "draft": false,
+            "query": "~SPOL 2",
+            "raw": 1,
+            "readable": true,
+            "scale": 1,
+            "unit": "pares de polos"
+        },
+        {
+            "draft": false,
+            "query": "~SWD 1",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "opção"
+        },
+        {
+            "draft": false,
+            "query": "~SWD 2",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "opção"
+        },
+        {
+            "draft": false,
+            "query": "~TID 1",
+            "raw": 0,
+            "readable": true,
+            "scale": 10,
+            "unit": "A"
+        },
+        {
+            "draft": false,
+            "query": "~TID 2",
+            "raw": 0,
+            "readable": true,
+            "scale": 10,
+            "unit": "A"
+        },
+        {
+            "draft": false,
+            "query": "~VK 1",
+            "raw": 13000,
+            "readable": true,
+            "scale": 1000,
+            "unit": "V/kRPM"
+        },
+        {
+            "draft": false,
+            "query": "~VK 2",
+            "raw": 0,
+            "readable": true,
+            "scale": 1000,
+            "unit": "V/kRPM"
+        },
+        {
+            "draft": false,
+            "query": "~ZSMA 1",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "calibração"
+        },
+        {
+            "draft": false,
+            "query": "~ZSMA 2",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "calibração"
+        },
+        {
+            "draft": false,
+            "query": "~ZSMC 1",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "calibração"
+        },
+        {
+            "draft": false,
+            "query": "~ZSMC 2",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "calibração"
+        },
+        {
+            "draft": false,
+            "query": "~ZSMC 3",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "calibração"
+        },
+        {
+            "draft": false,
+            "query": "~ZSMC 4",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "calibração"
+        },
+        {
+            "draft": false,
+            "query": "~ZSMC 5",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "calibração"
+        },
+        {
+            "draft": false,
+            "query": "~ZSMC 6",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "calibração"
+        },
+        {
+            "draft": false,
+            "query": "~CAS",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "opção"
+        },
+        {
+            "draft": false,
+            "query": "~CBR",
+            "raw": 3,
+            "readable": true,
+            "scale": 1,
+            "unit": "opção"
+        },
+        {
+            "draft": false,
+            "query": "~CEN",
+            "raw": 1,
+            "readable": true,
+            "scale": 1,
+            "unit": "opção"
+        },
+        {
+            "draft": false,
+            "query": "~CGT 1",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "ms"
+        },
+        {
+            "draft": false,
+            "query": "~CGT 2",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "fator"
+        },
+        {
+            "draft": false,
+            "query": "~CHB",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "ms"
+        },
+        {
+            "draft": false,
+            "query": "~CHBT 1",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "ID + ms"
+        },
+        {
+            "draft": false,
+            "query": "~CHBT 2",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "ID + ms"
+        },
+        {
+            "draft": false,
+            "query": "~CHBT 3",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "ID + ms"
+        },
+        {
+            "draft": false,
+            "query": "~CHBT 4",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "ID + ms"
+        },
+        {
+            "draft": false,
+            "query": "~CHLA",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "opção"
+        },
+        {
+            "draft": false,
+            "query": "~CLSN",
+            "raw": 4,
+            "readable": true,
+            "scale": 1,
+            "unit": "ID"
+        },
+        {
+            "draft": false,
+            "query": "~CNOD",
+            "raw": 1,
+            "readable": true,
+            "scale": 1,
+            "unit": "ID"
+        },
+        {
+            "draft": false,
+            "query": "~CSRT",
+            "raw": 100,
+            "readable": true,
+            "scale": 1,
+            "unit": "ms"
+        },
+        {
+            "draft": false,
+            "query": "~CTPS 1",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "ms"
+        },
+        {
+            "draft": false,
+            "query": "~CTPS 2",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "ms"
+        },
+        {
+            "draft": false,
+            "query": "~CTPS 3",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "ms"
+        },
+        {
+            "draft": false,
+            "query": "~CTPS 4",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "ms"
+        },
+        {
+            "draft": false,
+            "query": "~CTPS 5",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "ms"
+        },
+        {
+            "draft": false,
+            "query": "~CTPS 6",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "ms"
+        },
+        {
+            "draft": false,
+            "query": "~CTPS 7",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "ms"
+        },
+        {
+            "draft": false,
+            "query": "~CTPS 8",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "ms"
+        },
+        {
+            "draft": false,
+            "query": "~CTT 1",
+            "raw": 255,
+            "readable": true,
+            "scale": 1,
+            "unit": "opção"
+        },
+        {
+            "draft": false,
+            "query": "~CTT 2",
+            "raw": 255,
+            "readable": true,
+            "scale": 1,
+            "unit": "opção"
+        },
+        {
+            "draft": false,
+            "query": "~CTT 3",
+            "raw": 255,
+            "readable": true,
+            "scale": 1,
+            "unit": "opção"
+        },
+        {
+            "draft": false,
+            "query": "~CTT 4",
+            "raw": 255,
+            "readable": true,
+            "scale": 1,
+            "unit": "opção"
+        },
+        {
+            "draft": false,
+            "query": "~CTT 5",
+            "raw": 255,
+            "readable": true,
+            "scale": 1,
+            "unit": "opção"
+        },
+        {
+            "draft": false,
+            "query": "~CTT 6",
+            "raw": 255,
+            "readable": true,
+            "scale": 1,
+            "unit": "opção"
+        },
+        {
+            "draft": false,
+            "query": "~CTT 7",
+            "raw": 255,
+            "readable": true,
+            "scale": 1,
+            "unit": "opção"
+        },
+        {
+            "draft": false,
+            "query": "~CTT 8",
+            "raw": 255,
+            "readable": true,
+            "scale": 1,
+            "unit": "opção"
+        },
+        {
+            "draft": false,
+            "query": "~FSA",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "opção"
+        },
+        {
+            "draft": false,
+            "query": "~RPDM 1",
+            "raw": 537200928,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa PDO"
+        },
+        {
+            "draft": false,
+            "query": "~RPDM 2",
+            "raw": 537201184,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa PDO"
+        },
+        {
+            "draft": false,
+            "query": "~RPDM 3",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa PDO"
+        },
+        {
+            "draft": false,
+            "query": "~RPDM 4",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa PDO"
+        },
+        {
+            "draft": false,
+            "query": "~RPDM 5",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa PDO"
+        },
+        {
+            "draft": false,
+            "query": "~RPDM 6",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa PDO"
+        },
+        {
+            "draft": false,
+            "query": "~RPDM 7",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa PDO"
+        },
+        {
+            "draft": false,
+            "query": "~RPDM 8",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa PDO"
+        },
+        {
+            "draft": false,
+            "query": "~RPDM 9",
+            "raw": 537201440,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa PDO"
+        },
+        {
+            "draft": false,
+            "query": "~RPDM 10",
+            "raw": 537201696,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa PDO"
+        },
+        {
+            "draft": false,
+            "query": "~RPDM 11",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa PDO"
+        },
+        {
+            "draft": false,
+            "query": "~RPDM 12",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa PDO"
+        },
+        {
+            "draft": false,
+            "query": "~RPDM 13",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa PDO"
+        },
+        {
+            "draft": false,
+            "query": "~RPDM 14",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa PDO"
+        },
+        {
+            "draft": false,
+            "query": "~RPDM 15",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa PDO"
+        },
+        {
+            "draft": false,
+            "query": "~RPDM 16",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa PDO"
+        },
+        {
+            "draft": false,
+            "query": "~RPDM 17",
+            "raw": 537201952,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa PDO"
+        },
+        {
+            "draft": false,
+            "query": "~RPDM 18",
+            "raw": 537202208,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa PDO"
+        },
+        {
+            "draft": false,
+            "query": "~RPDM 19",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa PDO"
+        },
+        {
+            "draft": false,
+            "query": "~RPDM 20",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa PDO"
+        },
+        {
+            "draft": false,
+            "query": "~RPDM 21",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa PDO"
+        },
+        {
+            "draft": false,
+            "query": "~RPDM 22",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa PDO"
+        },
+        {
+            "draft": false,
+            "query": "~RPDM 23",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa PDO"
+        },
+        {
+            "draft": false,
+            "query": "~RPDM 24",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa PDO"
+        },
+        {
+            "draft": false,
+            "query": "~RPDM 25",
+            "raw": 537202464,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa PDO"
+        },
+        {
+            "draft": false,
+            "query": "~RPDM 26",
+            "raw": 537202720,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa PDO"
+        },
+        {
+            "draft": false,
+            "query": "~RPDM 27",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa PDO"
+        },
+        {
+            "draft": false,
+            "query": "~RPDM 28",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa PDO"
+        },
+        {
+            "draft": false,
+            "query": "~RPDM 29",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa PDO"
+        },
+        {
+            "draft": false,
+            "query": "~RPDM 30",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa PDO"
+        },
+        {
+            "draft": false,
+            "query": "~RPDM 31",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa PDO"
+        },
+        {
+            "draft": false,
+            "query": "~RPDM 32",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa PDO"
+        },
+        {
+            "draft": false,
+            "query": "~RPDM 33",
+            "raw": 537202976,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa PDO"
+        },
+        {
+            "draft": false,
+            "query": "~RPDM 34",
+            "raw": 537203232,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa PDO"
+        },
+        {
+            "draft": false,
+            "query": "~RPDM 35",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa PDO"
+        },
+        {
+            "draft": false,
+            "query": "~RPDM 36",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa PDO"
+        },
+        {
+            "draft": false,
+            "query": "~RPDM 37",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa PDO"
+        },
+        {
+            "draft": false,
+            "query": "~RPDM 38",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa PDO"
+        },
+        {
+            "draft": false,
+            "query": "~RPDM 39",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa PDO"
+        },
+        {
+            "draft": false,
+            "query": "~RPDM 40",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa PDO"
+        },
+        {
+            "draft": false,
+            "query": "~RPDM 41",
+            "raw": 537203488,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa PDO"
+        },
+        {
+            "draft": false,
+            "query": "~RPDM 42",
+            "raw": 537203744,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa PDO"
+        },
+        {
+            "draft": false,
+            "query": "~RPDM 43",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa PDO"
+        },
+        {
+            "draft": false,
+            "query": "~RPDM 44",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa PDO"
+        },
+        {
+            "draft": false,
+            "query": "~RPDM 45",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa PDO"
+        },
+        {
+            "draft": false,
+            "query": "~RPDM 46",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa PDO"
+        },
+        {
+            "draft": false,
+            "query": "~RPDM 47",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa PDO"
+        },
+        {
+            "draft": false,
+            "query": "~RPDM 48",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa PDO"
+        },
+        {
+            "draft": false,
+            "query": "~RPDM 49",
+            "raw": 537204000,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa PDO"
+        },
+        {
+            "draft": false,
+            "query": "~RPDM 50",
+            "raw": 537204256,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa PDO"
+        },
+        {
+            "draft": false,
+            "query": "~RPDM 51",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa PDO"
+        },
+        {
+            "draft": false,
+            "query": "~RPDM 52",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa PDO"
+        },
+        {
+            "draft": false,
+            "query": "~RPDM 53",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa PDO"
+        },
+        {
+            "draft": false,
+            "query": "~RPDM 54",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa PDO"
+        },
+        {
+            "draft": false,
+            "query": "~RPDM 55",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa PDO"
+        },
+        {
+            "draft": false,
+            "query": "~RPDM 56",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa PDO"
+        },
+        {
+            "draft": false,
+            "query": "~RPDM 57",
+            "raw": 537204512,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa PDO"
+        },
+        {
+            "draft": false,
+            "query": "~RPDM 58",
+            "raw": 537204768,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa PDO"
+        },
+        {
+            "draft": false,
+            "query": "~RPDM 59",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa PDO"
+        },
+        {
+            "draft": false,
+            "query": "~RPDM 60",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa PDO"
+        },
+        {
+            "draft": false,
+            "query": "~RPDM 61",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa PDO"
+        },
+        {
+            "draft": false,
+            "query": "~RPDM 62",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa PDO"
+        },
+        {
+            "draft": false,
+            "query": "~RPDM 63",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa PDO"
+        },
+        {
+            "draft": false,
+            "query": "~RPDM 64",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa PDO"
+        },
+        {
+            "draft": false,
+            "query": "~TPDM 1",
+            "raw": 554041632,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa PDO"
+        },
+        {
+            "draft": false,
+            "query": "~TPDM 2",
+            "raw": 554041888,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa PDO"
+        },
+        {
+            "draft": false,
+            "query": "~TPDM 3",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa PDO"
+        },
+        {
+            "draft": false,
+            "query": "~TPDM 4",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa PDO"
+        },
+        {
+            "draft": false,
+            "query": "~TPDM 5",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa PDO"
+        },
+        {
+            "draft": false,
+            "query": "~TPDM 6",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa PDO"
+        },
+        {
+            "draft": false,
+            "query": "~TPDM 7",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa PDO"
+        },
+        {
+            "draft": false,
+            "query": "~TPDM 8",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa PDO"
+        },
+        {
+            "draft": false,
+            "query": "~TPDM 9",
+            "raw": 554042144,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa PDO"
+        },
+        {
+            "draft": false,
+            "query": "~TPDM 10",
+            "raw": 554042400,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa PDO"
+        },
+        {
+            "draft": false,
+            "query": "~TPDM 11",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa PDO"
+        },
+        {
+            "draft": false,
+            "query": "~TPDM 12",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa PDO"
+        },
+        {
+            "draft": false,
+            "query": "~TPDM 13",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa PDO"
+        },
+        {
+            "draft": false,
+            "query": "~TPDM 14",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa PDO"
+        },
+        {
+            "draft": false,
+            "query": "~TPDM 15",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa PDO"
+        },
+        {
+            "draft": false,
+            "query": "~TPDM 16",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa PDO"
+        },
+        {
+            "draft": false,
+            "query": "~TPDM 17",
+            "raw": 554042656,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa PDO"
+        },
+        {
+            "draft": false,
+            "query": "~TPDM 18",
+            "raw": 554042912,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa PDO"
+        },
+        {
+            "draft": false,
+            "query": "~TPDM 19",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa PDO"
+        },
+        {
+            "draft": false,
+            "query": "~TPDM 20",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa PDO"
+        },
+        {
+            "draft": false,
+            "query": "~TPDM 21",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa PDO"
+        },
+        {
+            "draft": false,
+            "query": "~TPDM 22",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa PDO"
+        },
+        {
+            "draft": false,
+            "query": "~TPDM 23",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa PDO"
+        },
+        {
+            "draft": false,
+            "query": "~TPDM 24",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa PDO"
+        },
+        {
+            "draft": false,
+            "query": "~TPDM 25",
+            "raw": 554043168,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa PDO"
+        },
+        {
+            "draft": false,
+            "query": "~TPDM 26",
+            "raw": 554043424,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa PDO"
+        },
+        {
+            "draft": false,
+            "query": "~TPDM 27",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa PDO"
+        },
+        {
+            "draft": false,
+            "query": "~TPDM 28",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa PDO"
+        },
+        {
+            "draft": false,
+            "query": "~TPDM 29",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa PDO"
+        },
+        {
+            "draft": false,
+            "query": "~TPDM 30",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa PDO"
+        },
+        {
+            "draft": false,
+            "query": "~TPDM 31",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa PDO"
+        },
+        {
+            "draft": false,
+            "query": "~TPDM 32",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa PDO"
+        },
+        {
+            "draft": false,
+            "query": "~TPDM 33",
+            "raw": 554047776,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa PDO"
+        },
+        {
+            "draft": false,
+            "query": "~TPDM 34",
+            "raw": 554048032,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa PDO"
+        },
+        {
+            "draft": false,
+            "query": "~TPDM 35",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa PDO"
+        },
+        {
+            "draft": false,
+            "query": "~TPDM 36",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa PDO"
+        },
+        {
+            "draft": false,
+            "query": "~TPDM 37",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa PDO"
+        },
+        {
+            "draft": false,
+            "query": "~TPDM 38",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa PDO"
+        },
+        {
+            "draft": false,
+            "query": "~TPDM 39",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa PDO"
+        },
+        {
+            "draft": false,
+            "query": "~TPDM 40",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa PDO"
+        },
+        {
+            "draft": false,
+            "query": "~TPDM 41",
+            "raw": 554048288,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa PDO"
+        },
+        {
+            "draft": false,
+            "query": "~TPDM 42",
+            "raw": 554048544,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa PDO"
+        },
+        {
+            "draft": false,
+            "query": "~TPDM 43",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa PDO"
+        },
+        {
+            "draft": false,
+            "query": "~TPDM 44",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa PDO"
+        },
+        {
+            "draft": false,
+            "query": "~TPDM 45",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa PDO"
+        },
+        {
+            "draft": false,
+            "query": "~TPDM 46",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa PDO"
+        },
+        {
+            "draft": false,
+            "query": "~TPDM 47",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa PDO"
+        },
+        {
+            "draft": false,
+            "query": "~TPDM 48",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa PDO"
+        },
+        {
+            "draft": false,
+            "query": "~TPDM 49",
+            "raw": 554048800,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa PDO"
+        },
+        {
+            "draft": false,
+            "query": "~TPDM 50",
+            "raw": 554049056,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa PDO"
+        },
+        {
+            "draft": false,
+            "query": "~TPDM 51",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa PDO"
+        },
+        {
+            "draft": false,
+            "query": "~TPDM 52",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa PDO"
+        },
+        {
+            "draft": false,
+            "query": "~TPDM 53",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa PDO"
+        },
+        {
+            "draft": false,
+            "query": "~TPDM 54",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa PDO"
+        },
+        {
+            "draft": false,
+            "query": "~TPDM 55",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa PDO"
+        },
+        {
+            "draft": false,
+            "query": "~TPDM 56",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa PDO"
+        },
+        {
+            "draft": false,
+            "query": "~TPDM 57",
+            "raw": 554049312,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa PDO"
+        },
+        {
+            "draft": false,
+            "query": "~TPDM 58",
+            "raw": 554049568,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa PDO"
+        },
+        {
+            "draft": false,
+            "query": "~TPDM 59",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa PDO"
+        },
+        {
+            "draft": false,
+            "query": "~TPDM 60",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa PDO"
+        },
+        {
+            "draft": false,
+            "query": "~TPDM 61",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa PDO"
+        },
+        {
+            "draft": false,
+            "query": "~TPDM 62",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa PDO"
+        },
+        {
+            "draft": false,
+            "query": "~TPDM 63",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa PDO"
+        },
+        {
+            "draft": false,
+            "query": "~TPDM 64",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "mapa PDO"
+        },
+        {
+            "draft": false,
+            "query": "~RPDC 1",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "COB-ID"
+        },
+        {
+            "draft": false,
+            "query": "~RPDC 2",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "COB-ID"
+        },
+        {
+            "draft": false,
+            "query": "~RPDC 3",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "COB-ID"
+        },
+        {
+            "draft": false,
+            "query": "~RPDC 4",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "COB-ID"
+        },
+        {
+            "draft": false,
+            "query": "~RPDC 5",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "COB-ID"
+        },
+        {
+            "draft": false,
+            "query": "~RPDC 6",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "COB-ID"
+        },
+        {
+            "draft": false,
+            "query": "~RPDC 7",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "COB-ID"
+        },
+        {
+            "draft": false,
+            "query": "~RPDC 8",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "COB-ID"
+        },
+        {
+            "draft": false,
+            "query": "~TPDC 1",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "COB-ID"
+        },
+        {
+            "draft": false,
+            "query": "~TPDC 2",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "COB-ID"
+        },
+        {
+            "draft": false,
+            "query": "~TPDC 3",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "COB-ID"
+        },
+        {
+            "draft": false,
+            "query": "~TPDC 4",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "COB-ID"
+        },
+        {
+            "draft": false,
+            "query": "~TPDC 5",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "COB-ID"
+        },
+        {
+            "draft": false,
+            "query": "~TPDC 6",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "COB-ID"
+        },
+        {
+            "draft": false,
+            "query": "~TPDC 7",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "COB-ID"
+        },
+        {
+            "draft": false,
+            "query": "~TPDC 8",
+            "raw": 0,
+            "readable": true,
+            "scale": 1,
+            "unit": "COB-ID"
+        },
+        {
+            "draft": false,
+            "query": "~OTL 1",
+            "raw": 85,
+            "readable": true,
+            "scale": 1,
+            "unit": "°C"
+        },
+        {
+            "draft": false,
+            "query": "~OTL 2",
+            "raw": 100,
+            "readable": true,
+            "scale": 1,
+            "unit": "°C"
+        },
+        {
+            "draft": false,
+            "query": "~OTL 3",
+            "raw": 100,
+            "readable": true,
+            "scale": 1,
+            "unit": "°C"
+        },
+        {
+            "draft": false,
+            "query": "~SLL 1",
+            "raw": -20000,
+            "readable": true,
+            "scale": 1,
+            "unit": "contagens"
+        },
+        {
+            "draft": false,
+            "query": "~SLL 2",
+            "raw": -20000,
+            "readable": true,
+            "scale": 1,
+            "unit": "contagens"
+        }
+    ],
+    "schema": 1,
+    "scope": "catalog_configuration_profile",
+    "session_connected": true,
+    "source": "serial",
+    "timestamp_utc": "2026-10-07T20:54:23.588Z",
+    "version": "0.6.0"
+}

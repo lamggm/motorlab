@@ -3,8 +3,8 @@
 #include "cpr.h"
 #include "firmware.h"
 #include "robocan.h"
-#include "window.h"
-#include <QApplication>
+#include "control_host.h"
+#include <QCoreApplication>
 #include <QDateTime>
 #include <QDir>
 #include <QFile>
@@ -14,7 +14,7 @@
 #include <QProcess>
 #include <QSaveFile>
 #include <QSet>
-#include <QSignalBlocker>
+
 #include <QTemporaryFile>
 #include <QUuid>
 #include <cmath>
@@ -87,7 +87,7 @@ void validate(const QJsonValue &v, const QJsonObject &s,
 }
 } // namespace
 
-ControlServer::ControlServer(Window &window) : QObject(&window), w(window) {
+ControlServer::ControlServer(ControlHost &host) : QObject(&host), w(host) {
   QFile f(":/mcp-tools.json");
   if (!f.open(QIODevice::ReadOnly))
     qFatal("MCP schema resource missing");
@@ -106,9 +106,10 @@ ControlServer::ControlServer(Window &window) : QObject(&window), w(window) {
     else if (continuous.running && continuous.motorAck.isValid() &&
              continuous.motorAck.elapsed() >= w.session.watchdogMs() / 2)
       continuousStop("Comunicação atrasada; margem do watchdog atingida.");
-    else if (continuous.running && continuous.encoderSpeed && continuous.encoderProgress.elapsed() >= continuous.noMotionMs)
+    else if (continuous.running && (continuous.encoderSpeed || continuous.position) &&
+             (!continuous.position || std::abs(continuous.encoderCounter - continuous.value) > 20) && continuous.encoderProgress.elapsed() >= continuous.noMotionMs)
       continuousStop("Sem progresso do encoder A/B; realimentação não confirmada.");
-    else if (continuous.running && continuous.progress.elapsed() >= continuous.noMotionMs)
+    else if (continuous.running && !continuous.position && continuous.progress.elapsed() >= continuous.noMotionMs)
       continuousStop("Sem progresso do sensor interno; movimento não confirmado.");
   });
   deadline.setSingleShot(true);
@@ -190,7 +191,7 @@ ControlServer::ControlServer(Window &window) : QObject(&window), w(window) {
             if (!active.isEmpty() && jobs[active]["kind"] == "upload_script")
               finish(ok, msg);
           });
-  connect(&w, &Window::firmwareUpdateFinished, this,
+  connect(&w, &ControlHost::firmwareUpdateFinished, this,
           [this](bool ok, const QString &msg) {
             if (!active.isEmpty() && jobs[active]["kind"] == "firmware")
               finish(ok, msg);
@@ -260,12 +261,13 @@ QJsonObject ControlServer::state() const {
           {"watchdog_ms", s.watchdogMs()},
           {"streaming", s.streaming()},
           {"busy",
-           !active.isEmpty() || s.busy() || w.applying || w.readsPending > 0},
+           !active.isEmpty() || s.busy() || w.isApplying() || w.readsPending() > 0},
           {"active_job", active},
           {"continuous", continuousState()},
-          {"notice", w.notice->text()},
+          {"notice", w.noticeText()},
           {"sample_count", w.sampleCount()},
           {"physical_validation", "not_performed"},
+          {"backend", w.headless() ? "cli" : "gui"},
           {"unavailable",
            QJsonArray{"firmware_serial", "firmware_can", "firmware_auxiliary",
                       "automatic_PI_FOC_Vk_Kt", "linearity_correction",
@@ -273,10 +275,10 @@ QJsonObject ControlServer::state() const {
 }
 void ControlServer::requireIdle() const {
   need(!w.manualDriveActive(), "Controle pelos sliders em andamento; zere/pare os canais antes desta operação.");
-  need(active.isEmpty() && !w.applying && !w.readsPending &&
+  need(active.isEmpty() && !w.isApplying() && !w.readsPending() &&
            !w.session.uploading(),
        "Uma operação já está em andamento.");
-  need(!QApplication::activeModalWidget(),
+  need(!w.modalActive(),
        "Feche o diálogo modal no MotorLab antes de operar pelo MCP.");
 }
 void ControlServer::authorize(const QJsonObject &a) {
@@ -313,13 +315,7 @@ QJsonObject ControlServer::newJob(const QString &kind) {
                   {"model", w.session.model()},
                   {"firmware", w.session.firmware()},
                   {"replies", QJsonArray{}}};
-  w.applying = true;
-  // A pre-existing telemetry scan may finish while onReply is in maintenance
-  // mode. Discard that partial frame so polling can resume after this job.
-  w.scanActive = false;
-  w.changes.clear();
-  w.operationExpected.clear();
-  w.operationTarget.clear();
+  w.beginOperation();
   w.refreshState();
   deadline.start(120000);
   return {{"job_id", active}, {"state", "running"}};
@@ -344,16 +340,7 @@ void ControlServer::finish(bool ok, const QString &message,
     details["continuous"] = ended;
     j["continuous"] = ended;
     j["result"] = details;
-    for (auto label : w.speedSources)
-      label->setText("Encoder A/B: ?S · Hall/interno: ?BS");
-    for (auto label : w.hallRpm)
-      label->setText("—");
-    for (auto label : w.metrics)
-      label->setText("—");
-    w.faults->setText("Atualizando estado após parada…");
-    w.continuousHistoryNote->setVisible(false);
-    w.chart->setEnabled(true);
-    w.ioValues->setEnabled(true);
+    w.continuousFinished();
   }
   supervision.stop();
   continuous = Continuous{};
@@ -363,7 +350,7 @@ void ControlServer::finish(bool ok, const QString &message,
   afterSteps = {};
   tick.stop();
   deadline.stop();
-  w.applying = false;
+  w.endOperation();
   // Read jobs never acquire control permissions and must not revoke them.
   // Session transport failures still close the connection and disarm normally.
   if (j["kind"].toString() != "read")
@@ -460,9 +447,9 @@ QJsonObject ControlServer::dispatch(const QString &method,
         return jobs[text(a, "job_id")];
       }
       if (method == "motorlab_log")
-        return {{"text", w.console->toPlainText()
+        return {{"text", w.logText()
                              .split('\n')
-                             .mid(qMax(0, w.console->blockCount() -
+                             .mid(qMax(0, w.logText().split('\n').size() -
                                               a["limit"].toInt(100)))
                              .join('\n')}};
       if (method == "motorlab_ports") {
@@ -502,42 +489,18 @@ QJsonObject ControlServer::dispatch(const QString &method,
         return sequence("stop", {{"!EX", {}}, {"?FF", {}, true}});
       }
       if (method == "motorlab_telemetry") {
-        QJsonArray samples;
-        for (int n = qMax(0, int(w.recorded.size()) - a["limit"].toInt(20));
-             n < w.recorded.size(); ++n) {
-          const auto &v = w.recorded[n];
-          QJsonObject o{
-              {"timestamp", v.timestamp}, {"seconds", v.seconds},
-              {"amps1", v.amp1},          {"amps2", v.amp2},
-              {"rpm1", v.rpm1},           {"rpm2", v.rpm2},
-              {"rpm1_encoder", v.rpm1}, {"rpm2_encoder", v.rpm2},
-              {"rpm1_hall", v.hallRpm1}, {"rpm2_hall", v.hallRpm2},
-              {"voltage", v.voltage},     {"temperature", v.temperature}};
-          o["encoder1"] =
-              v.hasEncoder ? QJsonValue(double(v.encoder1)) : QJsonValue();
-          o["encoder2"] =
-              v.hasEncoder ? QJsonValue(double(v.encoder2)) : QJsonValue();
-          o["faults"] =
-              v.hasFaults ? QJsonValue(double(v.faults)) : QJsonValue();
-          o["flags"] = v.hasFlags ? QJsonValue(double(v.flags)) : QJsonValue();
-          samples.append(o);
-        }
-        return {{"samples", samples},
-                {"connected", s.connected()},
-                {"source", w.captureDemo ? "demo" : "serial"},
-                {"model", w.captureModel},
-                {"firmware", w.captureFirmware}};
+        return w.telemetry(a["limit"].toInt(20));
       }
       if (method == "motorlab_catalog" || method == "motorlab_parameters") {
         QJsonArray entries;
         const bool catalog = method == "motorlab_catalog";
         const auto filter = text(a, "search");
         const auto model = text(a, "model").isEmpty()
-                               ? w.offlineModel->currentText()
+                               ? w.selectedModel()
                                : text(a, "model");
         int matched = 0, offset = a["offset"].toInt(),
             limit = a["limit"].toInt(50);
-        for (const auto &p : w.parameters) {
+        for (const auto &p : w.parameters()) {
           if (!(p.suffix + " " + p.name).contains(filter, Qt::CaseInsensitive))
             continue;
           if (matched++ < offset || entries.size() >= limit)
@@ -558,39 +521,22 @@ QJsonObject ControlServer::dispatch(const QString &method,
             o["raw"] = p.known ? QJsonValue(double(p.raw)) : QJsonValue();
             o["dirty"] = p.dirty;
             o["draft_raw"] =
-                p.editor
-                    ? QJsonValue(double(qRound64(p.editor->value() * p.scale)))
-                    : QJsonValue();
+                p.editable ? QJsonValue(double(p.draftRaw)) : QJsonValue();
           }
           entries.append(o);
         }
         return {{"entries", entries},        {"total", matched},
                 {"offset", offset},          {"connected", s.connected()},
-                {"source", w.profileSource}, {"model", model}};
+                {"source", w.profileSource()}, {"model", model}};
       }
       if (method == "motorlab_view") {
         if (a.contains("model")) {
           requireIdle();
           need(!s.connected(), "Seleção de modelo somente desconectado.");
-          w.offlineModel->setCurrentText(text(a, "model"));
         }
-        if (a.contains("page"))
-          w.selectPage(a["page"].toInt());
-        if (a.contains("visible")) {
-          if (a["visible"].toBool()) {
-            w.show();
-            w.raise();
-          } else
-            w.hide();
-        }
-        if (a.contains("screenshot_path")) {
+        if (a.contains("screenshot_path"))
           outputPath(text(a, "screenshot_path"), a["overwrite"].toBool());
-          need(w.grab().save(text(a, "screenshot_path"), "PNG"),
-               "Falha ao salvar captura.");
-        }
-        return {{"visible", w.isVisible()},
-                {"page", w.pages->currentIndex()},
-                {"screenshot_path", a["screenshot_path"]}};
+        return w.view(a);
       }
       requireIdle();
       if (method == "motorlab_continuous")
@@ -604,15 +550,8 @@ QJsonObject ControlServer::dispatch(const QString &method,
       if (method == "motorlab_connect") {
         need(!s.connected(),
              "Desconecte explicitamente a fonte atual antes de trocar.");
-        if (text(a, "mode") == "serial") {
-          need(!text(a, "port").isEmpty(), "Informe port.");
-          w.source->setCurrentIndex(1);
-          w.port->setCurrentText(text(a, "port"));
-          w.baud->setCurrentText(QString::number(a["baud"].toInt(115200)));
-        } else
-          w.source->setCurrentIndex(0);
-        w.connectSource();
-        need(s.connected(), w.notice->text());
+        if (text(a, "mode") == "serial") need(!text(a, "port").isEmpty(), "Informe port.");
+        need(w.connectDevice(text(a, "mode"), text(a, "port"), a["baud"].toInt(115200)), w.noticeText());
         return state();
       }
       if (method == "motorlab_disconnect") {
@@ -633,53 +572,44 @@ QJsonObject ControlServer::dispatch(const QString &method,
             commands.append(Step{c.text, {}});
           }
           if (commands.isEmpty())
-            for (const auto &p : w.parameters)
+            for (const auto &p : w.parameters())
               commands.append(Step{"~" + p.suffix, {}});
         }
         // onReply updates the same editor; don't silently mix a draft with a
         // newer reading.
+        const auto parameters = w.parameters();
         for (const auto &cmd : commands)
-          for (auto &p : w.parameters)
+          for (const auto &p : parameters)
             if (cmd.command == "~" + p.suffix)
               need(!p.dirty || a["discard_drafts"].toBool(),
-                   "Existem rascunhos para a consulta. Use read_parameters com "
-                   "discard_drafts=true.");
+                   "Existem rascunhos para a consulta. Use discard_drafts=true.");
         for (const auto &cmd : commands)
-          for (auto &p : w.parameters)
-            if (cmd.command == "~" + p.suffix) {
-              p.dirty = false;
-              p.known = false;
-            }
+          for (int row = 0; row < parameters.size(); ++row)
+            if (cmd.command == "~" + parameters[row].suffix) w.clearParameter(row);
         return sequence("read", commands, method == "motorlab_read_parameters");
       }
       if (method == "motorlab_stage") {
         QVector<QPair<int, qint64>> staged;
         QSet<QString> seen;
+        const auto parameters = w.parameters();
         for (auto v : a["changes"].toArray()) {
           auto item = v.toObject();
           auto query = text(item, "query");
           need(!seen.contains(query), "Consulta duplicada.");
           seen.insert(query);
           int row = -1;
-          for (int n = 0; n < w.parameters.size(); ++n)
-            if ("~" + w.parameters[n].suffix == query)
+          for (int n = 0; n < parameters.size(); ++n)
+            if ("~" + parameters[n].suffix == query)
               row = n;
           need(row >= 0, "Parâmetro desconhecido.");
-          const auto &p = w.parameters[row];
+          const auto &p = parameters[row];
           qint64 raw = qint64(item["raw"].toDouble());
-          need(p.editable && p.editor &&
+          need(p.editable &&
                    Catalog::validValue(*p.spec, raw, p.channel),
                "Valor ou parâmetro não editável.");
           staged.append({row, raw});
         }
-        for (auto v : staged) {
-          auto &p = w.parameters[v.first];
-          QSignalBlocker block(p.editor);
-          p.editor->setValue(v.second / p.scale);
-          p.dirty = !p.known || p.raw != v.second;
-          w.parameterItems[v.first]->setText(0, p.name + " · " + p.suffix +
-                                                    (p.dirty ? " *" : ""));
-        }
+        for (auto v : staged) w.stageParameter(v.first, v.second);
         w.refreshState();
         return {{"staged", staged.size()}, {"transmitted", false}};
       }
@@ -690,11 +620,11 @@ QJsonObject ControlServer::dispatch(const QString &method,
                              {"?FF", {}, true}, {"?FS", {}, false, false, true}};
         int count = 0;
         bool disruptive = false;
-        for (const auto &p : w.parameters)
+        for (const auto &p : w.parameters())
           if (p.dirty) {
-            need(p.known && p.editor && p.editable,
+            need(p.known && p.editable,
                  "Leia os parâmetros antes de aplicar rascunhos.");
-            const auto raw = qRound64(p.editor->value() * p.scale);
+            const auto raw = p.draftRaw;
             need(Catalog::validValue(*p.spec, raw, p.channel),
                  "Rascunho inválido.");
             if (raw == p.raw)
@@ -721,16 +651,26 @@ QJsonObject ControlServer::dispatch(const QString &method,
         authorize(a);
         s.cancelMotion();
         auto commands = stopped();
-        if (c.key == "EESAV")
+        const bool counter = c.key == "C" || c.key == "CB";
+        if (c.key == "EESAV" || counter)
           commands = {{"!R 0", {}, false, true}, {"!EX", {}},
                       {"?FF", {}, true}, {"?FS", {}, false, false, true}};
+        if (counter) {
+          // A sensor may feed either motor. Never change its reference while
+          // either closed loop can interpret the new count as a position error.
+          commands.append(Step{"~MMOD 1", "0"});
+          commands.append(Step{"~MMOD 2", "0"});
+          commands.append(Step{"?S", "0:0"});
+          commands.append(Step{"?BS 1", "0"});
+          commands.append(Step{"?BS 2", "0"});
+        }
         commands.append(Step{c.text, {}});
+        if (counter)
+          commands.append(Step{"?" + c.key + " " + QString::number(c.channel),
+                               QString::number(c.value)});
         return sequence("maintenance", commands, false, [this, c] {
           if (c.key == "EELD" || c.key == "EERST")
-            for (auto &p : w.parameters) {
-              p.known = false;
-              p.dirty = false;
-            }
+            for (int row = 0; row < w.parameters().size(); ++row) w.clearParameter(row);
           finish(true, "Manutenção recebeu ACK; !EX permanece aplicado. "
                        "Persistência requer verificação após reinício.");
         });
@@ -805,7 +745,7 @@ QJsonObject ControlServer::dispatch(const QString &method,
           if (action == "export_csv")
             ok = w.saveCsv(path);
           if (action == "export_log")
-            ok = writeFile(path, w.console->toPlainText().toUtf8());
+            ok = writeFile(path, w.logText().toUtf8());
           need(ok, "Não foi possível exportar (perfil exige valores conhecidos "
                    "ou rascunhos).");
           return {{"path", path}, {"partial_profile", true}};
@@ -829,6 +769,7 @@ QJsonObject ControlServer::dispatch(const QString &method,
         QSet<QString> seen;
         QVector<QPair<int, qint64>> staged;
         int skipped = 0;
+        const auto parameters = w.parameters();
         for (const auto &v : profile.items) {
           if (seen.contains(v.identity()))
             continue;
@@ -848,10 +789,10 @@ QJsonObject ControlServer::dispatch(const QString &method,
           if (action == "import_cpr") {
             bool imported = false, number = false;
             const auto raw = v.value.toLongLong(&number);
-            for (int n = 0; n < w.parameters.size(); ++n) {
-              const auto &p = w.parameters[n];
+            for (int n = 0; n < parameters.size(); ++n) {
+              const auto &p = parameters[n];
               if (p.key == v.command &&
-                  (p.channel ? p.channel : 1) == v.index && p.editor &&
+                  (p.channel ? p.channel : 1) == v.index &&
                   p.editable && v.type != "String" && number &&
                   v.multiplier == qRound(p.scale) &&
                   Catalog::validValue(*p.spec, raw, p.channel)) {
@@ -872,23 +813,14 @@ QJsonObject ControlServer::dispatch(const QString &method,
                                      {"same", false}});
         if (action == "import_cpr") {
           const auto model = s.connected() ? Protocol::supportedModel(s.model())
-                                           : w.offlineModel->currentText();
+                                           : w.selectedModel();
           const bool demo = profile.roborun.contains("DEMO");
           need(profile.firmware == "v3.0:" + model,
                "Modelo/geração do CPR diferente.");
           need(!demo || !s.connected() || s.isDemo(),
                "Perfil simulado não pode ser importado em hardware.");
-          for (auto v : staged) {
-            auto &p = w.parameters[v.first];
-            QSignalBlocker block(p.editor);
-            p.editor->setValue(v.second / p.scale);
-            p.dirty = !p.known || p.raw != v.second;
-            w.parameterItems[v.first]->setText(0, p.name + " · " + p.suffix +
-                                                      (p.dirty ? " *" : ""));
-          }
-          w.profileModel = model;
-          w.profileSource = demo ? "demo" : "cpr";
-          w.profileFirmware.clear();
+          for (auto v : staged) w.stageParameter(v.first, v.second);
+          w.setProfileMetadata(model, QString(), demo ? "demo" : "cpr");
           w.refreshState();
         }
         return {{"firmware", profile.firmware},
@@ -900,10 +832,10 @@ QJsonObject ControlServer::dispatch(const QString &method,
       if (method == "motorlab_script") {
         const auto action = text(a, "action");
         if (action == "get")
-          return {{"source", w.script->toPlainText()}};
+          return {{"source", w.scriptText()}};
         if (action == "set") {
           need(a.contains("source"), "Informe source.");
-          w.script->setPlainText(text(a, "source"));
+          w.setScript(text(a, "source"));
           return {{"transmitted", false}};
         }
         if (action == "robocan") {
@@ -913,7 +845,7 @@ QJsonObject ControlServer::dispatch(const QString &method,
                   {"transmitted", false}};
         }
         const auto source =
-            a.contains("source") ? text(a, "source") : w.script->toPlainText();
+            a.contains("source") ? text(a, "source") : w.scriptText();
         const auto exe = qEnvironmentVariable(
             "MOTORLAB_COMPILER", QCoreApplication::applicationDirPath() +
                                      "/../libexec/compiler/motorlab-compiler");
@@ -1018,14 +950,12 @@ QJsonObject ControlServer::dispatch(const QString &method,
         auto result = newJob("firmware");
         const auto id = active;
         const auto path = text(a, "path"), backup = text(a, "backup_path");
-        // Existing modal DFU implementation keeps a Qt event loop alive. Its
-        // immutable copy, USB path binding and byte-for-byte verification are
-        // reused, not duplicated.
+        // The host runs the same USB preparation and verification contract;
+        // CLI completion is asynchronous and never requires a modal dialog.
         QTimer::singleShot(0, this, [this, id, path, backup] {
-          w.applying = false;
-          w.showFirmwareUpdate(path, backup, true);
-          if (active == id)
-            finish(false, w.notice->text());
+          w.endOperation();
+          w.startFirmware(path, backup);
+
         });
         deadline.stop();
         return result;

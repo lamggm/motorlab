@@ -1,17 +1,19 @@
-# MCP do MotorLab Linux 0.6.0
+# MCP do MotorLab Linux 0.7.0
 
 Servidor local para operar a instância nativa do MotorLab por ferramentas MCP.
-O adaptador usa apenas Python 3 padrão; a aplicação C++/Qt mantém a conexão,
-o catálogo, os rascunhos, os gráficos e as validações existentes. Sem Wine.
+O adaptador usa apenas Python 3 padrão. Por padrão opera o backend `motorlabd`,
+feito com Qt Core/Network e sem interface gráfica. Catálogo, rascunhos, jobs e
+validações são compartilhados pelo código da CLI e da GUI. [Comandos CLI](CLI.md).
 
 ## Abrir e registrar
 
-`./iniciar.sh` abre ou mostra a mesma instância usada pelo MCP. Ela inicia
-**desconectada**, sem procurar controladoras. O MCP pode iniciar a janela oculta;
-`motorlab_view(visible=true)` a mostra no desktop. Sem DISPLAY/WAYLAND, funciona
-com Qt offscreen e exporta capturas PNG.
+O MCP inicia **desconectado**, sem procurar controladoras. O padrão é CLI.
+`--backend gui` seleciona o aplicativo com janela; `./iniciar.sh` abre essa GUI.
+`motorlab_view(visible=true)` e capturas PNG exigem o backend GUI. Na CLI,
+`view` aceita modelo offline/página como metadados e recusa pedidos de janela
+ou imagem explicitamente. Telemetria, perfis e logs continuam exportáveis.
 
-Registro no Codex, usando o caminho absoluto deste pacote:
+Registro existente, usando o caminho absoluto deste pacote (o padrão agora é CLI):
 
 ```sh
 codex mcp add motorlab -- /usr/bin/python3 /CAMINHO/motorlab-linux/mcp/server.py
@@ -27,8 +29,8 @@ Documentação de configuração: https://developers.openai.com/codex/mcp/
 Protocolo stdio: https://modelcontextprotocol.io/specification/2025-11-25/basic/transports
 
 `./iniciar.sh --demo` mantém o comportamento anterior: abre uma instância
-independente. Para demo **compartilhada com MCP**, use `motorlab_connect` com
-`mode="demo"` e depois `motorlab_view`.
+independente. Para demo no backend MCP selecionado, use `motorlab_connect` com
+`mode="demo"`. Mostrar essa instância por `view` exige `--backend gui`.
 
 ## Ferramentas (25)
 
@@ -45,7 +47,7 @@ independente. Para demo **compartilhada com MCP**, use `motorlab_connect` com
 | `motorlab_apply` | Aplicar RAM com script pausado, EX confirmado, ACK e releitura |
 | `motorlab_maintenance` | EEPROM, reset, proteção, contadores e salvar calibração |
 | `motorlab_execute` | Comando temporizado de motor, saída, script ou CLMOD |
-| `motorlab_continuous` | Comando G aberto ou S em velocidade por encoder, com lease, watchdog e limites; start/renew |
+| `motorlab_continuous` | Comando G aberto, S em velocidade ou P em posição por encoder, com lease, watchdog e limites; start/renew |
 | `motorlab_stop` | EX prioritário; resultado distingue envio e confirmação |
 | `motorlab_pause` | Pausar script e parar; opcional `cancel_calibration=true` |
 | `motorlab_job` | Progresso, respostas, resultado e falhas da operação |
@@ -56,7 +58,7 @@ independente. Para demo **compartilhada com MCP**, use `motorlab_connect` com
 | `motorlab_upload_script` | HEX com ACK por registro, sem executar automaticamente |
 | `motorlab_can_read` | Uma consulta SocketCAN SDO, somente leitura |
 | `motorlab_firmware` | Inspeção de DFU e atualização USB existente |
-| `motorlab_view` | Página, modelo offline, janela e captura PNG |
+| `motorlab_view` | Modelo offline e página; janela/PNG somente em backend GUI |
 | `motorlab_log` | Últimas linhas do console |
 
 Nomes, argumentos, limites e descrições completos: `data/mcp-tools.json`.
@@ -99,7 +101,7 @@ v3.0f para escrita, porta exclusiva, watchdog para movimento, catálogo e comand
 validados. Ao fim das tarefas, a permissão de escrita é revogada. Não há disputa
 intencional com outros processos nem tomada forçada de uma porta ocupada.
 
-MCP/GUI compartilham uma fila de operação. Edição/ações concorrentes ficam
+Clientes MCP/CLI no mesmo socket compartilham uma fila de operação; com backend GUI, compartilham também a sessão da janela. CLI e GUI em sockets distintos não compartilham conexão serial. A exclusividade da porta impede conectar ambas ao mesmo dispositivo. Edição/ações concorrentes ficam
 bloqueadas durante uma tarefa; status, log, progresso e parada continuam acessíveis.
 Uma parada durante transação pode fechar a serial sem ACK para não confundir
 respostas. Isso é relatado como não confirmado, exigindo reconexão/consulta.
@@ -113,12 +115,11 @@ transporte RoboCAN continuam pendentes e são informados por `status`.
 ## Transporte, processos e arquivos
 
 - MCP JSON-RPC por stdio, versões 2024-11-05, 2025-03-26, 2025-06-18 e 2025-11-25.
-- Socket Unix privado: `$XDG_RUNTIME_DIR/motorlab/control.sock`, ou
-  `~/.local/state/motorlab/control.sock` se não houver diretório runtime.
+- Socket Unix privado CLI: `$XDG_RUNTIME_DIR/motorlab-cli/control.sock`; GUI: `$XDG_RUNTIME_DIR/motorlab/control.sock`. Sem diretório runtime, usa `~/.local/state` com o mesmo sufixo.
 - Diretório 0700; socket restrito ao usuário. Sem porta TCP/HTTP ou acesso remoto.
-- Lock de inicialização evita duas GUIs para o mesmo socket; nunca remove endpoint
+- Lock de inicialização evita dois backends para o mesmo socket; nunca remove endpoint
   de instância viva. Logs de inicialização ficam ao lado do socket.
-- A GUI continua aberta se um cliente MCP sair. Operações já aceitas não são
+- O backend continua aberto se um cliente MCP/CLI sair. Operações já aceitas não são
   repetidas pelo adaptador após perda de conexão. Movimento MCP tem limite temporal.
 - Últimos 32 jobs em memória; fechamento do aplicativo remove esse histórico.
   Exportar logs/resultados importantes antes de fechar.
@@ -130,15 +131,16 @@ transporte RoboCAN continuam pendentes e são informados por `status`.
 ## Verificação sem hardware
 
 ```sh
-cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
-cmake --build build -j4
-ctest --test-dir build --output-on-failure
-python3 tools/test_mcp.py --executable build/motorlab
+cmake -S . -B build-cli -DCMAKE_BUILD_TYPE=Release -DMOTORLAB_BUILD_GUI=OFF
+cmake --build build-cli -j4
+ctest --test-dir build-cli --output-on-failure
+python3 tools/test_mcp.py --executable build-cli/motorlabd
+python3 tools/test_cli.py --executable build-cli/motorlabd
 ```
 
-`control_tests` usa pseudoterminais para identidade, permissões, parada, ACK,
+`headless_tests` e `control_tests` usam pseudoterminais para identidade, permissões, parada, ACK,
 releitura, watchdog e rejeição de comandos. `test_mcp.py` exercita stdio, socket,
-dois clientes, GUI, todos os campos, compilador, perfis e captura. A validação
+dois clientes, todos os campos, compilador e perfis; captura gráfica só na GUI. `test_cli.py` verifica comandos, exportações, ausência de display e encerramento. A validação
 opcional `tools/test_mcp_sdk.py` usa o cliente oficial `mcp==1.26.0` em ambiente
 virtual separado; ele não é dependência do servidor distribuído.
 
@@ -205,3 +207,12 @@ SliderReleased não para nem envia EX. Cada canal renova seu setpoint enquanto h
 Jobs MCP que interferem na sessão são recusados enquanto os sliders mantêm um comando. `status`, `telemetry`, `log` e `job` continuam disponíveis. O término de uma consulta `read` não altera permissões; falhas de transporte continuam fechando e desarmando a sessão. `motorlab_stop` continua sendo a parada de emergência do MCP/supervisor; o botão **Parar** de cada canal na GUI é a parada normal.
 
 Os cartões **Encoder A/B** usam `?S`; **Hall / interno** usam `?BS 1` e `?BS 2`. A fonte nunca é trocada silenciosamente. Resposta ausente/rejeitada aparece como “—”, não zero. CSV acrescenta `rpm1_hall,rpm2_hall`; MCP acrescenta `rpm1_encoder,rpm2_encoder,rpm1_hall,rpm2_hall`, mantendo `rpm1,rpm2` como encoder no histórico normal. O gráfico permite selecionar Encoder/RPM ou Hall/RPM. A execução contínua MCP também lê `?S` e `?C`; o modo aberto mantém guardas BS/CB; encoder_speed acrescenta guardas S/C. A captura serial legada de 12 campos não inclui BS e mostra Hall indisponível durante essa captura.
+
+
+## Posição por encoder
+
+`mode="encoder_position"` usa `value` como destino **absoluto em contagens**, na faixa de −3000 a 3000; aceita zero. É um ensaio limitado: exige MMOD3, feedback externo, MXRPM/MVEL dentro de `max_speed_rpm` de até 100 RPM, motores inicialmente parados e deslocamento de até 4000 contagens. O perfil deve estar preparado previamente; iniciar não modifica parâmetros nem zera o contador.
+
+O mesmo alvo P é renovado com G0 e S=MVEL. Comandos relativos PR não são repetidos. Captura rápida é obrigatória e inclui C/F/TR/VDV/E/Id/Iq; erro de posição é rotulado em contagens. Repouso dentro de 20 contagens não dispara falta de progresso; a chegada deve ser avaliada pelo contador real, não pelo sucesso do job. Lease e guardas permanecem ativas durante a retenção. `motorlab_stop` envia EX e remove o torque, portanto não mantém posição.
+
+Para alterar referência C/CB por manutenção, ambos os motores precisam estar em MMOD0 e parados pelo encoder e Hall; EX/FF/FS e a releitura do contador são obrigatórios. [Ensaio e limitações de bancada](CONTROLE-POSICAO.md).

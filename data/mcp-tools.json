@@ -273,7 +273,7 @@
   },
   {
     "name": "motorlab_maintenance",
-    "description": "Manutenção documentada (EEPROM, reset, proteção, contadores, salvar calibração). Confirma !EX antes. EESAV tolera pausa de script rejeitada somente com !EX aceito, ?FF confirmando parada e ?FS recente sem script/setup ativos. Outras operações exigem pausa aceita. Não permite upload ou calibração motora por este caminho. Exige autorização humana específica para hardware.",
+    "description": "Manutenção documentada (EEPROM, reset, proteção, contadores, salvar calibração). Confirma !EX antes. EESAV tolera pausa de script rejeitada somente com !EX aceito, ?FF confirmando parada e ?FS recente sem script/setup ativos. Outras operações exigem pausa aceita. Não permite upload ou calibração motora por este caminho. Exige autorização humana específica para hardware. Contadores C/CB toleram pausa rejeitada somente com EX/FF/FS confirmados, ambos motores em MMOD0 e sensores parados; verificam o contador após escrever.",
     "inputSchema": {
       "type": "object",
       "properties": {
@@ -725,7 +725,7 @@
   },
   {
     "name": "motorlab_continuous",
-    "description": "Ensaio contínuo supervisionado com lease e watchdog. mode=open_loop (padrão): G bruto -100..100. mode=encoder_speed: S em RPM -3000..3000, exige MMOD1, encoder feedback externo, ALIM dentro da guarda, MXPF/MXPR dentro de max_power_percent (padrão 25%, ampliação explícita até 100%) e MXRPM dentro da guarda. Monitora Hall e encoder, sentido/progresso do encoder, falhas, corrente e temperatura. Para por EX em falha, perda da lease ou motorlab_stop. Exige autorização humana para hardware. capture_fast=true reduz o intervalo entre consultas para 1 ms (a taxa real depende do transporte), captura até 2000 ciclos completos no job.samples, inclui erro, PWM e correntes FOC Id/Iq no modo encoder_speed e interrompe por LoopErr. As consultas de um ciclo não são simultâneas.",
+    "description": "Ensaio contínuo supervisionado com lease e watchdog. mode=open_loop (padrão): G bruto -100..100. mode=encoder_speed: S em RPM -3000..3000, exige MMOD1, encoder feedback externo, ALIM dentro da guarda, MXPF/MXPR dentro de max_power_percent (padrão 25%, ampliação explícita até 100%) e MXRPM dentro da guarda. Monitora Hall e encoder, sentido/progresso do encoder, falhas, corrente e temperatura. Para por EX em falha, perda da lease ou motorlab_stop. Exige autorização humana para hardware. capture_fast=true reduz o intervalo entre consultas para 1 ms (a taxa real depende do transporte), captura até 2000 ciclos completos no job.samples, inclui erro, PWM e correntes FOC Id/Iq no modo encoder_speed e interrompe por LoopErr. As consultas de um ciclo não são simultâneas. mode=encoder_position: destino absoluto em contagens (zero permitido), MMOD3, deslocamento máximo 4000 contagens e janela entre origem/destino com margem100; exige MXRPM/MVEL dentro da guarda de até100 RPM e motores inicialmente parados. Repete o mesmo destino absoluto P (nunca PR) e mantém G0 (ativação serial sem setpoint no MMOD3) e S=MVEL para watchdog; captura obrigatória, para por LoopErr/corrente/velocidade/janela/lease e permite repouso dentro de20 contagens do alvo. Não zera referência nem grava EEPROM.",
     "inputSchema": {
       "type": "object",
       "properties": {
@@ -793,7 +793,8 @@
           "type": "string",
           "enum": [
             "open_loop",
-            "encoder_speed"
+            "encoder_speed",
+            "encoder_position"
           ]
         },
         "max_power_percent": {

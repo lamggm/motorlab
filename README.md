@@ -1,6 +1,6 @@
-# MotorLab Linux 0.6.0
+# MotorLab Linux 0.7.0
 
-Aplicativo nativo Linux, com interface C++/Qt 6 e compilador .NET executado no Linux, para **SBLG2360T e SBLMG2360T**. Independente e não oficial da Roboteq. A organização segue as referências do RoboRun+ fornecidas pelo usuário, mantendo as cores do MotorLab. Dois canais; variantes TS não recebem autorização de escrita.
+Aplicativo nativo Linux, com interface C++/Qt 6, backend CLI sem interface gráfica e compilador .NET executado no Linux, para **SBLG2360T e SBLMG2360T**. Independente e não oficial da Roboteq. A organização segue as referências do RoboRun+ fornecidas pelo usuário, mantendo as cores do MotorLab. Dois canais; variantes TS não recebem autorização de escrita.
 
 Meta experimental de baixa velocidade: **20 RPM no eixo do motor**. [Objetivo, condições e resultados de bancada](docs/BAIXA-VELOCIDADE.md).
 
@@ -41,7 +41,7 @@ O binário desta estação exige **Qt 6.11, glibc 2.42 e suas dependências din�
 
 ## MCP e automação
 
-A versão 0.6.0 inclui **25 ferramentas MCP** ligadas à mesma instância Qt: parâmetros, perfis, telemetria, scripts, manutenção, CANopen de leitura e firmware USB existente. `./iniciar.sh` mostra essa instância compartilhada. O MCP inicia desconectado e identifica explicitamente funções ainda indisponíveis.
+A versão 0.7.0 inclui **25 ferramentas MCP**. Por padrão, o MCP usa `motorlabd`, backend CLI sem Qt GUI/Widgets ou servidor gráfico. `motorlabctl` oferece comandos de terminal e acesso a todas as ferramentas por `call`. A GUI continua disponível por `./iniciar.sh` e por MCP com `--backend gui`, em socket separado. Ambas usam o mesmo motor de comandos e validações. A inicialização permanece desconectada. Veja [uso, compilação e pacote CLI](docs/CLI.md).
 
 O contínuo supervisionado aceita `mode="encoder_speed"` para S/RPM com validação de configuração e limites. Ensaios sem carga a 100 e 3000 RPM realizados em SBLG2360T; detalhes e limitações em `VALIDACAO.md`. Sintonia automática permanece pendente.
 A opção `capture_fast=true` registra até 2000 ciclos completos em `job.samples`, incluindo erro, referência da rampa, PWM e correntes FOC Id/Iq. O intervalo entre consultas é reduzido, mas a taxa depende da comunicação: cerca de 38–40 ciclos/s na bancada USB. As consultas não são simultâneas. Essa opção interrompe o ensaio por LoopErr ou corrente FOC acima da guarda. O painel Falhas também mostra erros específicos dos motores quando FF=0; AmpLim aparece como limitação de corrente.
@@ -96,7 +96,7 @@ Em falha parcial, algumas alterações podem ter sido aplicadas. A edição é r
 
 A aba Monitoramento mantém movimento desabilitado por padrão. Para liberar comandos físicos, habilite a escrita e **leia RWD configurado em pelo menos 100 ms**; o programa não muda o watchdog ao conectar. Revise o modo MMOD e os limites do motor antes de liberar. G é normalizado ±1000; S é RPM; P é posição absoluta; GIQ é corrente de torque em A ×10, limitado a ±450 nesta aplicação.
 
-**Aplicar** ou mover o slider transmite e mantém G/S/GIQ após soltar o mouse, renovando o comando dentro do RWD. **Parar** e zero enviam zero no modo selecionado (`!S canal 0` em RPM, `!G canal 0` em comando bruto), sem EX e sem revogar a habilitação. Posição absoluta usa Aplicar uma vez e Parar usa MS. O botão vermelho **PARADA !EX** é a emergência. Falha do controlador ou perda de comunicação interrompe o acionamento e registra o motivo. A aba Monitoramento mostra simultaneamente RPM do encoder A/B (`?S`) e Hall/interno (`?BS`), sem substituir uma fonte pela outra. O console também admite PR, GID, D0/D1 e ajustes de contador quando documentados e autorizados.
+**Aplicar** ou mover o slider transmite e mantém G/S/GIQ após soltar o mouse, renovando o comando dentro do RWD. **Parar** e zero enviam zero no modo selecionado (`!S canal 0` em RPM, `!G canal 0` em comando bruto), sem EX e sem revogar a habilitação. Em posição absoluta, soltar a barra confirma e mantém o destino; Aplicar também confirma e Parar usa MS. Ao conectar, a GUI consulta RWD/MMOD/MVEL/MXRPM e seleciona P quando MMOD3 foi lido, sem alterar o modo do driver. G não zero fica bloqueado nesse modo. O botão vermelho **PARADA !EX** é a emergência. Falha do controlador ou perda de comunicação interrompe o acionamento e registra o motivo. A aba Monitoramento mostra simultaneamente RPM do encoder A/B (`?S`) e Hall/interno (`?BS`), sem substituir uma fonte pela outra. O console também admite PR, GID, D0/D1 e ajustes de contador quando documentados e autorizados.
 
 EX durante uma consulta em andamento é enviado imediatamente e a conexão é encerrada para descartar respostas ambíguas. Nesse caso a mensagem informa que a parada foi solicitada, sem alegar confirmação. Reconecte e confira FF. Fechar normalmente quando armado tenta enviar EX; queda do processo, cabo ou energia do computador não garante parada. Um script autônomo no controlador pode continuar e alimentar o watchdog; EX/RWD do host não substituem a parada física da bancada.
 

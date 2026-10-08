@@ -88,6 +88,31 @@ private slots:
     session.close();
     QVERIFY(!session.writesEnabled());
   }
+  void normalMotorStopPreservesOtherChannelAndAuthorization() {
+    FakeController device; Session session;
+    QVERIFY(session.openSerial(device.path, 115200));
+    QTRY_VERIFY(!session.model().isEmpty());
+    QVERIFY(session.enqueue("~RWD"));
+    QTRY_COMPARE(session.watchdogMs(), 1000);
+    QVERIFY(session.setWritesEnabled(true));
+    QVERIFY(session.setMotionEnabled(true));
+    device.silent.insert("?V 2");
+    QVERIFY(session.enqueue("?V 2"));
+    QTRY_VERIFY(device.commands.contains("?V 2"));
+    QVERIFY(session.enqueue("!P 1 1000"));
+    QVERIFY(session.enqueue("!S 2 100"));
+    QVERIFY(session.enqueue("!MS 1"));
+    QVERIFY(session.motionEnabled());
+    device.send("V=512");
+    QTRY_VERIFY(device.commands.contains("!S 2 100"));
+    QVERIFY(device.commands.contains("!MS 1"));
+    QVERIFY(!device.commands.contains("!P 1 1000"));
+    QVERIFY(!device.commands.contains("!EX"));
+    QVERIFY(session.motionEnabled());
+    QVERIFY(session.writesEnabled());
+    QVERIFY(session.enqueue("!P 1 0"));
+    QTRY_VERIFY(device.commands.contains("!P 1 0"));
+  }
   void otherFirmwareRemainsReadable_data() {
     QTest::addColumn<QString>("model");
     QTest::newRow("SBLMG2360T") << QString("SBLMG2360T");

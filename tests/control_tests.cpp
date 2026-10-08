@@ -168,6 +168,55 @@ private slots:
       QVERIFY(!command.startsWith('^'));
     QVERIFY(!w.findChild<Session *>()->motionEnabled());
   }
+  void counterReferenceGuard_data() {
+    QTest::addColumn<QString>("key");
+    QTest::addColumn<QString>("badQuery");
+    QTest::addColumn<QString>("badReply");
+    QTest::addColumn<bool>("sent");
+    QTest::addColumn<bool>("success");
+    QTest::newRow("encoder-idle-no-script") << "C" << "" << "" << true << true;
+    QTest::newRow("internal-idle-no-script") << "CB" << "" << "" << true << true;
+    QTest::newRow("closed-loop-motor1") << "C" << "~MMOD 1" << "MMOD=3" << false << false;
+    QTest::newRow("closed-loop-motor2") << "C" << "~MMOD 2" << "MMOD=1" << false << false;
+    QTest::newRow("encoder-moving") << "C" << "?S" << "S=1:0" << false << false;
+    QTest::newRow("hall-moving") << "CB" << "?BS 1" << "BS=1" << false << false;
+    QTest::newRow("script-active") << "C" << "?FS" << "FS=128" << false << false;
+    QTest::newRow("stop-unconfirmed") << "C" << "?FF" << "FF=0" << false << false;
+    QTest::newRow("mode-unreadable") << "C" << "~MMOD 1" << "-" << false << false;
+    QTest::newRow("write-rejected") << "C" << "!C 1 0" << "-" << true << false;
+    QTest::newRow("readback-mismatch") << "C" << "?C 1" << "C=123" << true << false;
+  }
+  void counterReferenceGuard() {
+    QFETCH(QString, key); QFETCH(QString, badQuery); QFETCH(QString, badReply);
+    QFETCH(bool, sent); QFETCH(bool, success);
+    FakeController fake;
+    fake.overrides["!R 0"] = "-";
+    fake.overrides["?FS"] = "FS=8";
+    fake.overrides["?S"] = "S=0:0";
+    fake.overrides["?BS 1"] = "BS=0";
+    fake.overrides["?BS 2"] = "BS=0";
+    fake.overrides["?" + key + " 1"] = key + "=0";
+    if (!badQuery.isEmpty()) fake.overrides[badQuery] = badReply;
+    Window w; ControlServer c(w);
+    QVERIFY(call(c, "connect", {{"mode", "serial"}, {"port", fake.path}})["ok"].toBool());
+    QTRY_VERIFY(!call(c, "status")["result"].toObject()["model"].toString().isEmpty());
+    const auto st = call(c, "status")["result"].toObject();
+    fake.commands.clear();
+    const QString command = "!" + key + " 1 0";
+    auto id = start(c, "maintenance", {{"command", command}, {"confirm", true},
+                       {"expected_model", st["model"]}, {"expected_firmware", st["firmware"]}});
+    QVERIFY(!id.isEmpty());
+    QTRY_VERIFY(result(c, id)["state"].toString() != "running");
+    QCOMPARE(result(c, id)["success"].toBool(), success);
+    QCOMPARE(fake.commands.contains(command), sent);
+    if (sent) {
+      QVERIFY(fake.commands.indexOf("~MMOD 2") < fake.commands.indexOf(command));
+      QVERIFY(fake.commands.indexOf("?BS 2") < fake.commands.indexOf(command));
+    }
+    QVERIFY(!fake.commands.contains("!MG"));
+    QVERIFY(!fake.commands.contains("%EESAV"));
+    QVERIFY(!w.findChild<Session *>()->motionEnabled());
+  }
   void schemaOfflineAndLocalDrafts() {
     Window w;
     ControlServer c(w);
@@ -397,7 +446,9 @@ private slots:
         QTRY_VERIFY2(fake.commands.count(motorCommand) >= 3, qPrintable(result(c, id)["message"].toString()));
         QCOMPARE(call(c, "status")["result"].toObject()["continuous"].toObject()["unit"].toString(), QString("encoder_speed_rpm"));
         QVERIFY(call(c, "stop")["ok"].toBool());
-        QTRY_COMPARE(result(c, id)["state"].toString(), QString("succeeded"));
+        QTRY_VERIFY(result(c, id)["state"].toString() != "running");
+        QVERIFY2(result(c, id)["state"].toString() == "succeeded",
+                 qPrintable(result(c, id)["message"].toString()));
       } else QTRY_COMPARE_WITH_TIMEOUT(result(c, id)["state"].toString(), QString("failed"), 3500);
     }
     QVERIFY(result(c, id)["result"].toObject()["stop_confirmed"].toBool());
@@ -451,6 +502,80 @@ private slots:
     const int sent = fake.commands.count("!S 1 100");
     QTest::qWait(200);
     QCOMPARE(fake.commands.count("!S 1 100"), sent);
+  }
+  void positionSupervision_data() {
+    QTest::addColumn<QString>("scenario");
+    for (const auto name : {"hold-zero", "hold-target", "travel-window", "lease", "loop-error", "moving", "far-origin", "velocity-zero", "speed-limit"})
+      QTest::newRow(name) << QString(name);
+  }
+  void positionSupervision() {
+    QFETCH(QString, scenario);
+    FakeController fake;
+    fake.alim = 30;
+    fake.params["MMOD 1"] = 3; fake.params["EMOD 1"] = 18;
+    fake.params["EPPR 1"] = 1000; fake.params["MXRPM 1"] = 100;
+    fake.params["MVEL 1"] = 30;
+    fake.params["MXPF 1"] = fake.params["MXPR 1"] = 25;
+    fake.overrides["?A"] = "A=1:0";
+    fake.overrides["?S"] = "S=0:0";
+    fake.overrides["?C"] = "C=0:0";
+    fake.overrides["?F 1"] = "F=0";
+    fake.overrides["?RMP 1"] = "RMP=0";
+    fake.overrides["?TR 1"] = "TR=0";
+    fake.overrides["?VDV 1"] = "VDV=0";
+    fake.overrides["?E 1"] = "E=0";
+    fake.overrides["?MA 1"] = "MA=0"; fake.overrides["?MA 2"] = "MA=1";
+    if (scenario == "moving") fake.overrides["?S"] = "S=1:0";
+    if (scenario == "far-origin") fake.overrides["?C"] = "C=5000:0";
+    if (scenario == "velocity-zero") fake.params["MVEL 1"] = 0;
+    Window w; ControlServer c(w);
+    call(c, "connect", {{"mode", "serial"}, {"port", fake.path}});
+    QTRY_VERIFY(!call(c, "status")["result"].toObject()["model"].toString().isEmpty());
+    auto args = continuousArgs(c);
+    args["mode"] = "encoder_position"; args["value"] = scenario == "hold-target" ? 100 : 0;
+    args["max_current_a"] = 3; args["max_speed_rpm"] = 100;
+    args["lease_ms"] = 5000; args["no_motion_ms"] = 1000;
+    if (scenario == "lease") args["lease_ms"] = 1000;
+    if (scenario == "speed-limit") {
+      args["max_speed_rpm"] = 101;
+      QVERIFY(!call(c, "continuous", args)["ok"].toBool()); return;
+    }
+    const auto id = start(c, "continuous", args);
+    QVERIFY(!id.isEmpty());
+    if (scenario == "moving" || scenario == "far-origin" || scenario == "velocity-zero") {
+      QTRY_COMPARE(result(c, id)["state"].toString(), QString("failed"));
+      QVERIFY(!fake.commands.contains("!MG"));
+      QVERIFY(!fake.commands.contains("!P 1 0"));
+      return;
+    }
+    if (scenario == "lease") {
+      QTRY_COMPARE_WITH_TIMEOUT(result(c, id)["state"].toString(), QString("failed"), 3000);
+      QVERIFY(result(c, id)["message"].toString().contains("Supervisão expirou"));
+      QVERIFY(result(c, id)["result"].toObject()["stop_confirmed"].toBool());
+      return;
+    }
+    QTRY_VERIFY(fake.commands.count("!S 1 30") >= 2);
+    QVERIFY(fake.commands.count("!G 1 0") >= 2);
+    QVERIFY(fake.commands.indexOf("!G 1 0") < fake.commands.indexOf("!S 1 30"));
+    QTRY_VERIFY(fake.commands.count(scenario == "hold-target" ? "!P 1 100" : "!P 1 0") >= 2);
+    for (const auto &command : fake.commands) QVERIFY(!command.startsWith("!PR "));
+    if (scenario == "hold-target") fake.overrides["?C"] = "C=100:0";
+    if (scenario.startsWith("hold")) {
+      QTest::qWait(1200); // Rest at target must not trip the no-motion guard.
+      QCOMPARE(result(c, id)["state"].toString(), QString("running"));
+      const auto samples = result(c, id)["samples"].toArray();
+      QVERIFY(!samples.isEmpty());
+      QVERIFY(samples.last().toObject().contains("target_error_counts"));
+      QVERIFY(!samples.last().toObject().contains("speed_error_rpm"));
+      QVERIFY(call(c, "stop")["ok"].toBool());
+      QTRY_COMPARE(result(c, id)["state"].toString(), QString("succeeded"));
+    } else {
+      if (scenario == "travel-window") fake.overrides["?C"] = "C=101:0";
+      if (scenario == "loop-error") fake.overrides["?FM 1"] = "FM=4";
+      QTRY_COMPARE_WITH_TIMEOUT(result(c, id)["state"].toString(), QString("failed"), 3000);
+    }
+    QVERIFY(result(c, id)["result"].toObject()["stop_confirmed"].toBool());
+    QVERIFY(!fake.commands.contains("%EESAV"));
   }
   void continuousRangeDoesNotExpandOpenLoop() {
     FakeController fake; Window w; ControlServer c(w);

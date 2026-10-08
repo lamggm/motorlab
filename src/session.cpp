@@ -211,6 +211,17 @@ bool Session::enqueue(const QString &text) {
     return false;
   if (upload && !c.hex && c.key != "SLD" && !c.emergency)
     return false;
+  if (c.key == "MS") {
+    // A normal channel stop replaces queued setpoints for that motor only.
+    // Keep manual permission and the other channel's command stream intact.
+    QQueue<Protocol::Command> keep;
+    for (const auto &queued : pending)
+      if (!(queued.motion && queued.channel == c.channel)) keep.enqueue(queued);
+    pending = keep;
+    pending.prepend(c);
+    startNext();
+    return true;
+  }
   if (c.emergency) {
     if (c.key == "EX" && active && !demo) {
       cancelMotion();

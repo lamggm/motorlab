@@ -1,0 +1,47 @@
+[
+  {
+    "query": "~KIG 1",
+    "antes": 10000,
+    "depois": 30000
+  },
+  {
+    "query": "~KPG 1",
+    "antes": 30000,
+    "depois": 120000
+  },
+  {
+    "query": "~LPFB 1",
+    "antes": 45,
+    "depois": 80
+  },
+  {
+    "query": "~MDEC 1",
+    "antes": 2000,
+    "depois": 20000
+  },
+  {
+    "query": "~BFBK 1",
+    "antes": 1,
+    "depois": 2
+  },
+  {
+    "query": "~KIF 1",
+    "antes": 251328,
+    "depois": 502656
+  },
+  {
+    "query": "~KIF 3",
+    "antes": 251328,
+    "depois": 502656
+  },
+  {
+    "query": "~KPF 1",
+    "antes": 1000,
+    "depois": 2000
+  },
+  {
+    "query": "~KPF 3",
+    "antes": 1000,
+    "depois": 2000
+  }
+]

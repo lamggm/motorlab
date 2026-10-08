@@ -1,3 +1,34 @@
+# MotorLab Linux — validação
+
+## CLI 0.7.0 — 08/10/2026
+
+- `motorlabd` usa QCoreApplication e Qt Core/Network. Configuração `MOTORLAB_BUILD_GUI=OFF` compila sem exigir Qt Widgets. `ldd` confirmou ausência de QtGui, QtWidgets, X11, xcb e Wayland no executável; binário x86_64 nesta estação, Qt 6.11.2 e glibc 2.42.
+- `ControlHost` separa a sessão e os dados dos widgets. O backend CLI e o adaptador GUI usam o mesmo `ControlServer`, protocolo, filas, catálogo e supervisão; a GUI instalada foi preservada.
+- Protocolo e features passaram; `headless_tests` usa exclusivamente demo/pseudoterminais para RAM, EEPROM, contadores, pausa/EX/FF/FS, modos encoder_speed/encoder_position, leases, perdas de comunicação, corrente, falhas e ausência de progresso. Captura legada identifica DI/DO corretamente e mantém Hall ausente como null.
+- Oito integrações MCP passaram sem DISPLAY/WAYLAND: descoberta das 25 ferramentas, lançamento concorrente com um PID, desconexão inicial, catálogo/leitura dos 638 campos, compartilhamento de rascunhos entre clientes, compilador/perfis, lease e socket privado. Cliente oficial `mcp==1.26.0` confirmou initialize/list/status/demo/compiler/job/error.
+- Três integrações do terminal passaram com `QT_QPA_PLATFORM` apontando para um plugin inexistente: daemon sem interface gráfica, RAM demo e releitura, perfis JSON/CPR, importação atômica e modelo incompatível, CSV/logs, simulação MicroBasic, rejeição de janela/PNG e códigos de saída em falhas. SIGTERM encerrou os daemons e removeu seus sockets.
+- A regressão do adaptador GUI teve 81 casos aprovados; o único erro inicial foi ausência de `MOTORLAB_COMPILER` ao invocar a suíte diretamente fora do pacote. Reexecutar o cenário com o helper explícito passou (3/3 incluindo init/cleanup). CTest já configura esse caminho.
+- Evidências locais em `../../work/tests-cli-release.log`, `tests-mcp-cli.log`, `tests-terminal-cli-final.log`, `tests-sdk-cli.log`, `tests-gui-control-host.log` e `tests-gui-compiler-host.log`. Esses logs são locais, não acompanham o Git.
+- `motorlabctl` e o MCP iniciam CLI por padrão, em socket próprio `motorlab-cli/control.sock`; GUI continua disponível com `--backend gui`. Porta física permanece exclusiva. Nenhum teste desta entrega conectou, movimentou, configurou ou gravou EEPROM/firmware na bancada.
+- CLI cobre as funções implementadas; não completa firmware serial/CAN, ajuste automático ou linearidade. Fluxo USB DFU assíncrono tem validação de imagem, identidade USB e comparação por leitura, sem ensaio físico nesta entrega.
+
+
+# Posição salva na EEPROM e comando manual — 07/10/2026
+
+A pedido do operador, Motor1 configurado em MMOD3, MVEL30 RPM, MXRPM100 RPM e KPG3=0,2; contador A/B zerado em malha aberta e com motor parado. `%EESAV` confirmado por ACK;636 parâmetros relidos, somente as quatro diferenças previstas. Sem ciclo de energia; zero mecânico não persistente pela interface incremental. Motor final parado, FF16, controle manual desligado.
+
+GUI P renova destino absoluto confirmado com G0/S/P, aceita zero e separa rascunho do alvo ativo; faixa±4000contagens. MS preserva autorização e canal2, sem P0/EX. UI5/5 e protocolo19/19 aprovados; binário recarregado,636 valores preservados. Movimento manual físico fica para o teste do usuário. [Detalhes e evidências](docs/CONTROLE-POSICAO.md).
+
+# Controle de posição — 07/10/2026
+
+Motor 1 ensaiado em Count Position com referência temporária, MVEL30 RPM e ganho P de posição0,2. Destino90° resultou89,91°; retorno0° resultou0,36°, enquanto energizado. Operador confirmou avanço e retenção; FF/FM0 durante as capturas. Após EX, retorno acomodou em1,08°; sem torque não há retenção garantida. Aproximação fina no retorno ainda lenta. Todos os636 parâmetros anteriores restaurados/relidos sem diferenças, modo velocidade e máximo3000 RPM, desaceleração2000 RPM/s. Referência incremental anterior restaurada com o deslocamento físico residual. Nenhuma escrita EEPROM nesta rodada.
+
+MCP ganhou posição absoluta supervisionada e manutenção de contador com ambos os canais em malha aberta. Protocolo18/18 e posição11/11 aprovados. Consolidado43 aprovados/1 falha intermitente em regressão de velocidade: guarda de atraso da comunicação acionou EX confirmado no simulador; não se afirma aprovação total. [Relatório, configuração experimental e evidências](docs/CONTROLE-POSICAO.md).
+
+# Sintonia de baixa velocidade — 07/10/2026
+
+Motor 1 ajustado e ensaiado a 20, 100, 500, 1500 e 3000 RPM. Operador aceitou o giro lento observado na bancada; ainda há oscilação residual. Desaceleração normal ajustada para 2000 RPM/s a pedido do usuário e confirmada por leitura. Configuração apenas na RAM, EEPROM não gravada; motor deixado parado. [Relatório completo e parâmetros](docs/SINTONIA-20RPM.md).
+
 # Sintonia de aceleração e captura rápida — 07/10/2026
 
 Motor 1 SBLG2360T v3.0f, Kalatec KTC-86BLS98-J/X046, AS5047P 1000 PPR, bancada sem carga e sentido positivo. Leitura inicial encontrou MMOD0; selecionado MMOD1. Ganho integral FOC de fluxo/torque aumentado gradualmente de 6,2832 para 25,1328; Kp FOC0,1 e PI velocidade0,03/0,01 preservados. ALIM1=11,5 A durante os ensaios e no perfil final; aceleração3000 RPM/s, desaceleração200 RPM/s, MXRPM3000. EEPROM não gravada nesta rodada.

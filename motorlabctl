@@ -1,0 +1,5 @@
+#!/bin/sh
+set -eu
+motorlab_launcher=$(readlink -f "$0")
+motorlab_dir=$(CDPATH= cd -P "$(dirname "$motorlab_launcher")" && pwd)
+exec python3 "$motorlab_dir/mcp/cli.py" "$@"

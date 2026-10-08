@@ -9,7 +9,7 @@ import tempfile
 from mcp import ClientSession, StdioServerParameters
 from mcp.client.stdio import stdio_client
 ROOT=Path(__file__).resolve().parents[1]
-EXE=Path(sys.argv[1]).absolute() if len(sys.argv)>1 else ROOT/'bin/motorlab'
+EXE=Path(sys.argv[1]).absolute() if len(sys.argv)>1 else ROOT/'bin/motorlabd'
 
 async def main():
     with tempfile.TemporaryDirectory(prefix='motorlab-sdk-') as d:

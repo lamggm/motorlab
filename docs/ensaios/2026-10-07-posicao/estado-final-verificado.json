@@ -1,0 +1,18 @@
+{
+  "?C": "67457499:0",
+  "?S": "0:0",
+  "?BS 1": "0",
+  "?BS 2": "0",
+  "?FF": "16",
+  "?FM 1": "128",
+  "~MMOD 1": "1",
+  "~MVEL 1": "100",
+  "~MXRPM 1": "3000",
+  "~MDEC 1": "20000",
+  "~KPG 3": "100000",
+  "matched_parameters": 636,
+  "differences": {},
+  "counter_offset_restored": 67457487,
+  "temporary_counter_after_stop": 12,
+  "motion_enabled": false
+}
