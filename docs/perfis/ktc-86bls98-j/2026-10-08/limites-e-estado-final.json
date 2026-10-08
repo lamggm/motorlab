@@ -1,0 +1,28 @@
+{
+  "motor": "Kalatec KTC-86BLS98-J",
+  "controller": "SBLG2360T",
+  "channel": 1,
+  "rated_speed_rpm": 3000,
+  "current_limit_arms": 11.5,
+  "nominal_current_arms": 11.5,
+  "motor_mode_preserved": 3,
+  "trajectory_velocity_rpm_preserved": 30,
+  "controller_thermal_limit_c_preserved": 85,
+  "motor_thermistor_configured": false,
+  "eeprom_ack": true,
+  "power_cycle_after_save_tested": false,
+  "known_fields_compared": 636,
+  "configuration_differences": {
+    "~MXRPM 1": {
+      "before": 100,
+      "after": 3000
+    },
+    "~NOMA 1": {
+      "before": 200,
+      "after": 115
+    }
+  },
+  "final_speed_encoder_rpm": "0:0",
+  "final_speed_hall_rpm": "0",
+  "source": "https://www.kalatec.com.br/motor-bldc-400w/"
+}

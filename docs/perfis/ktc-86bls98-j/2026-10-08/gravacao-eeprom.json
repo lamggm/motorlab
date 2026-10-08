@@ -1,0 +1,42 @@
+{
+  "completed_steps": 5,
+  "created_utc": "2026-10-08T13:08:45.803Z",
+  "finished_utc": "2026-10-08T13:08:46.014Z",
+  "firmware": "Roboteq v3.0f SBLG2XXX 07/15/2026",
+  "job_id": "97e9ca70-9ed5-40be-8f8b-addec6649a80",
+  "kind": "maintenance",
+  "message": "Manutenção recebeu ACK; !EX permanece aplicado. Persistência requer verificação após reinício.",
+  "model": "SBLG2XXX:SBLG2360T",
+  "replies": [
+    {
+      "command": "!R 0",
+      "ok": false,
+      "payload": "Controlador rejeitou a consulta/operação."
+    },
+    {
+      "command": "!EX",
+      "ok": true,
+      "payload": "+"
+    },
+    {
+      "command": "?FF",
+      "ok": true,
+      "payload": "16"
+    },
+    {
+      "command": "?FS",
+      "ok": true,
+      "payload": "8"
+    },
+    {
+      "command": "%EESAV",
+      "ok": true,
+      "payload": "+"
+    }
+  ],
+  "result": {},
+  "source": "serial",
+  "state": "succeeded",
+  "success": true,
+  "total_steps": 5
+}

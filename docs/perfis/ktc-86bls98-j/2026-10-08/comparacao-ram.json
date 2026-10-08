@@ -1,0 +1,14 @@
+{
+  "known_before": 636,
+  "known_after": 636,
+  "differences": {
+    "~MXRPM 1": {
+      "before": 100,
+      "after": 3000
+    },
+    "~NOMA 1": {
+      "before": 200,
+      "after": 115
+    }
+  }
+}

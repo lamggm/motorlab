@@ -1,0 +1,21 @@
+{
+  "motor": "Kalatec KTC-86BLS98-J/X046",
+  "controller": "SBLG2360T",
+  "firmware": "Roboteq v3.0f SBLG2XXX 07/15/2026",
+  "channel": 1,
+  "snapshot_utc": "2026-10-08T13:08:46.772Z",
+  "archive_date_local": "2026-10-08",
+  "scope": "636 known catalog configuration parameters; not a full Flash/EEPROM memory image",
+  "profile_source": "outputs/limites-nominais-2026-10-08/perfil-final.json",
+  "eeprom_save_ack": true,
+  "power_cycle_after_save_tested": false,
+  "restoration_requires_same_motor_and_review": true,
+  "not_applicable_to": "KTC-86BLS125-J",
+  "files_sha256": {
+    "comparacao-ram.json": "afa5002f8cc23f61da19d48e8fe3207dd5ded9b0b4dadc73a16d3fad5000acf6",
+    "gravacao-eeprom.json": "7cf4075a39f21aceaf85e25f5648e3b2a8c8b0641b80bfc747377fdc7f110cf9",
+    "limites-e-estado-final.json": "045f5b1a563b48a5634b5a8f5916f8235afd08418deddc7525e10b3248e3f440",
+    "perfil-driver.json": "97a068e04bf3ba550dee22d1d7368bce1769474fec5b4f3ad04e624c26248ccd",
+    "releitura-pos-gravacao.json": "4fba7df86bc53bc9615f076555e65c48a8cab02789c072ad512c4ff37dd79dd6"
+  }
+}
